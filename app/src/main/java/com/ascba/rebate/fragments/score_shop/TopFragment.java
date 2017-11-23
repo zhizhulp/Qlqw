@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.score_shop.ExchangeSuccessActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
 import com.ascba.rebate.activities.setting.AddressActivity;
 import com.ascba.rebate.activities.setting.AddressAddActivity;
@@ -178,7 +179,17 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     //判断是否足够支付的设置
     private void isEnoughSetting(int num) {
 //        if (buttonTip == 0) {//服务端返回的立即兑换状态
-            if (type == 1) {//礼品分兑换
+        if (type == 1) {//礼品分兑换
+            if (num * perScore > (type == 1 ? totalScore : totalVo)) {
+                tvApply.setEnabled(false);
+                tvApply.setText((type == 1 ? "积分" : "福利券") + "不足");
+            } else {
+                tvApply.setEnabled(true);
+                tvApply.setText("立即兑换");
+            }
+            tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
+        } else if (type == 2) {//福利券兑换
+            if (isMoney == 0) {//不能用钱
                 if (num * perScore > (type == 1 ? totalScore : totalVo)) {
                     tvApply.setEnabled(false);
                     tvApply.setText((type == 1 ? "积分" : "福利券") + "不足");
@@ -187,22 +198,12 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                     tvApply.setText("立即兑换");
                 }
                 tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-            } else if (type == 2) {//福利券兑换
-                if (isMoney == 0) {//不能用钱
-                    if (num * perScore > (type == 1 ? totalScore : totalVo)) {
-                        tvApply.setEnabled(false);
-                        tvApply.setText((type == 1 ? "积分" : "福利券") + "不足");
-                    } else {
-                        tvApply.setEnabled(true);
-                        tvApply.setText("立即兑换");
-                    }
-                    tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-                } else {
-                    tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-                    tvApply.setEnabled(true);
-                    tvApply.setText("立即兑换");
-                }
+            } else {
+                tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
+                tvApply.setEnabled(true);
+                tvApply.setText("立即兑换");
             }
+        }
 //        }
     }
 
@@ -352,11 +353,12 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
             JSONObject dataObj = JSON.parseObject(data);
             int tip = dataObj.getIntValue("tip");
             if (tip == 0) {
-                showToast(result.getMsg());
-                Intent intent = getActivity().getIntent();
-                intent.putExtra("score", numberBtn.getNum() * perScore);
-                getActivity().setResult(Activity.RESULT_OK, intent);
-                getActivity().finish();
+                JSONObject jsonObject = JSON.parseObject(result.getData().toString());
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", type);
+                bundle.putString("info", jsonObject.getString("success_text"));
+                startActivity(ExchangeSuccessActivity.class, bundle);
+                getActivity().setResult(Activity.RESULT_OK);
             } else if (tip == 1) {
                 dm.showAlertDialog2(result.getMsg(), null, null, new DialogManager.Callback() {
                     @Override

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.recharge.RechargeSuccessActivity">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTitle="" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="45dp"
+        android:src="@mipmap/recharge_success" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:paddingBottom="25dp"
+        android:paddingTop="20dp"
+        android:text=""
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_21" />
+
+    <View
+        style="@style/LineHorizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="25dp"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="25dp">
+
+        <TextView
+            android:id="@+id/tv_pay_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温馨提示："
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:lineSpacingExtra="10dp"
+            android:paddingTop="15dp"
+            android:text=""
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/white" />
+
+    <View
+        android:id="@+id/wave_line"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@mipmap/success_wave_line" />
+
+    <Button
+        android:id="@+id/btn_complete"
+        style="@style/ButtonNormal"
+        android:layout_marginTop="40dp"
+        android:enabled="true"
+        android:text="" />
+</LinearLayout>

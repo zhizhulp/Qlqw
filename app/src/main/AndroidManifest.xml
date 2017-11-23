@@ -279,6 +279,7 @@
             android:exported="true" />
         <activity android:name="com.ascba.rebate.base.activity.BaseDefaultNetActivity" />
         <activity android:name=".activities.seller.PurchaseSuccessActivity" />
+        <activity android:name=".activities.score_shop.ExchangeSuccessActivity" />
     </application>
 
 </manifest>
