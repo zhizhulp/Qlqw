@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTail="购卡记录"
+        app:textTitle="预存佣金" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="佣金充值"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <GridView
+        android:id="@+id/seller_purchase_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp" />
+
+    <TextView
+        android:id="@+id/seller_purchase_info"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="礼品包价值（温馨提示：充值越多赠送越多）"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp">
+
+        <TextView
+            android:id="@+id/seller_purchase_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击采购，即表示已阅读并同意"
+            android:textColor="@color/grey_black_tv3"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/seller_purchase_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预存须知"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_13" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/seller_purchase_ok"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_pressed_shap"
+        android:text="立即采购"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_15" />
+</LinearLayout>

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="账户信息" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="手机账号"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/account_mobile_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="第三方账号绑定"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <RelativeLayout
+        android:id="@+id/wchat_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48.5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/wchat_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="33dp"
+            android:text="微信"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_wchat_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_wChat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_wchat_more"
+            android:text="已绑定"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/qq_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48.5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/qq_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="33dp"
+            android:text="QQ"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_qq_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_qq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_qq_more"
+            android:text="未绑定"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/weibo_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48.5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/weibo_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="33dp"
+            android:text="微博"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_weibo_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_weibo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_weibo_more"
+            android:text="未绑定"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/taobao_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/taobao_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="33dp"
+            android:text="淘宝"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_taobao_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_taobao_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_taobao_more"
+            android:text="未绑定"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="安全设置"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <RelativeLayout
+        android:id="@+id/payment_password_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48.5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:id="@+id/account_payment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="设置支付密码"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_payment_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_payment_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_payment_more"
+            android:text="未设置"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fingerprint_rl"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="指纹设置"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/account_fingerprint_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/account_fingerprint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_7dp"
+            android:layout_toLeftOf="@+id/account_fingerprint_more"
+            android:text="未开启"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+    </RelativeLayout>
+
+</LinearLayout>

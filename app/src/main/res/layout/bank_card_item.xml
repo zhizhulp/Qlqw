@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/white_corner_6dp"
+    android:layout_marginLeft="14dp"
+    android:layout_marginRight="14dp"
+    android:layout_marginTop="14dp"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <com.ascba.rebate.view.swipe_delete.EasySwipeMenuLayout
+        app:contentView="@+id/content"
+        app:rightMenuView="@+id/tv_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:id="@+id/content"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_marginTop="17dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/grey_black_tv2"
+                android:textSize="@dimen/text_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_marginBottom="14dp"
+                android:layout_gravity="right"
+                android:textColor="@color/grey_black_tv2"
+                android:textSize="@dimen/text_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:textSize="@dimen/text_17"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="删除"
+            android:background="@drawable/red_corner_bg"
+            android:id="@+id/tv_delete"
+            android:layout_width="80dp"
+            android:layout_height="match_parent" />
+    </com.ascba.rebate.view.swipe_delete.EasySwipeMenuLayout>
+
+</LinearLayout>

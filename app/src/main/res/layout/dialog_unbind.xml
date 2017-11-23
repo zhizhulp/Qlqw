@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/alert_bg"
+    android:gravity="center_horizontal"
+    android:minHeight="100dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_alert_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20.5dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingExtra="15dp"
+        android:text="确定要解除账号与%s的关联吗\n接触后将无法使用%s登录此账号"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:id="@+id/lat_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_alert_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/alert_text_left_half_bg"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey_line" />
+
+        <TextView
+            android:id="@+id/tv_alert_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/alert_text_right_half_bg"
+            android:gravity="center"
+            android:text="解除绑定"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+</LinearLayout>

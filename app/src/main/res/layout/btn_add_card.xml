@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+    <Button
+        android:paddingLeft="115dp"
+        android:paddingRight="115dp"
+        android:id="@+id/btn_add"
+        android:drawableLeft="@mipmap/add_white"
+        android:text="添加银行卡"
+        style="@style/ButtonNormal"
+        android:enabled="true" />
+</FrameLayout>

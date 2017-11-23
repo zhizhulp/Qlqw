@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="23dp"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/grey_black_tv"
+        android:text="去邀请好友"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/lat_friends"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:src="@mipmap/wx_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_12"
+                android:textColor="@color/grey_black_tv"
+                android:layout_marginTop="10dp"
+                android:text="微信"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/lat_circle"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:src="@mipmap/wx_circle_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_12"
+                android:textColor="@color/grey_black_tv"
+                android:layout_marginTop="10dp"
+                android:text="朋友圈"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:background="@color/bg"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15"
+        android:text="取消"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+</LinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="18dp"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:text="首页应用"
+        android:textColor="@color/blue_btn"
+        android:textSize="@dimen/text_14" />
+
+    <ImageView
+        android:id="@+id/module_top_iv1"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="21dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv2"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="21dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv3"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="21dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv4"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="21dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv5"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="21dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv6"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:src="@mipmap/module_loading" />
+
+    <ImageView
+        android:id="@+id/module_top_iv7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/module_edit"
+        style="@style/SelectBackgroundWhile"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="编辑"
+        android:textColor="@color/blue_btn"
+        android:textSize="@dimen/text_14" />
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EasyStatusView">
+        <attr name="esv_loading" format="reference"/>
+        <attr name="esv_error" format="reference"/>
+        <attr name="esv_empty" format="reference"/>
+        <attr name="esv_noNet" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="MoneyBar">
+        <attr name="textTitle" format="string" />
+        <attr name="needBack" format="boolean" />
+        <attr name="barBg" format="color" />
+        <attr name="titleColor" format="color" />
+        <attr name="needLine" format="boolean" />
+        <attr name="backImg" format="integer|reference"/>
+        <attr name="backTextColor" format="color|reference"/>
+        <attr name="textTail" format="string" />
+    </declare-styleable>
+    <declare-styleable name="RectangleBoxEditText">
+        <attr name="boxStokeColor" format="color|reference"/>
+        <attr name="boxBackgroundColor" format="color|reference"/>
+        <attr name="numberTextColor" format="color|reference"/>
+        <attr name="boxCount" format="integer"/>
+        <attr name="boxPadding" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="EditTextHint">
+        <attr name="hintSize" format="dimension|reference" />
+    </declare-styleable>
+    <declare-styleable name="PasswordInputView">
+        <attr name="pivBorderColor" format="color" />
+        <attr name="pivBorderWidth" format="dimension" />
+        <attr name="pivBorderRadius" format="dimension" />
+        <attr name="pivPasswordColor" format="color" />
+        <attr name="pivPasswordWidth" format="dimension" />
+        <attr name="pivPasswordRadius" format="dimension" />
+        <attr name="pivPasswordLength" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="EasySwipeMenuLayout">
+        <attr name="leftMenuView" format="reference" />
+        <attr name="rightMenuView" format="reference" />
+        <attr name="contentView" format="reference" />
+        <attr name="canRightSwipe" format="boolean" />
+        <attr name="canLeftSwipe" format="boolean" />
+        <attr name="fraction" format="float" />
+    </declare-styleable>
+    <declare-styleable name="pickerview">
+        <attr name="pickerview_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="pickerview_textSize" format="dimension"/>
+        <attr name="pickerview_textColorOut" format="color"/>
+        <attr name="pickerview_textColorCenter" format="color"/>
+        <attr name="pickerview_dividerColor" format="color"/>
+        <attr name="pickerview_lineSpacingMultiplier" format="float"/>
+    </declare-styleable>
+</resources>

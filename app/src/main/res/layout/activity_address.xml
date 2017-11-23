@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barBg="@color/blue_btn"
+        app:textTitle="收货地址"
+        app:titleColor="@color/white" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <FrameLayout
+        android:id="@+id/address_bottom_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@color/blue_btn"
+        android:onClick="add"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/add_white"
+            android:drawablePadding="@dimen/padding_7dp"
+            android:text="添加收货地址"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_15" />
+    </FrameLayout>
+</LinearLayout>

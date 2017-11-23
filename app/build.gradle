@@ -1,0 +1,139 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.ascba.rebate"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 30
+        versionName "3.5.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        flavorDimensions "code"
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "38b7d12e3ef40facf5b431d6",
+                JPUSH_CHANNEL: "developer-default"
+        ]
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled false
+            storeFile file('/debug.keystore')
+            keyAlias 'androiddebugkey'
+            storePassword 'android'
+            keyPassword 'android'
+        }
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled false
+            storeFile file('/asc.jks')
+            keyAlias 'lovelycat'
+            storePassword 'qlqw1234'
+            keyPassword 'qlqw1234'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true //启用Proguard
+            zipAlignEnabled true //是否启用zipAlign压缩
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false  //不启用Proguard
+            zipAlignEnabled false //是否启用zipAlign压缩
+            signingConfig signingConfigs.release
+        }
+    }
+    productFlavors {
+        normal {// 开发版
+            applicationId 'com.ascba.rebate'
+            resValue "string", "app_name", "测试版"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+            ]
+            buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
+        }
+        normal_release {//  上线版
+            applicationId 'com.ascba.rebate'
+            resValue "string", "app_name", "钱来钱往"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+            ]
+            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
+        }
+        uat {//  线上测试环境共存包
+            applicationId 'com.ascba.rebate.uat'
+            resValue "string", "app_name", "测试共存版"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+            ]
+            buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
+        }
+        online {//  线上版本共存包
+            applicationId 'com.ascba.rebate.online'
+            resValue "string", "app_name", "正式版demo"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+            ]
+            buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    compile project(':IDCardLib')
+    compile project(':livenesslib')
+    compile project(':library')
+    compile project(':wheelPicker')
+    compile files('libs/alipaySdk-20170725.jar')
+    compile project(':bdvideoplayer')
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:support-vector-drawable:26.1.0'
+    compile 'com.yanzhenjie.nohttp:okhttp:1.1.4'
+    compile 'com.alibaba:fastjson:1.2.36'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'top.zibin:Luban:1.1.3'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    compile 'com.wei.android.lib:fingerprintidentify:1.2.1'
+    compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.google.zxing:core:3.3.0'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'cn.jiguang.sdk:jpush:3.0.9'
+    compile 'cn.jiguang.sdk:jcore:1.1.7'
+    compile 'com.romandanylyk:pageindicatorview:0.2.0@aar'
+    compile 'com.sunfusheng:marqueeview:1.3.2'
+    compile('com.aliyun.ams:alicloud-android-hotfix:3.1.6') {
+        exclude(module: 'alicloud-android-utdid')
+    }
+
+}

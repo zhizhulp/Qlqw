@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="关于钱来钱往" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="75dp"
+            android:src="@mipmap/about_icon" />
+
+        <TextView
+            android:id="@+id/about_edition_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="47dp"
+            android:text="版本V3.0.0"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_11" />
+
+        <RelativeLayout
+            android:id="@+id/about_introduced_rl"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="项目介绍"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <ImageView
+                android:id="@+id/about_introduced_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/more" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/about_score_rl"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="给我们评分"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <ImageView
+                android:id="@+id/about_score_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/more" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/about_skype_rl"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="微信公众号"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_skype"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="钱来钱往官方"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/phone_rl"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="客服电话"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="400-900-6639"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

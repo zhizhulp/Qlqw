@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SelectBackgroundWhile">
+        <item name="android:background">@drawable/select_ripple_while</item>
+    </style>
+
+    <style name="SelectBackground">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SelectBackgroundBorderless">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+</resources>

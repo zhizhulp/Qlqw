@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.recharge.RechargeSuccessActivity">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTitle="购买成功" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="65dp"
+        android:src="@mipmap/recharge_success" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="购买成功"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_21" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="17dp"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="65dp">
+
+        <TextView
+            android:id="@+id/tv_pay_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="礼品分"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@color/white" />
+
+    <Button
+        android:id="@+id/btn_complete"
+        style="@style/ButtonNormal"
+        android:layout_marginTop="50dp"
+        android:enabled="true"
+        android:text="立即赠送" />
+</LinearLayout>

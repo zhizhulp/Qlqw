@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.ascba.rebate.activities.register.RegisterNextActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        app:backImg="@mipmap/back_blank"
+        app:barBg="@color/white"
+        app:backTextColor="@color/grey_black_tv"
+        android:layout_marginTop="@dimen/top0_25"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:paddingTop="@dimen/padding_7dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_nick_name"
+            style="@style/TextViewNormal"
+            android:text="用户昵称" />
+        <com.ascba.rebate.view.ClearEditText
+            android:inputType="text"
+            android:paddingRight="10dp"
+            android:id="@+id/et_nick_name"
+            style="@style/EditTextNormal"
+            android:layout_marginLeft="@dimen/margin_24dp"
+            android:hint="请输入用户昵称"
+            android:maxLines="1"
+            android:maxLength="11"/>
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        style="@style/LineHorizontal" />
+    <LinearLayout
+        android:paddingTop="@dimen/padding_7dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_psd"
+            style="@style/TextViewNormal"
+            android:text="支付密码" />
+        <com.ascba.rebate.view.ClearEditText
+            android:paddingRight="10dp"
+            android:inputType="numberPassword"
+            android:id="@+id/et_psd"
+            style="@style/EditTextNormal"
+            android:layout_marginLeft="@dimen/margin_24dp"
+            android:hint="请输入6位支付密码"
+            android:maxLines="1"
+            android:maxLength="6"/>
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        style="@style/LineHorizontal" />
+    <LinearLayout
+        android:paddingTop="@dimen/padding_7dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_confirm_psd"
+            style="@style/TextViewNormal"
+            android:text="确认密码" />
+        <com.ascba.rebate.view.ClearEditText
+            android:paddingRight="10dp"
+            android:inputType="numberPassword"
+            android:id="@+id/et_confirm_psd"
+            style="@style/EditTextNormal"
+            android:layout_marginLeft="@dimen/margin_24dp"
+            android:hint="请确认6位支付密码"
+            android:maxLines="1"
+            android:maxLength="6"/>
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        style="@style/LineHorizontal" />
+    <LinearLayout
+        android:paddingTop="@dimen/padding_7dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_rec_id"
+            style="@style/TextViewNormal"
+            android:text="推荐人ID" />
+        <com.ascba.rebate.view.ClearEditText
+            android:paddingRight="10dp"
+            android:id="@+id/et_rec_id"
+            style="@style/EditTextNormal"
+            android:layout_marginLeft="@dimen/margin_24dp"
+            android:hint="请输入推荐人ID(非必填项)"
+            android:maxLines="1" />
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        style="@style/LineHorizontal" />
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_marginTop="48dp"
+        android:text="立即注册"
+        style="@style/ButtonNormal"/>
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:gravity="center"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_13"
+            android:id="@+id/tv_cancel"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15"
+            android:text="选择银行卡"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:gravity="center"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_13"
+            android:id="@+id/tv_sure"
+            android:text="确定"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_line"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_add_card"
+        android:layout_gravity="center"
+        android:drawableLeft="@mipmap/add_blue"
+        android:drawablePadding="7dp"
+        android:gravity="center"
+        android:text="添加银行卡"
+        android:textSize="@dimen/text_14"
+        android:textColor="@color/blue_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp" />
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="安全验证" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:text="请输入旧密码"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_17" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.ascba.rebate.view.keyboard.PasswordInputView
+            android:id="@+id/password_input"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:maxLength="6"
+            app:pivPasswordLength="6" />
+
+        <TextView
+            android:id="@+id/forget_pay_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="17dp"
+            android:onClick="forget"
+            android:text="忘记密码？"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_16" />
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyBackground="@drawable/key_bg"
+        android:keyTextColor="@color/black"
+        android:shadowColor="@color/grey_black_tv"
+        android:shadowRadius="0.0"/>
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:id="@+id/tobe_sure_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <LinearLayout
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:id="@+id/tobe_sure_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tobe_sure_tv1">
+
+        <TextView
+            android:textColor="@color/blue_btn"
+            android:id="@+id/tobe_sure_tv22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tobe_sure_tv2"
+            android:textColor="@color/blue_btn"
+            android:text="元"
+            android:textSize="@dimen/text_14" />
+
+    </LinearLayout>
+    <TextView
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:id="@+id/tobe_sure_tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tobe_sure_tv2"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp" />
+    <View
+        android:background="@color/grey_line"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/tobe_sure_v4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tobe_sure_tv3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <RelativeLayout
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:id="@+id/seller_sure_order_back"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tobe_sure_v4"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/seller_sure_order_iv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/confirm_warn" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/seller_sure_order_tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@+id/seller_sure_order_iv1"
+            android:textSize="@dimen/text_13"
+            android:textColor="@color/grey_black_tv3"/>
+    </RelativeLayout>
+    <View
+        android:layout_below="@id/seller_sure_order_back"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/main_bg"/>
+</RelativeLayout>

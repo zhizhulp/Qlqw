@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.user_msg.UserMsgActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        app:textTitle="个人信息"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"/>
+
+    <RelativeLayout
+        android:id="@+id/lat_user_head"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_marginBottom="9dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:id="@+id/im_user_head"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/im_user_head"
+            android:text="资料设置"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_17" />
+
+        <ImageView
+            android:id="@+id/im_more1"
+            style="@style/ImageViewMore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/im_more1"
+            android:text="进入"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_name_authon"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:id="@+id/im_name_authen"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/name_authen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/im_name_authen"
+            android:text="个人认证"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/im_more2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/ImageViewMore"/>
+        <TextView
+            android:id="@+id/tv_name_authon"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/im_more2"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_black_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_alignParentBottom="true"
+            style="@style/LineHorizontal"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/lat_company_authon"
+        android:layout_marginBottom="9dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:id="@+id/im_company_authen"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/company_authen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/im_company_authen"
+            android:text="企业认证"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/im_more3"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/ImageViewMore"/>
+        <TextView
+            android:id="@+id/tv_company_authen"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/im_more3"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_black_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/lat_rec"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:id="@+id/im_my_rec"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/my_rec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/im_my_rec"
+            android:text="我的推荐"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/ImageViewMore"/>
+        <View
+            android:layout_alignParentBottom="true"
+            style="@style/LineHorizontal"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/lat_award"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:id="@+id/im_my_award"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/my_award"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/im_my_award"
+            android:text="我的奖励"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/ImageViewMore"/>
+    </RelativeLayout>
+</LinearLayout>

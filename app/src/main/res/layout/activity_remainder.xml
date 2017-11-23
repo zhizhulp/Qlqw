@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.mine.BalanceActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        app:textTitle="余额"
+        app:textTail="现金账单"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"/>
+    <TextView
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="账户余额"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/white"
+        android:paddingTop="30dp"
+        android:background="@color/blue_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_balance"
+        android:paddingTop="40dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="0.00"
+        android:textSize="58sp"
+        android:textColor="@color/white"
+        android:background="@color/blue_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/lat_recharge"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:src="@mipmap/recharge"
+            android:id="@+id/im_one"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/im_one"
+            android:layout_centerVertical="true"
+            android:text="充值"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_line"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/lat_cash_get"
+        android:background="@color/white"
+        android:layout_marginBottom="9dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:src="@mipmap/balance"
+            android:id="@+id/im_two"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/im_two"
+            android:layout_centerVertical="true"
+            android:text="提现"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/lat_bank_card"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+        <ImageView
+            android:src="@mipmap/bank_card"
+            android:id="@+id/im_three"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/im_three"
+            android:layout_centerVertical="true"
+            android:text="银行卡"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_problems"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_13"
+            android:text="常见问题"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</LinearLayout>

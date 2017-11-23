@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.register.RegisterActivity">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:layout_marginTop="@dimen/top0_25"
+        app:backImg="@mipmap/back_blank"
+        app:barBg="@color/white"
+        app:backTextColor="@color/grey_black_tv"
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:text="@string/register"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_19" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="29dp"
+            android:text="国家 / 地区"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中国"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="17dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+86"
+            android:textColor="@color/grey_tv"
+            android:textSize="@dimen/text_16" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@color/grey_line" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.ascba.rebate.view.ClearEditText
+        android:inputType="number"
+        android:maxLength="11"
+        android:id="@+id/register_et_number"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:hint="请输入手机号"
+        android:maxLines="1"
+        android:textColorHint="@color/grey_tv"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15"
+        app:hintSize="@dimen/text_15"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/login_clear"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/register_clear"/>
+</RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/grey_line" />
+    <Button
+        style="@style/ButtonNormal"
+        android:id="@+id/register_btn"
+        android:layout_marginTop="33dp"
+        android:text="下一步" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="23dp"
+        android:gravity="center"
+        android:text="轻触上面的“下一步”按钮，即表示您已同意"
+        android:textColor="@color/grey_little_tv"
+        android:textSize="@dimen/text_13" />
+
+    <TextView
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:id="@+id/register_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="《钱来钱往服务协议》"
+        android:textColor="@color/blue_tv" />
+
+</LinearLayout>

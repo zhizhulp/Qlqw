@@ -1,0 +1,36 @@
+<resources>
+    <string name="no_network">请手动打开网络</string>
+    <string name="register">手机号码注册</string>
+    <string name="modify_name_hint">可使用中英、数字和下划线，字数限制1–11个字</string>
+    <string name="name_unavailable">用户昵称长度不符合，请重新输入</string>
+    <string name="pay_psd_unavailable">支付密码长度不符合，请重新输入</string>
+    <string name="input_not_same">两次支付密码不一致，请重新输入</string>
+    <string name="cancel_register">您确定取消注册？</string>
+    <string name="input_name_unavailable">请不要输入特殊字符</string>
+    <string name="net_authen_failed">联网 授权失败！请检查网络或找服务商解决</string>
+    <string name="request_failed">请求失败</string>
+    <string name="cancel_pay">您已经取消支付</string>
+    <string name="failed_pay">支付失败</string>
+    <string name="success_pay">支付成功</string>
+    <string name="input_money_unavailable">请输入有效金额</string>
+    <string name="no_pi">个人信息未认证，是否立即认证？</string>
+    <string name="no_pay_psd">请先设置密码</string>
+    <string name="no_address">您还未填写收获地址，马上去填写</string>
+    <!--扫一扫-->
+    <string name="title_activity_scan_qr_code">扫一扫</string>
+    <string name="qc_code_close">关闭</string>
+    <string name="qr_code_select_picture">照片</string>
+    <string name="qr_code_open_flash_light">打开闪光灯</string>
+    <string name="qr_code_close_flash_light">关闭闪光灯</string>
+    <string name="qr_code_auto_scan_notification">将二维码放入框内，即可自动扫描</string>
+    <string name="qr_code_notification">提示</string>
+    <string name="qr_code_camera_not_open">您的相机功能好像没有打开哦~去\"设置>隐私>相机\"设置一下吧</string>
+    <string name="qr_code_positive_button_know">知道了</string>
+    <string name="qr_code_positive_button_confirm">确认</string>
+    <string name="qr_code_could_not_read_qr_code_from_picture">没有读出图片中的链接，换张图片试试吧~</string>
+    <string name="qr_code_could_not_read_qr_code_from_scanner">对不起，无法打开扫出的内容</string>
+    <string name="qr_code_camera_not_found">未检测到相机</string>
+    <string name="invite_share_title">哇！花多少赚多少，京东都怕了。</string>
+    <string name="invite_share_content">商品多，配送快，品质好，天天省钱，消费能赚钱，快快体验吧！</string>
+    <string name="code_unavailable">非有效二维码</string>
+</resources>

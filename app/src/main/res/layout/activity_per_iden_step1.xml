@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.ascba.rebate.activities.personal_identification.PIStartActivity">
+    <com.ascba.rebate.view.MoneyBar
+        app:textTitle="认证信息"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"/>
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="17dp"
+        android:text="认证时，请将镜头对准您的脸，并按提示进行"
+        android:textSize="@dimen/text_14"
+        android:textColor="@color/grey_black_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:src="@mipmap/face_identi_01"
+        android:layout_marginTop="17dp"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:src="@mipmap/face_identi_02"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@mipmap/face_identi_03"
+            android:layout_marginLeft="6dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@mipmap/face_identi_04"
+            android:layout_marginLeft="6dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:gravity="left"
+            android:text="不要遮挡眼镜"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center"
+            android:text="不要戴帽子"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="right"
+            android:text="不要光线太暗"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_start"
+        android:onClick="startCheck"
+        android:layout_marginTop="74dp"
+        android:text="开始采集"
+        style="@style/ButtonNormal" />
+</LinearLayout>

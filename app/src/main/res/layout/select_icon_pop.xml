@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@drawable/select_icon_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/head_icon_select_camera"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="拍照"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="15sp" />
+
+        <View style="@style/LineHorizontal" />
+
+        <TextView
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/head_icon_select_album"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="从相册中选择照片"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="15sp" />
+
+        <View style="@style/LineHorizontal" />
+
+        <TextView
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/head_icon_select_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/grey_little_tv"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

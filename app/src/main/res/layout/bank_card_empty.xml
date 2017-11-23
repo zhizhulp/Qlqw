@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_marginTop="57dp"
+        android:src="@mipmap/empty_bank_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:textSize="@dimen/text_13"
+        android:text="添加银行卡即可享受安全便捷的移动支付体验"
+        android:textColor="@color/grey_black_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_add"
+        android:drawableLeft="@mipmap/add_white"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="115dp"
+        android:paddingRight="115dp"
+        android:layout_gravity="center_horizontal"
+        android:text="添加银行卡"
+        style="@style/ButtonNormal"
+        android:enabled="true">
+    </Button>
+</LinearLayout>

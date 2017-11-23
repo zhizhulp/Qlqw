@@ -1,0 +1,521 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.fragments.main.MineFragment">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barBg="@color/blue_btn"
+        app:needBack="false"
+        app:textTitle="我"
+        app:titleColor="@color/white" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ascba.rebate.view.EasyStatusView
+            android:id="@+id/statusView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@color/blue_btn">
+
+                        <com.ascba.rebate.view.WaveViewByBezier
+                            android:id="@+id/waveview1"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_above="@+id/waveview3"
+                            android:layout_marginBottom="-24dp"
+                            app:color_bg="@color/transparentWhite" />
+
+                        <com.ascba.rebate.view.WaveViewByBezier
+                            android:id="@+id/waveview3"
+                            android:layout_width="match_parent"
+                            android:layout_height="68dp"
+                            android:layout_alignParentBottom="true"
+                            app:color_bg="@color/white" />
+
+                        <RelativeLayout
+                            android:id="@+id/lat_user_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginRight="14dp">
+
+                            <RelativeLayout
+                                android:id="@+id/mine_head_rl"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@drawable/picture_shape">
+
+                                <ImageView
+                                    android:id="@+id/mine_head"
+                                    android:layout_width="76dp"
+                                    android:layout_height="76dp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@mipmap/head_loading" />
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:id="@+id/im_go_head"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/more_white" />
+
+                            <LinearLayout
+                                android:id="@+id/lat_user_data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_toLeftOf="@id/im_go_head"
+                                android:layout_toRightOf="@id/mine_head_rl"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/id_mine_number"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="center"
+                                    android:maxLines="1"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_23" />
+
+                                <TextView
+                                    android:id="@+id/group_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="left"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_17" />
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/present_more_rl"
+                            android:layout_width="match_parent"
+                            android:layout_height="68dp"
+                            android:layout_alignParentBottom="true"
+                            style="@style/SelectBackground"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp">
+
+                            <ImageView
+                                android:id="@+id/present"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/present" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="33dp"
+                                android:gravity="center"
+                                android:text="礼品分余额"
+                                android:textColor="@color/grey_black_tv"
+                                android:textSize="@dimen/sp_14" />
+
+                            <TextView
+                                android:id="@+id/mine_tickets"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/textView2"
+                                android:layout_alignBottom="@+id/textView2"
+                                android:layout_marginRight="7dp"
+                                android:layout_toLeftOf="@+id/mine_present_more"
+                                android:layout_toStartOf="@+id/mine_present_more"
+                                android:textColor="@color/grey_black_tv2"
+                                android:textSize="@dimen/text_14" />
+
+                            <ImageView
+                                android:id="@+id/mine_present_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/present"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginBottom="14dp"
+                                android:clickable="true"
+                                android:src="@mipmap/more" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <include layout="@layout/mine_line" />
+
+                    <ImageView
+                        android:id="@+id/invite_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/mine_loading" />
+
+                    <include layout="@layout/mine_line" />
+
+                    <RelativeLayout
+                        android:id="@+id/myprivilege_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/mine_myprivilege_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/myprivilege" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="我的特权"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_myprivilege_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:src="@mipmap/more" />
+
+                    </RelativeLayout>
+
+                    <include
+                        layout="@layout/mine_line"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/bill_rl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="49dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/mine_bill_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_bill" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="现金账单"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_bill_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/more" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/grey_line" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/remainder_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/mine_remainder_sum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/remainder_sum" />
+
+                        <TextView
+                            android:id="@+id/mine_remainder_tv1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="现金余额"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+
+                        <TextView
+                            android:id="@+id/mine_remainder_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_remainder_tv1"
+                            android:layout_alignBottom="@+id/mine_remainder_tv1"
+                            android:layout_marginRight="7dp"
+                            android:layout_toLeftOf="@+id/mine_remainder_more"
+                            android:layout_toStartOf="@+id/mine_remainder_more"
+                            android:textColor="@color/grey_black_tv2"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_remainder_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_remainder_sum"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="14dp"
+                            android:clickable="true"
+                            android:src="@mipmap/more" />
+
+
+                    </RelativeLayout>
+
+                    <include layout="@layout/mine_line" />
+
+                    <RelativeLayout
+                        android:id="@+id/benefit_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/mine_benefit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/benefit" />
+
+                        <TextView
+                            android:id="@+id/mine_benefit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="累计现金分红"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/mine_benefit_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_benefit_text"
+                            android:layout_alignBottom="@+id/mine_benefit_text"
+                            android:layout_marginRight="7dp"
+                            android:layout_toLeftOf="@+id/mine_benefit_more"
+                            android:textColor="@color/grey_black_tv2"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_benefit_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_benefit"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="14dp"
+                            android:clickable="true"
+                            android:src="@mipmap/more" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/grey_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/coupon_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/mine_coupon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/coupon" />
+
+                        <TextView
+                            android:id="@+id/mine_coupon_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="累计福利分红"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/mine_coupon_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_coupon_text"
+                            android:layout_alignBottom="@+id/mine_coupon_text"
+                            android:layout_marginRight="7dp"
+                            android:layout_toLeftOf="@+id/mine_coupon_more"
+                            android:textColor="@color/grey_black_tv2"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_coupon_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_coupon"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="14dp"
+                            android:clickable="true"
+                            android:src="@mipmap/more" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/grey_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/purchase_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/mine_purchase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/purchase" />
+
+                        <TextView
+                            android:id="@+id/mine_purchase_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="佣金充值余额"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/mine_purchase_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_purchase_text"
+                            android:layout_alignBottom="@+id/mine_purchase_text"
+                            android:layout_marginRight="7dp"
+                            android:layout_toLeftOf="@+id/mine_purchase_more"
+                            android:textColor="@color/grey_black_tv2"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_purchase_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/mine_purchase"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="14dp"
+                            android:clickable="true"
+                            android:src="@mipmap/more" />
+                    </RelativeLayout>
+
+                    <include layout="@layout/mine_line" />
+
+                    <RelativeLayout
+                        android:id="@+id/setting_rl"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        style="@style/SelectBackground"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/mine_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/mine_setting" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:text="设置"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_14" />
+
+                        <ImageView
+                            android:id="@+id/mine_setting_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/more" />
+                    </RelativeLayout>
+
+                    <include layout="@layout/mine_line" />
+                </LinearLayout>
+
+            </ScrollView>
+        </com.ascba.rebate.view.EasyStatusView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

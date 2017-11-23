@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_exchange_iv"
+            android:layout_width="71dp"
+            android:layout_height="71dp"
+            android:layout_marginBottom="17dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="17dp"
+            android:src="@mipmap/exchange_loading" />
+
+        <TextView
+            android:id="@+id/item_exchange_title"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/item_exchange_iv"
+            android:gravity="left|center_vertical"
+            android:maxLines="1"
+            android:maxWidth="200dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/item_exchange_accumulate"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/item_exchange_title"
+            android:layout_toRightOf="@id/item_exchange_title"
+            android:gravity="right|center_vertical"
+            android:text="积分"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/item_exchange_content"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_below="@id/item_exchange_title"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/item_exchange_iv"
+            android:gravity="left|center_vertical"
+            android:maxLines="1"
+            android:maxWidth="260dp"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/item_exchange_num"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/item_exchange_content"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/item_exchange_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_below="@id/item_exchange_content"
+            android:layout_toRightOf="@id/item_exchange_iv"
+            android:gravity="center_vertical"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:id="@+id/item_exchange_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@mipmap/exchange_warn"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/item_exchange_logistics"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="查看物流"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+</LinearLayout>

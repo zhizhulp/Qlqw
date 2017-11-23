@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="指纹解锁" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/fingerprint_icon" />
+
+    <TextView
+        android:id="@+id/about_edition_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="33dp"
+        android:gravity="center"
+        android:lineSpacingExtra="7dp"
+        android:text="开通后，可使用Touch ID验证指纹解锁钱来钱往\n指纹解锁密码只针对本机有效"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_13" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48.5dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="指纹解锁"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/fingerprint_switch"
+            android:layout_width="56dp"
+            android:layout_height="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:sb_background="@color/search_bar"
+            app:sb_border_width="1.5dp"
+            app:sb_checked="false"
+            app:sb_checked_color="@color/blue_btn"
+            app:sb_shadow_radius="0.5dp"
+            app:sb_show_indicator="false" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_line" />
+</LinearLayout>

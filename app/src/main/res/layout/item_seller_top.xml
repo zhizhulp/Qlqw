@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/blue_btn"
+        android:gravity="center"
+        android:paddingTop="11dp"
+        android:text="今日收入(元)"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/item_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/blue_btn"
+        android:gravity="center_horizontal"
+        android:paddingBottom="20dp"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/seller_top_btn1"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="13dp"
+            android:drawableTop="@mipmap/seller_icon1"
+            android:gravity="center"
+            android:paddingBottom="17dp"
+            android:paddingTop="17dp"
+            android:text="我要收款" />
+
+        <TextView
+            android:paddingBottom="17dp"
+            android:paddingTop="17dp"
+            android:id="@+id/seller_top_btn2"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="13dp"
+            android:drawableTop="@mipmap/seller_icon2"
+            android:gravity="center"
+            android:text="明细记录" />
+
+        <TextView
+            android:paddingBottom="17dp"
+            android:paddingTop="17dp"
+            android:id="@+id/seller_top_btn3"
+            style="@style/SelectBackgroundWhile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="13dp"
+            android:drawableTop="@mipmap/seller_icon3"
+            android:gravity="center"
+            android:text="现金确认" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/module_title_left"
+        android:drawablePadding="7dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="17dp"
+        android:text="礼品采购"
+        android:textColor="@color/grey_black_tv3" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="3dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="7dp">
+
+        <TextView
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/grey_black_tv2"
+            android:background="@drawable/blue_corner_02"
+            android:text="立即充值"
+            android:id="@+id/item_seller_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="29dp" />
+
+        <TextView
+            android:id="@+id/item_seller_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/item_seller_iv"
+            android:paddingTop="12dp"
+            android:text="佣金充值卡"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/item_seller_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_seller_title"
+            android:layout_toLeftOf="@id/item_seller_iv"
+            android:lineSpacingExtra="8dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:text="赠送超值礼包，充值越多赠送越多"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/module_title_left"
+        android:drawablePadding="7dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="17dp"
+        android:text="推荐服务"
+        android:textColor="@color/grey_black_tv3" />
+</LinearLayout>

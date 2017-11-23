@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="14dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_centerVertical="true"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:id="@+id/im_calendar"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/calendar"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</RelativeLayout>

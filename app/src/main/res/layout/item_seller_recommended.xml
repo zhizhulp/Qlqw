@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SelectBackgroundWhile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <ImageView
+        android:id="@+id/item_seller_iv"
+        android:layout_width="100dp"
+        android:layout_height="67dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="7dp"
+        android:src="@mipmap/seller_img1" />
+
+    <TextView
+        android:id="@+id/item_seller_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/item_seller_iv"
+        android:paddingTop="19dp"
+        android:text="储值多多、礼品多多"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <TextView
+        android:id="@+id/item_seller_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_seller_title"
+        android:layout_toLeftOf="@id/item_seller_iv"
+        android:lineSpacingExtra="8dp"
+        android:paddingBottom="18dp"
+        android:paddingTop="12dp"
+        android:text="收益红包领不停，礼品赠送给不停"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_13" />
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

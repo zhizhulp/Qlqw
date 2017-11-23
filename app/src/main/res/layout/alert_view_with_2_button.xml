@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/alert_bg"
+    android:minHeight="100dp"
+    android:layout_width="240dp"
+    android:layout_height="100dp">
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="7dp"
+        android:text="我家住在黄土高坡"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/tv_alert_msg"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/grey_black_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+    <LinearLayout
+        android:id="@+id/lat_btn"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:background="@drawable/alert_text_left_half_bg"
+            android:id="@+id/tv_alert_sure"
+            android:gravity="center"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:text="确定"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey_line"/>
+        <TextView
+            android:background="@drawable/alert_text_right_half_bg"
+            android:id="@+id/tv_alert_cancel"
+            android:gravity="center"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14"
+            android:text="取消"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

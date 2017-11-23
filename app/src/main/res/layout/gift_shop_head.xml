@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@mipmap/gift_head_bg">
+
+        <RelativeLayout
+            android:id="@+id/lat_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp">
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_34" />
+
+            <ImageView
+                android:layout_marginBottom="8dp"
+                android:layout_toRightOf="@+id/tv_score"
+                android:layout_alignBottom="@id/tv_score"
+                android:src="@mipmap/gift_score_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/corner_rect_bg"
+            android:gravity="center"
+            android:text="普通会员"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/tv_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="37dp"
+            android:layout_marginLeft="86dp"
+            android:text="礼品分明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_15" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="0.5dp"
+            android:layout_height="17dp"
+            android:layout_alignBottom="@id/tv_details"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_toRightOf="@id/tv_details"
+            android:background="@color/grey_line" />
+
+        <TextView
+            android:id="@+id/tv_exchange_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/line"
+            android:layout_toRightOf="@id/line"
+            android:text="兑换记录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_15" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="49.5dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="推荐兑换"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp" />
+</LinearLayout>

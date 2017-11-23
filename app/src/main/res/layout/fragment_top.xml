@@ -1,0 +1,239 @@
+<com.ascba.rebate.view.vertical_drag.CustScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ascba.rebate.fragments.score_shop.TopFragment">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lat_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:lineSpacingExtra="7dp"
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="20dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/text_24" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:textColor="@color/grey_black_tv3"
+                android:textSize="@dimen/text_13" />
+            <TextView
+                android:visibility="gone"
+                android:background="@drawable/gift_corner_bg"
+                android:id="@+id/tv_add_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_13" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="9dp"
+            android:background="@color/white"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="购买数量："
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+
+            <com.ascba.rebate.view.NumberBtn
+                android:id="@+id/number_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lat_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/tv_user_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lat_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="49dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:id="@+id/tv_lct_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="配货地址:"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+
+            <ImageView
+                android:id="@+id/im_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/more" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="76dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/im_more"
+                android:ellipsize="end"
+                android:lineSpacingExtra="6dp"
+                android:maxLines="2"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/grey_tv"
+                android:textSize="@dimen/text_14" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@color/grey_line" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginBottom="9dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="运费:"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+
+            <TextView
+                android:id="@+id/tv_yunfei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="76dp"
+                android:layout_marginRight="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="免邮"
+                android:textColor="@color/grey_tv"
+                android:textSize="@dimen/text_14" />
+        </FrameLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:lineSpacingExtra="8dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="17dp" />
+
+        <TextView
+            android:id="@+id/tv_html"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="17dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="继续拖动，查看图文详情"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+    </LinearLayout>
+
+</com.ascba.rebate.view.vertical_drag.CustScrollView>

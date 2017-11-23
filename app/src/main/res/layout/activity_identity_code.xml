@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.register.IdentityCodeActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:layout_marginTop="@dimen/top0_25"
+        app:barBg="@color/white"
+        android:id="@+id/mb"
+        app:needBack="true"
+        app:backImg="@mipmap/back_blank"
+        app:backTextColor="@color/grey_black_tv"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+
+    <TextView
+        android:id="@+id/identity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="输入验证码"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_19"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/id_mobile_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="请查看短信并输入验证码"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="28dp">
+
+        <com.ascba.rebate.view.RectangleBoxEditText
+            android:id="@+id/et_rectangle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:digits="0123456789"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:textSize="@dimen/text_34"
+            android:textStyle="bold"
+            app:boxBackgroundColor="@color/grey_tv"
+            app:boxCount="4"
+            app:boxPadding="20dp"
+            app:boxStokeColor="@color/blue_btn"
+            app:numberTextColor="@color/grey_black_tv" />
+        <TextView
+            android:id="@+id/identity_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/et_rectangle"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+    </RelativeLayout>
+    <TextView
+        android:visibility="gone"
+        android:layout_marginTop="-10dp"
+        android:textColor="@color/grey_black_tv"
+        android:id="@+id/identity_noreceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="收不到验证码？" />
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.recharge.RechargeSuccessActivity">
+    <com.ascba.rebate.view.MoneyBar
+        app:textTitle="充值成功"
+        style="@style/MoneyBar"/>
+    <ImageView
+        android:background="@color/white"
+        android:paddingTop="65dp"
+        android:src="@mipmap/recharge_success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:gravity="center_horizontal"
+        android:background="@color/white"
+        android:paddingTop="15dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_21"
+        android:text="充值成功"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:paddingTop="65dp"
+        android:paddingBottom="17dp"
+        android:background="@color/white"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_pay_type"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_pay_money"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@color/white"/>
+    <Button
+        android:onClick="complete"
+        android:layout_marginTop="50dp"
+        android:text="完成"
+        android:enabled="true"
+        style="@style/ButtonNormal"/>
+</LinearLayout>

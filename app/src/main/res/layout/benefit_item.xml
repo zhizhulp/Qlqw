@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="73dp">
+    <FrameLayout
+        android:paddingLeft="14dp"
+        android:id="@+id/lat_ranking"
+        android:layout_width="35dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:id="@+id/im_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="center"
+            android:text="4"
+            android:textSize="@dimen/text_16"
+            android:textColor="@color/grey_black_tv"
+            android:id="@+id/tv_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+    <ImageView
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@id/lat_ranking"
+        android:layout_centerVertical="true"
+        android:id="@+id/im_head"
+        android:layout_width="39dp"
+        android:layout_height="39dp" />
+    <TextView
+        android:text="5500元"
+        android:paddingRight="14dp"
+        android:layout_alignParentRight="true"
+        android:maxLines="1"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_13"
+        android:textColor="@color/blue_btn"
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="10dp"
+        android:text="试一下什么效果"
+        android:layout_toLeftOf="@id/tv_money"
+        android:layout_toRightOf="@id/im_head"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_14"
+        android:textColor="@color/grey_black_tv"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+</RelativeLayout>

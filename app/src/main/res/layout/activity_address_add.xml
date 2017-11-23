@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTail="保存"
+        app:textTitle="新增地址" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:id="@+id/address_contacts_iv"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/address_contacts" />
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:layout_toLeftOf="@id/address_contacts_iv"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="收货人"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <com.ascba.rebate.view.ClearEditText
+                android:id="@+id/address_add_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:background="@null"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/grey_black_tv"
+                android:textColorHint="@color/grey_tv"
+                android:textSize="@dimen/text_13"
+                app:hintSize="@dimen/text_13" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/grey_line" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48.5dp"
+            android:layout_below="@id/rl_1"
+            android:layout_toLeftOf="@id/address_contacts_iv"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="联系电话"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <com.ascba.rebate.view.ClearEditText
+                android:id="@+id/address_add_mobile_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/grey_black_tv"
+                android:textColorHint="@color/grey_tv"
+                android:textSize="@dimen/text_13"
+                app:hintSize="@dimen/text_13" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/grey_line" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/address_select_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="所在地区"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/address_add_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="70dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grey_line" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/address_add_detail"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:maxLength="120"
+        android:hint="谨慎填写详细地址，不少于5个字"
+        android:paddingBottom="17dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="17dp"
+        android:textColor="@color/grey_black_tv"
+        android:textColorHint="@color/grey_tv"
+        android:textSize="@dimen/text_13" />
+
+    <include layout="@layout/mine_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="设置为默认地址"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/fingerprint_switch"
+            android:layout_width="40dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:sb_background="@color/search_bar"
+            app:sb_border_width="1.5dp"
+            app:sb_checked="false"
+            app:sb_checked_color="@color/blue_btn"
+            app:sb_shadow_radius="0.5dp"
+            app:sb_show_indicator="false" />
+    </RelativeLayout>
+</LinearLayout>

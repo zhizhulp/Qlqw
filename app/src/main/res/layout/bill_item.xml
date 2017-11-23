@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+    <ImageView
+        app:srcCompat="@mipmap/head_loading"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:id="@+id/im_icon"
+        android:layout_width="@dimen/bill_icon_default"
+        android:layout_height="@dimen/bill_icon_default" />
+    <LinearLayout
+        android:id="@+id/lat_right"
+        android:gravity="right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_money"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="13dp"
+            android:id="@+id/tv_status"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_toRightOf="@id/im_icon"
+        android:layout_toLeftOf="@id/lat_right"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/tv_title"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="13dp"
+            android:id="@+id/tv_time"
+            android:textColor="@color/grey_black_tv3"
+            android:textSize="@dimen/text_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+</RelativeLayout>

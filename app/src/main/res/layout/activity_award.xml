@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ascba.rebate.activities.mine.AwardActivity">
+
+    <TextView
+        android:id="@+id/tv_go"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/invite_red"
+        android:gravity="center"
+        android:text="立即邀请"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_14" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tv_go">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <FrameLayout
+        android:id="@+id/lat_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/invite_red"
+        android:fitsSystemWindows="true">
+
+        <com.ascba.rebate.view.MoneyBar
+            style="@style/MoneyBar"
+            app:barBg="@color/transparent"
+            app:textTail="活动规则" />
+    </FrameLayout>
+</RelativeLayout>

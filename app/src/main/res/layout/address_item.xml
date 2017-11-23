@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="17dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/item_address_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:maxWidth="260dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_17" />
+
+        <TextView
+            android:id="@+id/item_address_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_17" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/item_address_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="10dp"
+        android:maxLines="2"
+        android:paddingBottom="20dp"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_14" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <CheckBox
+            android:id="@+id/item_address_check"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/check_address"
+            android:paddingLeft="7dp"
+            android:text="设为默认"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/item_address_del"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/select_background_while"
+            android:drawableLeft="@mipmap/address_del"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="删除"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/item_address_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/item_address_del"
+            android:background="@drawable/select_background_while"
+            android:drawableLeft="@mipmap/address_edit"
+            android:drawablePadding="7dp"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="编辑"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+
+</LinearLayout>

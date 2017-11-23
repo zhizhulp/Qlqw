@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/msg_time_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_corner_6dp"
+        android:orientation="vertical"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="17dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="10dp"
+            android:maxLines="2"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_line" />
+
+        <TextView
+            android:id="@+id/tv_see"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableRight="@mipmap/more"
+            android:gravity="center_vertical"
+            android:text="查看详情"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+</LinearLayout>

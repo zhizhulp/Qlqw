@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue_btn"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:padding="14dp"
+            android:src="@mipmap/back_white" />
+
+        <TextView
+            android:id="@+id/module_search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_toRightOf="@id/im_back"
+            android:background="@drawable/grad_search_bg"
+            android:drawableLeft="@mipmap/module_search"
+            android:drawablePadding="7dp"
+            android:gravity="center_vertical"
+            android:hint="全部应用"
+            android:paddingLeft="14dp"
+            android:textColor="@color/grey_black_tv"
+            android:textColorHint="@color/grey_black_tv3"
+            android:textSize="@dimen/text_15" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

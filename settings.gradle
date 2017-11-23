@@ -1,0 +1,1 @@
+include ':app', ':IDCardLib', ':livenesslib', ':library', ':wheelPicker', ':bdvideoplayer'

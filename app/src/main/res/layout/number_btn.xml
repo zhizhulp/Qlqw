@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:background="@drawable/corner_2dp"
+    android:orientation="horizontal"
+    android:minWidth="95dp"
+    android:layout_width="wrap_content"
+    android:layout_height="28dp">
+    <ImageView
+        android:id="@+id/im_sub"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@mipmap/btn_sub"
+        android:layout_width="28dp"
+        android:layout_height="match_parent" />
+    <View
+        android:layout_width="0.8dp"
+        android:layout_height="match_parent"
+        android:background="@color/grey_black_tv2"/>
+    <TextView
+        android:id="@+id/tv_num"
+        android:minWidth="39dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="0.8dp"
+        android:layout_height="match_parent"
+        android:background="@color/grey_black_tv2"/>
+    <ImageView
+        android:id="@+id/im_add"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="center"
+        android:layout_width="28dp"
+        android:src="@mipmap/btn_add"
+        android:layout_height="match_parent" />
+</LinearLayout>

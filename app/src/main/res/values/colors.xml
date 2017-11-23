@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="qr_code_finder_frame">#FFFFFFFF</color>
+    <color name="qr_code_finder_laser">#ef8394</color>
+    <color name="qr_code_finder_mask">#80000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#989898</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="grey_tv">#b2b2b2</color>
+    <color name="grey_little_tv">#a6a6a6</color>
+    <color name="grey_black_tv">#4c4c4c</color>
+    <color name="grey_line">#e6e6e6</color>
+    <color name="transparentWhite">#3fff</color>
+    <color name="transparentWhite1">#1fff</color>
+    <color name="blue_btn">#408fff</color>
+    <color name="blue_tv">#5690f5</color>
+    <color name="red">#d90000</color>
+    <color name="red_02">#ff3333</color>
+    <color name="search_bar">#ccc</color>
+    <color name="bg">#f2f2f2</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="grey_black_tv2">#808080</color>
+    <color name="grey_black_tv3">#999999</color>
+    <color name="transparent">#0000</color>
+    <color name="blue_shap">#7ab2ff</color>
+    <color name="main_bg">#f4f4f4</color>
+    <color name="grey_ccc">#ccc</color>
+    <color name="yellow">#f29e3e</color>
+    <color name="submit_gray">#ffc0c0c0</color>
+    <color name="guide_select">#FF3D4260</color>
+    <color name="guide_no_select">#9c9ead</color>
+    <color name="invite_red">#e93f33</color>
+    <color name="yellow_02">#fa6400</color>
+    <color name="yellow_03">#FDD32D</color>
+    <color name="select_bg_transparent">#14000000</color>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="login_top">65dp</dimen>
+    <dimen name="register_top">111dp</dimen>
+    <dimen name="identitycode_top">111dp</dimen>
+    <dimen name="top0_25">25dp</dimen>
+</resources>

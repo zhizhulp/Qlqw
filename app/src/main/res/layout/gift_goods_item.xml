@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    style="@style/SelectBackgroundWhile"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="137.5dp">
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/im_icon"
+        android:src="@mipmap/head_loading"
+        android:layout_width="103.5dp"
+        android:layout_height="103.5dp" />
+    <LinearLayout
+        android:layout_toRightOf="@id/im_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:lines="2"
+            android:ellipsize="end"
+            android:id="@+id/tv_title"
+            android:lineSpacingExtra="7dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="37.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/tv_score"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/text_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:background="@drawable/gift_corner_bg"
+                android:id="@+id/tv_money"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+</RelativeLayout>

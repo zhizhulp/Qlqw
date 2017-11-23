@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lat_parent"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+    <RadioButton
+        android:button="@drawable/pay_type_cb_bg"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14"
+        android:paddingLeft="7dp"
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:layout_marginLeft="14dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/tv_type"
+        android:layout_toRightOf="@id/radioButton"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_num"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+</RelativeLayout>

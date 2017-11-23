@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ascba.rebate.activities.trade.SweepActivity">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTail="相册"
+        app:textTitle="扫一扫" />
+    <SurfaceView
+        android:id="@+id/qr_code_view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mb"
+        android:layout_gravity="center" />
+
+    <com.ascba.rebate.view.qr.view.QrCodeFinderView
+        android:layout_below="@id/mb"
+        android:id="@+id/qr_code_view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/rb_switch_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:button="@drawable/light_selector" />
+</RelativeLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.recharge.RechargeActivity">
+    
+    <com.ascba.rebate.view.MoneyBar
+        app:textTail="充值记录"
+        app:textTitle="余额充值"
+        style="@style/MoneyBar"/>
+    <LinearLayout
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/white_corner_6dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:text="充值金额"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="bottom"
+                android:textStyle="bold"
+                android:text="￥"
+                android:textSize="@dimen/text_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.ascba.rebate.view.EditTextHint
+                android:maxLength="10"
+                android:id="@+id/et_input"
+                app:hintSize="@dimen/text_28"
+                android:hint="请输入金额"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:layout_marginLeft="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textColorHint="@color/grey_tv"
+                android:textSize="@dimen/text_28"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_line"/>
+        <TextView
+            android:textSize="@dimen/text_12"
+            android:textColor="@color/grey_black_tv"
+            android:id="@+id/tv_attention"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_marginTop="20dp"
+        android:text="立即充值"
+        style="@style/ButtonNormal" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:text="温馨提示："
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:text="充值后可使用余额进行交易支付"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:visibility="gone"
+        android:padding="15dp"
+        android:text="大额充值"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_13"
+        android:textColor="@color/blue_btn"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

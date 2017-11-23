@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            style="@style/SelectBackgroundBorderless"
+            android:id="@+id/tabs_zero_par"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:scaleType="fitCenter"
+                android:id="@+id/im_tabs_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/tab_main" />
+
+            <TextView
+                android:id="@+id/tv_tabs_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tabs_top"
+                android:text="首页"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/SelectBackgroundBorderless"
+            android:id="@+id/tabs_three_par"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:scaleType="fitCenter"
+                    android:id="@+id/im_tabs_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/tab_msg" />
+
+                <TextView
+                    android:id="@+id/im_tabs_three_noty"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="-3dp"
+                    android:layout_toRightOf="@id/im_tabs_three"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="10dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_tabs_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/im_tabs_three"
+                    android:layout_marginTop="@dimen/tabs_top"
+                    android:text="消息"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_12" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/SelectBackgroundBorderless"
+            android:id="@+id/tabs_four_par"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:scaleType="fitCenter"
+                android:id="@+id/im_tabs_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/tab_me" />
+
+            <TextView
+                android:id="@+id/tv_tabs_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tabs_top"
+                android:text="我的"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_line"/>
+</RelativeLayout>

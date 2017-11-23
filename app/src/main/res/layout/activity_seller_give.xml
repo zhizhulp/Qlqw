@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTitle="礼品赠送" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="可赠送礼品分余额"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/seller_give_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赠送说明"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:id="@+id/seller_give_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/blue_btn"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tab_lay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:tl_iconVisible="false"
+        app:tl_indicator_color="@color/blue_btn"
+        app:tl_indicator_height="2dp"
+        app:tl_textSelectColor="@color/blue_btn"
+        app:tl_textUnselectColor="@color/grey_black_tv"
+        app:tl_textsize="15sp"
+        app:tl_underline_color="@color/grey_little_tv"
+        app:tl_underline_height="0.5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <LinearLayout
+            android:id="@+id/seller_give_mobile_lay"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="28dp"
+                android:text="对方账户"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <com.ascba.rebate.view.ClearEditText
+                android:id="@+id/seller_give_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="请输入对方11位手机号"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textColor="@color/grey_black_tv"
+                android:textColorHint="@color/grey_black_tv2"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_centerVertical="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="28dp"
+                android:text="礼品额度"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <com.ascba.rebate.view.ClearEditText
+                android:id="@+id/seller_give_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="请输入礼品额度，最低1000起送"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="@color/grey_black_tv"
+                android:textColorHint="@color/grey_black_tv2"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="温馨提示:"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_13" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1、"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_12" />
+
+        <TextView
+            android:id="@+id/seller_give_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="7dp"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2、"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_12" />
+
+        <TextView
+            android:id="@+id/seller_give_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="7dp"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_12" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/seller_give_btn"
+        style="@style/ButtonNormal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
+        android:text="立即赠送" />
+</LinearLayout>

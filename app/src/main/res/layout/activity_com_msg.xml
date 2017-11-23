@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_business_center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.company_identification.ComMsgActivity">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="认证信息" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_space"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="法人姓名"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tv_oper_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/grey_tv"
+                        android:textSize="@dimen/text_15" />
+                </LinearLayout>
+
+                <View
+                    style="@style/LineHorizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_space"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="注册资本"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tv_regist_capi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/grey_tv"
+                        android:textSize="@dimen/text_15" />
+                </LinearLayout>
+
+                <View
+                    style="@style/LineHorizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_space"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="公司状态"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tv_company_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/grey_tv"
+                        android:textSize="@dimen/text_15" />
+                </LinearLayout>
+
+                <View
+                    style="@style/LineHorizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="161dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="经营范围"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tv_scope"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="25dp"
+                        android:ellipsize="end"
+                        android:textColor="@color/grey_tv"
+                        android:textSize="@dimen/text_15" />
+                </LinearLayout>
+
+                <View
+                    style="@style/LineHorizontal"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <RelativeLayout
+                    android:id="@+id/work_pic_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_space"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_string_01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="上传营业执照"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/tv_show_work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tv_string_01"
+                        android:gravity="center"
+                        android:onClick="toSeeRule01"
+                        android:text="查看规范演示"
+                        android:textColor="@color/blue_btn"
+                        android:textSize="@dimen/text_13" />
+
+                    <ImageView
+                        android:id="@+id/go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/more" />
+
+                    <ImageView
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/bc_icon"
+                        android:id="@+id/busi_work_icon"
+                        android:layout_width="55dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="7dp"
+                        android:layout_toLeftOf="@id/go"
+                        android:onClick="uploadWorkPic" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp"
+                    android:background="@color/main_bg" />
+
+                <LinearLayout
+                    android:id="@+id/auth_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_space"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="被授权人姓名"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_15" />
+
+                        <TextView
+                            android:id="@+id/ed_auth_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="@color/grey_tv"
+                            android:textSize="@dimen/text_15" />
+                    </LinearLayout>
+
+                    <View
+                        style="@style/LineHorizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/auth_pic_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_space"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+
+                        <TextView
+                            android:id="@+id/tv_string_02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="上传授权书"
+                            android:textColor="@color/grey_black_tv"
+                            android:textSize="@dimen/text_15" />
+
+                        <TextView
+                            android:id="@+id/tv_show_auth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/tv_string_02"
+                            android:gravity="center"
+                            android:onClick="toSeeRule02"
+                            android:text="查看规范演示"
+                            android:textColor="@color/blue_btn"
+                            android:textSize="@dimen/text_13" />
+
+                        <ImageView
+                            android:id="@+id/go_go"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/more" />
+
+                        <ImageView
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/bc_icon"
+                            android:id="@+id/busi_auth_icon"
+                            android:layout_width="55dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="7dp"
+                            android:layout_toLeftOf="@id/go_go"
+                            android:onClick="uploadAuthPic" />
+                    </RelativeLayout>
+
+                    <View
+                        style="@style/LineHorizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_commit"
+                    style="@style/ButtonNormal"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="30dp"
+                    android:enabled="true"
+                    android:onClick="goCommit"
+                    android:text="提交" />
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/lat_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:background="#000000"
+            android:gravity="center_vertical"
+            android:minHeight="44dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/warnning" />
+
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

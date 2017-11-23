@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.ascba.rebate.activities.user_data.ModifyNickNameActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"/>
+    <TextView
+        android:layout_marginTop="33dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:text="修改昵称"
+        android:textSize="@dimen/text_27"
+        android:textColor="@color/grey_black_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:text="@string/modify_name_hint"
+        android:textSize="@dimen/text_14"
+        android:textColor="@color/grey_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.ascba.rebate.view.EditTextHint
+        android:id="@+id/et_nick_name"
+        android:maxLines="1"
+        android:maxLength="11"
+        android:inputType="text"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:hint="请输入新昵称"
+        app:hintSize="@dimen/text_15"
+        style="@style/EditTextNormal"
+        android:layout_height="54dp" />
+    <View
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        style="@style/LineHorizontal"/>
+    <Button
+        android:layout_marginTop="32dp"
+        android:text="保存"
+        style="@style/ButtonNormal"
+        android:id="@+id/btn_save"/>
+</LinearLayout>
