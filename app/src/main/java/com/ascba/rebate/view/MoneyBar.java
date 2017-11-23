@@ -61,7 +61,7 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
         backIm.setBackgroundResource(backImgId);
         tvBack.setTextColor(backTextColor);
         //设置尾部文字
-        tailText.setText(tailStr);
+        setTextTail(tailStr);
         tailText.setOnClickListener(this);
         //设置title字体颜色
         mTextView.setTextColor(titleTextColor);
@@ -136,7 +136,12 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
     }
 
     public void setTextTail(String tailStr) {
-        tailText.setText(tailStr);
+        if (tailStr != null && !tailStr.isEmpty()) {
+            setTailShow(true);
+            tailText.setText(tailStr);
+        } else {
+            setTailShow(false);
+        }
     }
 
     public void setTailShow(boolean show) {
