@@ -449,7 +449,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="33dp"
-                            android:text="佣金充值余额"
+                            android:text="礼品赠送余额"
                             android:textColor="@color/grey_black_tv"
                             android:textSize="@dimen/text_14" />
 
