@@ -21,13 +21,12 @@ import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.LoginNextEntity;
 import com.ascba.rebate.bean.Result;
-import com.ascba.rebate.listener.CompressListener;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.FileUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.SelectIconDialog;
-import com.ascba.rebate.view.picasso.RoundedCornersTransformation;
+import com.ascba.rebate.view.picasso.MaskTransformation;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.FileBinary;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -90,7 +89,7 @@ public class UserDataActivity extends BaseDefaultNetActivity implements View.OnC
 
     private void setImageHead(String avatar) {
         Picasso.with(this).load(avatar)
-                .transform(new RoundedCornersTransformation(5, 0))
+                .transform(new MaskTransformation(this, R.mipmap.head_loading))
                 .placeholder(R.mipmap.head_loading).into(imHead);
     }
 
