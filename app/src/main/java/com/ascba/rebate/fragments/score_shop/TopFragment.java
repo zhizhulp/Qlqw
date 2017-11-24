@@ -1,6 +1,7 @@
 package com.ascba.rebate.fragments.score_shop;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -177,34 +178,35 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     }
 
     //判断是否足够支付的设置
+    @SuppressLint("SetTextI18n")
     private void isEnoughSetting(int num) {
-//        if (buttonTip == 0) {//服务端返回的立即兑换状态
         if (type == 1) {//礼品分兑换
-            if (num * perScore > (type == 1 ? totalScore : totalVo)) {
-                tvApply.setEnabled(false);
-                tvApply.setText((type == 1 ? "积分" : "福利券") + "不足");
-            } else {
-                tvApply.setEnabled(true);
-                tvApply.setText("立即兑换");
-            }
-            tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-        } else if (type == 2) {//福利券兑换
-            if (isMoney == 0) {//不能用钱
-                if (num * perScore > (type == 1 ? totalScore : totalVo)) {
+            if (buttonTip == 0) {
+                if (num * perScore > totalScore) {
                     tvApply.setEnabled(false);
-                    tvApply.setText((type == 1 ? "积分" : "福利券") + "不足");
+                    tvApply.setText(("积分不足"));
                 } else {
                     tvApply.setEnabled(true);
                     tvApply.setText("立即兑换");
                 }
-                tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-            } else {
-                tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
-                tvApply.setEnabled(true);
-                tvApply.setText("立即兑换");
+            }
+        } else if (type == 2) {//福利券兑换
+            if (buttonTip == 0) {
+                if (isMoney == 0) {//不能用钱
+                    if (num * perScore > totalVo) {
+                        tvApply.setEnabled(false);
+                        tvApply.setText("福利券不足");
+                    } else {
+                        tvApply.setEnabled(true);
+                        tvApply.setText("立即兑换");
+                    }
+                } else {
+                    tvApply.setEnabled(true);
+                    tvApply.setText("立即兑换");
+                }
             }
         }
-//        }
+        tvBtmScore.setText(getBtmSpanStr(num * perScore, num * perAddMoney));
     }
 
     @Override
@@ -238,7 +240,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                     addressID = address.getAddress_id();
                     tvAddress.setText(address.getAddress_detail());
                     tvMobile.setText(address.getMobile());
-                    tvUserName.setText("收货人：" +address.getConsignee());
+                    tvUserName.setText("收货人：" + address.getConsignee());
                 } else {
                     viewUser.setVisibility(View.GONE);
                     tvAddress.setText(getString(R.string.no_address));
@@ -325,7 +327,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                 viewUser.setVisibility(View.VISIBLE);
                 addressID = addObj.getInteger("address_id");
                 tvAddress.setText(addObj.getString("address_detail"));
-                tvUserName.setText(addObj.getString("address_realname"));
+                tvUserName.setText("收货人：" +addObj.getString("address_realname"));
                 tvMobile.setText(addObj.getString("address_mobile"));
             } else {
                 viewUser.setVisibility(View.GONE);
