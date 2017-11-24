@@ -238,7 +238,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                     addressID = address.getAddress_id();
                     tvAddress.setText(address.getAddress_detail());
                     tvMobile.setText(address.getMobile());
-                    tvUserName.setText(address.getConsignee());
+                    tvUserName.setText("收货人：" +address.getConsignee());
                 } else {
                     viewUser.setVisibility(View.GONE);
                     tvAddress.setText(getString(R.string.no_address));
