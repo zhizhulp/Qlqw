@@ -11,8 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +73,7 @@ public class AwardActivity extends BaseDefaultNetActivity implements View.OnClic
     private String ruleUrl;
     private int totalY;
     private View barLat;
+    private View tvGo;
 
     @Override
     protected int bindLayout() {
@@ -85,8 +88,8 @@ public class AwardActivity extends BaseDefaultNetActivity implements View.OnClic
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        fv(R.id.tv_go).setOnClickListener(this);
-        fv(R.id.tv_go).setBackgroundColor(ContextCompat.getColor(this,R.color.invite_red));
+        tvGo = fv(R.id.tv_go);
+        tvGo.setOnClickListener(this);
         mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
             public void clickTail() {
@@ -115,24 +118,33 @@ public class AwardActivity extends BaseDefaultNetActivity implements View.OnClic
             }
         });
         mRefreshLayout.setPrimaryColorsId(R.color.bg, R.color.grey_black_tv2);
-        setMoneyBarAlpha();
+        //setMoneyBarAlpha();
         requestData();
     }
 
-    private void setMoneyBarAlpha() {
-        final int maxY = getResources().getDisplayMetrics().widthPixels;
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                totalY += dy;
-                if (totalY <= maxY) {
-                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY,233,63,51));
-                } else {
-                    barLat.setBackgroundResource(R.color.invite_red);
-                }
+    private void setMoneyBarAlpha(final String colorStr) {
+        if (!TextUtils.isEmpty(colorStr) && colorStr.length() == 6) {
+            final String redStr = colorStr.substring(0, 2);
+            final String greenStr = colorStr.substring(2, 4);
+            final String blueStr = colorStr.substring(4, 6);
+            final int maxY = getResources().getDisplayMetrics().widthPixels;
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    totalY += dy;
+                    if (totalY <= maxY) {
+                        Log.d(TAG, "onScrolled: alpha "+totalY * 255 / maxY);
+                        barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY,
+                                Integer.parseInt(redStr, 16),
+                                Integer.parseInt(greenStr, 16),
+                                Integer.parseInt(blueStr, 16)));
+                    } else {
+                        barLat.setBackgroundColor(Color.parseColor("#" + colorStr));
+                    }
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void requestData() {
@@ -175,6 +187,8 @@ public class AwardActivity extends BaseDefaultNetActivity implements View.OnClic
                 ViewGroup.LayoutParams params = imHead.getLayoutParams();
                 params.height = getResources().getDisplayMetrics().widthPixels * 1080 / 1121;
                 awardAdapter.addHeaderView(headView);
+                setMoneyBarAlpha(all.getBgcolor());
+                tvGo.setBackgroundColor(Color.parseColor("#" + all.getBgcolor()));
             }
             Picasso.with(this).load(all.getInvitePic()).into(imHead);
             setTotalPeople(all.getPersonInvite());

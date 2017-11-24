@@ -147,5 +147,7 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
     public void setTailShow(boolean show) {
         tailText.setVisibility(show ? VISIBLE : GONE);
     }
-
+    public void setBgColor(int color){
+        setBackgroundColor(color);
+    }
 }

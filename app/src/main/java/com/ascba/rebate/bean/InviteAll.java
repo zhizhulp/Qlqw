@@ -21,6 +21,7 @@ public class InviteAll {
     private List<Attention> allInvite;
     private List<RecAward> memInvite;
     private String inviteRules;
+    private String bgcolor;
     /**
      * memberFriends : {"image":"http://www.qlqw.com/public/uploads/indexPic/courtesy.jpg","title":"哇！花多少赚多少，京东都怕了。","subtitle":"商品多，配送快，品质好，天天省钱，消费能赚钱，快快体验吧！","courtesy_img":"http://www.qlqw.com/public/uploads/indexPic/zhuan.jpg","courtesy_url":"http://www.qlqw.com/index/Reg/getVerify?p_referee=84&from_type=1"}
      * memberCircle : {"image":"http://www.qlqw.com/public/uploads/indexPic/courtesy.jpg","title":"哇！花多少赚多少，京东都怕了。","subtitle":"商品多，配送快，品质好，天天省钱，消费能赚钱，快快体验吧！","courtesy_img":"http://www.qlqw.com/public/uploads/indexPic/zhuan.jpg","courtesy_url":"http://www.qlqw.com/index/Reg/getVerify?p_referee=84&from_type=2"}
@@ -28,6 +29,14 @@ public class InviteAll {
 
     private MemberFriends memberFriends;
     private MemberCircle memberCircle;
+
+    public String getBgcolor() {
+        return bgcolor;
+    }
+
+    public void setBgcolor(String bgcolor) {
+        this.bgcolor = bgcolor;
+    }
 
     public String getInviteRules() {
         return inviteRules;
