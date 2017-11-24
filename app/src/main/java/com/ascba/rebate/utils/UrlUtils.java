@@ -1,6 +1,7 @@
 package com.ascba.rebate.utils;
 
 import com.ascba.rebate.BuildConfig;
+import com.ascba.rebate.appconfig.AppConfig;
 
 /**
  * Created by lenovo on 2017/8/21.
@@ -8,7 +9,14 @@ import com.ascba.rebate.BuildConfig;
  */
 
 public class UrlUtils {
-    private static String baseWebsite = BuildConfig.BASE_URL;
+    static {
+        if (BuildConfig.DEBUG)
+            baseWebsite = AppConfig.getInstance().getString("debug_url", BuildConfig.BASE_URL);
+        else
+            baseWebsite = BuildConfig.BASE_URL;
+    }
+
+    public static String baseWebsite;
     public static String getLoginVerify = baseWebsite + "getLoginVerify";
     public static String getRegisterVerify = baseWebsite + "getRegisterVerify";
     public static String checkRegisterVerify = baseWebsite + "checkRegisterVerify";
@@ -17,7 +25,6 @@ public class UrlUtils {
     public static String set = baseWebsite + "user/set";
     public static String register = baseWebsite + "register";
     public static String registerProtocol = baseWebsite + "agreement/register";
-    public static String test = "http://apidebug.qlqwp2p.com/user/nameAuth?address=realityImg&debug=1";
     public static String findCompanyInfo = baseWebsite + "company/findCompanyInfo";
     public static String add = baseWebsite + "company/add";
     public static String update = baseWebsite + "company/update";

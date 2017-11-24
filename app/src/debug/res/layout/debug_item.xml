@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <RadioButton
+            android:id="@+id/debug_type_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/pay_type_cb_bg" />
+
+        <TextView
+            android:id="@+id/debug_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp" />
+</RelativeLayout>

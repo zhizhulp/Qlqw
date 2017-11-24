@@ -49,6 +49,9 @@ android {
             zipAlignEnabled true //是否启用zipAlign压缩
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //release 固定
+            resValue "string", "app_name", "钱来钱往"
+            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
         }
         debug {
             minifyEnabled false  //不启用Proguard
@@ -57,33 +60,13 @@ android {
         }
     }
     productFlavors {
-        bug {// 开发版
-            applicationId 'com.ascba.rebate'
-            resValue "string", "app_name", "测试版"
-            manifestPlaceholders = [
-                    JPUSH_PKGNAME: applicationId,
-            ]
-            buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
-        }
         normal_release {//  上线版
-            applicationId 'com.ascba.rebate'
-            resValue "string", "app_name", "钱来钱往"
-            manifestPlaceholders = [
-                    JPUSH_PKGNAME: applicationId,
-            ]
-            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
-        }
-        uat {//  测试环境共存包
-            applicationId 'com.ascba.rebate.uat'
-            resValue "string", "app_name", "测试共存版"
-            manifestPlaceholders = [
-                    JPUSH_PKGNAME: applicationId,
-            ]
+            resValue "string", "app_name", "测试版"
             buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
         }
         demo {//  预上线版本共存包
             applicationId 'com.ascba.rebate.demo'
-            resValue "string", "app_name", "demo版"
+            resValue "string", "app_name", "共存版"
             manifestPlaceholders = [
                     JPUSH_PKGNAME: applicationId,
             ]

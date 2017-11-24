@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ascba.rebate.BuildConfig;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.main.MainActivity;
 import com.ascba.rebate.activities.register.RegisterActivity;
@@ -26,6 +26,7 @@ import com.ascba.rebate.manager.ActivityManager;
 import com.ascba.rebate.manager.JpushSetManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
+import com.ascba.rebate.utils.Demo;
 import com.ascba.rebate.utils.PackageUtils;
 import com.ascba.rebate.utils.RegexUtils;
 import com.ascba.rebate.utils.UrlUtils;
@@ -65,6 +66,15 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        if (BuildConfig.DEBUG) {
+            final Demo demo = new Demo();
+            fv(R.id.select).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    demo.showTest1(LoginActivity.this);
+                }
+            });
+        }
         if (AppConfig.getInstance().getBoolean("first_login", true)) {
             etNumber = fv(R.id.login_et_number);
             etNumber.setText(AppConfig.getInstance().getString("mobile", null));
