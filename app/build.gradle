@@ -57,7 +57,7 @@ android {
         }
     }
     productFlavors {
-        normal {// 开发版
+        bug {// 开发版
             applicationId 'com.ascba.rebate'
             resValue "string", "app_name", "测试版"
             manifestPlaceholders = [
@@ -73,7 +73,7 @@ android {
             ]
             buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
         }
-        uat {//  线上测试环境共存包
+        uat {//  测试环境共存包
             applicationId 'com.ascba.rebate.uat'
             resValue "string", "app_name", "测试共存版"
             manifestPlaceholders = [
@@ -81,9 +81,9 @@ android {
             ]
             buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
         }
-        online {//  线上版本共存包
-            applicationId 'com.ascba.rebate.online'
-            resValue "string", "app_name", "正式版demo"
+        demo {//  预上线版本共存包
+            applicationId 'com.ascba.rebate.demo'
+            resValue "string", "app_name", "demo版"
             manifestPlaceholders = [
                     JPUSH_PKGNAME: applicationId,
             ]

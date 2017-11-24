@@ -30,6 +30,7 @@ import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.WaveViewByBezier;
+import com.ascba.rebate.view.picasso.MaskTransformation;
 import com.ascba.rebate.view.picasso.RoundedCornersTransformation;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -117,7 +118,7 @@ public class MineFragment extends BaseDefaultNetFragment implements View.OnClick
         MineEntity.UserInfoBean userInfo = mineEntity.getUserInfo();
         MineEntity.UserDataBean userData = mineEntity.getUserData();
         Picasso.with(getContext()).load(userInfo.getAvatar())
-                .transform(new RoundedCornersTransformation(7, 0))
+                .transform(new MaskTransformation(this.getContext(), R.mipmap.head_loading))
                 .placeholder(R.mipmap.head_loading).into(ivHead);
         tvNumber.setText(userInfo.getNickname());
         tvGroup.setText(userInfo.getGroup_name());
@@ -192,7 +193,7 @@ public class MineFragment extends BaseDefaultNetFragment implements View.OnClick
             boolean updateName = data.getBooleanExtra("update_name", false);
             if (updateHead) {
                 Picasso.with(getContext()).load(AppConfig.getInstance().getString("avatar", null))
-                        .transform(new RoundedCornersTransformation(7, 0))
+                        .transform(new MaskTransformation(this.getContext(), R.mipmap.head_loading))
                         .placeholder(R.mipmap.head_loading).into(ivHead);
             }
             if (updateName) {

@@ -20,7 +20,7 @@ import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.UrlUtils;
-import com.ascba.rebate.view.picasso.RoundedCornersTransformation;
+import com.ascba.rebate.view.picasso.MaskTransformation;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.RequestMethod;
 
@@ -50,7 +50,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
         fv(R.id.lat_company_authon).setOnClickListener(this);
         fv(R.id.lat_rec).setOnClickListener(this);
         fv(R.id.lat_award).setOnClickListener(this);
-        mMoneyBar.setCallBack(mMoneyBar. new CallbackImp() {
+        mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
             public void clickBack(View back) {
                 backResults();
@@ -123,7 +123,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
             ComMsg comMsg = (ComMsg) result.getData();
             Bundle b = new Bundle();
             b.putParcelable("company_msg", comMsg);
-            AppConfig.getInstance().putInt("company_status",comMsg.getStatus());
+            AppConfig.getInstance().putInt("company_status", comMsg.getStatus());
             startActivityForResult(ComMsgActivity.class, b, CodeUtils.REQUEST_COM_ERROR);
         }
     }
@@ -151,7 +151,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
      */
     private void setHead() {
         Picasso.with(this).load(AppConfig.getInstance().getString("avatar", null))
-                .transform(new RoundedCornersTransformation(5,0))
+                .transform(new MaskTransformation(this, R.mipmap.head_loading))
                 .placeholder(R.mipmap.head_loading).into(imHead);
     }
 
@@ -182,7 +182,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
             tvNameAuthon.setText(cardStatus == 0 ? "待认证" : "已认证");
         }
 
-        if(this.companyStatus !=companyStatus){
+        if (this.companyStatus != companyStatus) {
             setCompanyText(instance);
         }
     }

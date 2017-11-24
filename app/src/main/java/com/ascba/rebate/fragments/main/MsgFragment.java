@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.msg.MsgListActivity;
 import com.ascba.rebate.adapter.MsgAdapter;
@@ -15,6 +14,7 @@ import com.ascba.rebate.bean.MsgEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -64,6 +64,7 @@ public class MsgFragment extends BaseDefaultNetFragment {
                 startActivity(MsgListActivity.class, bundle);
             }
         });
+        msgAdapter.setEmptyView(R.layout.empty_msg, mRecyclerView);
         requestMsgNetwork(0);
     }
 

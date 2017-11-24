@@ -30,7 +30,7 @@ public class GiftShopActivity extends BaseDefaultNetActivity implements View.OnC
     public TextView tvLevel;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] titles = new String[]{"礼品兑换", "福利券兑换"};
+    private String[] titles = new String[]{"礼品分兑换", "福利券兑换"};
     private List<Fragment> fragmentList;
     public ImageView imStr;
     public TextView tvDetails;
