@@ -60,11 +60,11 @@ android {
         }
     }
     productFlavors {
-        normal_release {//  上线版
+        normal {//  上线版
             resValue "string", "app_name", "测试版"
             buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
         }
-        demo {//  预上线版本共存包
+        uat {//  共存版
             applicationId 'com.ascba.rebate.demo'
             resValue "string", "app_name", "共存版"
             manifestPlaceholders = [
@@ -73,8 +73,23 @@ android {
             buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
         }
     }
+    android.applicationVariants.all { variant -> //  打包包名修改
+        variant.outputs.all {
+            if (variant.buildType.name.equals('release'))
+                outputFileName = "钱来钱往_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+            else if (variant.productFlavors[0].name.equals('normal'))
+                outputFileName = "测试版_${releaseTime()}.apk"
+            else if (variant.productFlavors[0].name.equals('uat'))
+                outputFileName = "共存版_${releaseTime()}.apk"
+            else if (variant.buildType.name.equals('debug'))
+                outputFileName = "app_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+        }
+    }
 }
 
+def releaseTime() {
+    return new Date().format("MMdd HH时mm分", TimeZone.getTimeZone("GMT+08:00"))
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
