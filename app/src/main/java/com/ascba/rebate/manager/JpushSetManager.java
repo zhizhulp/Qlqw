@@ -62,7 +62,7 @@ public class JpushSetManager {
                     if (NetUtils.isMobileConnected()) {
                         mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
                     } else {
-                        Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "网络异常" );
                     }
                     break;
                 default:
@@ -86,7 +86,7 @@ public class JpushSetManager {
                     if (NetUtils.isMobileConnected()) {
                         mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_TAGS, tags), 1000 * 60);
                     } else {
-                        Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "网络异常" );
                     }
                     break;
 
