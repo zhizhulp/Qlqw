@@ -241,9 +241,9 @@ public class DataCleanUtils {
                     + context.getPackageName() + "/databases"));
             size += getFolderSize(new File("/data/data/"
                     + context.getPackageName() + "/app_webview"));
-//             size += getFolderSize(new File("/data/data/"
-//                     + context.getPackageName() + "/shared_prefs"));
-            size += getFolderSize(context.getFilesDir());
+//            size += getFolderSize(new File("/data/data/"
+//                    + context.getPackageName() + "/shared_prefs"));
+//            size += getFolderSize(context.getFilesDir());
             if (filePathList == null) {
                 return getFormatSize(size);
             }
@@ -268,8 +268,8 @@ public class DataCleanUtils {
             cleanDatabases(context);
             cleanCustomCache(new File("/data/data/"
                     + context.getPackageName() + "/app_webview"));
-            // cleanSharedPreference(context);
-            cleanFiles(context);
+//            cleanSharedPreference(context);
+//            cleanFiles(context);
             if (filePathList == null) {
                 return;
             }
