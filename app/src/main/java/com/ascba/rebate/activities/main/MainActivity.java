@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.ascba.rebate.BuildConfig;
 import com.ascba.rebate.R;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -36,7 +37,9 @@ public class MainActivity extends BaseDefaultNetActivity implements AppTabs.Call
     protected void initViews(Bundle savedInstanceState) {
         resolveProblems(savedInstanceState);
         super.initViews(savedInstanceState);
-        SophixManager.getInstance().queryAndLoadNewPatch();
+        if(!BuildConfig.DEBUG){
+            SophixManager.getInstance().queryAndLoadNewPatch();
+        }
         initAppTabs();
         initAllFragments();
         selFrgByPos(mHomeFragment);
