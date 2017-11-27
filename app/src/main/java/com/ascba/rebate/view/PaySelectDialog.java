@@ -6,6 +6,7 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -120,7 +121,7 @@ public class PaySelectDialog extends BottomSheetDialog {
         types.add(new PayType(true, R.mipmap.pay_weixin, "微信支付", "推荐已安装微信用户使用", PayUtils.WX_PAY, true));
         types.add(new PayType(false, R.mipmap.pay_ali, "支付宝支付", "推荐已安装支付宝用户使用", PayUtils.ALI_PAY, true));
         if (balance != null) {
-            if (Float.parseFloat(balance) > Float.parseFloat(price))
+            if (Float.parseFloat(balance) >= Float.parseFloat(price))
                 types.add(new PayType(false, R.mipmap.pay_balance_enabled,
                         "余额支付(剩余:¥" + balance + ")", "账户余额支付", PayUtils.BALANCE, true));
             else
