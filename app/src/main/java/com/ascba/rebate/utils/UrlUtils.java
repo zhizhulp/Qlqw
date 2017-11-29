@@ -92,4 +92,6 @@ public class UrlUtils {
     public static String billvoucher = baseWebsite + "billvoucher/list";
     public static String invite = baseWebsite + "user/invite";
     public static String getUpgrade = baseWebsite + "app/getUpgrade";
+    public static String invoiceCreate = baseWebsite + "invoice/create";
+    public static String invoiceAdd = baseWebsite + "invoice/add";
 }

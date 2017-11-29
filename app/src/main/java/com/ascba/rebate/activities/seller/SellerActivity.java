@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
@@ -18,6 +17,7 @@ import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.bean.SellerEntity;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -41,6 +41,13 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        mMoneyBar.setTextTail("设置");
+        mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
+            @Override
+            public void clickTail() {
+                startActivity(SellerSetActivity.class, null);
+            }
+        });
         sellerRecommendedAdapter = new SellerRecommendedAdapter();
         mRecyclerView.setAdapter(sellerRecommendedAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -98,8 +105,8 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                 startActivity(ReceiveCodeActivity.class, null);
                 break;
             case R.id.seller_top_btn2://明细记录
-                Intent intent =new Intent(this, BillActivity.class);
-                intent.putExtra("mine_type",3);
+                Intent intent = new Intent(this, BillActivity.class);
+                intent.putExtra("mine_type", 3);
                 startActivity(intent);
                 break;
             case R.id.seller_top_btn3://现金确认

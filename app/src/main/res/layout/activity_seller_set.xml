@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:textTitle="商家设置" />
+
+    <RelativeLayout
+        android:id="@+id/lat_seller_head"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:background="@color/blue_btn"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:id="@+id/seller_set_head"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/seller_set_name"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_toRightOf="@id/seller_set_head"
+            android:gravity="center"
+            android:paddingTop="9dp"
+            android:text="收钱码店主"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/seller_set_info"
+            android:layout_width="71dp"
+            android:layout_height="19dp"
+            android:layout_below="@id/seller_set_name"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/seller_set_head"
+            android:background="@drawable/white_corner_2dp"
+            android:gravity="center"
+            android:text="信息待完善"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_12" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/more_white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_sound"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="语音提醒"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            style="@style/ImageViewMore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <include layout="@layout/mine_line" />
+
+    <RelativeLayout
+        android:id="@+id/lat_invoice"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="申请发票"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            style="@style/ImageViewMore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_invoice_history"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="开票历史"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            style="@style/ImageViewMore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_invoice_help"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="发票帮助"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            style="@style/ImageViewMore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+</LinearLayout>

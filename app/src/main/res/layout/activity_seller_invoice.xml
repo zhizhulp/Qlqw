@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTitle="开票说明" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="发票类型"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="纸质发票"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_13" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="发票类型"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <RadioGroup
+                        android:id="@+id/invoice_rg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checkedButton="@+id/invoice_rb_personal"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/invoice_rb_personal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:button="@drawable/selector_invoice_14"
+                            android:paddingLeft="7dp"
+                            android:text="个人"
+                            android:textColor="@color/grey_text_color"
+                            android:textSize="@dimen/text_13" />
+
+                        <android.support.v4.widget.Space
+                            android:layout_width="28dp"
+                            android:layout_height="match_parent" />
+
+                        <RadioButton
+                            android:id="@+id/invoice_rb_company"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:button="@drawable/selector_invoice_14"
+                            android:paddingLeft="7dp"
+                            android:text="公司"
+                            android:textColor="@color/grey_text_color"
+                            android:textSize="@dimen/text_13" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="发票抬头"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <com.ascba.rebate.view.ClearEditText
+                        android:id="@+id/invoice_title_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="请填写发票抬头"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/grey_black_tv"
+                        android:textColorHint="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13"
+                        app:hintSize="@dimen/text_13" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:id="@+id/invoice_company_lat"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="公司税号"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <com.ascba.rebate.view.ClearEditText
+                        android:id="@+id/invoice_num_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="请输入公司税号"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/grey_black_tv"
+                        android:textColorHint="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13"
+                        app:hintSize="@dimen/text_13" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="发票内容"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/invoice_context_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="居间服务费"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_13" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="28dp"
+                        android:text="发票金额"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/invoice_money_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_13" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <include layout="@layout/mine_line" />
+
+            <LinearLayout
+                android:id="@+id/invoice_address_lat"
+                style="@style/SelectBackgroundWhile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <LinearLayout
+                    android:id="@+id/invoice_address_top_lat"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:paddingBottom="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="收件人："
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/invoice_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="80dp"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/invoice_mobile_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/invoice_address_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingRight="14dp"
+                        android:text="邮寄地址：  "
+                        android:textColor="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13" />
+
+                    <ImageView style="@style/ImageViewMore" />
+                </LinearLayout>
+
+                <View style="@style/LineHorizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="运费："
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/invoice_freight_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="包邮"
+                        android:textColor="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="默认开具增值普通发票，如有特殊要求请备注说明"
+                android:textColor="@color/grey_black_tv2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="76dp"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:gravity="center"
+                    android:text="备注"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <EditText
+                    android:id="@+id/invoice_remark_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center|left"
+                    android:hint="特殊要求请备注说明..."
+                    android:lineSpacingExtra="6dp"
+                    android:maxHeight="50dp"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="11dp"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textColorHint="@color/grey_black_tv3"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/invoice_btn"
+                style="@style/ButtonNormal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
