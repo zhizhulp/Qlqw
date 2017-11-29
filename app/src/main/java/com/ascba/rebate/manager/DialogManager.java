@@ -51,6 +51,38 @@ public class DialogManager {
         return dialogAlter;
     }
 
+    public Dialog showAlertDialog(String title, String message, String btnStr, final Callback dialogClick) {
+        final Dialog dialogAlter = new Dialog(context, R.style.dialog);
+        setCancel(dialogAlter);
+        View alertView = LayoutInflater.from(context).inflate(R.layout.alert_view, null);
+        dialogAlter.setContentView(alertView);
+        TextView tvTitle = (TextView) alertView.findViewById(R.id.tv_alert_title);//title
+        tvTitle.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        TextView tvMsg = (TextView) alertView.findViewById(R.id.tv_alert_msg);//提示信息
+        tvMsg.setText(message);
+        TextView btSure = (TextView) alertView.findViewById(R.id.tv_alert_sure);//确定按钮
+        btSure.setText(btnStr == null ? "确定" : btnStr);
+        btSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialogClick != null) {
+                    dialogClick.handleLeft();
+                }
+                dialogAlter.dismiss();
+            }
+        });
+        Window window = dialogAlter.getWindow();
+        WindowManager.LayoutParams wlp;
+        if (window != null) {
+            wlp = window.getAttributes();
+            wlp.width = (int) ScreenDpiUtils.dp2px(context, 270);
+            window.setAttributes(wlp);
+        }
+        dialogAlter.show();
+        return dialogAlter;
+    }
+
     /**
      * 可以处理确定和取消的情况，可以自定义button文字
      */

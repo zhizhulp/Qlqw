@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="240dp"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/alert_bg"
     android:gravity="center_horizontal"
     android:minHeight="100dp"
     android:orientation="vertical">
+
+    <TextView
+        android:visibility="gone"
+        android:textColor="@color/grey_black_tv"
+        android:layout_marginTop="20dp"
+        android:text="title"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/tv_alert_title"
+        android:textSize="@dimen/text_17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:textColor="@color/grey_black_tv"
