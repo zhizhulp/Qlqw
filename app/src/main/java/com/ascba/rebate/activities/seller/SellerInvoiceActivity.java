@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,19 +44,20 @@ public class SellerInvoiceActivity extends BaseDefaultNetActivity implements Vie
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        Log.i(TAG, "initViews: "+getIntent().getStringExtra("data"));
         ((RadioGroup) fv(R.id.invoice_rg)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.invoice_rb_company) {
                     type = 1;
                     companyLat.setVisibility(View.VISIBLE);
-                    dm.showAlertDialog("开票须知", " 应国家税务总局要求，自2017年7月1日起，" +
-                            "您若开具增值税普通发票，需同时提供企业抬头及税号，否则发票将无法用于企业报销", "我知道了", new DialogManager.Callback() {
-                        @Override
-                        public void handleLeft() {
-                            startActivity(SellerInvoiceActivity.class, null);
-                        }
-                    });
+//                    dm.showAlertDialog("开票须知", " 应国家税务总局要求，自2017年7月1日起，" +
+//                            "您若开具增值税普通发票，需同时提供企业抬头及税号，否则发票将无法用于企业报销", "我知道了", new DialogManager.Callback() {
+//                        @Override
+//                        public void handleLeft() {
+//                            startActivity(SellerInvoiceActivity.class, null);
+//                        }
+//                    });
                 } else if (checkedId == R.id.invoice_rb_personal) {
                     type = 0;
                     companyLat.setVisibility(View.GONE);
