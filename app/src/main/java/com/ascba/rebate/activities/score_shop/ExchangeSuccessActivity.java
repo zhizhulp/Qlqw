@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.seller.SellerGiveCreateActivity;
+import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 
 public class ExchangeSuccessActivity extends BaseDefaultNetActivity {
@@ -47,7 +47,7 @@ public class ExchangeSuccessActivity extends BaseDefaultNetActivity {
             @Override
             public void onClick(View v) {
                 if (type == 0)
-                    startActivity(SellerGiveCreateActivity.class, null);
+                    startActivity(SellerInvoiceHistoryActivity.class, null);
                 else
                     GiftExchangeLogActivity.jumpIntent(ExchangeSuccessActivity.this, type);
                 finish();
@@ -66,9 +66,7 @@ public class ExchangeSuccessActivity extends BaseDefaultNetActivity {
             mMoneyBar.setTextTitle("申请成功");
             tvTitle.setText("申请成功");
             btnComplete.setText("查看申请");
-            tvMoney.setText("\u3000\u3000" +
-                    "首次申请后15个工作日寄出，无需再次申请，后期产生的发票在账单日后15个工作日内寄出。"
-                    + intent.getStringExtra("info"));
+            tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         } else if (type == 1 || type == 2) {
             mMoneyBar.setTextTitle("兑换成功");
             tvTitle.setText("兑换成功");

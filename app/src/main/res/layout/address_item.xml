@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:maxWidth="260dp"
+            android:maxWidth="200dp"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_17" />
 

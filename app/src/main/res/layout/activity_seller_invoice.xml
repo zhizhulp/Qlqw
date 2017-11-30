@@ -41,6 +41,7 @@
                         android:textSize="@dimen/text_14" />
 
                     <TextView
+                        android:id="@+id/invoice_type_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="纸质发票"
@@ -178,7 +179,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="居间服务费"
                         android:textColor="@color/grey_black_tv"
                         android:textSize="@dimen/text_13" />
                 </LinearLayout>
@@ -239,6 +239,9 @@
                         android:id="@+id/invoice_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:maxWidth="180dp"
                         android:minWidth="80dp"
                         android:textColor="@color/grey_black_tv"
                         android:textSize="@dimen/text_14" />
@@ -293,7 +296,6 @@
                         android:id="@+id/invoice_freight_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="包邮"
                         android:textColor="@color/grey_black_tv2"
                         android:textSize="@dimen/text_13" />
                 </LinearLayout>
@@ -346,6 +348,7 @@
                 style="@style/ButtonNormal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
+                android:enabled="true"
                 android:text="提交" />
         </LinearLayout>
     </ScrollView>

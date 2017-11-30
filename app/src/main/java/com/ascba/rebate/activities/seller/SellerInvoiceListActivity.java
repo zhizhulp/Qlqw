@@ -1,5 +1,7 @@
 package com.ascba.rebate.activities.seller;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -34,9 +36,10 @@ import java.util.List;
  */
 
 public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements View.OnClickListener {
-    private static final int GET = 704;
-    private static final int LOAD = 698;
-    private static final int SAVE = 918;
+    private final int GET = 704;
+    private final int LOAD = 698;
+    private final int SAVE = 918;
+    private final int RESULT = 249;
 
     private List<InvoiceSelect> invoiceSelects;
     private int num;
@@ -173,7 +176,16 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         bundle.putString("data", data);
         bundle.putString("invoice_ids", invoice_ids);
         bundle.putInt("status", status);
-        startActivity(SellerInvoiceActivity.class, bundle);
+        startActivityForResult(SellerInvoiceActivity.class, bundle, RESULT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT && resultCode == Activity.RESULT_OK) {
+            initSelect();
+            requestNetwork(GET);
+        }
     }
 
     @Override
@@ -226,8 +238,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
             final JSONObject data = JSON.parseObject(result.getData().toString());
             int tip = data.getInteger("tip");
             if (tip == 1)
-                dm.showAlertDialog2("您的发票金额低于500元，将以顺风到" +
-                        "付的形式快递给你，确认提交吗？", "取消", "确定", new DialogManager.Callback() {
+                dm.showAlertDialog2(result.getMsg(), "取消", "确定", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         startInvoicePage(data.toString());
