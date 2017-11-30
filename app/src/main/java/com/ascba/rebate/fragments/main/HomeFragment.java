@@ -59,7 +59,6 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
     private HomeListAdapter adapter;
     private HomeGridAdapter gridAdapter;
     private Banner banner;
-    private String downUrl = "http://video.qlqwshop.com/qlqw.mp4";
 
     @Override
     protected int bindLayout() {
