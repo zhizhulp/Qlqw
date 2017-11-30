@@ -184,6 +184,9 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT && resultCode == Activity.RESULT_OK) {
             initSelect();
+            invoiceSelectAdapter.lastMonth = null;
+            invoiceSelectAdapter.lastYear = null;
+            invoiceSelects.clear();
             requestNetwork(GET);
         }
     }
@@ -204,6 +207,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     }
 
     private void requestNetwork(int what) {
+        invoiceSelectAdapter.paged = 1;
         AbstractRequest request = buildRequest(UrlUtils.invoiceCreate, RequestMethod.GET, null);
         request.add("paged", invoiceSelectAdapter.paged);
         executeNetwork(what, "请稍后", request);

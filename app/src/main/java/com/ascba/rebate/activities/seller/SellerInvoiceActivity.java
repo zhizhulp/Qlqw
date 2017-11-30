@@ -195,6 +195,7 @@ public class SellerInvoiceActivity extends BaseDefaultNetActivity implements Vie
             bundle.putString("info", jsonObject.getString("success_text"));
             startActivity(ExchangeSuccessActivity.class, bundle);
             setResult(Activity.RESULT_OK);
+            finish();
         }
     }
 }
