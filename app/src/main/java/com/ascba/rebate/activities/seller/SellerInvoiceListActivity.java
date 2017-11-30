@@ -187,6 +187,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
             invoiceSelectAdapter.lastMonth = null;
             invoiceSelectAdapter.lastYear = null;
             invoiceSelects.clear();
+            invoiceSelectAdapter.paged = 1;
             requestNetwork(GET);
         }
     }
@@ -207,7 +208,6 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     }
 
     private void requestNetwork(int what) {
-        invoiceSelectAdapter.paged = 1;
         AbstractRequest request = buildRequest(UrlUtils.invoiceCreate, RequestMethod.GET, null);
         request.add("paged", invoiceSelectAdapter.paged);
         executeNetwork(what, "请稍后", request);
@@ -261,6 +261,8 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 invoiceSelectAdapter.lastYear = item.getYear();
                 invoiceSelects.add(new InvoiceSelect(item.getMonth(), item.getYear()));
             }
+            if (cbAllSelect.isChecked())
+                item.setSelect(true);
             invoiceSelects.add(item);
         }
     }
