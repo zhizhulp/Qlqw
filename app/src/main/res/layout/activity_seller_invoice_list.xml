@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTail="开票说明"
+        app:textTitle="发票申请" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <View style="@style/LineHorizontal" />
+
+    <RelativeLayout
+        android:id="@+id/invoice_list_bottom_lat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white">
+
+        <CheckBox
+            android:id="@+id/invoice_all_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:button="@drawable/selector_invoice_19"
+            android:paddingLeft="7dp"
+            android:text="全部"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_15" />
+        <!--<editor-fold desc="底部 的 上半部分 文字内容">-->
+        <TextView
+            android:id="@+id/invoice_select_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/invoice_all_select"
+            android:text="0"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/bottom_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/invoice_select_tv"
+            android:layout_toRightOf="@id/invoice_select_tv"
+            android:text="笔申请，共"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/invoice_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/invoice_select_tv"
+            android:layout_toRightOf="@id/bottom_tv_1"
+            android:text="0.00"
+            android:textColor="@color/blue_btn"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/invoice_select_tv"
+            android:layout_toRightOf="@id/invoice_money_tv"
+            android:text="元"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_14" />
+        <!--</editor-fold>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/invoice_select_tv"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="8dp"
+            android:text="(满1000.00元方能申请)"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_11" />
+
+        <Button
+            android:id="@+id/invoice_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/blue_btn"
+            android:text="立即开票"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_15" />
+    </RelativeLayout>
+</LinearLayout>

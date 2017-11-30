@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    style="@style/SelectBackgroundWhile"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <CheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:button="@drawable/selector_invoice_19" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/cb_select"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="购买佣金储值卡"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@id/tv_title"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="11-25 08:27"
+        android:textColor="@color/grey_black_tv3"
+        android:textSize="@dimen/text_12" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="-200.00"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

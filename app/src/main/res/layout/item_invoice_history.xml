@@ -10,38 +10,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/item_exchange_iv"
-            android:layout_width="71dp"
-            android:layout_height="71dp"
-            android:layout_marginBottom="17dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="17dp"
-            android:src="@mipmap/module_loading" />
+        android:layout_height="105dp">
 
         <TextView
             android:id="@+id/item_exchange_title"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/item_exchange_iv"
             android:gravity="left|center_vertical"
             android:maxLines="1"
             android:maxWidth="200dp"
-            android:textColor="@color/grey_black_tv"
-            android:textSize="@dimen/text_14" />
-
-        <TextView
-            android:id="@+id/item_exchange_accumulate"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/item_exchange_title"
-            android:layout_toRightOf="@id/item_exchange_title"
-            android:gravity="right|center_vertical"
-            android:text="积分"
+            android:text="发票（个人）(个人)"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_14" />
 
@@ -55,6 +34,7 @@
             android:gravity="left|center_vertical"
             android:maxLines="1"
             android:maxWidth="260dp"
+            android:text="开票状态：代开发票"
             android:textColor="@color/grey_black_tv2"
             android:textSize="@dimen/text_13" />
 
@@ -65,6 +45,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/item_exchange_content"
             android:gravity="right|center_vertical"
+            android:text="开票金额：1860.00"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_13" />
 
@@ -72,6 +53,7 @@
             android:id="@+id/item_exchange_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
+            android:text="兑换日期：2017.08.24"
             android:layout_below="@id/item_exchange_content"
             android:layout_toRightOf="@id/item_exchange_iv"
             android:gravity="center_vertical"
@@ -95,7 +77,8 @@
             android:drawableLeft="@mipmap/exchange_warn"
             android:drawablePadding="7dp"
             android:gravity="center"
-            android:textColor="@color/grey_black_tv"
+            android:text="有机状态"
+            android:textColor="@color/grey_black_tv2"
             android:textSize="@dimen/text_13" />
 
         <TextView
