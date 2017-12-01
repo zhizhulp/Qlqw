@@ -78,11 +78,11 @@ android {
             if (variant.buildType.name.equals('release'))
                 outputFileName = "钱来钱往_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
             else if (variant.productFlavors[0].name.equals('normal'))
-                outputFileName = "测试版_${releaseTime()}.apk"
+                outputFileName = "测试版_${defaultConfig.versionName}.apk"
             else if (variant.productFlavors[0].name.equals('uat'))
                 outputFileName = "共存版_${releaseTime()}.apk"
             else if (variant.buildType.name.equals('debug'))
-                outputFileName = "app_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                outputFileName = "app_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
         }
     }
 }
