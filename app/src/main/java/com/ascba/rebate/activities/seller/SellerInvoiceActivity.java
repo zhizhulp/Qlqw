@@ -147,7 +147,8 @@ public class SellerInvoiceActivity extends BaseDefaultNetActivity implements Vie
                 request.add("letterhead_type", type);
                 request.add("letterhead", title);
                 request.add("invoice_desc", contextTv.getText().toString());
-                request.add("company_tax", num);
+                if (type == 2)
+                    request.add("company_tax", num);
                 request.add("remark", remarkEt.getText().toString());
                 request.add("address_id", address.getAddress_id());
                 executeNetwork(0, "请稍后", request);

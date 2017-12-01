@@ -227,8 +227,8 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 formatList(list);
                 num = jsonObject.getInteger("num");
                 total_fee = jsonObject.getFloat("total_fee");
-                agreement_url = jsonObject.getString("agreement_url");
             }
+            agreement_url = jsonObject.getString("agreement_url");
             invoiceSelectAdapter.notifyDataSetChanged();
         } else if (what == LOAD) {
             List<InvoiceSelect> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
