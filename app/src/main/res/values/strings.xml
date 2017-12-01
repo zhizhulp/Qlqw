@@ -15,7 +15,7 @@
     <string name="input_money_unavailable">请输入有效金额</string>
     <string name="no_pi">个人信息未认证，是否立即认证？</string>
     <string name="no_pay_psd">请先设置密码</string>
-    <string name="no_address">您还未填写收获地址，马上去填写</string>
+    <string name="no_address">您还未填写收货地址，马上去填写</string>
     <!--扫一扫-->
     <string name="title_activity_scan_qr_code">扫一扫</string>
     <string name="qc_code_close">关闭</string>

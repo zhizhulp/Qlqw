@@ -8,10 +8,13 @@ import java.text.DecimalFormat;
  */
 
 public class NumberFormatUtils {
+    private static DecimalFormat point2 = new DecimalFormat("##0.00");
+
     public static String getNewDouble(double oriDouble) {
-        return new DecimalFormat("##0.00").format(oriDouble);
+        return point2.format(oriDouble);
     }
+
     public static String getNewFloat(float oriDouble) {
-        return new DecimalFormat("##0.00").format(oriDouble);
+        return point2.format(oriDouble);
     }
 }

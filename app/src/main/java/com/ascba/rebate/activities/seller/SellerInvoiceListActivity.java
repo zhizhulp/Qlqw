@@ -1,10 +1,11 @@
 package com.ascba.rebate.activities.seller;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.InvoiceSelect;
 import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.EmptyUtils;
 import com.ascba.rebate.utils.NumberFormatUtils;
@@ -25,6 +27,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.yanzhenjie.nohttp.RequestMethod;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +36,10 @@ import java.util.List;
  */
 
 public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements View.OnClickListener {
-
-    private static final int GET = 704;
-    private static final int LOAD = 698;
-    private static final int SAVE = 918;
+    private final int GET = 704;
+    private final int LOAD = 698;
+    private final int SAVE = 918;
+    private final int RESULT = 249;
 
     private List<InvoiceSelect> invoiceSelects;
     private int num;
@@ -46,10 +49,14 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     private InvoiceSelectAdapter invoiceSelectAdapter;
     private RelativeLayout latBottom;
     private CheckBox cbAllSelect;
-    private TextView tvNum, tvTotalFee;
+    private TextView tvNum, tvMoney;
 
-    private int selectNum = 0;
-    private float selectMoney = 0f;
+    private int selectNum;
+    private float selectMoney;
+    private BigDecimal moneyBigDecimal;
+
+    private int status;
+    private String invoice_ids;
 
     @Override
     protected int bindLayout() {
@@ -68,22 +75,9 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         fv(R.id.invoice_btn).setOnClickListener(this);
         latBottom = fv(R.id.invoice_list_bottom_lat);
         tvNum = fv(R.id.invoice_select_tv);
-        tvTotalFee = fv(R.id.invoice_money_tv);
+        tvMoney = fv(R.id.invoice_money_tv);
         cbAllSelect = fv(R.id.invoice_all_select);
-        cbAllSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    selectNum = num;
-                    selectMoney = total_fee;
-                } else {
-                    selectNum = 0;
-                    selectMoney = 0f;
-                }
-                setSelectText();
-                allItemCheck(isChecked);
-            }
-        });
+        cbAllSelect.setOnClickListener(this);
 
         mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -103,6 +97,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 InvoiceSelect select = (InvoiceSelect) adapter.getItem(position);
                 if (select.getItemType() == InvoiceSelectAdapter.TYPE_ITEM) {
                     checkSelect(select);
+                    cbAllSelect.setChecked(false);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -110,31 +105,106 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(invoiceSelectAdapter);
 
+        initSelect();
         requestNetwork(GET);
     }
 
     private void allItemCheck(boolean check) {
         for (InvoiceSelect select : invoiceSelects) {
-            select.setSelect(check);
+            if (select.getItemType() == InvoiceSelectAdapter.TYPE_ITEM)
+                select.setSelect(check);
         }
         invoiceSelectAdapter.notifyDataSetChanged();
     }
 
+    private void initSelect() {
+        selectNum = 0;
+        setSelectMoney(0);
+    }
+
     private void setSelectText() {
-        tvNum.setText(""+selectNum);
-        tvTotalFee.setText(NumberFormatUtils.getNewFloat(selectMoney));
+        tvNum.setText("" + selectNum);
+        tvMoney.setText(NumberFormatUtils.getNewFloat(selectMoney));
+    }
+
+    private void setSelectMoney(float money) {
+        selectMoney = money;
+        moneyBigDecimal = new BigDecimal(Float.toString(money));
     }
 
     private void checkSelect(InvoiceSelect select) {
+        BigDecimal a = new BigDecimal(Float.toString(select.getMoney()));
         select.setSelect(!select.isSelect());
         if (select.isSelect()) {
             selectNum++;
-            selectMoney += select.getMoney();
+            moneyBigDecimal = moneyBigDecimal.add(a);
         } else {
             selectNum--;
-            selectMoney -= select.getMoney();
+            moneyBigDecimal = moneyBigDecimal.subtract(a);
         }
+        selectMoney = moneyBigDecimal.floatValue();
         setSelectText();
+    }
+
+    private void check() {
+        if (cbAllSelect.isChecked()) {
+            status = 1;
+            invoice_ids = "";
+        } else {
+            StringBuffer buffer = new StringBuffer();
+            for (InvoiceSelect select : invoiceSelects) {
+                if (select.isSelect()) {
+                    buffer.append(select.getBill_id());
+                    buffer.append(',');
+                }
+            }
+            if (buffer.length() <= 0) {
+                showToast("您没有选择任何发票申请条目。");
+                return;
+            }
+            status = 0;
+            invoice_ids = buffer.substring(0, buffer.length() - 1);
+        }
+        AbstractRequest request = buildRequest(UrlUtils.invoiceCheck, RequestMethod.POST, null);
+        request.add("status", status);
+        request.add("invoice_ids", invoice_ids);
+        executeNetwork(SAVE, "请稍后", request);
+    }
+
+    private void startInvoicePage(String data) {
+        Bundle bundle = new Bundle();
+        bundle.putString("data", data);
+        bundle.putString("invoice_ids", invoice_ids);
+        bundle.putInt("status", status);
+        startActivityForResult(SellerInvoiceActivity.class, bundle, RESULT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT && resultCode == Activity.RESULT_OK) {
+            initSelect();
+            invoiceSelectAdapter.lastMonth = null;
+            invoiceSelectAdapter.lastYear = null;
+            invoiceSelects.clear();
+            invoiceSelectAdapter.paged = 1;
+            requestNetwork(GET);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.invoice_btn) {
+            check();
+        } else if (v.getId() == R.id.invoice_all_select) {
+            if (cbAllSelect.isChecked()) {
+                selectNum = num;
+                setSelectMoney(total_fee);
+            } else
+                initSelect();
+            setSelectText();
+            allItemCheck(cbAllSelect.isChecked());
+        }
     }
 
     private void requestNetwork(int what) {
@@ -157,8 +227,8 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 formatList(list);
                 num = jsonObject.getInteger("num");
                 total_fee = jsonObject.getFloat("total_fee");
-                agreement_url = jsonObject.getString("agreement_url");
             }
+            agreement_url = jsonObject.getString("agreement_url");
             invoiceSelectAdapter.notifyDataSetChanged();
         } else if (what == LOAD) {
             List<InvoiceSelect> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
@@ -168,6 +238,18 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
             else
                 formatList(list);
             invoiceSelectAdapter.notifyDataSetChanged();
+        } else if (what == SAVE) {
+            final JSONObject data = JSON.parseObject(result.getData().toString());
+            int tip = data.getInteger("tip");
+            if (tip == 1)
+                dm.showAlertDialog2(result.getMsg(), "取消", "确定", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startInvoicePage(data.toString());
+                    }
+                });
+            else if (tip == 0)
+                startInvoicePage(data.toString());
         }
     }
 
@@ -179,27 +261,9 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 invoiceSelectAdapter.lastYear = item.getYear();
                 invoiceSelects.add(new InvoiceSelect(item.getMonth(), item.getYear()));
             }
+            if (cbAllSelect.isChecked())
+                item.setSelect(true);
             invoiceSelects.add(item);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.invoice_btn) {
-//            invoiceSelectAdapter.paged = 1;
-//            requestNetwork(LOAD);
-//            dm.showAlertDialog2("您的发票金额低于500元，将以顺风到" +
-//                    "付的形式快递给你，确认提交吗？", "取消", "确定", new DialogManager.Callback() {
-//                @Override
-//                public void handleLeft() {
-//
-//                }
-//
-//                @Override
-//                public void handleRight() {
-//                    startActivity(SellerInvoiceActivity.class, null);
-//                }
-//            });
         }
     }
 }

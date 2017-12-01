@@ -3,6 +3,8 @@ package com.ascba.rebate.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by Jero on 2017/9/20 0020.
  */
@@ -22,8 +24,10 @@ public class AddressEntity implements Parcelable {
      */
 
     private int address_id;
+    @JSONField(name = "consignee", alternateNames = {"address_realname"})
     private String consignee;
     private String address;
+    @JSONField(name = "mobile", alternateNames = {"address_mobile"})
     private String mobile;
     private int type;
     private int province;
@@ -147,7 +151,7 @@ public class AddressEntity implements Parcelable {
         this.address_detail = in.readString();
     }
 
-    public static final Parcelable.Creator<AddressEntity> CREATOR = new Parcelable.Creator<AddressEntity>() {
+    public static final Creator<AddressEntity> CREATOR = new Creator<AddressEntity>() {
         @Override
         public AddressEntity createFromParcel(Parcel source) {
             return new AddressEntity(source);
