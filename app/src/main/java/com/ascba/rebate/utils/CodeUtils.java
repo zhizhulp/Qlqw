@@ -17,7 +17,7 @@ public class CodeUtils {
     public static final int REQUEST_ALBUM_ICON_WORK = 2027;
     public static final int REQUEST_CAMERA_ICON_AUTH = 2028;
     public static final int REQUEST_ALBUM_ICON_AUTH = 2029;
-    public static final int REQUEST_CAMERA_ICON_WORK  = 2030;
+    public static final int REQUEST_CAMERA_ICON_WORK = 2030;
     public static final int REQUEST_COM_AUTHON = 2031;
     public static final int REQUEST_COM_ERROR = 2032;
     public static final int REQUEST_RECHARGE = 2033;
@@ -31,13 +31,17 @@ public class CodeUtils {
     public static final int REQUEST_CROP = 2041;
     public static final String WX_PAY_APP_ID = "wxc0690c2be47a7d66";//wxbc93c33327923c2c
     public static final String WX_APP_ID = "wxc0690c2be47a7d66";
-    public static String WX_APP_SECRET = "" ;//ebc8efae9ea7ca24e6b95ace1ef5f390  //3c446cc12abc8ee4b0f6d26cf30c0931
+    public static String WX_APP_SECRET = "";//ebc8efae9ea7ca24e6b95ace1ef5f390  //3c446cc12abc8ee4b0f6d26cf30c0931
     public static final int REQUEST_EDIT = 2042;
     public static final int REQUEST_ADD_PWD = 3001;
     public static final int CODE_CONFIRM = 3002;
     public static final int REQUEST_DET = 3003;
     public static final int REQUEST_CLEAR = 3004;
     public static final int REQUEST_TRADE = 3005;
-    public static final String AUTH_API_KEI="KFBRv1tq8aNYeiLz7ZyW4nr8KH1md3VT";//1inycqDlAEEOPZSeUAzTCb8JHW7cnONz
-    public static final String AUTH_API_SECRET="dVnBWviI5DZhAHNVPDvrnbwo9CmOvBuH";//1Ic5gQGLn6EAmKKtq0z2hSLH8TyuccUb
+    public static final String AUTH_API_KEI = "KFBRv1tq8aNYeiLz7ZyW4nr8KH1md3VT";//1inycqDlAEEOPZSeUAzTCb8JHW7cnONz
+    public static final String AUTH_API_SECRET = "dVnBWviI5DZhAHNVPDvrnbwo9CmOvBuH";//1Ic5gQGLn6EAmKKtq0z2hSLH8TyuccUb
+    public static final int REQUEST_SHOP_NAME = 3006;
+    public static final int REQUEST_SHOP_PHONE = 3007;
+    public static final int REQUEST_SHOP_ADDRESS = 3008;
+    public static final int REQUEST_SHOP_TIME = 3009;
 }

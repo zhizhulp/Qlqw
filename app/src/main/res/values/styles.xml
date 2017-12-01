@@ -28,14 +28,41 @@
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
-
+    <!--text style1-->
     <style name="TextViewNormal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_15</item>
         <item name="android:textColor">@color/grey_black_tv</item>
     </style>
-
+    <!--text style2-->
+    <style name="TextTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:textColor">@color/grey_black_tv</item>
+    </style>
+    <!--text style3-->
+    <style name="TextDesc">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/grey_black_tv2</item>
+    </style>
+    <!--android:id="@+id/im_more_01"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@mipmap/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"-->
+    <style name="Mct_Image_More">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:src">@mipmap/more</item>
+    </style>
     <style name="EditTextNormal">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

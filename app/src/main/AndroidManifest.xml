@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.ascba.rebate">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -17,13 +16,29 @@
     <uses-permission android:name="com.fingerprints.service.ACCESS_FINGERPRINT_MANAGER" />
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
+    <!--高德地图权限设置-->
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+
     <application
-        android:name="com.ascba.rebate.application.MyApplication"
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--高德地图-->
+        <service android:name="com.amap.api.location.APSService"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="11d31c62f7f344c66c4f0fc80a15c4ce"/>
         <!-- hotfix -->
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
@@ -38,7 +53,7 @@
         <!-- JPush -->
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
-            android:name="com.ascba.rebate.broadcast.MyReceiver"
+            android:name=".broadcast.MyReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -53,7 +68,7 @@
         </receiver>
         <!-- 微信支付 -->
         <activity
-            android:name="com.ascba.rebate.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
@@ -61,13 +76,13 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-               <!-- <data android:scheme="wxbc93c33327923c2c" />-->
+                <!-- <data android:scheme="wxbc93c33327923c2c" /> -->
                 <data android:scheme="wxc0690c2be47a7d66" />
             </intent-filter>
         </activity>
         <!-- 微信登录、分享 -->
         <activity
-            android:name="com.ascba.rebate.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/WXTheme" />
@@ -96,168 +111,168 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 支付宝end -->
         <activity
-            android:name="com.ascba.rebate.activities.main.MainActivity"
+            android:name=".activities.main.MainActivity"
             android:exported="true"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.ascba.rebate.activities.login.LoginActivity"
+            android:name=".activities.login.LoginActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.register.RegisterActivity"
+            android:name=".activities.register.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.register.IdentityCodeActivity"
+            android:name=".activities.register.IdentityCodeActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name="com.ascba.rebate.activities.register.RegisterNextActivity"
+            android:name=".activities.register.RegisterNextActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.user_data.UserDataActivity"
+            android:name=".activities.user_data.UserDataActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.user_msg.UserMsgActivity"
+            android:name=".activities.user_msg.UserMsgActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.user_data.ModifyNickNameActivity"
+            android:name=".activities.user_data.ModifyNickNameActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.mine.PresentActivity" />
-        <activity android:name="com.ascba.rebate.activities.mine.PrivilegeActivity" />
+        <activity android:name=".activities.mine.PresentActivity" />
+        <activity android:name=".activities.mine.PrivilegeActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.bill.BillActivity"
+            android:name=".activities.bill.BillActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.mine.BalanceActivity"
+            android:name=".activities.mine.BalanceActivity"
             android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name="com.ascba.rebate.activities.mine.SettingActivity" />
+        <activity android:name=".activities.mine.SettingActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.test.TestActivity"
+            android:name=".activities.test.TestActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.base.activity.WebViewBaseActivity" />
+        <activity android:name=".base.activity.WebViewBaseActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.personal_identification.PIStartActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.ascba.rebate.activities.personal_identification.PICommitActivity"
+            android:name=".activities.personal_identification.PIStartActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.personal_identification.LivenessActivity"
+            android:name=".activities.personal_identification.PICommitActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.personal_identification.IDCardScanActivity"
+            android:name=".activities.personal_identification.LivenessActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.personal_identification.IDCardScanActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.company_identification.InPutCNActivity" />
+        <activity android:name=".activities.company_identification.InPutCNActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.company_identification.ComMsgActivity"
+            android:name=".activities.company_identification.ComMsgActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.company_identification.ShowPicActivity"
+            android:name=".activities.company_identification.ShowPicActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.personal_identification.PISuccessActivity"
+            android:name=".activities.personal_identification.PISuccessActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.recharge.RechargeActivity"
+            android:name=".activities.recharge.RechargeActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name="com.ascba.rebate.activities.recharge.RechargeSuccessActivity"
+            android:name=".activities.recharge.RechargeSuccessActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.bank_card.AddBankCardActivity"
+            android:name=".activities.bank_card.AddBankCardActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.bank_card.BankCardListActivity"
+            android:name=".activities.bank_card.BankCardListActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.cash_get.CashGetActivity"
+            android:name=".activities.cash_get.CashGetActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name="com.ascba.rebate.activities.cash_get.CGDealingActivity"
+            android:name=".activities.cash_get.CGDealingActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.AboutActivity"
+            android:name=".activities.setting.AboutActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.AccountActivity"
+            android:name=".activities.setting.AccountActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.FingerprintActivity"
+            android:name=".activities.setting.FingerprintActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.SetPayPwdActivity"
+            android:name=".activities.setting.SetPayPwdActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.UpdatePayPwdActivity"
+            android:name=".activities.setting.UpdatePayPwdActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.ForgetPayPwdActivity"
+            android:name=".activities.setting.ForgetPayPwdActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.msg.MsgListActivity"
+            android:name=".activities.msg.MsgListActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.AddressActivity"
+            android:name=".activities.setting.AddressActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.setting.AddressAddActivity"
+            android:name=".activities.setting.AddressAddActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.bill.FilterBillActivity" />
+        <activity android:name=".activities.bill.FilterBillActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.score_shop.GiftShopActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity"
+            android:name=".activities.score_shop.GiftShopActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity"
+            android:name=".activities.score_shop.GiftGoodsDetailsActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.benefits.SaleProtocolActivity"
+            android:name=".activities.score_shop.GiftExchangeLogActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.bill.ScoreBillActivity"
+            android:name=".activities.benefits.SaleProtocolActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.bill.ScoreFilterActivity"
+            android:name=".activities.bill.ScoreBillActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.home.ModulesAllActivity"
+            android:name=".activities.bill.ScoreFilterActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.home.ModulesEditActivity"
+            android:name=".activities.home.ModulesAllActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.trade.ReceiveCodeActivity"
+            android:name=".activities.home.ModulesEditActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.trade.SweepActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.home.PlayVideoActivity"
+            android:name=".activities.trade.ReceiveCodeActivity"
+            android:exported="true" />
+        <activity android:name=".activities.trade.SweepActivity" />
+        <activity
+            android:name=".activities.home.PlayVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.ascba.rebate.activities.seller.SellerActivity"
+            android:name=".activities.seller.SellerActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.home.ModulesSearchActivity"
+            android:name=".activities.home.ModulesSearchActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.trade.ConfirmListActivity" />
-        <activity android:name="com.ascba.rebate.activities.trade.TradeConfirmActivity" />
-        <activity android:name="com.ascba.rebate.activities.seller.SellerPurchaseActivity" />
+        <activity android:name=".activities.trade.ConfirmListActivity" />
+        <activity android:name=".activities.trade.TradeConfirmActivity" />
+        <activity android:name=".activities.seller.SellerPurchaseActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.seller.SellerGiveCreateActivity"
+            android:name=".activities.seller.SellerGiveCreateActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.ascba.rebate.activities.trade.OfflinePayActivity"
+            android:name=".activities.trade.OfflinePayActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.guide.GuideActivity"
+            android:name=".activities.guide.GuideActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.launch.LaunchActivity"
+            android:name=".activities.launch.LaunchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -266,24 +281,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ascba.rebate.activities.benefits.SellBenefitActivity"
+            android:name=".activities.benefits.SellBenefitActivity"
             android:exported="true" />
         <activity
-            android:name="com.ascba.rebate.activities.benefits.BenefitDetActivity"
+            android:name=".activities.benefits.BenefitDetActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.activities.login.BindMobileActivity" />
-        <activity android:name="com.ascba.rebate.activities.bill.VoucherBillActivity" />
-        <activity android:name="com.ascba.rebate.activities.bill.VoucherFilterActivity" />
+        <activity android:name=".activities.login.BindMobileActivity" />
+        <activity android:name=".activities.bill.VoucherBillActivity" />
+        <activity android:name=".activities.bill.VoucherFilterActivity" />
         <activity
-            android:name="com.ascba.rebate.activities.mine.AwardActivity"
+            android:name=".activities.mine.AwardActivity"
             android:exported="true" />
-        <activity android:name="com.ascba.rebate.base.activity.BaseDefaultNetActivity" />
+        <activity android:name=".base.activity.BaseDefaultNetActivity" />
         <activity android:name=".activities.seller.PurchaseSuccessActivity" />
         <activity android:name=".activities.score_shop.ExchangeSuccessActivity" />
         <activity android:name=".activities.seller.SellerSetActivity" />
         <activity android:name=".activities.seller.SellerInvoiceActivity" />
         <activity android:name=".activities.seller.SellerInvoiceListActivity" />
         <activity android:name=".activities.seller.SellerInvoiceHistoryActivity" />
+        <activity
+            android:name=".activities.merchant.MctEnterActivity"
+            android:exported="true" />
+        <activity android:name=".activities.merchant.MctModBaseActivity" />
+        <activity android:name=".activities.merchant.MctModTimeActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:exported="true"/>
     </application>
 
 </manifest>
