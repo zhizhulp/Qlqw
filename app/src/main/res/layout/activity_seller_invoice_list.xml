@@ -83,6 +83,7 @@
             android:textSize="@dimen/text_14" />
         <!--</editor-fold>-->
         <TextView
+            android:id="@+id/invoice_info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/invoice_select_tv"

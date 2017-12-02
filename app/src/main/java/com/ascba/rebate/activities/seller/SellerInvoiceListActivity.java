@@ -44,12 +44,12 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     private List<InvoiceSelect> invoiceSelects;
     private int num;
     private float total_fee;
-    private String agreement_url;
+    private String agreement_url, shipping_text;
 
     private InvoiceSelectAdapter invoiceSelectAdapter;
     private RelativeLayout latBottom;
     private CheckBox cbAllSelect;
-    private TextView tvNum, tvMoney;
+    private TextView tvNum, tvMoney, tvInfo;
 
     private int selectNum;
     private float selectMoney;
@@ -76,6 +76,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         latBottom = fv(R.id.invoice_list_bottom_lat);
         tvNum = fv(R.id.invoice_select_tv);
         tvMoney = fv(R.id.invoice_money_tv);
+        tvInfo = fv(R.id.invoice_info_tv);
         cbAllSelect = fv(R.id.invoice_all_select);
         cbAllSelect.setOnClickListener(this);
 
@@ -227,6 +228,8 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 formatList(list);
                 num = jsonObject.getInteger("num");
                 total_fee = jsonObject.getFloat("total_fee");
+                shipping_text = jsonObject.getString("shipping_text");
+                tvInfo.setText(shipping_text);
             }
             agreement_url = jsonObject.getString("agreement_url");
             invoiceSelectAdapter.notifyDataSetChanged();
