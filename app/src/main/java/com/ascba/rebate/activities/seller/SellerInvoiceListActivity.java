@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     private RelativeLayout latBottom;
     private CheckBox cbAllSelect;
     private TextView tvNum, tvMoney, tvInfo;
+    private Button btn;
 
     private int selectNum;
     private float selectMoney;
@@ -73,7 +75,8 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                 WebViewBaseActivity.start(SellerInvoiceListActivity.this, "开票说明", agreement_url);
             }
         });
-        fv(R.id.invoice_btn).setOnClickListener(this);
+        btn = fv(R.id.invoice_btn);
+        btn.setOnClickListener(this);
         latBottom = fv(R.id.invoice_list_bottom_lat);
         tvNum = fv(R.id.invoice_select_tv);
         tvMoney = fv(R.id.invoice_money_tv);
@@ -98,8 +101,12 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 InvoiceSelect select = (InvoiceSelect) adapter.getItem(position);
                 if (select.getItemType() == InvoiceSelectAdapter.TYPE_ITEM) {
-                    checkSelect(select);
-                    cbAllSelect.setChecked(false);
+                    if (mRefreshLayout.isLoadmoreFinished()) {
+                        checkSelect(select);
+                    } else if (cbAllSelect.isChecked()) {
+                        allSelectCheck(select);
+                    } else
+                        checkSelect(select);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -121,13 +128,21 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
     }
 
     private void initSelect() {
-        selectNum = 0;
+        setSelectNum(0);
         setSelectMoney(0);
     }
 
     private void setSelectText() {
         tvNum.setText("" + selectNum);
         tvMoney.setText(NumberFormatUtils.getNewFloat(selectMoney));
+    }
+
+    private void setSelectNum(int num) {
+        selectNum = num;
+        if (selectNum <= 0)
+            btn.setEnabled(false);
+        else
+            btn.setEnabled(true);
     }
 
     private void setSelectMoney(float money) {
@@ -139,12 +154,30 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         BigDecimal a = new BigDecimal(Float.toString(select.getMoney()));
         select.setSelect(!select.isSelect());
         if (select.isSelect()) {
-            selectNum++;
+            setSelectNum(++selectNum);
             moneyBigDecimal = moneyBigDecimal.add(a);
         } else {
-            selectNum--;
+            setSelectNum(--selectNum);
             moneyBigDecimal = moneyBigDecimal.subtract(a);
         }
+        selectMoney = moneyBigDecimal.floatValue();
+        setSelectText();
+    }
+
+    private void allSelectCheck(InvoiceSelect select) {
+        cbAllSelect.setChecked(false);
+        BigDecimal a;
+        initSelect();
+        for (InvoiceSelect sel : invoiceSelects) {
+            if (sel.getBill_id() == select.getBill_id()) {
+                select.setSelect(!select.isSelect());
+            } else if (sel.getItemType() == InvoiceSelectAdapter.TYPE_ITEM) {
+                a = new BigDecimal(Float.toString(select.getMoney()));
+                selectNum++;
+                moneyBigDecimal = moneyBigDecimal.add(a);
+            }
+        }
+        setSelectNum(selectNum);
         selectMoney = moneyBigDecimal.floatValue();
         setSelectText();
     }
@@ -201,7 +234,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
             check();
         } else if (v.getId() == R.id.invoice_all_select) {
             if (cbAllSelect.isChecked()) {
-                selectNum = num;
+                setSelectNum(num);
                 setSelectMoney(total_fee);
             } else
                 initSelect();

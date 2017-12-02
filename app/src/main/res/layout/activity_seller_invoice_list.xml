@@ -98,7 +98,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@color/blue_btn"
+            android:background="@drawable/btn_pay_selector"
             android:text="立即开票"
             android:textColor="@color/white"
             android:textSize="@dimen/text_15" />
