@@ -23,6 +23,7 @@ import com.ascba.rebate.utils.EmptyUtils;
 import com.ascba.rebate.utils.NumberFormatUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -105,6 +106,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(invoiceSelectAdapter);
+        mRecyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder(InvoiceSelectAdapter.TYPE_HEAD).create());
 
         initSelect();
         requestNetwork(GET);
