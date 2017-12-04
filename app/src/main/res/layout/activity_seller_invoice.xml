@@ -278,28 +278,30 @@
                 </LinearLayout>
 
                 <View style="@style/LineHorizontal" />
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="运费："
-                        android:textColor="@color/grey_black_tv"
-                        android:textSize="@dimen/text_14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运费："
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
 
-                    <TextView
-                        android:id="@+id/invoice_freight_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grey_black_tv2"
-                        android:textSize="@dimen/text_13" />
-                </LinearLayout>
-
+                <TextView
+                    android:id="@+id/invoice_freight_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
             </LinearLayout>
 
             <TextView
