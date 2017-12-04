@@ -294,7 +294,7 @@
             android:exported="true" />
         <activity android:name=".base.activity.BaseDefaultNetActivity" />
         <activity android:name=".activities.seller.PurchaseSuccessActivity" />
-        <activity android:name=".activities.score_shop.ExchangeSuccessActivity" />
+        <activity android:name=".activities.success.TextInfoSuccessActivity" />
         <activity android:name=".activities.seller.SellerSetActivity" />
         <activity android:name=".activities.seller.SellerInvoiceActivity" />
         <activity android:name=".activities.seller.SellerInvoiceListActivity" />

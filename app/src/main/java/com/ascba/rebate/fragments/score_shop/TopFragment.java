@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.score_shop.ExchangeSuccessActivity;
+import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
 import com.ascba.rebate.activities.setting.AddressActivity;
 import com.ascba.rebate.activities.setting.AddressAddActivity;
@@ -359,7 +359,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", type);
                 bundle.putString("info", jsonObject.getString("success_text"));
-                startActivity(ExchangeSuccessActivity.class, bundle);
+                startActivity(TextInfoSuccessActivity.class, bundle);
                 getActivity().setResult(Activity.RESULT_OK);
             } else if (tip == 1) {
                 dm.showAlertDialog2(result.getMsg(), null, null, new DialogManager.Callback() {
