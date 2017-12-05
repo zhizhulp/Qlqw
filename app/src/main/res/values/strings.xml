@@ -33,4 +33,5 @@
     <string name="invite_share_title">哇！花多少赚多少，京东都怕了。</string>
     <string name="invite_share_content">商品多，配送快，品质好，天天省钱，消费能赚钱，快快体验吧！</string>
     <string name="code_unavailable">非有效二维码</string>
+    <string name="search_type">请输入要搜索的行业</string>
 </resources>

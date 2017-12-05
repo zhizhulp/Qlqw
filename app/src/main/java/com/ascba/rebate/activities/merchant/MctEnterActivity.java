@@ -21,13 +21,18 @@ import android.widget.TextView;
 import com.amap.api.location.AMapLocation;
 import com.ascba.rebate.BuildConfig;
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.user_data.UserDataActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.MctModType;
 import com.ascba.rebate.manager.LocationManager;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.FileUtils;
 import com.ascba.rebate.view.SelectIconDialog;
+import com.ascba.rebate.view.jd_selector.BottomDialog;
+import com.ascba.rebate.view.jd_selector.City;
+import com.ascba.rebate.view.jd_selector.County;
+import com.ascba.rebate.view.jd_selector.OnAddressSelectedListener;
+import com.ascba.rebate.view.jd_selector.Province;
+import com.ascba.rebate.view.jd_selector.Street;
 
 import java.io.File;
 
@@ -97,6 +102,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                 showSelectIconDialog();
                 break;
             case R.id.lat_mct_type://主营类目
+                MctTypeActivity.start(this,tvType.getText().toString());
                 break;
             case R.id.lat_mct_time://主营时间
                 MctModTimeActivity.start(this, tvTime.getText().toString());
@@ -109,6 +115,15 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                 startLocation();
                 break;
             case R.id.lat_mct_proxy_locate://选择地区
+                final BottomDialog dialog = new BottomDialog(this);
+                dialog.setOnAddressSelectedListener(new OnAddressSelectedListener() {
+                    @Override
+                    public void onAddressSelected(Province province, City city, County county, Street street) {
+                        dialog.dismiss();
+                        tvPLocate.setText(String.format("%s%s%s%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
+                    }
+                });
+                dialog.show();
                 break;
             case R.id.lat_mct_address://详细地址
                 MctModBaseActivity.start(this, new MctModType
@@ -215,6 +230,9 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     break;
                 case CodeUtils.REQUEST_SHOP_TIME:
                     tvTime.setText(data.getStringExtra("business_data_time"));
+                    break;
+                case CodeUtils.REQUEST_MCT_TYPE:
+                    tvType.setText(data.getStringExtra("type"));
                     break;
             }
         }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ascba.rebate">
+
+    <uses-sdk tools:overrideLibrary="org.raphets.roundimageview" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- NoHttp -->
@@ -16,16 +19,15 @@
     <uses-permission android:name="com.fingerprints.service.ACCESS_FINGERPRINT_MANAGER" />
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
-    <!--高德地图权限设置-->
-    <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-
+    <!-- 高德地图权限设置 -->
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
         android:name=".application.MyApplication"
@@ -34,11 +36,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--高德地图-->
-        <service android:name="com.amap.api.location.APSService"/>
+
+        <!-- 高德地图 -->
+        <service android:name="com.amap.api.location.APSService" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="11d31c62f7f344c66c4f0fc80a15c4ce"/>
+            android:value="11d31c62f7f344c66c4f0fc80a15c4ce" />
         <!-- hotfix -->
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
@@ -303,9 +307,13 @@
             android:name=".activities.merchant.MctEnterActivity"
             android:exported="true" />
         <activity android:name=".activities.merchant.MctModBaseActivity" />
-        <activity android:name=".activities.merchant.MctModTimeActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
-            android:exported="true"/>
+        <activity
+            android:name=".activities.merchant.MctModTimeActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
+        <activity android:name=".activities.merchant.MctTypeActivity" />
+        <activity android:name=".activities.merchant.MctRightsActivity" />
+        <activity android:name=".activities.merchant.MctPayActivity"></activity>
     </application>
 
 </manifest>

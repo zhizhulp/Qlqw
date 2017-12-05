@@ -135,4 +135,5 @@ dependencies {
         exclude(module: 'alicloud-android-utdid')
     }
     compile 'com.amap.api:location:latest.integration'
+    compile 'org.raphets:roundimageview:1.2.0'
 }
