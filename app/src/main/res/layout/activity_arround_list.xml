@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ascba.rebate.view.MoneyBar
+        style="@style/MoneyBar"
+        app:textTail="我要入驻"
+        app:textTitle="周边商家" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <com.ascba.rebate.view.ClearEditText
+            android:id="@+id/search_et"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/white_search_bg"
+            android:drawableLeft="@mipmap/module_search"
+            android:drawablePadding="7dp"
+            android:gravity="center_vertical"
+            android:hint="搜索"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_black_tv"
+            android:textColorHint="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/search_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:textColor="@color/grey_black_tv2"
+            android:text="搜索"
+            android:textSize="@dimen/text_15" />
+    </LinearLayout>
+
+    <include layout="@layout/refresh_and_list" />
+</LinearLayout>

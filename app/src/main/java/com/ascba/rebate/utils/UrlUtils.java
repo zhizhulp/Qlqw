@@ -97,4 +97,5 @@ public class UrlUtils {
     public static String invoiceAdd = baseWebsite + "invoice/add";
     public static String invoiceList = baseWebsite + "invoice/list";
     public static String sellerSetting = baseWebsite + "seller/setting";
+    public static String sellerArround = baseWebsite + "seller/arround";
 }

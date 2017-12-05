@@ -314,6 +314,7 @@
         <activity android:name=".activities.merchant.MctTypeActivity" />
         <activity android:name=".activities.merchant.MctRightsActivity" />
         <activity android:name=".activities.merchant.MctPayActivity"></activity>
+        <activity android:name=".activities.arround.ArroundListActivity" />
     </application>
 
 </manifest>

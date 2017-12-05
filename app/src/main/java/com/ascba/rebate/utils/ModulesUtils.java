@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.arround.ArroundListActivity;
 import com.ascba.rebate.activities.benefits.SellBenefitActivity;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
@@ -75,6 +76,9 @@ public class ModulesUtils {
                 break;
             case "MerchantServices":// 商家服务
                 goActivity(activity, SellerActivity.class, null);
+                break;
+            case "周边商家":// 周边商家
+                goActivity(activity,ArroundListActivity.class,null);
                 break;
             case "More":// 更多
                 return false;
