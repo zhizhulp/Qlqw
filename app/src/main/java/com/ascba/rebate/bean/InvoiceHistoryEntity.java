@@ -7,7 +7,7 @@ package com.ascba.rebate.bean;
 public class InvoiceHistoryEntity {
     /**
      * invoice_id : 16
-     * total_fee : 201.6
+     * total_fee : "1.00元"
      * create_time : 2017/11/29
      * member_info : 汪炳旭(个人)
      * status : 待开票
@@ -17,7 +17,7 @@ public class InvoiceHistoryEntity {
      */
 
     private int invoice_id;
-    private double total_fee;
+    private String total_fee;
     private String create_time;
     private String member_info;
     private String status;
@@ -33,11 +33,11 @@ public class InvoiceHistoryEntity {
         this.invoice_id = invoice_id;
     }
 
-    public double getTotal_fee() {
+    public String getTotal_fee() {
         return total_fee;
     }
 
-    public void setTotal_fee(double total_fee) {
+    public void setTotal_fee(String total_fee) {
         this.total_fee = total_fee;
     }
 

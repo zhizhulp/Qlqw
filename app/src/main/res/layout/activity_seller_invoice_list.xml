@@ -83,6 +83,7 @@
             android:textSize="@dimen/text_14" />
         <!--</editor-fold>-->
         <TextView
+            android:id="@+id/invoice_info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/invoice_select_tv"
@@ -97,7 +98,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@color/blue_btn"
+            android:background="@drawable/btn_pay_selector"
             android:text="立即开票"
             android:textColor="@color/white"
             android:textSize="@dimen/text_15" />

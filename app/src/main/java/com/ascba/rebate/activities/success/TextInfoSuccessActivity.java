@@ -1,4 +1,4 @@
-package com.ascba.rebate.activities.score_shop;
+package com.ascba.rebate.activities.success;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 
-public class ExchangeSuccessActivity extends BaseDefaultNetActivity {
+public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
     private TextView tvType;
     private TextView tvMoney;
@@ -49,7 +50,7 @@ public class ExchangeSuccessActivity extends BaseDefaultNetActivity {
                 if (type == 0)
                     startActivity(SellerInvoiceHistoryActivity.class, null);
                 else
-                    GiftExchangeLogActivity.jumpIntent(ExchangeSuccessActivity.this, type);
+                    GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, type);
                 finish();
             }
         });
