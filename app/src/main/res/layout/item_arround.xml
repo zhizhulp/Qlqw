@@ -99,6 +99,7 @@
             android:ellipsize="end"
             android:lineSpacingExtra="6dp"
             android:maxLines="2"
+            android:minHeight="61dp"
             android:paddingBottom="14dp"
             android:paddingLeft="45dp"
             android:paddingRight="40dp"

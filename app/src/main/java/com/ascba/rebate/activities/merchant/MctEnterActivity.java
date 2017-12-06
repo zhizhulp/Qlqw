@@ -102,7 +102,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                 showSelectIconDialog();
                 break;
             case R.id.lat_mct_type://主营类目
-                MctTypeActivity.start(this,tvType.getText().toString());
+                MctTypeActivity.start(this, tvType.getText().toString());
                 break;
             case R.id.lat_mct_time://主营时间
                 MctModTimeActivity.start(this, tvTime.getText().toString());
@@ -139,6 +139,11 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                 public void onLocateSuccess(AMapLocation location) {
                     Log.d(TAG, "long" + location.getLongitude() + ",lan" + location.getLatitude());
                     tvLocate.setText(location.getAddress());
+                }
+
+                @Override
+                public boolean onLocateFailed(AMapLocation location) {
+                    return false;
                 }
             });
         }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,12 +29,19 @@ import java.util.List;
  */
 
 public class ArroundListActivity extends BaseDefaultNetActivity implements View.OnClickListener {
+    private static final int GET_ONE = 195;
+    private static final int GET_PAGE = 177;
+    private static final int SEARCH_ONE = 376;
+    private static final int SEARCH_PAGE = 563;
+
     private LocationManager lm;
     private ArroundAdapter arroundAdapter;
-    private List<ArroundEntity> arroundEntities;
+    private ArroundAdapter searchAdapter;
     private EditText searchEt;
     private TextView btn;
 
+    private int type = 1;// 1 周边 2查询
+    private int mSearchPage = 1;
     private int mPage = 1;
     private double lon, lat;
 
@@ -54,12 +60,18 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
                 // TODO
             }
         });
-        mRefreshLayout.setPrimaryColorsId(R.color.bg, R.color.grey_black_tv);
+        mRefreshLayout.setPrimaryColorsId(R.color.bg, R.color.grey_black_tv2);
         mRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mPage++;
-                requestNetwork(1);
+                // 根据状态请求不同的加载更多
+                if (type == 1) {
+                    mPage++;
+                    requestNetwork(GET_PAGE);
+                } else if (type == 2) {
+                    mSearchPage++;
+                    requestNetwork(SEARCH_PAGE);
+                }
             }
 
             @Override
@@ -71,6 +83,7 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
                 startLocation();
             }
         });
+        searchAdapter = new ArroundAdapter();
         arroundAdapter = new ArroundAdapter();
         mRecyclerView.setAdapter(arroundAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -89,12 +102,20 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
+                //根据搜索文字长度 决定是否开启搜索按钮
                 if (s.length() > 0) {
-                    btn.setEnabled(true);
-                    btn.setTextColor(getResources().getColor(R.color.blue_btn));
+                    if (!btn.isEnabled()) {
+                        btn.setEnabled(true);
+                        btn.setTextColor(getResources().getColor(R.color.blue_btn));
+                    }
                 } else {
                     btn.setEnabled(false);
                     btn.setTextColor(getResources().getColor(R.color.grey_black_tv2));
+                    //如果搜索长度清空并且显示内容为搜索内容  切换为原来的内容
+                    if (type == 2) {
+                        type = 1;
+                        mRecyclerView.setAdapter(arroundAdapter);
+                    }
                 }
             }
         });
@@ -107,12 +128,28 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
             lm = new LocationManager(this, new LocationManager.LocateListener() {
                 @Override
                 public void onLocateSuccess(AMapLocation location) {
-                    Log.d(TAG, "long" + location.getLongitude() + ",lan" + location.getLatitude());
                     lon = location.getLongitude();
                     lat = location.getLatitude();
-                    Log.i(TAG, "onLocateSuccess: " + location.getAddress());
-                    mPage = 1;
-                    requestNetwork(0);
+                    // 根据状态决定 是那种类型的初始化加载
+                    if (type == 1) {
+                        mPage = 1;
+                        requestNetwork(GET_ONE);
+                    } else if (type == 2) {
+                        mSearchPage = 1;
+                        requestNetwork(SEARCH_ONE);
+                    }
+                }
+
+                @Override
+                public boolean onLocateFailed(AMapLocation location) {
+                    if (type == 1) {
+                        mPage = 1;
+                        requestNetwork(GET_ONE);
+                    } else if (type == 2) {
+                        mSearchPage = 1;
+                        requestNetwork(SEARCH_ONE);
+                    }
+                    return false;
                 }
             });
         }
@@ -123,6 +160,8 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
         request.add("lon", lon);
         request.add("lat", lat);
         request.add("paged", mPage);
+        if (type == 2)
+            request.add("search", searchEt.getText().toString());
         executeNetwork(what, "请稍后", request);
     }
 
@@ -130,25 +169,40 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.search_tv) {
-            // TODO
+            type = 2;
+            requestNetwork(SEARCH_ONE);
+            // 清空上次搜索数据
+            mSearchPage = 1;
+            searchAdapter.getData().clear();
+            mRecyclerView.setAdapter(searchAdapter);
         }
     }
 
     @Override
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
-        if (what == 0) {
-            arroundEntities = JSON.parseArray(JSON.parseObject(result.getData().toString())
+        if (what == GET_ONE) {
+            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
                     .getString("pushBusinessList"), ArroundEntity.class);
-            arroundAdapter.setNewData(arroundEntities);
-        } else if (what == 1) {
-            arroundEntities = JSON.parseArray(JSON.parseObject(result.getData().toString())
+            arroundAdapter.setNewData(list);
+        } else if (what == GET_PAGE) {
+            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
                     .getString("pushBusinessList"), ArroundEntity.class);
-            if (arroundEntities.size() == 0) {
+            if (list.size() == 0)
                 loadMoreOver();
-            } else {
-                arroundAdapter.addData(arroundEntities);
-            }
+            else
+                arroundAdapter.addData(list);
+        } else if (what == SEARCH_ONE) {
+            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
+                    .getString("pushBusinessList"), ArroundEntity.class);
+            searchAdapter.setNewData(list);
+        } else if (what == SEARCH_PAGE) {
+            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
+                    .getString("pushBusinessList"), ArroundEntity.class);
+            if (list.size() == 0)
+                loadMoreOver();
+            else
+                searchAdapter.addData(list);
         }
     }
 

@@ -77,7 +77,7 @@ public class ModulesUtils {
             case "MerchantServices":// 商家服务
                 goActivity(activity, SellerActivity.class, null);
                 break;
-            case "周边商家":// 周边商家
+            case "AroundMerchants":// 周边商家
                 goActivity(activity,ArroundListActivity.class,null);
                 break;
             case "More":// 更多
