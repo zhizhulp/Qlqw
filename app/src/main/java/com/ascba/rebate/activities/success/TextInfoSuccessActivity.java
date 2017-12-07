@@ -2,6 +2,7 @@ package com.ascba.rebate.activities.success;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -11,6 +12,7 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
+import com.ascba.rebate.utils.PayUtils;
 
 public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
@@ -49,6 +51,8 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
             public void onClick(View v) {
                 if (type == 0)
                     startActivity(SellerInvoiceHistoryActivity.class, null);
+                else if (type == 3)
+                    Log.d(TAG, "onClick: type==3");
                 else
                     GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, type);
                 finish();
@@ -62,7 +66,7 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
     private void getParams() {
         Intent intent = getIntent();
-        type = intent.getIntExtra("type", 0);
+        type = intent.getIntExtra("type", 3);
         if (type == 0) {
             mMoneyBar.setTextTitle("申请成功");
             tvTitle.setText("申请成功");
@@ -73,6 +77,11 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
             tvTitle.setText("兑换成功");
             btnComplete.setText("立即查看");
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
+        } else if (type == 3) {
+            mMoneyBar.setTextTitle("支付成功");
+            tvTitle.setText("支付成功");
+            btnComplete.setText("需要判断");
+            tvMoney.setText(String.format("　　%s", PayUtils.getInstance().info));
         }
     }
 

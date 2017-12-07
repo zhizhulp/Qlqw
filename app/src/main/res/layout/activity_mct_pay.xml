@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context="com.ascba.rebate.activities.merchant.MctPayActivity">
     <com.ascba.rebate.view.MoneyBar
-        app:textTitle="优享"
+        app:textTitle="优享商家"
         style="@style/MoneyBar"/>
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/white"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -17,6 +17,15 @@ public class Pay {
     private String aliPayInfo;
     private String out_trade_no;
     private WXPay wxPayInfo;
+    private String success_info;
+
+    public String getSuccess_info() {
+        return success_info;
+    }
+
+    public void setSuccess_info(String success_info) {
+        this.success_info = success_info;
+    }
 
     public WXPay getWxPayInfo() {
         return wxPayInfo;

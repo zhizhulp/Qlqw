@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ascba.rebate.activities.merchant.MctApplyStartActivity">
+    <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
+        app:textTitle="商家入驻"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_apply"
+        android:text="已了解，前往入驻"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentBottom="true"
+        style="@style/ButtonNormal"
+        android:enabled="true"/>
+    <WebView
+        android:layout_below="@id/mb"
+        android:layout_above="@id/btn_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

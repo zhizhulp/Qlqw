@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
+import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
+import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
@@ -21,6 +23,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.nohttp.RequestMethod;
+
+import java.util.List;
 
 /**
  * Created by Jero on 2017/10/12 0012.
@@ -64,6 +68,15 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         break;
                     case 3:
                         startActivity(SellerGiveCreateActivity.class, null);
+                        break;
+                    case 4:
+                        // TODO: 2017/12/6
+                        boolean alreadyApply = false;
+                        if (!alreadyApply) {
+                            startActivity(MctApplyStartActivity.class, null);
+                        } else {
+                            startActivity(MctEnterActivity.class, null);
+                        }
                         break;
                     default:
 
@@ -124,6 +137,11 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
         if (what == 0) {
             sellerEntity = (SellerEntity) result.getData();
             money.setText(sellerEntity.getMoney());
+
+            List<SellerEntity.ServerBean> servers = sellerEntity.getServer();
+            servers.add(new SellerEntity.ServerBean("完善商家资料", "完善商家资料，享受商家更多特权",
+                    "http://apidebug.qlqwp2p.com/public/static/app/images/StoredOne.png",
+                    "http://www.qlqw.com/purchase/giveindex", 4));
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
         }
     }

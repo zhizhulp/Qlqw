@@ -36,7 +36,6 @@
                     android:id="@+id/mct_logo"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:src="@mipmap/logo"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
             </RelativeLayout>
@@ -240,6 +239,8 @@
                     android:id="@+id/im_more_07"
                     style="@style/Mct_Image_More"/>
                 <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:id="@+id/mct_proxy_locate"
                     android:gravity="right"
                     android:layout_marginLeft="14dp"
@@ -316,7 +317,8 @@
                 android:layout_marginBottom="56dp"
                 android:id="@+id/btn_apply"
                 android:text="提交"
-                style="@style/ButtonNormal" />
+                style="@style/ButtonNormal"
+                android:enabled="true"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

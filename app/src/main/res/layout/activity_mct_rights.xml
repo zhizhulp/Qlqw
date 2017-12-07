@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_btm"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:layout_toRightOf="@id/im"
@@ -40,7 +41,6 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_centerVertical="true"
-            android:text="有没有缴纳年费"
             android:textColor="@color/grey_black_tv2"
             android:textSize="@dimen/text_13"
             android:layout_width="wrap_content"
@@ -195,7 +195,7 @@
                 <View
                     android:layout_marginTop="25dp"
                     android:id="@+id/point_02"
-                    android:background="@drawable/mct_point_blue"
+                    android:background="@drawable/mct_point_yellow"
                     android:layout_width="10dp"
                     android:layout_height="10dp"/>
                 <TextView
@@ -241,7 +241,7 @@
                 <View
                     android:layout_marginTop="25dp"
                     android:id="@+id/point_03"
-                    android:background="@drawable/mct_point_blue"
+                    android:background="@drawable/mct_point_green"
                     android:layout_width="10dp"
                     android:layout_height="10dp"/>
                 <TextView

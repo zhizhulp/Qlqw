@@ -9,6 +9,9 @@ import com.ascba.rebate.appconfig.AppConfig;
  */
 
 public class UrlUtils {
+
+
+
     static {
         if (BuildConfig.DEBUG)
             baseWebsite = AppConfig.getInstance().getString("debug_url", BuildConfig.BASE_URL);
@@ -97,4 +100,9 @@ public class UrlUtils {
     public static String invoiceAdd = baseWebsite + "invoice/add";
     public static String invoiceList = baseWebsite + "invoice/list";
     public static String sellerSetting = baseWebsite + "seller/setting";
+    public static String mctPay = baseWebsite + "seller/pay";
+    public static String sellerPayment = baseWebsite + "seller/payment";
+    public static String interests = baseWebsite + "seller/interests";
+    public static String perfect = baseWebsite + "seller/perfect";
+
 }

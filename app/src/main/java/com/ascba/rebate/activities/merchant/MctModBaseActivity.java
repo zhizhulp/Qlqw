@@ -50,6 +50,7 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
         etInput.addTextChangedListener(this);
         etInput.setHint(mmType.getHint());
         etInput.setText(mmType.getContent());
+        etInput.setSelection(mmType.getContent().length());
     }
 
     public static void start(Activity context, MctModType type) {

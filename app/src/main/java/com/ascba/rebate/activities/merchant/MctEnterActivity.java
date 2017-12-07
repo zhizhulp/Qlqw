@@ -1,6 +1,7 @@
 package com.ascba.rebate.activities.merchant;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +25,14 @@ import com.ascba.rebate.BuildConfig;
 import com.ascba.rebate.R;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.MctModType;
+import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.bean.SellerDet;
+import com.ascba.rebate.bean.SellerEntity;
 import com.ascba.rebate.manager.LocationManager;
+import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.FileUtils;
+import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.SelectIconDialog;
 import com.ascba.rebate.view.jd_selector.BottomDialog;
 import com.ascba.rebate.view.jd_selector.City;
@@ -33,6 +40,8 @@ import com.ascba.rebate.view.jd_selector.County;
 import com.ascba.rebate.view.jd_selector.OnAddressSelectedListener;
 import com.ascba.rebate.view.jd_selector.Province;
 import com.ascba.rebate.view.jd_selector.Street;
+import com.squareup.picasso.Picasso;
+import com.yanzhenjie.nohttp.RequestMethod;
 
 import java.io.File;
 
@@ -53,10 +62,17 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private File logoFile, designFile;
     private int type;//0 选择logo 1 选择店头
     private LocationManager lm;
+    private int mStatus;
 
     @Override
     protected int bindLayout() {
         return R.layout.activity_mct_enter;
+    }
+
+    public static void start(Activity activity, int mStatus) {
+        Intent intent = new Intent(activity, MctEnterActivity.class);
+        intent.putExtra("seller_status", mStatus);
+        activity.startActivity(intent);
     }
 
     @Override
@@ -84,51 +100,88 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         fv(R.id.lat_mct_locate).setOnClickListener(this);
         fv(R.id.lat_mct_proxy_locate).setOnClickListener(this);
         fv(R.id.lat_mct_address).setOnClickListener(this);
+        btnApply.setOnClickListener(this);
+        getParams();
+
+    }
+
+    private void getParams() {
+        Intent intent = getIntent();
+        mStatus = intent.getIntExtra("status", 3);
+        if (mStatus == 0) {//0未认证1审核中2认证通过3认证失败
+            btnApply.setEnabled(true);
+            btnApply.setText("提交");
+        } else if (mStatus == 3) {
+            btnApply.setEnabled(true);
+            btnApply.setText("认证失败");
+            requestData();
+        } else {
+            btnApply.setEnabled(false);
+            requestData();
+        }
+    }
+
+    private void requestData() {
+        AbstractRequest request = buildRequest(UrlUtils.perfect, RequestMethod.GET, SellerDet.class);
+        executeNetwork(0, "请稍后", request);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.lat_mct_logo://商家logo
-                type = 0;
-                showSelectIconDialog();
-                break;
-            case R.id.lat_mct_name://店铺名称
-                MctModBaseActivity.start(this, new MctModType
-                        (0, "店铺名称", "there is not rules yet", "请输入店铺名称", tvName.getText().toString(), CodeUtils.REQUEST_SHOP_NAME));
-                break;
-            case R.id.lat_mct_design://店头形象
-                type = 1;
-                showSelectIconDialog();
-                break;
-            case R.id.lat_mct_type://主营类目
-                MctTypeActivity.start(this,tvType.getText().toString());
-                break;
-            case R.id.lat_mct_time://主营时间
-                MctModTimeActivity.start(this, tvTime.getText().toString());
-                break;
-            case R.id.lat_mct_phone://联系电话
-                MctModBaseActivity.start(this, new MctModType
-                        (1, "联系电话", "there is not rules yet", "请输入联系电话", tvPhone.getText().toString(), CodeUtils.REQUEST_SHOP_PHONE));
-                break;
-            case R.id.lat_mct_locate://商家定位
-                startLocation();
-                break;
-            case R.id.lat_mct_proxy_locate://选择地区
-                final BottomDialog dialog = new BottomDialog(this);
-                dialog.setOnAddressSelectedListener(new OnAddressSelectedListener() {
-                    @Override
-                    public void onAddressSelected(Province province, City city, County county, Street street) {
-                        dialog.dismiss();
-                        tvPLocate.setText(String.format("%s%s%s%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
+        if (mStatus == 0 || mStatus == 3) {
+            switch (v.getId()) {
+                case R.id.lat_mct_logo://商家logo
+                    type = 0;
+                    showSelectIconDialog();
+                    break;
+                case R.id.lat_mct_name://店铺名称
+                    MctModBaseActivity.start(this, new MctModType
+                            (0, "店铺名称", "there is not rules yet", "请输入店铺名称", tvName.getText().toString(), CodeUtils.REQUEST_SHOP_NAME));
+                    break;
+                case R.id.lat_mct_design://店头形象
+                    type = 1;
+                    showSelectIconDialog();
+                    break;
+                case R.id.lat_mct_type://主营类目
+                    MctTypeActivity.start(this, tvType.getText().toString());
+                    break;
+                case R.id.lat_mct_time://主营时间
+                    MctModTimeActivity.start(this, tvTime.getText().toString());
+                    break;
+                case R.id.lat_mct_phone://联系电话
+                    MctModBaseActivity.start(this, new MctModType
+                            (1, "联系电话", "there is not rules yet", "请输入联系电话", tvPhone.getText().toString(), CodeUtils.REQUEST_SHOP_PHONE));
+                    break;
+                case R.id.lat_mct_locate://商家定位
+                    startLocation();
+                    break;
+                case R.id.lat_mct_proxy_locate://选择地区
+                    final BottomDialog dialog = new BottomDialog(this);
+                    dialog.setOnAddressSelectedListener(new OnAddressSelectedListener() {
+                        @Override
+                        public void onAddressSelected(Province province, City city, County county, Street street) {
+                            dialog.dismiss();
+                            tvPLocate.setText(String.format("%s%s%s%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
+                        }
+                    });
+                    dialog.show();
+                    break;
+                case R.id.lat_mct_address://详细地址
+                    MctModBaseActivity.start(this, new MctModType
+                            (2, "详细地址", "there is not rules yet", "请输入详细地址", tvAddress.getText().toString(), CodeUtils.REQUEST_SHOP_ADDRESS));
+                    break;
+                case R.id.btn_apply:
+                    if (allIsOk()) {
+
+                        etDesc.clearFocus();
+                        etDesc.setFocusable(false);
+                        btnApply.setText("审核中");
+                        btnApply.setEnabled(false);
+                    } else {
+                        showToast("资料不完整");
                     }
-                });
-                dialog.show();
-                break;
-            case R.id.lat_mct_address://详细地址
-                MctModBaseActivity.start(this, new MctModType
-                        (2, "详细地址", "there is not rules yet", "请输入详细地址", tvAddress.getText().toString(), CodeUtils.REQUEST_SHOP_ADDRESS));
-                break;
+                    break;
+            }
         }
     }
 
@@ -270,6 +323,42 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         super.onDestroy();
         if (null != lm) {
             lm.destroyLocation();
+        }
+    }
+
+    private boolean allIsOk() {
+        return logoFile != null && logoFile.exists() && designFile != null && designFile.exists()
+                && !TextUtils.isEmpty(tvName.getText().toString()) && !TextUtils.isEmpty(tvType.getText().toString())
+                && !TextUtils.isEmpty(tvTime.getText().toString()) && !TextUtils.isEmpty(tvPhone.getText().toString())
+                && !TextUtils.isEmpty(tvLocate.getText().toString()) && !TextUtils.isEmpty(tvPLocate.getText().toString())
+                && !TextUtils.isEmpty(tvAddress.getText().toString()) && !TextUtils.isEmpty(etDesc.getText().toString());
+
+    }
+
+    @Override
+    protected <T> void mHandle200(int what, Result<T> result) {
+        super.mHandle200(what, result);
+        if (what == 0) {
+            SellerDet sellerDet = (SellerDet) result.getData();
+            setUI(sellerDet);
+        }
+    }
+
+    private void setUI(SellerDet sellerDet) {
+        if (sellerDet != null) {
+            SellerDet.SellerBean seller = sellerDet.getSeller();
+            Picasso.with(this).load(seller.getSeller_cover_logo()).into(imLogo);
+            tvName.setText(seller.getSeller_name());
+            Picasso.with(this).load(seller.getSeller_image()).into(imDesign);
+            tvType.setText(seller.getSeller_taglib());
+            tvTime.setText(seller.getSeller_business_hours());
+            tvPhone.setText(seller.getSeller_tel());
+            tvLocate.setText(seller.getSeller_address());
+            tvPLocate.setText(seller.getSeller_address());
+            tvAddress.setText(seller.getSeller_localhost());
+            etDesc.setText(seller.getSeller_description());
+            etDesc.clearFocus();
+            etDesc.setFocusable(false);
         }
     }
 }

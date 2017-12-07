@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lat_class"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="14dp"
+    android:layout_marginRight="14dp"
+    android:background="@drawable/msc_class_corner"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:paddingLeft="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/mct_class_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_content"
+            android:textSize="@dimen/text_12"
+            android:textColor="@color/mct_class_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_now_price"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/mct_class_color_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/grey_black_tv"
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_before_price"
+            android:textSize="@dimen/text_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

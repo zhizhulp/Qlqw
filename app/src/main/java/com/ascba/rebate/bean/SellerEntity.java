@@ -57,6 +57,17 @@ public class SellerEntity {
         private String server_url;
         private int server_status;
 
+        public ServerBean() {
+        }
+
+        public ServerBean(String server_title, String server_desc, String server_img, String server_url, int server_status) {
+            this.server_title = server_title;
+            this.server_desc = server_desc;
+            this.server_img = server_img;
+            this.server_url = server_url;
+            this.server_status = server_status;
+        }
+
         public String getServer_title() {
             return server_title;
         }

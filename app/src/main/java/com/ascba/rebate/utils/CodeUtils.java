@@ -45,4 +45,6 @@ public class CodeUtils {
     public static final int REQUEST_SHOP_ADDRESS = 3008;
     public static final int REQUEST_SHOP_TIME = 3009;
     public static final int REQUEST_MCT_TYPE = 3010;
+    public static final int REQUEST_MCT_PAY = 3011;
+
 }
