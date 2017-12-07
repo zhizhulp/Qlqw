@@ -193,6 +193,11 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     Log.d(TAG, "long" + location.getLongitude() + ",lan" + location.getLatitude());
                     tvLocate.setText(location.getAddress());
                 }
+
+                @Override
+                public boolean onLocateFailed(AMapLocation location) {
+                    return false;
+                }
             });
         }
     }
