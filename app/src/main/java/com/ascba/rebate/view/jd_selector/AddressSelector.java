@@ -18,8 +18,20 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
+import com.ascba.rebate.appconfig.AppConfig;
+import com.ascba.rebate.net.CallServer;
+import com.ascba.rebate.utils.EncodeUtils;
+import com.ascba.rebate.utils.PackageUtils;
+import com.ascba.rebate.utils.UrlUtils;
+import com.yanzhenjie.nohttp.RequestMethod;
+import com.yanzhenjie.nohttp.rest.OnResponseListener;
+import com.yanzhenjie.nohttp.rest.Response;
+import com.yanzhenjie.nohttp.rest.StringRequest;
 
 import java.util.List;
 
@@ -131,6 +143,7 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
 
     public AddressSelector(Context context) {
         this.context = context;
+
         initViews();
         initAdapters();
         new GetAddressTask(context, new GetAddressTask.OnResults() {
@@ -364,7 +377,7 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
 
                 countyAdapter.notifyDataSetChanged();
 
-                retrieveStreetsWith(county.getStreet());
+                retrieveStreetsWith(county);
 
                 break;
 
@@ -419,9 +432,53 @@ public class AddressSelector implements AdapterView.OnItemClickListener {
         handler.sendMessage(Message.obtain(handler, WHAT_COUNTIES_PROVIDED, counties));
     }
 
-    private void retrieveStreetsWith(List<Street> streets) {
-        progressBar.setVisibility(View.VISIBLE);
-        handler.sendMessage(Message.obtain(handler, WHAT_STREETS_PROVIDED, streets));
+    private void retrieveStreetsWith(County county) {
+        StringRequest request=new StringRequest(UrlUtils.getChildRegion, RequestMethod.GET);
+        request.add("region_id",county.getId());
+        request.addHeader("apiversion", PackageUtils.getPackageVersion(context));
+        request.addHeader("clientfrom", "android" + PackageUtils.getAndroidVersion());
+        request.addHeader("deviceuuid", PackageUtils.getDeviceId());
+        String nonceStr = EncodeUtils.makeNonceStr();
+        request.addHeader("noncestr", nonceStr);
+        request.addHeader("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        request.addHeader("sign", EncodeUtils.makeSign(nonceStr, UrlUtils.getChildRegion));
+        request.addHeader("sessionId", AppConfig.getInstance().getString("session_id", null));
+        request.addHeader("accessToken", AppConfig.getInstance().getString("access_token", null));
+        CallServer.getInstance().addStringRequest(0, request, new OnResponseListener<String>() {
+            @Override
+            public void onStart(int what) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                if(response.responseCode()==200){
+                    String data = response.get();
+                    Log.d("4569", "onSucceed: "+data);
+                    JSONObject obj = JSON.parseObject(data);
+                    JSONObject dataObj = obj.getJSONObject("data");
+                    Log.d("4569", "onSucceed: "+dataObj.getString("region"));
+                    List<Street> streets = JSON.parseArray(dataObj.getString("region"), Street.class);
+                    Log.d("4569", "onSucceed: "+streets);
+                    handler.sendMessage(Message.obtain(handler, WHAT_STREETS_PROVIDED, streets));
+                }else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFinish(int what) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+
     }
 
     private class ProvinceAdapter extends BaseAdapter {

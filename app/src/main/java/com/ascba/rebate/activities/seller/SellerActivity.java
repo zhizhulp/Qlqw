@@ -13,9 +13,11 @@ import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.bean.SellerDet;
 import com.ascba.rebate.bean.SellerEntity;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
@@ -70,13 +72,14 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         startActivity(SellerGiveCreateActivity.class, null);
                         break;
                     case 4:
-                        // TODO: 2017/12/6
-                        boolean alreadyApply = false;
-                        if (!alreadyApply) {
-                            startActivity(MctApplyStartActivity.class, null);
-                        } else {
-                            startActivity(MctEnterActivity.class, null);
-                        }
+                        requestSellerData();
+//                        boolean alreadyApply = false;
+//                        if (!alreadyApply) {
+//                            startActivity(MctApplyStartActivity.class, null);
+//                        } else {
+//                            startActivity(MctEnterActivity.class, null);
+//                        }
+
                         break;
                     default:
 
@@ -99,6 +102,11 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
     private void requestNetwork() {
         AbstractRequest request = buildRequest(UrlUtils.purchaseIndex, RequestMethod.GET, SellerEntity.class);
         executeNetwork(0, "请稍后", request);
+    }
+
+    private void requestSellerData() {
+        AbstractRequest request = buildRequest(UrlUtils.perfect, RequestMethod.GET, SellerDet.class);
+        executeNetwork(1, "请稍后", request);
     }
 
     private View getTopView() {
@@ -143,6 +151,15 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                     "http://apidebug.qlqwp2p.com/public/static/app/images/StoredOne.png",
                     "http://www.qlqw.com/purchase/giveindex", 4));
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
+        } else if (what == 1) {
+            SellerDet data = (SellerDet) result.getData();
+            AppConfig.getInstance().putInt("company_status", data.getCompany_status());
+            int sellerStatus = data.getSeller_status();
+            if (sellerStatus == 0) {//0商家未完善资料
+                MctApplyStartActivity.start(this,data.getPerfect_url());
+            } else if (sellerStatus == 1) {//1商家已完善过资料
+                MctEnterActivity.start(this,1);
+            }
         }
     }
 }

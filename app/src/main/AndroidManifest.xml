@@ -318,10 +318,9 @@
         <activity
             android:name=".activities.merchant.MctPayActivity"
             android:exported="true" />
-        <activity android:name=".activities.merchant.MctApplyStartActivity"></activity>
-        <activity android:name=".activities.merchant.MctRightsActivity" />
-        <activity android:name=".activities.merchant.MctPayActivity"></activity>
+        <activity android:name=".activities.merchant.MctApplyStartActivity" />
         <activity android:name=".activities.arround.ArroundListActivity" />
+        <activity android:name=".activities.company_identification.CISuccessActivity"></activity>
     </application>
 
 </manifest>

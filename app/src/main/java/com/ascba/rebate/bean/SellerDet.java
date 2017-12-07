@@ -17,6 +17,15 @@ public class SellerDet {
     private int company_status;
     private String perfect_url;
     private SellerBean seller;
+    /**
+     * compayn_status_text : 公司资质未实名，是否立即实名？
+     * seller_error_status : 1
+     * seller_error_status_text : 7天内不能修改
+     */
+
+    private String compayn_status_text;
+    private int seller_error_status;
+    private String seller_error_status_text;
 
     public int getSeller_status() {
         return seller_status;
@@ -48,6 +57,30 @@ public class SellerDet {
 
     public void setSeller(SellerBean seller) {
         this.seller = seller;
+    }
+
+    public String getCompayn_status_text() {
+        return compayn_status_text;
+    }
+
+    public void setCompayn_status_text(String compayn_status_text) {
+        this.compayn_status_text = compayn_status_text;
+    }
+
+    public int getSeller_error_status() {
+        return seller_error_status;
+    }
+
+    public void setSeller_error_status(int seller_error_status) {
+        this.seller_error_status = seller_error_status;
+    }
+
+    public String getSeller_error_status_text() {
+        return seller_error_status_text;
+    }
+
+    public void setSeller_error_status_text(String seller_error_status_text) {
+        this.seller_error_status_text = seller_error_status_text;
     }
 
     public static class SellerBean {

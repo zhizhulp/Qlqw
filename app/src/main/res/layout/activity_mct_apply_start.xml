@@ -19,6 +19,7 @@
         style="@style/ButtonNormal"
         android:enabled="true"/>
     <WebView
+        android:id="@+id/webView"
         android:layout_below="@id/mb"
         android:layout_above="@id/btn_apply"
         android:layout_width="match_parent"

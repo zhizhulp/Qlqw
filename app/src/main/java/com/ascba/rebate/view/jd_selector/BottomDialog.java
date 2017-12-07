@@ -20,7 +20,8 @@ public class BottomDialog extends Dialog {
     private void init(Context context) {
         selector2 = new AddressSelector(context);
         setContentView(selector2.getView());
-
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -31,6 +32,7 @@ public class BottomDialog extends Dialog {
     }
 
     public void setOnAddressSelectedListener(OnAddressSelectedListener listener) {
+        dismiss();
         this.selector2.setOnAddressSelectedListener(listener);
     }
 }

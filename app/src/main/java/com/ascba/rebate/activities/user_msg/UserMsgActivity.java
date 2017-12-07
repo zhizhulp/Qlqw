@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.company_identification.CISuccessActivity;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
@@ -123,8 +124,13 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
             ComMsg comMsg = (ComMsg) result.getData();
             Bundle b = new Bundle();
             b.putParcelable("company_msg", comMsg);
-            AppConfig.getInstance().putInt("company_status", comMsg.getStatus());
-            startActivityForResult(ComMsgActivity.class, b, CodeUtils.REQUEST_COM_ERROR);
+            int status = comMsg.getStatus();
+            AppConfig.getInstance().putInt("company_status", status);
+            if (status == 1 || status == 2) {
+                startActivityForResult(ComMsgActivity.class, b, CodeUtils.REQUEST_COM_ERROR);
+            } else if (status == 3) {
+                startActivity(CISuccessActivity.class,b);
+            }
         }
     }
 

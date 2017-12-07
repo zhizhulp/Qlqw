@@ -41,6 +41,7 @@ import com.ascba.rebate.view.jd_selector.OnAddressSelectedListener;
 import com.ascba.rebate.view.jd_selector.Province;
 import com.ascba.rebate.view.jd_selector.Street;
 import com.squareup.picasso.Picasso;
+import com.yanzhenjie.nohttp.FileBinary;
 import com.yanzhenjie.nohttp.RequestMethod;
 
 import java.io.File;
@@ -63,6 +64,9 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private int type;//0 选择logo 1 选择店头
     private LocationManager lm;
     private int mStatus;
+    private int errorStatus;
+    private double lon;
+    private double lat;
 
     @Override
     protected int bindLayout() {
@@ -71,7 +75,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
 
     public static void start(Activity activity, int mStatus) {
         Intent intent = new Intent(activity, MctEnterActivity.class);
-        intent.putExtra("seller_status", mStatus);
+        intent.putExtra("status", mStatus);
         activity.startActivity(intent);
     }
 
@@ -107,15 +111,11 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
 
     private void getParams() {
         Intent intent = getIntent();
-        mStatus = intent.getIntExtra("status", 3);
-        if (mStatus == 0) {//0未认证1审核中2认证通过3认证失败
+        mStatus = intent.getIntExtra("status", 0);
+        if (mStatus == 0) {//0商家未完善资料1商家已完善资料
             btnApply.setEnabled(true);
             btnApply.setText("提交");
-        } else if (mStatus == 3) {
-            btnApply.setEnabled(true);
-            btnApply.setText("认证失败");
-            requestData();
-        } else {
+        } else if (mStatus == 1) {
             btnApply.setEnabled(false);
             requestData();
         }
@@ -126,9 +126,26 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         executeNetwork(0, "请稍后", request);
     }
 
+    private void requestApply() {
+        AbstractRequest request = buildRequest(UrlUtils.perfectPost, RequestMethod.POST, null);
+        request.add("seller_name", tvName.getText().toString());
+        request.add("seller_taglib", tvType.getText().toString());
+        request.add("seller_business_hours", tvTime.getText().toString());
+        request.add("seller_address", tvLocate.getText().toString());//
+        request.add("seller_region", tvPLocate.getText().toString());
+        request.add("seller_location", tvAddress.getText().toString());//
+        request.add("seller_tel", tvPhone.getText().toString());
+        request.add("seller_lon", lon);
+        request.add("seller_lat", lat);
+        request.add("seller_image", new FileBinary(designFile));
+        request.add("seller_cover_logo", new FileBinary(logoFile));
+
+        executeNetwork(1, "请稍后", request);
+    }
+
     @Override
     public void onClick(View v) {
-        if (mStatus == 0 || mStatus == 3) {
+        if (mStatus == 0 || errorStatus==0) {
             switch (v.getId()) {
                 case R.id.lat_mct_logo://商家logo
                     type = 0;
@@ -161,7 +178,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                         @Override
                         public void onAddressSelected(Province province, City city, County county, Street street) {
                             dialog.dismiss();
-                            tvPLocate.setText(String.format("%s%s%s%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
+                            tvPLocate.setText(String.format("%s-%s-%s-%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
                         }
                     });
                     dialog.show();
@@ -172,11 +189,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     break;
                 case R.id.btn_apply:
                     if (allIsOk()) {
-
-                        etDesc.clearFocus();
-                        etDesc.setFocusable(false);
-                        btnApply.setText("审核中");
-                        btnApply.setEnabled(false);
+                        requestApply();
                     } else {
                         showToast("资料不完整");
                     }
@@ -185,12 +198,14 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         }
     }
 
+
     private void startLocation() {
         if (lm == null) {
             lm = new LocationManager(this, new LocationManager.LocateListener() {
                 @Override
                 public void onLocateSuccess(AMapLocation location) {
-                    Log.d(TAG, "long" + location.getLongitude() + ",lan" + location.getLatitude());
+                    lon = location.getLongitude();
+                    lat = location.getLatitude();
                     tvLocate.setText(location.getAddress());
                 }
 
@@ -343,14 +358,21 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     @Override
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
-        if (what == 0) {
+        if (what == 0) {//获取资料
             SellerDet sellerDet = (SellerDet) result.getData();
             setUI(sellerDet);
+        } else if (what == 1) {//提交资料
+            showToast(result.getMsg());
+            requestData();
         }
     }
 
     private void setUI(SellerDet sellerDet) {
         if (sellerDet != null) {
+            errorStatus = sellerDet.getSeller_error_status();
+            mStatus = sellerDet.getSeller_status();
+            btnApply.setEnabled(errorStatus==0);
+            btnApply.setText(sellerDet.getSeller_error_status_text());
             SellerDet.SellerBean seller = sellerDet.getSeller();
             Picasso.with(this).load(seller.getSeller_cover_logo()).into(imLogo);
             tvName.setText(seller.getSeller_name());
@@ -362,8 +384,11 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
             tvPLocate.setText(seller.getSeller_address());
             tvAddress.setText(seller.getSeller_localhost());
             etDesc.setText(seller.getSeller_description());
-            etDesc.clearFocus();
-            etDesc.setFocusable(false);
+            if(errorStatus == 1){
+                etDesc.clearFocus();
+                etDesc.setFocusable(false);
+            }
+
         }
     }
 }
