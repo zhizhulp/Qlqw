@@ -40,6 +40,8 @@ public class LocationManager implements BaseUIActivity.PermissionCallback {
 
     public interface LocateListener {
         void onLocateSuccess(AMapLocation location);
+
+        boolean onLocateFailed(AMapLocation location);
     }
 
     /**
@@ -86,6 +88,8 @@ public class LocationManager implements BaseUIActivity.PermissionCallback {
                         locateListener.onLocateSuccess(location);
                     }
                 } else {
+                    if (!locateListener.onLocateFailed(location))
+                        stopLocation();
                     Log.e(TAG, "locate error,error code :" + location.getErrorCode() + ",error msg" + location.getErrorInfo());
                 }
             } else {
@@ -109,6 +113,7 @@ public class LocationManager implements BaseUIActivity.PermissionCallback {
      * 销毁定位
      * 如果AMapLocationClient是在当前Activity实例化的，
      * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
+     *
      * @author hongming.wang
      * @since 2.8.0
      */
