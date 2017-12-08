@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
+import com.ascba.rebate.activities.merchant.MctPayActivity;
+import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.adapter.ArroundAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.ArroundEntity;
@@ -45,6 +50,8 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
     private int mPage = 1;
     private double lon, lat;
 
+    private int member_status;//0普通用户1未完善资料2已完善资料3商家过期
+
     @Override
     protected int bindLayout() {
         return R.layout.activity_arround_list;
@@ -57,7 +64,18 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
 
             @Override
             public void clickTail() {
-                // TODO
+                //todo
+                switch (member_status) {
+                    case 1:
+                        startActivity(MctPayActivity.class, null);
+                        break;
+                    case 2:
+                        startActivity(MctApplyStartActivity.class, null);
+                        break;
+                    case 3:
+                        startActivity(MctPayActivity.class, null);
+                        break;
+                }
             }
         });
         mRefreshLayout.setPrimaryColorsId(R.color.bg, R.color.grey_black_tv2);
@@ -159,9 +177,11 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
         AbstractRequest request = buildRequest(UrlUtils.sellerArround, RequestMethod.GET, null);
         request.add("lon", lon);
         request.add("lat", lat);
-        request.add("paged", mPage);
-        if (type == 2)
+        if (type == 2) {
+            request.add("paged", mSearchPage);
             request.add("search", searchEt.getText().toString());
+        } else
+            request.add("paged", mPage);
         executeNetwork(what, "请稍后", request);
     }
 
@@ -182,27 +202,54 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
         if (what == GET_ONE) {
-            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
-                    .getString("pushBusinessList"), ArroundEntity.class);
+            JSONObject object = JSON.parseObject(result.getData().toString());
+            List<ArroundEntity> list = JSON.parseArray(object.getString("pushBusinessList"), ArroundEntity.class);
+            member_status = object.getInteger("member_status");
+            setTail();
             arroundAdapter.setNewData(list);
         } else if (what == GET_PAGE) {
-            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
-                    .getString("pushBusinessList"), ArroundEntity.class);
+            JSONObject object = JSON.parseObject(result.getData().toString());
+            List<ArroundEntity> list = JSON.parseArray(object.getString("pushBusinessList"), ArroundEntity.class);
+            member_status = object.getInteger("member_status");
+            setTail();
             if (list.size() == 0)
                 loadMoreOver();
             else
                 arroundAdapter.addData(list);
         } else if (what == SEARCH_ONE) {
-            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
-                    .getString("pushBusinessList"), ArroundEntity.class);
+            JSONObject object = JSON.parseObject(result.getData().toString());
+            List<ArroundEntity> list = JSON.parseArray(object.getString("pushBusinessList"), ArroundEntity.class);
+            member_status = object.getInteger("member_status");
+            setTail();
             searchAdapter.setNewData(list);
         } else if (what == SEARCH_PAGE) {
-            List<ArroundEntity> list = JSON.parseArray(JSON.parseObject(result.getData().toString())
-                    .getString("pushBusinessList"), ArroundEntity.class);
+            JSONObject object = JSON.parseObject(result.getData().toString());
+            List<ArroundEntity> list = JSON.parseArray(object.getString("pushBusinessList"), ArroundEntity.class);
+            member_status = object.getInteger("member_status");
+            setTail();
             if (list.size() == 0)
                 loadMoreOver();
             else
                 searchAdapter.addData(list);
+        }
+    }
+
+    private void setTail() {
+        //todo
+        Log.i(TAG, "setTail: " + member_status);
+        switch (member_status) {
+            case 0:
+                mMoneyBar.setTextTail("");
+                break;
+            case 1:
+                mMoneyBar.setTextTail("商家入驻");
+                break;
+            case 2:
+                mMoneyBar.setTextTail("完善资料");
+                break;
+            case 3:
+                mMoneyBar.setTextTail("商家续费");
+                break;
         }
     }
 

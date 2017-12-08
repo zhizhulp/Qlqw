@@ -12,7 +12,6 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
-import com.ascba.rebate.utils.PayUtils;
 
 public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
@@ -22,6 +21,7 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
     private Button btnComplete;
     private View wave;
     int type;
+    int select = 0;
 
     @Override
     protected int bindLayout() {
@@ -49,12 +49,15 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
         btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type == 0)
+                if (type == 1)
                     startActivity(SellerInvoiceHistoryActivity.class, null);
+                else if (type == 2)
+                    GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, select);
                 else if (type == 3)
-                    Log.d(TAG, "onClick: type==3");
-                else
-                    GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, type);
+                    if (select == 1)
+                        Log.d(TAG, "onClick: type==3");
+                    else {
+                    }
                 finish();
             }
         });
@@ -66,13 +69,14 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
     private void getParams() {
         Intent intent = getIntent();
-        type = intent.getIntExtra("type", 3);
-        if (type == 0) {
+        type = intent.getIntExtra("type", 0);
+        if (type == 1) {
             mMoneyBar.setTextTitle("申请成功");
             tvTitle.setText("申请成功");
             btnComplete.setText("查看申请");
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
-        } else if (type == 1 || type == 2) {
+        } else if (type == 2) {
+            select = intent.getIntExtra("select", 0);
             mMoneyBar.setTextTitle("兑换成功");
             tvTitle.setText("兑换成功");
             btnComplete.setText("立即查看");
@@ -80,8 +84,12 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
         } else if (type == 3) {
             mMoneyBar.setTextTitle("支付成功");
             tvTitle.setText("支付成功");
-            btnComplete.setText("需要判断");
-            tvMoney.setText(String.format("　　%s", PayUtils.getInstance().info));
+            select = intent.getIntExtra("select", 0);
+            if (select == 1)
+                btnComplete.setText("完善资料");
+            else
+                btnComplete.setText("立即体验");
+            tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         }
     }
 

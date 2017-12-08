@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.ascba.rebate.activities.merchant.MctPayActivity">
+
     <com.ascba.rebate.view.MoneyBar
-        app:textTitle="优享商家"
-        style="@style/MoneyBar"/>
+        style="@style/MoneyBar"
+        app:textTitle="优享商家" />
+
     <android.support.v7.widget.RecyclerView
-        android:background="@color/white"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_apply"
+        style="@style/ButtonNormal"
+        android:layout_marginBottom="20dp"
+        android:enabled="true"
+        android:text="立即支付" />
 </LinearLayout>

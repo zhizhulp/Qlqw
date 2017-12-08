@@ -192,7 +192,7 @@ public class SellerInvoiceActivity extends BaseDefaultNetActivity implements Vie
         if (what == 0) {
             JSONObject jsonObject = JSON.parseObject(result.getData().toString());
             Bundle bundle = new Bundle();
-            bundle.putInt("type", 0);
+            bundle.putInt("type", 1);
             bundle.putString("info", jsonObject.getString("success_text"));
             startActivity(TextInfoSuccessActivity.class, bundle);
             setResult(Activity.RESULT_OK);

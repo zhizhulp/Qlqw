@@ -13,6 +13,8 @@ public class MctPayClass extends MctBasePay {
     private String after;
     @JSONField(name = "level_original_price")
     private String before;
+    private int only_price;
+
     @Override
     public int getItemType() {
         return ITEM_TYPE_CLASS;
@@ -66,5 +68,22 @@ public class MctPayClass extends MctBasePay {
 
     public void setBefore(String before) {
         this.before = before;
+    }
+
+    public int getOnly_price() {
+        return only_price;
+    }
+
+    public void setOnly_price(int only_price) {
+        this.only_price = only_price;
+    }
+
+    public String getMoney() {
+        if (getOnly_price() == 1) {
+            return getBefore();
+        } else if (getOnly_price() == 0) {
+            return getAfter();
+        }
+        return "";
     }
 }

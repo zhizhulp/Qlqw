@@ -7,7 +7,6 @@
 
     <com.ascba.rebate.view.MoneyBar
         style="@style/MoneyBar"
-        app:textTail="我要入驻"
         app:textTitle="周边商家" />
 
     <LinearLayout

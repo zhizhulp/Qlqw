@@ -357,7 +357,8 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
             if (tip == 0) {
                 JSONObject jsonObject = JSON.parseObject(result.getData().toString());
                 Bundle bundle = new Bundle();
-                bundle.putInt("type", type);
+                bundle.putInt("type", 2);
+                bundle.putInt("select", type);
                 bundle.putString("info", jsonObject.getString("success_text"));
                 startActivity(TextInfoSuccessActivity.class, bundle);
                 getActivity().setResult(Activity.RESULT_OK);

@@ -320,7 +320,7 @@
             android:exported="true" />
         <activity android:name=".activities.merchant.MctApplyStartActivity" />
         <activity android:name=".activities.arround.ArroundListActivity" />
-        <activity android:name=".activities.company_identification.CISuccessActivity"></activity>
+        <activity android:name=".activities.company_identification.CISuccessActivity"/>
     </application>
 
 </manifest>
