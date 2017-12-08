@@ -8,8 +8,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <RelativeLayout
+            android:id="@+id/lat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/text_15"
+                android:textColor="@color/grey_black_tv"
+                android:text="请选择"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/im_close"
+                android:padding="14dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/pay_select_close"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
         <LinearLayout
+            android:layout_below="@id/lat"
             android:id="@+id/layout_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
