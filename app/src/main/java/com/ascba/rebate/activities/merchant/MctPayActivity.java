@@ -2,6 +2,8 @@ package com.ascba.rebate.activities.merchant;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.ascba.rebate.bean.MctPayTitle;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -41,6 +44,10 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     private TextView tvClass;
     private String money;
 
+    private int has_update;
+    private int seller_settled;
+    private String success_info;
+
     @Override
     protected int bindLayout() {
         return R.layout.activity_mct_pay;
@@ -52,11 +59,12 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
         addData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mctAdapter = new MctPayAdapter(data);
-        View footView = getLayoutInflater().inflate(R.layout.button, null);
-        footView.findViewById(R.id.btn_apply).setOnClickListener(this);
 
+        View footView = new View(this);
+        footView.setLayoutParams(new RecyclerView.LayoutParams(-1, (int) ScreenDpiUtils.dp2px(this, 20)));
         mctAdapter.addFooterView(footView);
         mRecyclerView.setAdapter(mctAdapter);
+        fv(R.id.btn_apply).setOnClickListener(this);
         requestData();
     }
 
@@ -78,7 +86,7 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
 
         List<MctPayDesc> interests = JSON.parseArray(jObj.getString("interests"), MctPayDesc.class);
         if (interests != null && interests.size() > 0) {
-            data.add(new MctPayTitle("开通即可享受以下权益"));
+            data.add(new MctPayTitle("开通即可享受以下权益", true));
             data.addAll(interests);
         }
         mctAdapter.notifyDataSetChanged();
@@ -103,25 +111,22 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        showPayDialog(((MctPayClass) data.get(mctAdapter.getIndex()-1)).getAfter(), money);
-    }
-
-    @Override
-    protected Class<?> bindPaySuccessPage() {
-        return TextInfoSuccessActivity.class;
+        int id = v.getId();
+        if (id == R.id.btn_apply)
+            showPayDialog(mctAdapter.getSelect().getMoney(), money);
     }
 
     @Override
     protected void requestPayInfo(String type, String money, int what) {
         AbstractRequest request = buildRequest(UrlUtils.sellerPayment, RequestMethod.POST, Pay.class);
         request.add("pay_type", type);
-        request.add("level_id",((MctPayClass) data.get(mctAdapter.getIndex()-1)).getId());
+        request.add("level_id", mctAdapter.getSelect().getId());
         executeNetwork(what, "请稍后", request);
     }
 
     @Override
     protected <T> void mHandle200(int what, Result<T> result) {
-        super.mHandle200(what,result);
+        super.mHandle200(what, result);
         if (what == 0) {
             String data = (String) result.getData();
             JSONObject jObj = JSONObject.parseObject(data);
@@ -132,4 +137,26 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
         }
     }
 
+    @Override
+    protected void onPay(Result result) {
+        super.onPay(result);
+        JSONObject object = JSON.parseObject(result.getData().toString());
+        has_update = object.getInteger("has_update");
+        seller_settled = object.getInteger("seller_settled");
+        success_info = object.getString("success_info");
+    }
+
+    @Override
+    protected void payResult(String type) {
+        super.payResult(type);
+        Log.i(TAG, "payResult: ");
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 3);
+        if (seller_settled == 1 && has_update == 0)
+            bundle.putInt("select", 1);
+        else
+            bundle.putInt("select", 0);
+        bundle.putString("info", success_info);
+        startActivity(TextInfoSuccessActivity.class, bundle);
+    }
 }

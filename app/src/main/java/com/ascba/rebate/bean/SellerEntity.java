@@ -17,6 +17,8 @@ public class SellerEntity {
     private String money;
     private String server_tip;
     private List<ServerBean> server;
+    private int member_status;
+    private String member_status_text;
 
     public String getMoney() {
         return money;
@@ -40,6 +42,22 @@ public class SellerEntity {
 
     public void setServer(List<ServerBean> server) {
         this.server = server;
+    }
+
+    public int getMember_status() {
+        return member_status;
+    }
+
+    public void setMember_status(int member_status) {
+        this.member_status = member_status;
+    }
+
+    public String getMember_status_text() {
+        return member_status_text;
+    }
+
+    public void setMember_status_text(String member_status_text) {
+        this.member_status_text = member_status_text;
     }
 
     public static class ServerBean {

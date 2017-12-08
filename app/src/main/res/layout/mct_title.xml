@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    android:textSize="@dimen/text_15"
-    android:textColor="@color/grey_black_tv"
-    android:paddingLeft="14dp"
-    android:paddingRight="14dp"
-    android:background="@color/white"
-    android:id="@+id/tv_title"
-    android:paddingTop="17dp"
-    android:paddingBottom="17dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-</TextView>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="17dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="17dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <View
+        android:id="@+id/v_line"
+        style="@style/LineHorizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

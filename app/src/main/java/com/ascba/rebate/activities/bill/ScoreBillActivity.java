@@ -143,6 +143,9 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 5) {//总记录
                 mMoneyBar.setTextTitle("佣金账单");
+            } else if (mineType == 6) {//跨界奖励
+                type = 5;
+                mMoneyBar.setTextTitle("跨界奖励");
             }
         }
     }
@@ -162,7 +165,7 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
         }
         if (mineType == 5) {
             request.add("scene", 1);
-        }else {
+        } else {
             request.add("scene", 0);
         }
         executeNetwork(0, request);

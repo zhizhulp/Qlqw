@@ -1,4 +1,5 @@
 package com.ascba.rebate.bean;
+
 /**
  * Created by 李平 on 2017/12/6 14:29
  * Describe: 商家权益
@@ -34,6 +35,7 @@ public class MctRights {
     private String seller_referee_money;
     private String seller_give_money;
     private String seller_url;
+    private String active_url;
 
     public String getSeller_url() {
         return seller_url;
@@ -137,5 +139,13 @@ public class MctRights {
 
     public void setSeller_give_money(String seller_give_money) {
         this.seller_give_money = seller_give_money;
+    }
+
+    public String getActive_url() {
+        return active_url;
+    }
+
+    public void setActive_url(String active_url) {
+        this.active_url = active_url;
     }
 }

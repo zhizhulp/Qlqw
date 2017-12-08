@@ -10,23 +10,21 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
+import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
-import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
-import com.ascba.rebate.bean.SellerDet;
 import com.ascba.rebate.bean.SellerEntity;
+import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.nohttp.RequestMethod;
-
-import java.util.List;
 
 /**
  * Created by Jero on 2017/10/12 0012.
@@ -72,14 +70,14 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         startActivity(SellerGiveCreateActivity.class, null);
                         break;
                     case 4:
-                        requestSellerData();
-//                        boolean alreadyApply = false;
-//                        if (!alreadyApply) {
-//                            startActivity(MctApplyStartActivity.class, null);
-//                        } else {
-//                            startActivity(MctEnterActivity.class, null);
-//                        }
-
+                        //todo
+                        if (sellerEntity.getMember_status() == 0 || sellerEntity.getMember_status() == 1)
+                            startActivity(MctApplyStartActivity.class, null);
+                        else if (sellerEntity.getMember_status() == 2 || sellerEntity.getMember_status() == 3)
+                            startActivity(MctEnterActivity.class, null);
+                        break;
+                    case 5:
+                        startActivity(MctRightsActivity.class, null);
                         break;
                     default:
 
@@ -104,11 +102,6 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
         executeNetwork(0, "请稍后", request);
     }
 
-    private void requestSellerData() {
-        AbstractRequest request = buildRequest(UrlUtils.perfect, RequestMethod.GET, SellerDet.class);
-        executeNetwork(1, "请稍后", request);
-    }
-
     private View getTopView() {
         View view = getLayoutInflater().inflate(R.layout.item_seller_top, null);
         view.findViewById(R.id.seller_top_btn1).setOnClickListener(this);
@@ -123,7 +116,21 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seller_top_btn1://我要收款
-                startActivity(ReceiveCodeActivity.class, null);
+                //todo
+                if (sellerEntity.getMember_status() == 2)
+                    startActivity(ReceiveCodeActivity.class, null);
+                else
+                    dm.showAlertDialog2(sellerEntity.getMember_status_text(), "取消", "确认", new DialogManager.Callback() {
+                        @Override
+                        public void handleLeft() {
+                            super.handleLeft();
+                        }
+
+                        @Override
+                        public void handleRight() {
+                            super.handleRight();
+                        }
+                    });
                 break;
             case R.id.seller_top_btn2://明细记录
                 Intent intent = new Intent(this, BillActivity.class);
@@ -145,21 +152,7 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
         if (what == 0) {
             sellerEntity = (SellerEntity) result.getData();
             money.setText(sellerEntity.getMoney());
-
-            List<SellerEntity.ServerBean> servers = sellerEntity.getServer();
-            servers.add(new SellerEntity.ServerBean("完善商家资料", "完善商家资料，享受商家更多特权",
-                    "http://apidebug.qlqwp2p.com/public/static/app/images/StoredOne.png",
-                    "http://www.qlqw.com/purchase/giveindex", 4));
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
-        } else if (what == 1) {
-            SellerDet data = (SellerDet) result.getData();
-            AppConfig.getInstance().putInt("company_status", data.getCompany_status());
-            int sellerStatus = data.getSeller_status();
-            if (sellerStatus == 0) {//0商家未完善资料
-                MctApplyStartActivity.start(this,data.getPerfect_url());
-            } else if (sellerStatus == 1) {//1商家已完善过资料
-                MctEnterActivity.start(this,1);
-            }
         }
     }
 }
