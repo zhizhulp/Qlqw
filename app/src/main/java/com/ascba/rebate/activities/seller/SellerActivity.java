@@ -6,14 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
+import com.ascba.rebate.activities.merchant.MctPayActivity;
 import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
@@ -70,11 +74,11 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         startActivity(SellerGiveCreateActivity.class, null);
                         break;
                     case 4:
-                        //todo
-                        if (sellerEntity.getMember_status() == 0 || sellerEntity.getMember_status() == 1)
-                            startActivity(MctApplyStartActivity.class, null);
-                        else if (sellerEntity.getMember_status() == 2 || sellerEntity.getMember_status() == 3)
-                            startActivity(MctEnterActivity.class, null);
+                        int status = sellerEntity.getSeller_status();
+                        if (status == 1)
+                            MctEnterActivity.start(SellerActivity.this, 1);
+                        else if (status == 0)
+                            MctApplyStartActivity.start(SellerActivity.this, sellerEntity.getSeller_perfect_url());
                         break;
                     case 5:
                         startActivity(MctRightsActivity.class, null);
@@ -97,9 +101,15 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
         requestNetwork();
     }
 
+
     private void requestNetwork() {
         AbstractRequest request = buildRequest(UrlUtils.purchaseIndex, RequestMethod.GET, SellerEntity.class);
         executeNetwork(0, "请稍后", request);
+    }
+
+    private void requestSellerStatus() {
+        AbstractRequest request = buildRequest(UrlUtils.getSellerStatus, RequestMethod.GET, null);
+        executeNetwork(1, "请稍后", request);
     }
 
     private View getTopView() {
@@ -116,21 +126,7 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seller_top_btn1://我要收款
-                //todo
-                if (sellerEntity.getMember_status() == 2)
-                    startActivity(ReceiveCodeActivity.class, null);
-                else
-                    dm.showAlertDialog2(sellerEntity.getMember_status_text(), "取消", "确认", new DialogManager.Callback() {
-                        @Override
-                        public void handleLeft() {
-                            super.handleLeft();
-                        }
-
-                        @Override
-                        public void handleRight() {
-                            super.handleRight();
-                        }
-                    });
+                requestSellerStatus();
                 break;
             case R.id.seller_top_btn2://明细记录
                 Intent intent = new Intent(this, BillActivity.class);
@@ -151,8 +147,38 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
         super.mHandle200(what, result);
         if (what == 0) {
             sellerEntity = (SellerEntity) result.getData();
+            AppConfig.getInstance().putInt("company_status", sellerEntity.getCompany_status());
             money.setText(sellerEntity.getMoney());
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
+        } else if (what == 1) {
+            String data = (String) result.getData();
+            JSONObject dataObj = JSON.parseObject(data);
+            int memberStatus = dataObj.getIntValue("member_status");
+            String statusText = dataObj.getString("member_status_text");
+            if (memberStatus == 0) {//收款码
+                startActivity(ReceiveCodeActivity.class, null);
+            } else if (memberStatus == 1) {//支付
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctPayActivity.class, null);
+                    }
+                });
+            } else if (memberStatus == 2) {//需要完善资料
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctApplyStartActivity.class, null);
+                    }
+                });
+            } else if (memberStatus == 3) {//续费
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctPayActivity.class, null);
+                    }
+                });
+            }
         }
     }
 }

@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
+import com.ascba.rebate.activities.merchant.MctPayActivity;
+import com.ascba.rebate.manager.DialogManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
@@ -191,6 +195,10 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
         AbstractRequest request = buildRequest(UrlUtils.indexHome, RequestMethod.GET, HomeBean.class);
         executeNetwork(0, request);
     }
+    private void requestSellerStatus() {
+        AbstractRequest request = buildRequest(UrlUtils.getSellerStatus, RequestMethod.GET, null);
+        executeNetwork(2, "请稍后", request);
+    }
 
     @Override
     protected <T> void mHandle200(int what, Result<T> result) {
@@ -201,6 +209,35 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
             addNavData(homeBean.getNavList());
             addVideoData(homeBean.getVideoList());
             ModulesUtils.navActivity = homeBean.getNav_activity();
+        } else if(what==2){
+            String data = (String) result.getData();
+            JSONObject dataObj = JSON.parseObject(data);
+            int memberStatus = dataObj.getIntValue("member_status");
+            String statusText = dataObj.getString("member_status_text");
+            if (memberStatus == 0) {//收款码
+                startActivity(ReceiveCodeActivity.class, null);
+            } else if (memberStatus == 1) {//支付
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctPayActivity.class, null);
+                    }
+                });
+            } else if (memberStatus == 2) {//需要完善资料
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctApplyStartActivity.class, null);
+                    }
+                });
+            } else if (memberStatus == 3) {//续费
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctPayActivity.class, null);
+                    }
+                });
+            }
         }
     }
 
@@ -226,7 +263,7 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
     private void addNavData(List<ModuleEntity> navBeans) {
         navs.clear();
         navs.addAll(navBeans);
-        if (navBeans != null && navBeans.size() > 0) {
+        if (navBeans.size() > 0) {
             if (gridAdapter == null) {
                 addNav();
             }
@@ -248,7 +285,8 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
         if (id == R.id.lat_sweep || id == R.id.im_sweep_title) {
             startActivity(SweepActivity.class, null);
         } else if (id == R.id.lat_receive || id == R.id.im_receive_title) {
-            startActivity(ReceiveCodeActivity.class, null);
+            requestSellerStatus();
+            //startActivity(ReceiveCodeActivity.class, null);
         }
     }
 

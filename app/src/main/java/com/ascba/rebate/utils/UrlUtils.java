@@ -11,6 +11,7 @@ import com.ascba.rebate.appconfig.AppConfig;
 public class UrlUtils {
 
 
+
     static {
         if (BuildConfig.DEBUG)
             baseWebsite = AppConfig.getInstance().getString("debug_url", BuildConfig.BASE_URL);
@@ -107,6 +108,7 @@ public class UrlUtils {
     public static String perfectPost = baseWebsite + "seller/perfectPost";
     public static String getChildRegion = baseWebsite + "seller/getChildRegion";
     public static String getSellerTaglib = baseWebsite + "seller/getSellerTaglib";
+    public static String getSellerStatus = baseWebsite + "seller/getSellerStatus";
 
 
 }
