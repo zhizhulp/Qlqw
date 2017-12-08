@@ -132,9 +132,10 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         request.add("seller_taglib", tvType.getText().toString());
         request.add("seller_business_hours", tvTime.getText().toString());
         request.add("seller_address", tvLocate.getText().toString());//
-        request.add("seller_region", tvPLocate.getText().toString());
-        request.add("seller_location", tvAddress.getText().toString());//
+        request.add("region_name", tvPLocate.getText().toString());
+        request.add("seller_localhost", tvAddress.getText().toString());//
         request.add("seller_tel", tvPhone.getText().toString());
+        request.add("seller_description", etDesc.getText().toString());
         request.add("seller_lon", lon);
         request.add("seller_lat", lat);
         request.add("seller_image", new FileBinary(designFile));
@@ -153,7 +154,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     break;
                 case R.id.lat_mct_name://店铺名称
                     MctModBaseActivity.start(this, new MctModType
-                            (0, "店铺名称", "there is not rules yet", "请输入店铺名称", tvName.getText().toString(), CodeUtils.REQUEST_SHOP_NAME));
+                            (0, "店铺名称", getString(R.string.modify_name_hint), "请输入店铺名称", tvName.getText().toString(), CodeUtils.REQUEST_SHOP_NAME));
                     break;
                 case R.id.lat_mct_design://店头形象
                     type = 1;
