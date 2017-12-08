@@ -149,7 +149,7 @@
         android:background="@color/white"
         android:gravity="start"
         android:maxLength="120"
-        android:hint="谨慎填写详细地址，不少于5个字"
+        android:hint="@string/address_hint"
         android:paddingBottom="17dp"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"

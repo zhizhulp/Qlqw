@@ -3,6 +3,7 @@ package com.ascba.rebate.view;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 
 /**
@@ -31,6 +32,8 @@ public class MyAutoCompleteTextView extends android.support.v7.widget.AppCompatA
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
-        performFiltering(getText(), KeyEvent.KEYCODE_UNKNOWN);
+        if (getFilter() != null) {
+            performFiltering(getText(), KeyEvent.KEYCODE_UNKNOWN);
+        }
     }
 }
