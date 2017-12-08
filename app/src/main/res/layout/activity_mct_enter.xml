@@ -8,7 +8,16 @@
     <com.ascba.rebate.view.MoneyBar
         app:textTitle="商家入驻"
         style="@style/MoneyBar"/>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/btn_apply"
+        android:text="提交"
+        style="@style/ButtonNormal"
+        android:enabled="true"/>
     <ScrollView
+        android:layout_above="@id/btn_apply"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_below="@+id/mb"
@@ -87,7 +96,7 @@
                     android:id="@+id/im_more_02"
                     style="@style/Mct_Image_More"/>
                 <ImageView
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:paddingTop="4dp"
                     android:paddingBottom="4dp"
                     android:id="@+id/mct_design"
@@ -95,8 +104,8 @@
                     android:layout_marginRight="14dp"
                     android:layout_toLeftOf="@id/im_more_02"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="42dp"
                     android:layout_toStartOf="@id/im_more_02" />
             </RelativeLayout>
             <!--主营类目-->
@@ -312,13 +321,6 @@
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <Button
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="56dp"
-                android:id="@+id/btn_apply"
-                android:text="提交"
-                style="@style/ButtonNormal"
-                android:enabled="true"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

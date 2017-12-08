@@ -3,20 +3,22 @@ package com.ascba.rebate.activities.merchant;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.adapter.MctTypeAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.MctType;
+import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
+import com.ascba.rebate.utils.UrlUtils;
+import com.yanzhenjie.nohttp.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +27,7 @@ import java.util.List;
  */
 
 public class MctTypeActivity extends BaseDefaultNetActivity implements AdapterView.OnItemClickListener {
-    private MctTypeAdapter adapter;
     private AutoCompleteTextView autoEt;
-    private List<MctType> data;
 
     @Override
     protected int bindLayout() {
@@ -38,28 +38,35 @@ public class MctTypeActivity extends BaseDefaultNetActivity implements AdapterVi
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         autoEt = fv(R.id.actv);
-        addData();
-        adapter = new MctTypeAdapter(data);
-        autoEt.setAdapter(adapter);
-        autoEt.setOnItemClickListener(this);
+        requestData();
+    }
+
+    private void requestData() {
+        AbstractRequest request = buildRequest(UrlUtils.getSellerTaglib, RequestMethod.GET, null);
+        executeNetwork(0, "请稍后", request);
+    }
+
+    @Override
+    protected <T> void mHandle200(int what, Result<T> result) {
+        super.mHandle200(what, result);
+        if (what == 0) {
+            String str = (String) result.getData();
+            JSONObject jObj = JSON.parseObject(str);
+            List<MctType> list = JSON.parseArray(jObj.getString("taglib"), MctType.class);
+            MctTypeAdapter adapter = new MctTypeAdapter(list);
+            autoEt.setAdapter(adapter);
+            autoEt.setVisibility(View.VISIBLE);
+            autoEt.setOnItemClickListener(this);
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String text = data.get(position).getText();
+        String text = ((MctType) autoEt.getAdapter().getItem(position)).getText();
         Intent intent = getIntent();
         intent.putExtra("type", text);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    private void addData() {
-        if (data == null) {
-            data = new ArrayList<>();
-        }
-        for (int i = 0; i < 10; i++) {
-            data.add(new MctType(i, "text" + i));
-        }
     }
 
     public static void start(Activity activity, String type) {

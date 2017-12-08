@@ -1,4 +1,7 @@
 package com.ascba.rebate.bean;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by 李平 on 2017/12/4 10:24
  * Describe:商家选择类型
@@ -6,7 +9,11 @@ package com.ascba.rebate.bean;
 
 public class MctType {
     private int id;
+    @JSONField(name = "name")
     private String text;
+
+    public MctType() {
+    }
 
     public MctType(int id, String text) {
         this.id = id;

@@ -1,7 +1,5 @@
 package com.ascba.rebate.adapter;
 
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,11 +53,6 @@ public class MctTypeAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
-    @Nullable
-    @Override
-    public CharSequence[] getAutofillOptions() {
-        return new CharSequence[0];
-    }
 
     @Override
     public Filter getFilter() {
