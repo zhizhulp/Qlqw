@@ -32,6 +32,8 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
     protected PsdDialog mPsdDialog;
     protected PayUtils payUtils;
 
+    protected Pay pay;
+
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
@@ -146,10 +148,8 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
         if (mPsdDialog != null && mPsdDialog.isShowing()) {
             mPsdDialog.dismiss();
         }
-        payUtils.requestPay((Pay) result.getData());
-        if (payUtils.type.equals(PayUtils.BALANCE)) {
-            payResult(payUtils.type);
-        }
+        pay = (Pay) result.getData();
+        payUtils.requestPay(pay);
     }
 
     @Override

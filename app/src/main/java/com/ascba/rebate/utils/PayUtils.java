@@ -93,7 +93,7 @@ public class PayUtils {
             requestForWX(activity, data.getWxPayInfo());
         } else if (type.equals(BALANCE)) {
             Intent intent = new Intent();
-            intent.putExtra("type", "微信支付");
+            intent.putExtra("type", "余额支付");
             intent.putExtra("money", PayUtils.getInstance().money);
             goSuccess(intent);
         }

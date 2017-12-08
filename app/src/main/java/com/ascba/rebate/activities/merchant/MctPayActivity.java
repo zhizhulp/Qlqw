@@ -44,8 +44,6 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     private TextView tvClass;
     private String money;
 
-    private Pay pay;
-
     @Override
     protected int bindLayout() {
         return R.layout.activity_mct_pay;
@@ -133,12 +131,6 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
             setList(jObj);
             updatePayPsdStatus(jObj);
         }
-    }
-
-    @Override
-    protected void onPay(Result result) {
-        super.onPay(result);
-        pay = (Pay) result.getData();
     }
 
     @Override
