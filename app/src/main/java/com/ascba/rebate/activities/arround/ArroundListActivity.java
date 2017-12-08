@@ -15,13 +15,13 @@ import com.amap.api.location.AMapLocation;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctPayActivity;
-import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.adapter.ArroundAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.ArroundEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.LocationManager;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.EmptyUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
@@ -102,6 +102,7 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
             }
         });
         searchAdapter = new ArroundAdapter();
+        searchAdapter.setEmptyView(new EmptyUtils().getView(this, R.mipmap.no_award, "没有搜索到商家哦~"));
         arroundAdapter = new ArroundAdapter();
         mRecyclerView.setAdapter(arroundAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

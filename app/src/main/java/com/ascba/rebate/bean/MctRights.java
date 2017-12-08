@@ -36,6 +36,13 @@ public class MctRights {
     private String seller_give_money;
     private String seller_url;
     private String active_url;
+    /**
+     * active_color : 333
+     * active_h5_title : 我是活动标题
+     */
+
+    private String active_color;
+    private String active_h5_title;
 
     public String getSeller_url() {
         return seller_url;
@@ -147,5 +154,21 @@ public class MctRights {
 
     public void setActive_url(String active_url) {
         this.active_url = active_url;
+    }
+
+    public String getActive_color() {
+        return active_color;
+    }
+
+    public void setActive_color(String active_color) {
+        this.active_color = active_color;
+    }
+
+    public String getActive_h5_title() {
+        return active_h5_title;
+    }
+
+    public void setActive_h5_title(String active_h5_title) {
+        this.active_h5_title = active_h5_title;
     }
 }

@@ -1,6 +1,8 @@
 package com.ascba.rebate.activities.merchant;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -121,7 +123,9 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
         super.mHandle200(what, result);
         if (what == 0) {
             data = (MctRights) result.getData();
-            Picasso.with(this).load(data.getActive_img()).into(banner);
+            Picasso.with(this).load(data.getActive_img())
+                    .placeholder(R.mipmap.gift_head_loading)
+                    .into(banner);
             tvTitle.setText(data.getActive_title());
             if (data.getActive_desc().isEmpty())
                 tvStatus.setVisibility(View.GONE);
@@ -135,6 +139,9 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
             tvAward.setText(data.getSeller_referee_money());
             tvAll.setText(data.getSeller_give_money());
             tvBtm.setText(data.getSeller_text());
+
+            GradientDrawable drawable = (GradientDrawable) fv(R.id.lat_status).getBackground();
+            drawable.setColor(Color.parseColor("#" + data.getActive_color()));
         }
     }
 }

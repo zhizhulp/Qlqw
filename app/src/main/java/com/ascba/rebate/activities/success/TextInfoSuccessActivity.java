@@ -2,15 +2,16 @@ package com.ascba.rebate.activities.success;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
+import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 
 public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
@@ -54,10 +55,8 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                 else if (type == 2)
                     GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, select);
                 else if (type == 3)
-                    if (select == 1)
-                        Log.d(TAG, "onClick: type==3");
-                    else {
-                    }
+                    if (select == 1) startActivity(MctApplyStartActivity.class, null);
+                    else startActivity(ReceiveCodeActivity.class, null);
                 finish();
             }
         });

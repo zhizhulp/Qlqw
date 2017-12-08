@@ -7,6 +7,7 @@ import com.alipay.sdk.app.PayTask;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.application.MyApplication;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
+import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.manager.PayHandler;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -27,7 +28,7 @@ public class PayUtils {
     public String money;
     public String info;
     private Class<?> cls;
-    private BaseDefaultNetActivity activity;
+    private BaseDefaultPayActivity activity;
     private boolean paySuccess;
     private boolean isResult = false;
 
@@ -45,11 +46,11 @@ public class PayUtils {
         return payUtils;
     }
 
-    public PayUtils setInit(BaseDefaultNetActivity activity, Class<?> successCls) {
+    public PayUtils setInit(BaseDefaultPayActivity activity, Class<?> successCls) {
         return this.setInit(activity, successCls, false);
     }
 
-    public PayUtils setInit(BaseDefaultNetActivity activity, Class<?> successCls, boolean result) {
+    public PayUtils setInit(BaseDefaultPayActivity activity, Class<?> successCls, boolean result) {
         clear();
         isResult = result;
         payUtils.activity = activity;
@@ -80,7 +81,8 @@ public class PayUtils {
                 activity.startActivityForResult(intent, CodeUtils.REQUEST_PAY);
             else
                 activity.startActivity(intent);
-        }
+        } else
+            activity.payResult(type);
     }
 
     public void requestPay(Pay data) {

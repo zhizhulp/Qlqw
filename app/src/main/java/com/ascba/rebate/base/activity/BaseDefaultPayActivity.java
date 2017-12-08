@@ -173,7 +173,7 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
      *
      * @param type
      */
-    protected void payResult(String type) {
+    public void payResult(String type) {
         payUtils.clear();
         setResult(RESULT_OK, getIntent());
         finish();

@@ -44,9 +44,7 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     private TextView tvClass;
     private String money;
 
-    private int has_update;
-    private int seller_settled;
-    private String success_info;
+    private Pay pay;
 
     @Override
     protected int bindLayout() {
@@ -140,23 +138,19 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     @Override
     protected void onPay(Result result) {
         super.onPay(result);
-        JSONObject object = JSON.parseObject(result.getData().toString());
-        has_update = object.getInteger("has_update");
-        seller_settled = object.getInteger("seller_settled");
-        success_info = object.getString("success_info");
+        pay = (Pay) result.getData();
     }
 
     @Override
-    protected void payResult(String type) {
+    public void payResult(String type) {
         super.payResult(type);
-        Log.i(TAG, "payResult: ");
         Bundle bundle = new Bundle();
         bundle.putInt("type", 3);
-        if (seller_settled == 1 && has_update == 0)
+        if (pay.getSeller_settled() == 1 && pay.getHas_update() == 0)
             bundle.putInt("select", 1);
         else
             bundle.putInt("select", 0);
-        bundle.putString("info", success_info);
+        bundle.putString("info", pay.getSuccess_info());
         startActivity(TextInfoSuccessActivity.class, bundle);
     }
 }

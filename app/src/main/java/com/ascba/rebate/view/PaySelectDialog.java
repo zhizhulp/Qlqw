@@ -26,7 +26,7 @@ import java.util.List;
 public class PaySelectDialog extends BottomSheetDialog {
     private String price;
     private Callback callback;
-    private String type = PayUtils.WX_PAY;
+    private String type;
     private TextView tvPrice;
     private String balance;
 
@@ -110,6 +110,7 @@ public class PaySelectDialog extends BottomSheetDialog {
     @Override
     public void show() {
         super.show();
+        type = PayUtils.WX_PAY;
         tvPrice.setText(price);
         pt.notifyDataSetChanged();
     }
