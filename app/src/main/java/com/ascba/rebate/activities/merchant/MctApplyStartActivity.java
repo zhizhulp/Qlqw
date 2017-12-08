@@ -30,7 +30,7 @@ import com.yanzhenjie.nohttp.RequestMethod;
 public class MctApplyStartActivity extends BaseDefaultNetActivity implements View.OnClickListener {
 
     private WebView webView;
-    private String url;
+    private String url = UrlUtils.sellerPerfectAgreement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
         findViewById(R.id.btn_apply).setOnClickListener(this);
         webView = findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
-        getParams();
+        webView.loadUrl(url);
+        //getParams();
     }
 
     private void getParams() {

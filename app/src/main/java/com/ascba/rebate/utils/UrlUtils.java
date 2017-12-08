@@ -109,6 +109,7 @@ public class UrlUtils {
     public static String getChildRegion = baseWebsite + "seller/getChildRegion";
     public static String getSellerTaglib = baseWebsite + "seller/getSellerTaglib";
     public static String getSellerStatus = baseWebsite + "seller/getSellerStatus";
+    public static String sellerPerfectAgreement = baseWebsite + "sellerPerfectAgreement";
 
 
 }
