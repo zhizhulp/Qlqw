@@ -18,8 +18,7 @@ public class Pay {
     private String out_trade_no;
     private WXPay wxPayInfo;
     private String success_info;
-    private int has_update;
-    private int seller_settled;
+    private int member_status;
 
     public String getSuccess_info() {
         return success_info;
@@ -53,20 +52,12 @@ public class Pay {
         this.out_trade_no = out_trade_no;
     }
 
-    public int getHas_update() {
-        return has_update;
+    public int getMember_status() {
+        return member_status;
     }
 
-    public void setHas_update(int has_update) {
-        this.has_update = has_update;
-    }
-
-    public int getSeller_settled() {
-        return seller_settled;
-    }
-
-    public void setSeller_settled(int seller_settled) {
-        this.seller_settled = seller_settled;
+    public void setMember_status(int member_status) {
+        this.member_status = member_status;
     }
 
     public static class WXPay{
