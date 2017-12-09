@@ -1,8 +1,6 @@
 package com.ascba.rebate.activities.seller;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,10 +13,10 @@ import com.ascba.rebate.adapter.PurchaseMoneyAdapter;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
+import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.PurchaseEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
-import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -96,20 +94,10 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
 
     @Override
     protected void requestPayInfo(String type, String money, int what) {
-//        AbstractRequest request = buildRequest(UrlUtils.purchasePayment, RequestMethod.POST, Pay.class);
-//        request.add("pay_type", type);
-//        request.add("total_fee", money);
-//        executeNetwork(what, "请稍后", request);
-        if (mPayDialog != null && mPayDialog.isShowing()) {
-            mPayDialog.dismiss();
-        }
-        if (mPsdDialog != null && mPsdDialog.isShowing()) {
-            mPsdDialog.dismiss();
-        }
-        Intent intent = new Intent();
-        intent.putExtra("type", "余额支付");
-        intent.putExtra("money", PayUtils.getInstance().money);
-        payUtils.goSuccess(intent);
+        AbstractRequest request = buildRequest(UrlUtils.purchasePayment, RequestMethod.POST, Pay.class);
+        request.add("pay_type", type);
+        request.add("total_fee", money);
+        executeNetwork(what, "请稍后", request);
     }
 
     @Override

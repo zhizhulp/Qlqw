@@ -3,7 +3,6 @@ package com.ascba.rebate.activities.merchant;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,13 +75,16 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     private void setList(JSONObject jObj) {
         List<MctPayClass> level = JSON.parseArray(jObj.getString("level"), MctPayClass.class);
         if (level != null && level.size() > 0) {
-            data.add(new MctPayTitle("优享商家"));
+            data.add(new MctPayTitle("商家入驻"));
             data.addAll(level);
         }
 
         List<MctPayDesc> interests = JSON.parseArray(jObj.getString("interests"), MctPayDesc.class);
         if (interests != null && interests.size() > 0) {
-            data.add(new MctPayTitle("开通即可享受以下权益", true));
+            data.add(new MctPayTitle("入驻即可享受以下权益", true));
+            for (MctPayDesc desc : interests) {
+                desc.setContent(desc.getContent().replace("\n", "\n\n"));
+            }
             data.addAll(interests);
         }
         mctAdapter.notifyDataSetChanged();

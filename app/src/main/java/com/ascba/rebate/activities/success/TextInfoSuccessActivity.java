@@ -81,8 +81,8 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
             btnComplete.setText("立即查看");
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         } else if (type == 3) {
-            mMoneyBar.setTextTitle("支付成功");
-            tvTitle.setText("支付成功");
+            mMoneyBar.setTextTitle("入驻成功");
+            tvTitle.setText("入驻成功");
             select = intent.getIntExtra("select", 0);
             if (select == 1)
                 btnComplete.setText("完善资料");
