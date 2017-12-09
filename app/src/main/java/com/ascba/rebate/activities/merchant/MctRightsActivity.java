@@ -106,7 +106,6 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
                     WebViewBaseActivity.start(this, data.getActive_title(), data.getActive_url());
                 break;
             case R.id.lat_employee:// 佣金奖励
-                // TODO
                 startActivity(new Intent(this, BillActivity.class).putExtra("mine_type", 6));
                 break;
             case R.id.lat_award:// 跨界奖励

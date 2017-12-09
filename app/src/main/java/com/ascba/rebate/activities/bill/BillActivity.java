@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.benefits.BenefitDetActivity;
 import com.ascba.rebate.activities.cash_get.CGDealingActivity;
@@ -24,6 +23,7 @@ import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.BillFilterDialog;
 import com.ascba.rebate.view.datepicker.TimePickerView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration;
 import com.oushangfeng.pinnedsectionitemdecoration.callback.OnHeaderClickListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -159,21 +159,24 @@ public class BillActivity extends BaseDefaultNetActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mineType = extras.getInt("mine_type");
-            if (mineType == 1 || mineType == 2 || mineType == 3 || mineType == 5) {
+            if (mineType == 3) {
+                type = 3;
+                mMoneyBar.setTextTitle("收款记录");
                 mMoneyBar.setTailShow(false);
-                if (mineType == 3) {
-                    type = 3;
-                    mMoneyBar.setTextTitle("收款记录");
-                } else if (mineType == 2) {
-                    mMoneyBar.setTextTitle("充值记录");
-                } else if (mineType == 5) {
-                    type = 9;
-                    mMoneyBar.setTextTitle("结算账单");
-                } else if (mineType == 1) {
-                    mMoneyBar.setTextTitle("提现记录");
-                }
-            } else {
-                mMoneyBar.setTextTitle("现金账单");
+            } else if (mineType == 2) {
+                mMoneyBar.setTextTitle("充值记录");
+                mMoneyBar.setTailShow(false);
+            } else if (mineType == 5) {
+                type = 9;
+                mMoneyBar.setTextTitle("结算账单");
+                mMoneyBar.setTailShow(false);
+            } else if (mineType == 1) {
+                mMoneyBar.setTextTitle("提现记录");
+                mMoneyBar.setTailShow(false);
+            } else if (mineType == 6) {
+                type = 13;
+                mMoneyBar.setTextTitle("佣金奖励");
+                mMoneyBar.setTailShow(false);
             }
         } else {
             mMoneyBar.setTextTitle("现金账单");

@@ -107,7 +107,7 @@ public class SellerInvoiceListActivity extends BaseDefaultNetActivity implements
                         allSelectCheck(select);
                     } else
                         checkSelect(select);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemChanged(position);
                 }
             }
         });

@@ -64,7 +64,6 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
 
             @Override
             public void clickTail() {
-                //todo
                 switch (member_status) {
                     case 1:
                         startActivity(MctPayActivity.class, null);
@@ -236,8 +235,6 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
     }
 
     private void setTail() {
-        //todo
-        Log.i(TAG, "setTail: " + member_status);
         switch (member_status) {
             case 0:
                 mMoneyBar.setTextTail("");

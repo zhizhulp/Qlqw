@@ -86,7 +86,6 @@ public class PayUtils {
     }
 
     public void requestPay(Pay data) {
-        PayUtils.getInstance().info = data.getSuccess_info();
         if (type.equals(ALI_PAY)) {
             requestForAli(activity, data.getAliPayInfo());
         } else if (type.equals(WX_PAY)) {
