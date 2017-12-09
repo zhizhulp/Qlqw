@@ -155,9 +155,14 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CodeUtils.REQUEST_PAY && resultCode == RESULT_OK) {
-            payResult(payUtils.type);
+        if (requestCode == CodeUtils.REQUEST_PAY) {
+            onResult(payUtils.type, resultCode);
         }
+    }
+
+    protected void onResult(String type, int resultCode) {
+        Log.e(TAG, "onResult: 开启result模式 记得重写此方法处理，否则会走清理方法");
+        payResult(payUtils.type);
     }
 
     @Override
