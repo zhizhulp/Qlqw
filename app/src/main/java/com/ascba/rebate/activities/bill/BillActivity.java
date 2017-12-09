@@ -175,7 +175,11 @@ public class BillActivity extends BaseDefaultNetActivity {
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 6) {
                 type = 13;
-                mMoneyBar.setTextTitle("佣金奖励");
+                mMoneyBar.setTextTitle("入驻商家收益");
+                mMoneyBar.setTailShow(false);
+            } else if (mineType == 7) {
+                type = 14;
+                mMoneyBar.setTextTitle("推荐代理收益");
                 mMoneyBar.setTailShow(false);
             }
         } else {

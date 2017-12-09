@@ -43,7 +43,7 @@ public class PurchaseSuccessActivity extends BaseDefaultNetActivity {
             @Override
             public void onClick(View v) {
                 if (type == 0)
-                    startActivity(SellerGiveCreateActivity.class, null);
+                    setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -51,7 +51,7 @@ public class PurchaseSuccessActivity extends BaseDefaultNetActivity {
 
     private void backResults() {
         if (type == 0)
-            startActivity(SellerPurchaseActivity.class, null);
+            setResult(RESULT_OK);
         finish();
     }
 

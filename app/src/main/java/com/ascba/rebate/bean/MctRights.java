@@ -20,6 +20,10 @@ public class MctRights {
      * seller_purchase_money : 0
      * seller_referee_money : 9025
      * seller_give_money : 1615200
+     * active_color : 333
+     * active_h5_title : 我是活动标题
+     * seller_agent_money : 0
+     * seller_getpay_money : 77648
      */
 
     private int seller_id;
@@ -36,13 +40,10 @@ public class MctRights {
     private String seller_give_money;
     private String seller_url;
     private String active_url;
-    /**
-     * active_color : 333
-     * active_h5_title : 我是活动标题
-     */
-
     private String active_color;
     private String active_h5_title;
+    private String seller_agent_money;
+    private String seller_getpay_money;
 
     public String getSeller_url() {
         return seller_url;
@@ -170,5 +171,21 @@ public class MctRights {
 
     public void setActive_h5_title(String active_h5_title) {
         this.active_h5_title = active_h5_title;
+    }
+
+    public String getSeller_agent_money() {
+        return seller_agent_money;
+    }
+
+    public void setSeller_agent_money(String seller_agent_money) {
+        this.seller_agent_money = seller_agent_money;
+    }
+
+    public String getSeller_getpay_money() {
+        return seller_getpay_money;
+    }
+
+    public void setSeller_getpay_money(String seller_getpay_money) {
+        this.seller_getpay_money = seller_getpay_money;
     }
 }

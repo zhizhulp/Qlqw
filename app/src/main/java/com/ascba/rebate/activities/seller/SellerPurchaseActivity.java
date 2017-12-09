@@ -123,4 +123,20 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
         params.height = itemHeight > spaceHeight ? spaceHeight : itemHeight;
         gridView.setLayoutParams(params);
     }
+
+    @Override
+    protected boolean payIsResult() {
+        return true;
+    }
+
+    @Override
+    protected void onResult(String type, int resultCode) {
+        if (resultCode == RESULT_OK) {
+            payUtils.clear();
+        } else if (resultCode == RESULT_CANCELED) {
+            startActivity(SellerGiveCreateActivity.class, null);
+            payUtils.clear();
+            finish();
+        }
+    }
 }

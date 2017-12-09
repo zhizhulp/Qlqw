@@ -8,7 +8,7 @@
 
     <com.ascba.rebate.view.MoneyBar
         style="@style/MoneyBar"
-        app:textTitle="商家权益" />
+        app:textTitle="商家入驻" />
 
     <RelativeLayout
         android:id="@+id/lat_btm"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
-
+            <!--<editor-fold desc="活动+剩余时间">-->
             <org.raphets.roundimageview.RoundImageView
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
@@ -153,48 +153,55 @@
                     android:background="@drawable/mct_circle_bg_03"
                     android:text="续费" />
             </RelativeLayout>
-
+            <!--</editor-fold>-->
+            <!--<editor-fold desc="现金收益">-->
             <View style="@style/LineHorizontal" />
 
             <include layout="@layout/mine_line" />
-            <!--佣金奖励-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/module_title_left"
+                android:drawablePadding="7dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="14dp"
+                android:paddingTop="15dp"
+                android:text="现金收益"
+                android:textColor="@color/grey_black_tv" />
+
+            <View style="@style/LineHorizontal" />
+            <!--入驻商家收益-->
             <RelativeLayout
-                android:id="@+id/lat_employee"
+                android:id="@+id/lat_employee_mct"
                 style="@style/SelectBackgroundWhile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="96dp"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp">
 
-                <View
-                    android:id="@+id/point_01"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/mct_point_blue" />
-
                 <TextView
-                    android:id="@+id/tv_employee_str"
+                    android:id="@+id/tv_employee_mct_str"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/point_01"
-                    android:text="佣金奖励"
+                    android:drawableLeft="@drawable/mct_point_blue"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="入驻商家收益"
                     android:textColor="@color/grey_black_tv"
                     android:textSize="@dimen/text_14" />
 
                 <TextView
-                    android:id="@+id/tv_employee"
+                    android:id="@+id/tv_employee_mct"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_employee_str"
-                    android:layout_below="@id/tv_employee_str"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="37dp"
+                    android:layout_below="@id/tv_employee_mct_str"
+                    android:gravity="center"
+                    android:paddingLeft="17dp"
                     android:text="0.00"
                     android:textColor="@color/grey_black_tv"
-                    android:textSize="@dimen/text_24" />
+                    android:textSize="@dimen/text_26" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -205,46 +212,100 @@
 
                 <View
                     style="@style/LineHorizontal"
-                    android:layout_below="@id/tv_employee" />
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
-            <!--跨界奖励-->
+            <!--推荐代理收益-->
+            <RelativeLayout
+                android:id="@+id/lat_employee_agent"
+                style="@style/SelectBackgroundWhile"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/tv_employee_agent_str"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/mct_point_yellow"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="推荐代理收益"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/tv_employee_agent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:layout_below="@id/tv_employee_agent_str"
+                    android:gravity="center"
+                    android:paddingLeft="17dp"
+                    android:text="0.00"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_26" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/more" />
+
+                <View
+                    style="@style/LineHorizontal"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+            <!--</editor-fold>-->
+            <!--<editor-fold desc="礼品分收益">-->
+            <View style="@style/LineHorizontal" />
+
+            <include layout="@layout/mine_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/module_title_left"
+                android:drawablePadding="7dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="14dp"
+                android:paddingTop="15dp"
+                android:text="礼品分收益"
+                android:textColor="@color/grey_black_tv" />
+
+            <View style="@style/LineHorizontal" />
+            <!--礼品分收益-->
             <RelativeLayout
                 android:id="@+id/lat_award"
                 style="@style/SelectBackgroundWhile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="96dp"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp">
-
-                <View
-                    android:id="@+id/point_02"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/mct_point_yellow" />
 
                 <TextView
                     android:id="@+id/tv_award_str"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/point_02"
-                    android:text="跨界奖励"
+                    android:drawableLeft="@drawable/mct_point_blue"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="礼品分收益"
                     android:textColor="@color/grey_black_tv"
                     android:textSize="@dimen/text_14" />
 
                 <TextView
                     android:id="@+id/tv_award"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_award_str"
+                    android:layout_height="37dp"
                     android:layout_below="@id/tv_award_str"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:paddingLeft="17dp"
                     android:text="0"
                     android:textColor="@color/grey_black_tv"
-                    android:textSize="@dimen/text_24" />
+                    android:textSize="@dimen/text_26" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -255,46 +316,39 @@
 
                 <View
                     style="@style/LineHorizontal"
-                    android:layout_below="@id/tv_award" />
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
-            <!--礼品赠送总额-->
+            <!--礼品分流水收益-->
             <RelativeLayout
                 android:id="@+id/lat_all"
                 style="@style/SelectBackgroundWhile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="96dp"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp">
-
-                <View
-                    android:id="@+id/point_03"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="25dp"
-                    android:background="@drawable/mct_point_green" />
 
                 <TextView
                     android:id="@+id/tv_all_str"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/point_03"
-                    android:text="礼品赠送总额"
+                    android:drawableLeft="@drawable/mct_point_yellow"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="礼品分流水收益"
                     android:textColor="@color/grey_black_tv"
                     android:textSize="@dimen/text_14" />
 
                 <TextView
                     android:id="@+id/tv_all"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tv_all_str"
+                    android:layout_height="37dp"
                     android:layout_below="@id/tv_all_str"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:paddingLeft="17dp"
                     android:text="0"
                     android:textColor="@color/grey_black_tv"
-                    android:textSize="@dimen/text_24" />
+                    android:textSize="@dimen/text_26" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -302,11 +356,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/more" />
-
-                <View
-                    style="@style/LineHorizontal"
-                    android:layout_below="@id/tv_all" />
             </RelativeLayout>
+            <!--</editor-fold>-->
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

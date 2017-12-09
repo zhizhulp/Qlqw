@@ -38,7 +38,8 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
     private TextView tvTime;
     private TextView tvStatus;
     private TextView tvLeftTime;
-    private TextView tvEmployee;
+    private TextView tvEmployeeMct;
+    private TextView tvEmployeeAgent;
     private TextView tvAward;
     private TextView tvAll;
     private TextView tvPay;
@@ -69,14 +70,16 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
         tvPay = fv(R.id.tv_pay);
         tvPay.setOnClickListener(this);
 
-        tvEmployee = fv(R.id.tv_employee);
+        tvEmployeeMct = fv(R.id.tv_employee_mct);
+        tvEmployeeAgent = fv(R.id.tv_employee_agent);
         tvAward = fv(R.id.tv_award);
         tvAll = fv(R.id.tv_all);
 
         tvBtm = fv(R.id.tv_btm);
 
         fv(R.id.tv_see).setOnClickListener(this);
-        fv(R.id.lat_employee).setOnClickListener(this);
+        fv(R.id.lat_employee_mct).setOnClickListener(this);
+        fv(R.id.lat_employee_agent).setOnClickListener(this);
         fv(R.id.lat_award).setOnClickListener(this);
         fv(R.id.lat_all).setOnClickListener(this);
 
@@ -103,16 +106,19 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
                 break;
             case R.id.tv_status:// 活动
                 if (data.getActive_status() == 1)
-                    WebViewBaseActivity.start(this, data.getActive_title(), data.getActive_url());
+                    WebViewBaseActivity.start(this, data.getActive_h5_title(), data.getActive_url());
                 break;
-            case R.id.lat_employee:// 佣金奖励
+            case R.id.lat_employee_mct:// 入驻商家收益
                 startActivity(new Intent(this, BillActivity.class).putExtra("mine_type", 6));
                 break;
-            case R.id.lat_award:// 跨界奖励
-                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 6));
+            case R.id.lat_employee_agent:// 推荐代理收益
+                startActivity(new Intent(this, BillActivity.class).putExtra("mine_type", 7));
                 break;
-            case R.id.lat_all:// 礼品赠送总额
-                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 2));
+            case R.id.lat_award:// 礼品分收益
+                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 7));
+                break;
+            case R.id.lat_all:// 礼品分流水收益
+                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 6));
                 break;
         }
     }
@@ -134,9 +140,10 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
             tvLeftTime.setText(data.getSeller_last_time());
             tvPay.setText(data.getSeller_status_text());
 
-            tvEmployee.setText(data.getSeller_purchase_money());
-            tvAward.setText(data.getSeller_referee_money());
-            tvAll.setText(data.getSeller_give_money());
+            tvEmployeeMct.setText(data.getSeller_purchase_money());
+            tvEmployeeAgent.setText(data.getSeller_agent_money());
+            tvAward.setText(data.getSeller_getpay_money());
+            tvAll.setText(data.getSeller_referee_money());
             tvBtm.setText(data.getSeller_text());
 
             GradientDrawable drawable = (GradientDrawable) fv(R.id.lat_status).getBackground();

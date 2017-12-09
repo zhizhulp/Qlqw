@@ -10,7 +10,7 @@
 
     <com.ascba.rebate.view.MoneyBar
         style="@style/MoneyBar"
-        app:textTitle="优享商家" />
+        app:textTitle="商家入驻" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
