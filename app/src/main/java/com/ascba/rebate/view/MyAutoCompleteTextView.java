@@ -5,13 +5,14 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.AutoCompleteTextView;
 
 /**
  * Created by 李平 on 2017/12/4 16:12
  * Describe: 用户没有输入时显示所有
  */
 
-public class MyAutoCompleteTextView extends android.support.v7.widget.AppCompatAutoCompleteTextView {
+public class MyAutoCompleteTextView extends AutoCompleteTextView{
     public MyAutoCompleteTextView(Context context) {
         super(context);
     }

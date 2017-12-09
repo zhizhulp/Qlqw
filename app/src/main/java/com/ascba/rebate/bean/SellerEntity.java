@@ -21,7 +21,24 @@ public class SellerEntity {
     private int company_status;
     private String company_status_text;
     private String seller_perfect_url;
+    private int member_status;
+    private String member_status_text;
 
+    public int getMember_status() {
+        return member_status;
+    }
+
+    public void setMember_status(int member_status) {
+        this.member_status = member_status;
+    }
+
+    public String getMember_status_text() {
+        return member_status_text;
+    }
+
+    public void setMember_status_text(String member_status_text) {
+        this.member_status_text = member_status_text;
+    }
 
     public int getSeller_status() {
         return seller_status;

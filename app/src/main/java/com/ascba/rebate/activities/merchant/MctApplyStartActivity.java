@@ -12,6 +12,8 @@ import android.webkit.WebViewClient;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
+import com.ascba.rebate.activities.personal_identification.PICommitActivity;
+import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.ComMsg;
@@ -41,22 +43,11 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
         webView = findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
-        //getParams();
-    }
-
-    private void getParams() {
-        Intent intent = getIntent();
-        url = intent.getStringExtra("url");
-        if(!TextUtils.isEmpty(url)){
-            webView.loadUrl(url);
-        }else {
-            finish();
-        }
     }
 
     public static void start(Activity activity, String url) {
-        Intent intent=new Intent(activity,MctApplyStartActivity.class);
-        intent.putExtra("url",url);
+        Intent intent = new Intent(activity, MctApplyStartActivity.class);
+        intent.putExtra("url", url);
         activity.startActivity(intent);
     }
 
@@ -67,12 +58,22 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
             MctEnterActivity.start(this, 0);
             finish();
         } else if (companyStatus == 0) {//未通过
-            dm.showAlertDialog2("公司资质未实名，是否立即实名？", "取消", "确定", new DialogManager.Callback() {
-                @Override
-                public void handleRight() {
-                    startActivity(InPutCNActivity.class, null);
-                }
-            });
+            int anInt = AppConfig.getInstance().getInt("card_status", 0);
+            if (anInt == 0) {//个人未认证
+                dm.showAlertDialog2("您没有实名认证，是否立即实名？", "取消", "确定", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(PIStartActivity.class, null);
+                    }
+                });
+            }else {
+                dm.showAlertDialog2("公司资质未实名，是否立即实名？", "取消", "确定", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(InPutCNActivity.class, null);
+                    }
+                });
+            }
         } else if (companyStatus == 1) {//审核中
             showToast("公司资质审核中，请审核通过后再试。");
         } else if (companyStatus == 2) {//资料有误

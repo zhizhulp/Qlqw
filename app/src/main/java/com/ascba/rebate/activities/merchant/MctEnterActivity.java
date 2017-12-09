@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -67,6 +69,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private int errorStatus;
     private double lon;
     private double lat;
+    private ScrollView scrollView;
 
     @Override
     protected int bindLayout() {
@@ -94,6 +97,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         tvAddress = fv(R.id.mct_address);
         etDesc = fv(R.id.mct_desc);
         btnApply = fv(R.id.btn_apply);
+        scrollView = fv(R.id.scrollView);
 
         fv(R.id.lat_mct_logo).setOnClickListener(this);
         fv(R.id.lat_mct_name).setOnClickListener(this);
@@ -146,6 +150,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "mStatus: "+mStatus+",errorStatus"+errorStatus);
         if (mStatus == 0 || errorStatus==0) {
             switch (v.getId()) {
                 case R.id.lat_mct_logo://商家logo
@@ -371,10 +376,10 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private void setUI(SellerDet sellerDet) {
         if (sellerDet != null) {
             errorStatus = sellerDet.getSeller_error_status();
-            mStatus = sellerDet.getSeller_status();
             btnApply.setEnabled(errorStatus==0);
             btnApply.setText(sellerDet.getSeller_error_status_text());
             SellerDet.SellerBean seller = sellerDet.getSeller();
+            mStatus = seller.getSeller_status();
             Picasso.with(this).load(seller.getSeller_cover_logo()).placeholder(R.mipmap.module_loading).into(imLogo);
             tvName.setText(seller.getSeller_name());
             Picasso.with(this).load(seller.getSeller_image()).placeholder(R.mipmap.gift_head_loading).into(imDesign);

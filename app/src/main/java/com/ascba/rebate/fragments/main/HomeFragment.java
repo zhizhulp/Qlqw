@@ -18,7 +18,9 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
+import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.merchant.MctPayActivity;
+import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.manager.DialogManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
@@ -213,28 +215,38 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
             String data = (String) result.getData();
             JSONObject dataObj = JSON.parseObject(data);
             int memberStatus = dataObj.getIntValue("member_status");
-            String statusText = dataObj.getString("member_status_text");
-            if (memberStatus == 0) {//收款码
+            final String statusText = dataObj.getString("member_status_text");
+            //0正常1普通用户2资料审核中3商家过期4资料不全，第一次（跳转到H5）5资料不全第N次（跳转到资料提交）
+            if (memberStatus == 0) {
                 startActivity(ReceiveCodeActivity.class, null);
-            } else if (memberStatus == 1) {//支付
+            } else if (memberStatus == 1) {
                 dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         startActivity(MctPayActivity.class, null);
                     }
                 });
-            } else if (memberStatus == 2) {//需要完善资料
+            } else if (memberStatus == 2) {
+                showToast(statusText);
+            } else if (memberStatus == 3) {
+                dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
+                    @Override
+                    public void handleRight() {
+                        startActivity(MctPayActivity.class, null);
+                    }
+                });
+            } else if (memberStatus == 4) {
                 dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         startActivity(MctApplyStartActivity.class, null);
                     }
                 });
-            } else if (memberStatus == 3) {//续费
+            } else if (memberStatus == 5) {
                 dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
-                        startActivity(MctPayActivity.class, null);
+                        MctEnterActivity.start(getActivity(),1);
                     }
                 });
             }

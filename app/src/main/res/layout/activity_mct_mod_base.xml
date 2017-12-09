@@ -8,6 +8,7 @@
     android:background="@color/white"
     tools:context="com.ascba.rebate.activities.user_data.ModifyNickNameActivity">
     <com.ascba.rebate.view.MoneyBar
+        android:id="@+id/mb"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_56"/>
     <TextView

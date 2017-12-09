@@ -311,7 +311,8 @@
             android:name=".activities.merchant.MctModTimeActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
-        <activity android:name=".activities.merchant.MctTypeActivity" />
+        <activity android:name=".activities.merchant.MctTypeActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".activities.merchant.MctRightsActivity"
             android:exported="true" />

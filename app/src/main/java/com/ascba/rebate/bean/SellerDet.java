@@ -6,42 +6,11 @@ package com.ascba.rebate.bean;
 
 public class SellerDet {
 
-    /**
-     * seller_status : 1
-     * company_status : 0
-     * perfect_url : http://www.baidu.com
-     * seller : {"seller_name":"愤怒大鱿鱼","seller_cover_logo":"http://3demo.oss-cn-beijing.aliyuncs.com/public/uploads/seller/logo/991/991.png","seller_image":"http://3demo.oss-cn-beijing.aliyuncs.com/public/uploads/seller/image/991/991.png","seller_taglib":"餐饮","seller_business_hours":"09:00~23:00","seller_tel":"","seller_address":"","seller_localhost":"","seller_description":""}
-     */
-
-    private int seller_status;
-    private int company_status;
     private String perfect_url;
     private SellerBean seller;
-    /**
-     * compayn_status_text : 公司资质未实名，是否立即实名？
-     * seller_error_status : 1
-     * seller_error_status_text : 7天内不能修改
-     */
 
-    private String compayn_status_text;
     private int seller_error_status;
     private String seller_error_status_text;
-
-    public int getSeller_status() {
-        return seller_status;
-    }
-
-    public void setSeller_status(int seller_status) {
-        this.seller_status = seller_status;
-    }
-
-    public int getCompany_status() {
-        return company_status;
-    }
-
-    public void setCompany_status(int company_status) {
-        this.company_status = company_status;
-    }
 
     public String getPerfect_url() {
         return perfect_url;
@@ -57,14 +26,6 @@ public class SellerDet {
 
     public void setSeller(SellerBean seller) {
         this.seller = seller;
-    }
-
-    public String getCompayn_status_text() {
-        return compayn_status_text;
-    }
-
-    public void setCompayn_status_text(String compayn_status_text) {
-        this.compayn_status_text = compayn_status_text;
     }
 
     public int getSeller_error_status() {
@@ -106,6 +67,15 @@ public class SellerDet {
         private String seller_localhost;
         private String seller_description;
         private String region_name;
+        private int seller_status;
+
+        public int getSeller_status() {
+            return seller_status;
+        }
+
+        public void setSeller_status(int seller_status) {
+            this.seller_status = seller_status;
+        }
 
         public String getRegion_name() {
             return region_name;

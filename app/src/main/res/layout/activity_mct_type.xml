@@ -6,33 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.ascba.rebate.activities.merchant.MctTypeActivity">
+
     <com.ascba.rebate.view.MoneyBar
-        app:textTitle="选择行业"
-        style="@style/MoneyBar"/>
-    <FrameLayout
-        android:id="@+id/fl"
+        style="@style/MoneyBar"
+        app:textTitle="选择行业" />
+
+    <EditText
+        android:id="@+id/actv"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <com.ascba.rebate.view.MyAutoCompleteTextView
-            android:visibility="gone"
-            android:layout_gravity="center_vertical"
-            android:dropDownAnchor="@id/fl"
-            android:dropDownWidth="match_parent"
-            android:completionThreshold="1"
-            android:id="@+id/actv"
-            android:textColor="@color/grey_black_tv"
-            android:textSize="@dimen/text_14"
-            android:textColorHint="@color/grey_black_tv2"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:drawablePadding="7dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:background="@drawable/type_search_bg"
-            android:hint="@string/search_type"
-            android:drawableLeft="@mipmap/module_search"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:drawableStart="@mipmap/module_search" />
-    </FrameLayout>
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/type_search_bg"
+        android:drawableLeft="@mipmap/module_search"
+        android:drawablePadding="7dp"
+        android:drawableStart="@mipmap/module_search"
+        android:hint="@string/search_type"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:textColor="@color/grey_black_tv"
+        android:textColorHint="@color/grey_black_tv2"
+        android:textSize="@dimen/text_14" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
 </LinearLayout>
