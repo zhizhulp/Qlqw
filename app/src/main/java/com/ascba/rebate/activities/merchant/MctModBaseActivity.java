@@ -52,7 +52,7 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
         etInput.addTextChangedListener(this);
         etInput.setHint(mmType.getHint());
         etInput.setText(mmType.getContent());
-        mMoneyBar.setTextTitle(mmType.getContent());
+        mMoneyBar.setTextTitle(mmType.getTitle());
         etInput.setSelection(mmType.getContent().length());
 
         int type = mmType.getType();

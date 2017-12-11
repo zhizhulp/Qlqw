@@ -35,6 +35,6 @@
     <string name="code_unavailable">非有效二维码</string>
     <string name="search_type">请输入要搜索的行业</string>
     <string name="address_hint">谨慎填写详细地址，不少于5个字</string>
-    <string name="phone_hint">11位有效手机号码</string>
+    <string name="phone_hint">店铺的电话</string>
     <string name="seller_name_unavailable">店铺名称长度不符合，请重新输入</string>
 </resources>

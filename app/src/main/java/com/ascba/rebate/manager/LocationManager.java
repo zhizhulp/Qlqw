@@ -47,7 +47,7 @@ public class LocationManager implements BaseUIActivity.PermissionCallback {
     /**
      * 开始定位
      */
-    private void startLocation() {
+    public void startLocation() {
         locationClient = new AMapLocationClient(activity);
         initDefaultOption();
         locationClient.setLocationOption(locationOption);

@@ -86,10 +86,10 @@ public class SellerSetActivity extends BaseDefaultNetActivity implements View.On
                     .placeholder(R.mipmap.head_loading).into(imHead);
             tvName.setText(nickname);
             tvInfo.setText(status_text);
-            if (status == 0)
-                tvInfo.setVisibility(View.VISIBLE);
-            else if (status == 1)
-                tvInfo.setVisibility(View.GONE);
+//            if (status == 0)
+//                tvInfo.setVisibility(View.VISIBLE);
+//            else if (status == 1)
+//                tvInfo.setVisibility(View.GONE);
         }
     }
 }

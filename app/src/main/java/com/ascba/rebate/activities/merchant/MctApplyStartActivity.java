@@ -1,18 +1,16 @@
 package com.ascba.rebate.activities.merchant;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
-import com.ascba.rebate.activities.personal_identification.PICommitActivity;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -20,7 +18,6 @@ import com.ascba.rebate.bean.ComMsg;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
-import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.yanzhenjie.nohttp.RequestMethod;
 
@@ -31,18 +28,26 @@ import com.yanzhenjie.nohttp.RequestMethod;
 
 public class MctApplyStartActivity extends BaseDefaultNetActivity implements View.OnClickListener {
 
-    private WebView webView;
-    private String url = UrlUtils.sellerPerfectAgreement;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mct_apply_start);
+    protected int bindLayout() {
+        return R.layout.activity_mct_apply_start;
+    }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    @Override
+    protected void initViews(Bundle savedInstanceState) {
+        super.initViews(savedInstanceState);
         findViewById(R.id.btn_apply).setOnClickListener(this);
-        webView = findViewById(R.id.webView);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
+        WebView webView = findViewById(R.id.webView);
+//        webView.setWebViewClient(new WebViewClient());
+//        WebSettings settings = webView.getSettings();
+//        settings.setJavaScriptEnabled(true);
+//        settings.setUseWideViewPort(true);// 调整到适合webview大小
+//        settings.setLoadWithOverviewMode(true);// 调整到适合webview大小
+//        settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);// 屏幕自适应网页,如果没有这个，在低分辨率的手机上显示可能会异常
+//        settings.setSupportZoom(true);
+        webView.loadUrl(UrlUtils.sellerPerfectAgreement);
     }
 
     public static void start(Activity activity, String url) {

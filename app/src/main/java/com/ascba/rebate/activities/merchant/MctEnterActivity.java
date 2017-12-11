@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -29,7 +27,6 @@ import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.MctModType;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.bean.SellerDet;
-import com.ascba.rebate.bean.SellerEntity;
 import com.ascba.rebate.manager.LocationManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
@@ -69,7 +66,6 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private int errorStatus;
     private double lon;
     private double lat;
-    private ScrollView scrollView;
 
     @Override
     protected int bindLayout() {
@@ -97,7 +93,6 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         tvAddress = fv(R.id.mct_address);
         etDesc = fv(R.id.mct_desc);
         btnApply = fv(R.id.btn_apply);
-        scrollView = fv(R.id.scrollView);
 
         fv(R.id.lat_mct_logo).setOnClickListener(this);
         fv(R.id.lat_mct_name).setOnClickListener(this);
@@ -116,11 +111,10 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private void getParams() {
         Intent intent = getIntent();
         mStatus = intent.getIntExtra("status", 0);
-        if (mStatus == 0) {//0商家未完善资料1商家已完善资料
+        if (mStatus == 0) {//0提交资料 1修改资料
             btnApply.setEnabled(true);
             btnApply.setText("提交");
         } else if (mStatus == 1) {
-            btnApply.setEnabled(false);
             requestData();
         }
     }
@@ -142,16 +136,19 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         request.add("seller_description", etDesc.getText().toString());
         request.add("seller_lon", lon);
         request.add("seller_lat", lat);
-        request.add("seller_image", new FileBinary(designFile));
-        request.add("seller_cover_logo", new FileBinary(logoFile));
-
+        if (designFile != null && designFile.exists()) {
+            request.add("seller_image", new FileBinary(designFile));
+        }
+        if (logoFile != null && logoFile.exists()) {
+            request.add("seller_cover_logo", new FileBinary(logoFile));
+        }
         executeNetwork(1, "请稍后", request);
     }
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "mStatus: "+mStatus+",errorStatus"+errorStatus);
-        if (mStatus == 0 || errorStatus==0) {
+        Log.d(TAG, "mStatus: " + mStatus + ",errorStatus" + errorStatus);
+        if (mStatus == 0 || errorStatus == 0) {
             switch (v.getId()) {
                 case R.id.lat_mct_logo://商家logo
                     type = 0;
@@ -194,10 +191,14 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                             (2, "详细地址", getString(R.string.address_hint), "请输入详细地址", tvAddress.getText().toString(), CodeUtils.REQUEST_SHOP_ADDRESS));
                     break;
                 case R.id.btn_apply:
-                    if (allIsOk()) {
+                    if (mStatus == 0) {
+                        if (allIsOk()) {
+                            requestApply();
+                        } else {
+                            showToast("资料不完整");
+                        }
+                    }else {
                         requestApply();
-                    } else {
-                        showToast("资料不完整");
                     }
                     break;
             }
@@ -220,6 +221,8 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     return false;
                 }
             });
+        } else {
+            lm.startLocation();
         }
     }
 
@@ -353,10 +356,10 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     }
 
     private boolean allIsOk() {
-        return logoFile != null && logoFile.exists() && designFile != null && designFile.exists()
+        return  designFile != null && designFile.exists() && logoFile != null && logoFile.exists()
                 && !TextUtils.isEmpty(tvName.getText().toString()) && !TextUtils.isEmpty(tvType.getText().toString())
                 && !TextUtils.isEmpty(tvTime.getText().toString()) && !TextUtils.isEmpty(tvPhone.getText().toString())
-                && !TextUtils.isEmpty(tvLocate.getText().toString()) && !TextUtils.isEmpty(tvPLocate.getText().toString())
+                && !TextUtils.isEmpty(tvPLocate.getText().toString())
                 && !TextUtils.isEmpty(tvAddress.getText().toString()) && !TextUtils.isEmpty(etDesc.getText().toString());
 
     }
@@ -376,13 +379,19 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private void setUI(SellerDet sellerDet) {
         if (sellerDet != null) {
             errorStatus = sellerDet.getSeller_error_status();
-            btnApply.setEnabled(errorStatus==0);
+            btnApply.setEnabled(errorStatus == 0);
             btnApply.setText(sellerDet.getSeller_error_status_text());
             SellerDet.SellerBean seller = sellerDet.getSeller();
             mStatus = seller.getSeller_status();
-            Picasso.with(this).load(seller.getSeller_cover_logo()).placeholder(R.mipmap.module_loading).into(imLogo);
+            String coverLogo = seller.getSeller_cover_logo();
+            if (!TextUtils.isEmpty(coverLogo)) {
+                Picasso.with(this).load(coverLogo).placeholder(R.mipmap.module_loading).into(imLogo);
+            }
             tvName.setText(seller.getSeller_name());
-            Picasso.with(this).load(seller.getSeller_image()).placeholder(R.mipmap.gift_head_loading).into(imDesign);
+            String sellerImage = seller.getSeller_image();
+            if (!TextUtils.isEmpty(sellerImage)) {
+                Picasso.with(this).load(sellerImage).placeholder(R.mipmap.gift_head_loading).into(imDesign);
+            }
             tvType.setText(seller.getSeller_taglib());
             tvTime.setText(seller.getSeller_business_hours());
             tvPhone.setText(seller.getSeller_tel());
@@ -390,7 +399,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
             tvPLocate.setText(seller.getRegion_name());
             tvAddress.setText(seller.getSeller_localhost());
             etDesc.setText(seller.getSeller_description());
-            if(errorStatus == 1){
+            if (errorStatus == 1) {
                 etDesc.clearFocus();
                 etDesc.setFocusable(false);
             }

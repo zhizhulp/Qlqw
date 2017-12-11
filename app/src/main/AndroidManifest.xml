@@ -319,7 +319,8 @@
         <activity
             android:name=".activities.merchant.MctPayActivity"
             android:exported="true" />
-        <activity android:name=".activities.merchant.MctApplyStartActivity" />
+        <activity android:name=".activities.merchant.MctApplyStartActivity"
+            android:exported="true"/>
         <activity android:name=".activities.arround.ArroundListActivity" />
         <activity android:name=".activities.company_identification.CISuccessActivity"/>
     </application>
