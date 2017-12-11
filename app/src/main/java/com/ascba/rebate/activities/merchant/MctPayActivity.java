@@ -140,13 +140,7 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
         super.payResult(type);
         Bundle bundle = new Bundle();
         bundle.putInt("type", 3);
-        int member_status = pay.getMember_status();
-        if (member_status == 4)
-            bundle.putInt("select", 1);
-        else if (member_status == 5)
-            bundle.putInt("select", 2);
-        else
-            bundle.putInt("select", 0);
+        bundle.putInt("select", pay.getMember_status());
         bundle.putString("info", pay.getSuccess_info());
         startActivity(TextInfoSuccessActivity.class, bundle);
     }

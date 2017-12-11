@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
@@ -16,10 +14,6 @@ import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
-import com.ascba.rebate.bean.Result;
-import com.ascba.rebate.net.AbstractRequest;
-import com.ascba.rebate.utils.UrlUtils;
-import com.yanzhenjie.nohttp.RequestMethod;
 
 public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
 
@@ -62,9 +56,9 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                 else if (type == 2)
                     GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, select);
                 else if (type == 3)
-                    if (select == 1) startActivity(MctApplyStartActivity.class, null);
-                    else if (select == 2) MctEnterActivity.start(TextInfoSuccessActivity.this, 1);
-                    else startActivity(ReceiveCodeActivity.class, null);
+                    if (select == 2) startActivity(MctApplyStartActivity.class, null);
+                    else if (select == 3) MctEnterActivity.start(TextInfoSuccessActivity.this, 1);
+                    else if (select == 1) startActivity(ReceiveCodeActivity.class, null);
                 finish();
             }
         });
@@ -92,11 +86,10 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
             mMoneyBar.setTextTitle("入驻成功");
             tvTitle.setText("入驻成功");
             select = intent.getIntExtra("select", -1);
-            if (select == 0)
+            if (select == 1)
                 btnComplete.setText("立即体验");
             else
                 btnComplete.setText("完善资料");
-//            requestPayInfo(type);
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         }
     }
@@ -104,29 +97,5 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
     @Override
     public void onBackPressed() {
         backResults();
-    }
-
-    private void requestPayInfo(int what) {
-        AbstractRequest request = buildRequest(UrlUtils.getSellerStatus, RequestMethod.GET, null);
-        executeNetwork(what, "请稍后", request);
-    }
-
-    @Override
-    protected <T> void mHandle200(int what, Result<T> result) {
-        super.mHandle200(what, result);
-        if (what == 3) {
-            JSONObject jsonObject = JSON.parseObject(result.getData().toString());
-            int member_status = jsonObject.getInteger("member_status");
-            if (member_status == 4)
-                select = 1;
-            else if (member_status == 5)
-                select = 2;
-            else
-                select = 0;
-            if (select == 0)
-                btnComplete.setText("立即体验");
-            else
-                btnComplete.setText("完善资料");
-        }
     }
 }

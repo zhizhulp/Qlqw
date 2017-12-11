@@ -17,12 +17,9 @@ public class SellerEntity {
     private String money;
     private String server_tip;
     private List<ServerBean> server;
-    private int seller_status;
     private int company_status;
-    private String company_status_text;
     private String seller_perfect_url;
     private int member_status;
-    private String member_status_text;
 
     public int getMember_status() {
         return member_status;
@@ -32,36 +29,12 @@ public class SellerEntity {
         this.member_status = member_status;
     }
 
-    public String getMember_status_text() {
-        return member_status_text;
-    }
-
-    public void setMember_status_text(String member_status_text) {
-        this.member_status_text = member_status_text;
-    }
-
-    public int getSeller_status() {
-        return seller_status;
-    }
-
-    public void setSeller_status(int seller_status) {
-        this.seller_status = seller_status;
-    }
-
     public int getCompany_status() {
         return company_status;
     }
 
     public void setCompany_status(int company_status) {
         this.company_status = company_status;
-    }
-
-    public String getCompany_status_text() {
-        return company_status_text;
-    }
-
-    public void setCompany_status_text(String company_status_text) {
-        this.company_status_text = company_status_text;
     }
 
     public String getSeller_perfect_url() {
@@ -95,7 +68,6 @@ public class SellerEntity {
     public void setServer(List<ServerBean> server) {
         this.server = server;
     }
-
 
     public static class ServerBean {
         /**

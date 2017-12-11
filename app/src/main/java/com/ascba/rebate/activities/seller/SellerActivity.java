@@ -17,7 +17,6 @@ import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
-import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
@@ -75,9 +74,9 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         break;
                     case 4:
                         int memberStatus = sellerEntity.getMember_status();
-                        if (memberStatus == 1 || memberStatus == 4) {
+                        if (memberStatus == 1) {
                             startActivity(MctApplyStartActivity.class, null);
-                        } else if (memberStatus == 0 || memberStatus == 2 || memberStatus == 3 || memberStatus == 5) {
+                        } else if (memberStatus == 2) {
                             MctEnterActivity.start(SellerActivity.this, 1);
                         }
                         break;
