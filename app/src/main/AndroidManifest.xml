@@ -290,7 +290,8 @@
         <activity
             android:name=".activities.benefits.BenefitDetActivity"
             android:exported="true" />
-        <activity android:name=".activities.login.BindMobileActivity" />
+        <activity android:name=".activities.login.BindMobileActivity"
+            android:exported="true"/>
         <activity android:name=".activities.bill.VoucherBillActivity" />
         <activity android:name=".activities.bill.VoucherFilterActivity" />
         <activity

@@ -7,12 +7,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.ascba.rebate.R;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
+import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.LoginNextEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.ActivityManager;
@@ -35,6 +37,8 @@ public class BindMobileActivity extends BaseDefaultNetActivity implements View.O
     private String mobile, code;
     private boolean codePressed = false;
     private int codeLength;
+    private CheckBox cb;
+    private View tvProtocol;
 
     @Override
     protected int bindLayout() {
@@ -59,6 +63,9 @@ public class BindMobileActivity extends BaseDefaultNetActivity implements View.O
         etCode = fv(R.id.bind_code_et);
         tvTime = fv(R.id.bind_time_tv);
         btnOK = fv(R.id.bind_btn);
+        cb = fv(R.id.cb);
+        tvProtocol = fv(R.id.tv_protocol);
+        tvProtocol.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         tvTime.setOnClickListener(this);
         code = etCode.getText().toString();
@@ -122,19 +129,26 @@ public class BindMobileActivity extends BaseDefaultNetActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bind_btn:
-                if (codePressed) {
-                    if (codeLength == 6) {
-                        requestVerifyNetwork(1);
+                if(cb.isChecked()){
+                    if (codePressed) {
+                        if (codeLength == 6) {
+                            requestVerifyNetwork(1);
+                        } else {
+                            showToast("请输入六位验证码");
+                        }
                     } else {
-                        showToast("请输入六位验证码");
+                        showToast("请先获取验证码");
                     }
-                } else {
-                    showToast("请先获取验证码");
+                }else {
+                    showToast("请先同意《钱来钱往服务协议》");
                 }
                 break;
             case R.id.bind_time_tv:
                 codePressed = true;
                 identityMobile();
+                break;
+            case R.id.tv_protocol:
+                WebViewBaseActivity.start(this,"服务协议",UrlUtils.agreementRegister);
                 break;
         }
     }
