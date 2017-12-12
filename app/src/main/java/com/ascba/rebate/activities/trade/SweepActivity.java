@@ -101,6 +101,8 @@ public class SweepActivity extends BaseDefaultNetActivity implements SurfaceHold
             public void requestPermissionAndBack(boolean isOk) {
                 if (isOk) {
                     initCamera();
+                }else {
+                    finish();
                 }
             }
         });

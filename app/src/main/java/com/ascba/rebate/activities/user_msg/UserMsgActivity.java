@@ -11,6 +11,7 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.activities.company_identification.CISuccessActivity;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
+import com.ascba.rebate.activities.mine.RecActivity;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.activities.personal_identification.PISuccessActivity;
 import com.ascba.rebate.activities.user_data.UserDataActivity;
@@ -97,7 +98,6 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
                 }
                 break;
             case R.id.lat_company_authon:
-
                 int companyStatus = AppConfig.getInstance().getInt("company_status", 0);//用户是否进行企业认证.(0：待认证，1：已认证)
                 if (cardStatus == 0) {
                     showToast("个人认证未通过，请先认证");
@@ -111,6 +111,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
                 }
                 break;
             case R.id.lat_rec:
+                startActivity(RecActivity.class,null);
                 break;
             case R.id.lat_award:
                 break;

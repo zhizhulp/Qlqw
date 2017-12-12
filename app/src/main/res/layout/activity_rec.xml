@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.mine.RecActivity">
+    <com.ascba.rebate.view.MoneyBar
+        app:textTitle="我的二维码"
+        style="@style/MoneyBar"/>
+    <ScrollView
+        android:background="#FF424243"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="465dp">
+            <!--user msg-->
+            <LinearLayout
+                android:background="@drawable/rec_corner_01"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal">
+                <org.raphets.roundimageview.RoundImageView
+                    android:src="@mipmap/logo"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="21dp"
+                    android:id="@+id/im_head"
+                    app:type="circle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:text="155******44"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_class"
+                        android:layout_marginTop="11dp"
+                        android:text="普通会员"
+                        android:textColor="@color/grey_black_tv"
+                        android:textSize="@dimen/text_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <!--qr code -->
+            <RelativeLayout
+                android:background="@drawable/corner_rec_bg_02"
+                android:layout_width="match_parent"
+                android:layout_height="365dp">
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_width="220dp"
+                    android:layout_height="220dp" />
+                <TextView
+                    android:text="请向用户出示二维码，扫描即可注册"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginBottom="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

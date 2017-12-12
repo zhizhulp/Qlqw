@@ -311,21 +311,24 @@
             android:name=".activities.merchant.MctModTimeActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
-        <activity android:name=".activities.merchant.MctTypeActivity"
-            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".activities.merchant.MctTypeActivity"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".activities.merchant.MctRightsActivity"
             android:exported="true" />
         <activity
             android:name=".activities.merchant.MctPayActivity"
             android:exported="true" />
-        <activity android:name=".activities.merchant.MctApplyStartActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".activities.merchant.MctApplyStartActivity"
+            android:exported="true" />
         <activity android:name=".activities.arround.ArroundListActivity" />
-        <activity android:name=".activities.company_identification.CISuccessActivity"/>
+        <activity android:name=".activities.company_identification.CISuccessActivity" />
         <activity android:name=".activities.agent.AgentActivity" />
         <activity android:name=".activities.agent.AgentPayActivity" />
         <activity android:name=".activities.agent.CityAgentActivity" />
+        <activity android:name=".activities.mine.RecActivity"></activity>
     </application>
 
 </manifest>
