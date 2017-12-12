@@ -1,7 +1,9 @@
 package com.ascba.rebate.view.jd_selector;
 
-public class Street {
+import com.alibaba.fastjson.annotation.JSONField;
 
+public class Street {
+    @JSONField(name = "region_id")
     private int id;
     private String name;
 

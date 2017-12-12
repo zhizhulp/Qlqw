@@ -66,6 +66,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     private int errorStatus;
     private double lon;
     private double lat;
+    private int streetId;
 
     @Override
     protected int bindLayout() {
@@ -131,6 +132,8 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         request.add("seller_business_hours", tvTime.getText().toString());
         request.add("seller_address", tvLocate.getText().toString());//
         request.add("region_name", tvPLocate.getText().toString());
+        request.add("region_id", streetId);
+        Log.d(TAG, "request: region_id: "+streetId);
         request.add("seller_localhost", tvAddress.getText().toString());//
         request.add("seller_tel", tvPhone.getText().toString());
         request.add("seller_description", etDesc.getText().toString());
@@ -181,7 +184,9 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                         @Override
                         public void onAddressSelected(Province province, City city, County county, Street street) {
                             dialog.dismiss();
-                            tvPLocate.setText(String.format("%s-%s-%s-%s", province.getName(), city.getName(), county.getName(), street != null ? street.getName() : ""));
+                            tvPLocate.setText(String.format("%s-%s-%s-%s", province.getName(), city.getName(), county.getName(), street.getName()));
+                            streetId = street.getId();
+                            Log.d(TAG, "onAddressSelected: region_id: "+streetId);
                         }
                     });
                     dialog.show();
@@ -197,7 +202,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                         } else {
                             showToast("资料不完整");
                         }
-                    }else {
+                    } else {
                         requestApply();
                     }
                     break;
@@ -356,7 +361,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     }
 
     private boolean allIsOk() {
-        return  designFile != null && designFile.exists() && logoFile != null && logoFile.exists()
+        return designFile != null && designFile.exists() && logoFile != null && logoFile.exists()
                 && !TextUtils.isEmpty(tvName.getText().toString()) && !TextUtils.isEmpty(tvType.getText().toString())
                 && !TextUtils.isEmpty(tvTime.getText().toString()) && !TextUtils.isEmpty(tvPhone.getText().toString())
                 && !TextUtils.isEmpty(tvPLocate.getText().toString())
@@ -383,6 +388,8 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
             btnApply.setText(sellerDet.getSeller_error_status_text());
             SellerDet.SellerBean seller = sellerDet.getSeller();
             mStatus = seller.getSeller_status();
+            streetId = seller.getRegion_id();
+            Log.d(TAG, "setUI region_id: "+streetId);
             String coverLogo = seller.getSeller_cover_logo();
             if (!TextUtils.isEmpty(coverLogo)) {
                 Picasso.with(this).load(coverLogo).placeholder(R.mipmap.module_loading).into(imLogo);

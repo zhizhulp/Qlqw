@@ -68,6 +68,15 @@ public class SellerDet {
         private String seller_description;
         private String region_name;
         private int seller_status;
+        private int region_id;
+
+        public int getRegion_id() {
+            return region_id;
+        }
+
+        public void setRegion_id(int region_id) {
+            this.region_id = region_id;
+        }
 
         public int getSeller_status() {
             return seller_status;
