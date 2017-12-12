@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.benefits.BenefitDetActivity;
 import com.ascba.rebate.adapter.BillAdapter;
@@ -21,6 +21,7 @@ import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.BillFilterDialog;
 import com.ascba.rebate.view.datepicker.TimePickerView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration;
 import com.oushangfeng.pinnedsectionitemdecoration.callback.OnHeaderClickListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -89,7 +90,7 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
                 Bill bill = data.get(position);
                 int type = bill.getType();
                 if (type == 2) {//分红详情
-                    BenefitDetActivity.jumpIntent(VoucherBillActivity.this,bill.getObject_id());
+                    BenefitDetActivity.jumpIntent(VoucherBillActivity.this, bill.getObject_id());
                 }
             }
         });
@@ -148,6 +149,10 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
                 type = 1;
             } else if (mineType == 2) {
                 type = 2;
+            } else if (mineType == 8) {
+                type = extras.getInt("type", 0);
+                mMoneyBar.setTextTitle(extras.getString("title", "福利券账单"));
+                mMoneyBar.setTailShow(false);
             }
         }
     }

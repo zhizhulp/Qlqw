@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.agent.AgentActivity;
+import com.ascba.rebate.activities.agent.CityAgentActivity;
 import com.ascba.rebate.activities.arround.ArroundListActivity;
 import com.ascba.rebate.activities.benefits.SellBenefitActivity;
 import com.ascba.rebate.activities.bill.BillActivity;
@@ -78,7 +80,13 @@ public class ModulesUtils {
                 goActivity(activity, SellerActivity.class, null);
                 break;
             case "AroundMerchants":// 周边商家
-                goActivity(activity,ArroundListActivity.class,null);
+                goActivity(activity, ArroundListActivity.class, null);
+                break;
+            case "RegionalPartner":// 区域合伙人
+                goActivity(activity, CityAgentActivity.class, null);
+                break;
+            case "AgentLeague":// 代理加盟
+                goActivity(activity, AgentActivity.class, null);
                 break;
             case "More":// 更多
                 return false;

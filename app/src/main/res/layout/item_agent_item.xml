@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lat_employee_mct"
+    style="@style/SelectBackgroundWhile"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/title_point_10"
+        android:drawablePadding="7dp"
+        android:gravity="center"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_below="@id/tv_title"
+        android:gravity="center"
+        android:paddingLeft="17dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_26" />
+
+    <ImageView
+        android:id="@+id/im_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/more" />
+
+    <View
+        android:id="@+id/v_line"
+        style="@style/LineHorizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

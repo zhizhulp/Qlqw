@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/LineHorizontal" />
+
+    <include layout="@layout/mine_line" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/title_vertical_line"
+        android:drawablePadding="7dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="现金收益"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/grey_line" />
+</LinearLayout>

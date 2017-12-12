@@ -322,6 +322,9 @@
         <activity android:name=".activities.merchant.MctApplyStartActivity" />
         <activity android:name=".activities.arround.ArroundListActivity" />
         <activity android:name=".activities.company_identification.CISuccessActivity"/>
+        <activity android:name=".activities.agent.AgentActivity" />
+        <activity android:name=".activities.agent.AgentPayActivity" />
+        <activity android:name=".activities.agent.CityAgentActivity" />
     </application>
 
 </manifest>

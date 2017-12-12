@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -180,6 +181,10 @@ public class BillActivity extends BaseDefaultNetActivity {
             } else if (mineType == 7) {
                 type = 14;
                 mMoneyBar.setTextTitle("推荐代理收益");
+                mMoneyBar.setTailShow(false);
+            } else if (mineType == 8) {
+                type = extras.getInt("type", 0);
+                mMoneyBar.setTextTitle(extras.getString("title", "现金账单"));
                 mMoneyBar.setTailShow(false);
             }
         } else {

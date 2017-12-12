@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="22dp">
+
+        <org.raphets.roundimageview.RoundImageView
+            android:id="@+id/im_head"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            app:type="circle" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_toRightOf="@id/im_head"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_20" />
+
+        <TextView
+            android:id="@+id/tv_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_name"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/circle_style_01"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+
+    <View style="@style/LineHorizontal" />
+
+    <include layout="@layout/mine_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:id="@+id/tv_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:drawableLeft="@drawable/title_vertical_line"
+            android:drawablePadding="7dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15" />
+
+        <TextView
+            android:id="@+id/tv_select_address"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="[选择区域：北京市]"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/grey_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="代理商"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_agent_num"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/blue_btn"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="线上商家"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_online_mct_num"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/blue_btn"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="线下商家"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_mct_num"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/blue_btn"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="普通会员"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_user_num"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:text="89"
+                android:textColor="@color/blue_btn"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_agent_num"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <View
+            style="@style/LineHorizontal"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/tv_left_time_str"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="剩余商家入驻年限"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/tv_left_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/tv_left_time_str"
+            android:gravity="center"
+            android:text="10"
+            android:textColor="@color/grey_black_tv2"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/mct_circle_bg_03"
+            android:text="购买"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_13" />
+    </RelativeLayout>
+</LinearLayout>

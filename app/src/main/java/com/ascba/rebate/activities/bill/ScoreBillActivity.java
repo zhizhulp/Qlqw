@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -149,6 +150,10 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
             } else if (mineType == 7) {//礼品分收益
                 type = 2;
                 mMoneyBar.setTextTitle("礼品分收益");
+            } else if (mineType == 8) {
+                type = extras.getInt("type", 0);
+                mMoneyBar.setTextTitle(extras.getString("title", "礼品分账单"));
+                mMoneyBar.setTailShow(false);
             }
         }
     }

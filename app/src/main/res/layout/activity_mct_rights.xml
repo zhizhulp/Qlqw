@@ -162,7 +162,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/module_title_left"
+                android:drawableLeft="@drawable/title_vertical_line"
                 android:drawablePadding="7dp"
                 android:paddingBottom="15dp"
                 android:paddingLeft="14dp"
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/mct_point_blue"
+                    android:drawableLeft="@drawable/title_point_10"
                     android:drawablePadding="7dp"
                     android:gravity="center"
                     android:text="入驻商家收益"
@@ -252,10 +252,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/more" />
-
-                <View
-                    style="@style/LineHorizontal"
-                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
             <!--</editor-fold>-->
             <!--<editor-fold desc="礼品分收益">-->

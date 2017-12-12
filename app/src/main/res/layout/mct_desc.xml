@@ -10,10 +10,9 @@
         android:id="@+id/img"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="9dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="14dp"
-        android:layout_marginTop="9dp"
         app:type="circle" />
 
     <TextView
@@ -42,6 +41,7 @@
         android:textSize="@dimen/text_13" />
 
     <View
+        android:id="@+id/v_line"
         style="@style/LineHorizontal"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
