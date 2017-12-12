@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.bean.MctBasePay;
+import com.ascba.rebate.bean.MctPayAddress;
 import com.ascba.rebate.bean.MctPayClass;
 import com.ascba.rebate.bean.MctPayDesc;
 import com.ascba.rebate.bean.MctPayTitle;
@@ -25,6 +26,7 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
         addItemType(MctBasePay.ITEM_TYPE_TITLE, R.layout.mct_title);
         addItemType(MctBasePay.ITEM_TYPE_CLASS, R.layout.mct_class);
         addItemType(MctBasePay.ITEM_TYPE_DESC, R.layout.mct_desc);
+        addItemType(MctBasePay.ITEM_TYPE_ADDRESS, R.layout.mct_desc);
     }
 
     @Override
@@ -73,6 +75,9 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
                         into((ImageView) helper.getView(R.id.img));
                 helper.setText(R.id.tv_title, payDesc.getTitle());
                 helper.setText(R.id.tv_content, payDesc.getContent());
+                break;
+            case 3:
+                MctPayAddress payAddress = (MctPayAddress) item;
                 break;
         }
     }

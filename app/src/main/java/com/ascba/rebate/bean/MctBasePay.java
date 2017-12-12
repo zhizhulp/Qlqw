@@ -7,6 +7,7 @@ public class MctBasePay implements MultiItemEntity {
     public static int ITEM_TYPE_TITLE =0;
     public static int ITEM_TYPE_CLASS =1;
     public static int ITEM_TYPE_DESC =2;
+    public static int ITEM_TYPE_ADDRESS =3;
     @Override
     public int getItemType() {
         return ITEM_TYPE_TITLE;

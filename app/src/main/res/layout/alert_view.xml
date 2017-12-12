@@ -12,7 +12,7 @@
         android:visibility="gone"
         android:textColor="@color/grey_black_tv"
         android:layout_marginTop="20dp"
-        android:text="title"
+        android:text="address"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
         android:id="@+id/tv_alert_title"

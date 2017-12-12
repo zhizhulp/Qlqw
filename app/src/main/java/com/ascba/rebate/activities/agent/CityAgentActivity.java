@@ -1,6 +1,7 @@
 package com.ascba.rebate.activities.agent;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -110,6 +111,8 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
         tvName = headView.findViewById(R.id.tv_name);
         tvClass = headView.findViewById(R.id.tv_class);
         tvType = headView.findViewById(R.id.tv_type_name);
+        GradientDrawable drawable = (GradientDrawable) tvType.getCompoundDrawables()[0];
+        drawable.setColor(getResources().getColor(R.color.blue_btn));
         tvAgentNum = headView.findViewById(R.id.tv_agent_num);
         tvOnlineMctNum = headView.findViewById(R.id.tv_online_mct_num);
         tvMctNum = headView.findViewById(R.id.tv_mct_num);

@@ -14,7 +14,9 @@ import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.adapter.MctPayAdapter;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
+import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.MctBasePay;
+import com.ascba.rebate.bean.MctPayAddress;
 import com.ascba.rebate.bean.MctPayClass;
 import com.ascba.rebate.bean.MctPayDesc;
 import com.ascba.rebate.bean.MctPayTitle;
@@ -41,7 +43,9 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     private ImageView imHead;
     private TextView tvName;
     private TextView tvClass;
-    private String money;
+
+    private int is_buy_agency;
+    private String balance_money, region_info, agreement_url, agreement_headname;
 
     @Override
     protected int bindLayout() {
@@ -56,15 +60,16 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
         mctAdapter = new MctPayAdapter(data);
 
         View footView = new View(this);
-        footView.setLayoutParams(new RecyclerView.LayoutParams(-1, (int) ScreenDpiUtils.dp2px(this, 20)));
+        footView.setLayoutParams(new RecyclerView.LayoutParams(-1, (int) ScreenDpiUtils.dp2px(this, 3)));
         mctAdapter.addFooterView(footView);
         mRecyclerView.setAdapter(mctAdapter);
         fv(R.id.btn_apply).setOnClickListener(this);
+        fv(R.id.tv_agent_html).setOnClickListener(this);
         requestData();
     }
 
     private void requestData() {
-        AbstractRequest request = buildRequest(UrlUtils.mctPay, RequestMethod.GET, null);
+        AbstractRequest request = buildRequest(UrlUtils.agentJoin, RequestMethod.GET, null);
         executeNetwork(0, "请稍后", request);
     }
 
@@ -73,15 +78,17 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     }
 
     private void setList(JSONObject jObj) {
-        List<MctPayClass> level = JSON.parseArray(jObj.getString("level"), MctPayClass.class);
+        List<MctPayClass> level = JSON.parseArray(jObj.getString("agent_setmeal_list"), MctPayClass.class);
         if (level != null && level.size() > 0) {
-            data.add(new MctPayTitle("商家入驻"));
+            data.add(new MctPayTitle("代理加盟"));
             data.addAll(level);
         }
 
-        List<MctPayDesc> interests = JSON.parseArray(jObj.getString("interests"), MctPayDesc.class);
+        data.add(new MctPayAddress(region_info, is_buy_agency == 1));
+
+        List<MctPayDesc> interests = JSON.parseArray(jObj.getString("protocol_list"), MctPayDesc.class);
         if (interests != null && interests.size() > 0) {
-            data.add(new MctPayTitle("入驻即可享受以下权益", true));
+            data.add(new MctPayTitle("加盟即可享受以下权益", true));
             for (MctPayDesc desc : interests) {
                 desc.setContent(desc.getContent().replace("\n", "\n\n"));
             }
@@ -98,9 +105,10 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
             tvClass = headView.findViewById(R.id.tv_class);
             mctAdapter.addHeaderView(headView);
         }
-        Picasso.with(this).load(jObj.getString("seller_image")).placeholder(R.mipmap.logo).into(imHead);
-        tvName.setText(jObj.getString("seller_name"));
-        tvClass.setText(jObj.getString("seller_rule"));
+        AppConfig appConfig = AppConfig.getInstance();
+        Picasso.with(this).load(appConfig.getString("avatar", null)).placeholder(R.mipmap.logo).into(imHead);
+        tvName.setText(appConfig.getString("nickname", null));
+        tvClass.setText(appConfig.getString("group_name", null));
     }
 
     private void addData() {
@@ -111,7 +119,9 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_apply)
-            showPayDialog(mctAdapter.getSelect().getMoney(), money);
+            showPayDialog(mctAdapter.getSelect().getMoney(), balance_money);
+        else if (id == R.id.tv_agent_html)
+            WebViewBaseActivity.start(this, agreement_headname, agreement_url);
     }
 
     @Override
@@ -128,7 +138,11 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
         if (what == 0) {
             String data = (String) result.getData();
             JSONObject jObj = JSONObject.parseObject(data);
-            money = jObj.getString("money");
+            balance_money = jObj.getString("balance_money");
+            is_buy_agency = jObj.getInteger("is_buy_agency");
+            region_info = jObj.getString("region_info");
+            agreement_url = jObj.getString("agreement_url");
+            agreement_headname = jObj.getString("agreement_headname");
             setHead(jObj);
             setList(jObj);
             updatePayPsdStatus(jObj);
@@ -139,8 +153,7 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     public void payResult(String type) {
         super.payResult(type);
         Bundle bundle = new Bundle();
-        bundle.putInt("type", 3);
-        bundle.putInt("select", pay.getMember_status());
+        bundle.putInt("type", 4);
         bundle.putString("info", pay.getSuccess_info());
         startActivity(TextInfoSuccessActivity.class, bundle);
     }

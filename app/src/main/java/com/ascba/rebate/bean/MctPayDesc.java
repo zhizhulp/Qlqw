@@ -3,11 +3,11 @@ package com.ascba.rebate.bean;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MctPayDesc extends MctBasePay {
-    @JSONField(name = "interests_image")
+    @JSONField(name = "interests_image", alternateNames = {"avatar"})
     private String descImg;
-    @JSONField(name = "interests_title")
+    @JSONField(name = "interests_title", alternateNames = {"title"})
     private String title;
-    @JSONField(name = "interests_desc")
+    @JSONField(name = "interests_desc", alternateNames = {"intro"})
     private String content;
     @Override
     public int getItemType() {

@@ -3,15 +3,15 @@ package com.ascba.rebate.bean;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MctPayClass extends MctBasePay {
-    @JSONField(name = "level_id")
+    @JSONField(name = "level_id", alternateNames = {"setmeal_id"})
     private int id;
-    @JSONField(name = "level_title")
+    @JSONField(name = "level_title", alternateNames = {"setmeal_title"})
     private String title;
-    @JSONField(name = "level_desc")
+    @JSONField(name = "level_desc", alternateNames = {"setmeal_intro"})
     private String content;
-    @JSONField(name = "level_present_price")
+    @JSONField(name = "level_present_price", alternateNames = {"discount_price"})
     private String after;
-    @JSONField(name = "level_original_price")
+    @JSONField(name = "level_original_price", alternateNames = {"price"})
     private String before;
     private int only_price;
 
