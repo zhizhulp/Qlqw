@@ -7,16 +7,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.bill.VoucherBillActivity;
 import com.ascba.rebate.adapter.AgentAdapter;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.AgentItem;
+import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.squareup.picasso.Picasso;
+import com.yanzhenjie.nohttp.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +83,12 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         });
         mRecyclerView.setAdapter(agentAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        setList(null);
-        addHead();
+        requestData();
+    }
+
+    private void requestData() {
+        AbstractRequest request = buildRequest(UrlUtils.agencyIndex, RequestMethod.GET, null);
+        executeNetwork(0, "请稍后", request);
     }
 
     private void addHead() {
@@ -90,43 +100,66 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         tvAgentNum = headView.findViewById(R.id.tv_agent_num);
         tvOnlineMctNum = headView.findViewById(R.id.tv_online_mct_num);
         tvMctNum = headView.findViewById(R.id.tv_mct_num);
-        tvUserNum = headView.findViewById(R.id.tv_user_name);
+        tvUserNum = headView.findViewById(R.id.tv_user_num);
         tvTime = headView.findViewById(R.id.tv_left_time);
         tvPay = headView.findViewById(R.id.tv_pay);
         tvPay.setOnClickListener(this);
         agentAdapter.addHeaderView(headView);
     }
 
+    @Override
+    protected <T> void mHandle200(int what, Result<T> result) {
+        super.mHandle200(what, result);
+        if (what == 0) {
+            String data = (String) result.getData();
+            JSONObject dataObj = JSON.parseObject(data);
+            setHead(dataObj);
+            setList(dataObj);
+        }
+    }
+
     private void setHead(JSONObject jObj) {
         if (headView == null)
             addHead();
-        Picasso.with(this).load(jObj.getString("seller_image")).placeholder(R.mipmap.logo).into(imHead);
-        tvName.setText(jObj.getString("seller_name"));
-        tvClass.setText(jObj.getString("seller_rule"));
-        tvType.setText(jObj.getString("seller_rule"));
-        tvAgentNum.setText(jObj.getString("seller_rule"));
-        tvOnlineMctNum.setText(jObj.getString("seller_rule"));
-        tvMctNum.setText(jObj.getString("seller_rule"));
-        tvUserNum.setText(jObj.getString("seller_rule"));
-        tvTime.setText(jObj.getString("seller_rule"));
+        AppConfig ins = AppConfig.getInstance();
+        Picasso.with(this).load(ins.getString("avatar", null)).placeholder(R.mipmap.logo).into(imHead);
+        tvName.setText(ins.getString("nickname", null));
+        tvClass.setText(ins.getString("group_name", null));
+        tvType.setText(jObj.getString("agent_title"));
+        tvAgentNum.setText(jObj.getString("statis_agent"));
+        tvOnlineMctNum.setText(jObj.getString("statis_online_business"));
+        tvMctNum.setText(jObj.getString("statis_offline_business"));
+        tvUserNum.setText(jObj.getString("statis_general_user"));
+        tvTime.setText(jObj.getString("seller_count"));
+        mMoneyBar.setTextTail(jObj.getIntValue("user_agent") == 0 ? "代理加盟" : null);
     }
 
-    private void setList(JSONObject object) {
+    private void setList(JSONObject jObj) {
+        agentItems.clear();
         agentItems.add(new AgentItem(0xff408fff, "现金收益"));
-        agentItems.add(new AgentItem(0xff408fff, "现金收益", "", "", 1, 0));
-        agentItems.add(new AgentItem(0xfff29130, "现金收益", "", "", 1, 0));
-        agentItems.add(new AgentItem(0xff40e2ff, "现金收益", "", "", 1, 0));
-        agentItems.add(new AgentItem(0xfffa60a9, "现金收益", "", "", 1, 0));
+        agentItems.add(new AgentItem(0xff408fff, jObj.getString("business_income_title"),
+                jObj.getString("business_income"), jObj.getString("business_income_off_title"), 1, 0));
+        agentItems.add(new AgentItem(0xfff29130, jObj.getString("commission_title"),
+                jObj.getString("commission"), jObj.getString("commission_off_title"), 1, 0));
+        agentItems.add(new AgentItem(0xff40e2ff, jObj.getString("red_commission_title"),
+                jObj.getString("red_commission"), jObj.getString("red_commission_off_title"), 1, 0));
+        agentItems.add(new AgentItem(0xfffa60a9, jObj.getString("dividend_commission_title"),
+                jObj.getString("dividend_commission"), jObj.getString("dividend_commission_off_title"), 1, 0));
+        agentItems.add(new AgentItem(0xfffa60a9, jObj.getString("agency_title"),
+                jObj.getString("agency"), jObj.getString("agency_off_title"), 1, 0));
         agentItems.add(new AgentItem(0xff834ffb, "积分收益"));
-        agentItems.add(new AgentItem(0xff834ffb, "积分收益", "", "", 2, 0));
+        agentItems.add(new AgentItem(0xff834ffb, jObj.getString("gift_points_title"),
+                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, 0));
         agentItems.add(new AgentItem(0xffffb540, "福利券收益"));
-        agentItems.add(new AgentItem(0xffffb540, "福利券收益", "", "", 3, 0));
+        agentItems.add(new AgentItem(0xffffb540, jObj.getString("benefit_coupon_title"),
+                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, 0));
+        agentAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.tv_pay) {
-
+            startActivity(AgentPayActivity.class, null);
         }
     }
 }
