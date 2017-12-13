@@ -113,5 +113,6 @@ public class UrlUtils {
     public static String agentJoin = baseWebsite + "agent/join";
     public static String agencyIndex = baseWebsite + "agency/index";
     public static String partnerIndex = baseWebsite + "partner/index";
+    public static String agreementRegister = baseWebsite + "agreement/egister";
 
 }

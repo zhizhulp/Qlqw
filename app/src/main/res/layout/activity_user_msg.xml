@@ -159,6 +159,7 @@
             android:layout_centerVertical="true"
             style="@style/ImageViewMore"/>
         <View
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             style="@style/LineHorizontal"/>
     </RelativeLayout>
