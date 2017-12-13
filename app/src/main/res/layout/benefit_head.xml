@@ -82,7 +82,7 @@
         android:drawablePadding="15dp"
         android:gravity="center"
         android:paddingTop="20dp"
-        android:text="今日分红收益排行榜"
+        android:text="今日寄卖收益排行榜"
         android:textColor="@color/grey_black_tv"
         android:textSize="@dimen/text_16" />
 

@@ -124,7 +124,7 @@ public class SellBenefitActivity extends BaseDefaultNetActivity implements View.
             btnStatus.setVisibility(View.GONE);
             btnStatus.setEnabled(false);
         }
-        tvTitle.setText("今日寄卖分红动态（" + member.getRanking() + "）");
+        tvTitle.setText("今日寄卖动态（" + member.getRanking() + "）");
         tvMoney.setText(setMoney(member.getToday_money()));
         setMoneySpanString(member.getNeed_money(), member.getScore(),
                 member.getLast_bill_time(), member.getLeast_settlement());
