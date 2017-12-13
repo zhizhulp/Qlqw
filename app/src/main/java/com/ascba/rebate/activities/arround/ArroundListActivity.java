@@ -1,10 +1,10 @@
 package com.ascba.rebate.activities.arround;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +21,7 @@ import com.ascba.rebate.bean.ArroundEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.LocationManager;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.EmptyUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -66,13 +67,13 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
             public void clickTail() {
                 switch (member_status) {
                     case 1:
-                        startActivity(MctPayActivity.class, null);
+                        startActivityForResult(MctPayActivity.class, null, CodeUtils.REQUEST_MCT_PAY);
                         break;
                     case 2:
                         startActivity(MctApplyStartActivity.class, null);
                         break;
                     case 3:
-                        startActivity(MctPayActivity.class, null);
+                        startActivityForResult(MctPayActivity.class, null, CodeUtils.REQUEST_MCT_PAY);
                         break;
                 }
             }
@@ -256,6 +257,15 @@ public class ArroundListActivity extends BaseDefaultNetActivity implements View.
         super.onDestroy();
         if (null != lm) {
             lm.destroyLocation();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CodeUtils.REQUEST_MCT_PAY && resultCode == RESULT_OK) {
+            member_status = 0;
+            setTail();
         }
     }
 }

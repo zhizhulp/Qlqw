@@ -146,13 +146,13 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
     private void setList(JSONObject jObj) {
         agentItems.add(new AgentItem(0xff408fff, "现金收益"));
         agentItems.add(new AgentItem(0xff408fff, jObj.getString("settlement_amount_title"),
-                jObj.getString("settlement_amount"), jObj.getString("settlement_amount_off_title"), 1, 0));
+                jObj.getString("settlement_amount"), jObj.getString("settlement_amount_off_title"), 1, ""));
         agentItems.add(new AgentItem(0xff834ffb, "积分收益"));
         agentItems.add(new AgentItem(0xff834ffb, jObj.getString("gift_points_title"),
-                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, 0));
+                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, ""));
         agentItems.add(new AgentItem(0xffffb540, "福利券收益"));
         agentItems.add(new AgentItem(0xffffb540, jObj.getString("benefit_coupon_title"),
-                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, 0));
+                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, ""));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class AgentItem implements MultiItemEntity {
     private String content;
     private String nextTitle;
     private int nextType;// 1 现金账单  2 礼品份账单 3 福利券账单
-    private int listType;
+    private String listType;
 
     public AgentItem(@ColorInt int color, String title) {
         setType(AgentAdapter.TITLE_TYPE);
@@ -31,7 +31,7 @@ public class AgentItem implements MultiItemEntity {
         setContent(content);
     }
 
-    public AgentItem(@ColorInt int color, String title, String content, String nextTitle, int nextType, int listType) {
+    public AgentItem(@ColorInt int color, String title, String content, String nextTitle, int nextType, String listType) {
         this(color, title, content);
         setNextTitle(nextTitle);
         setNextType(nextType);
@@ -86,11 +86,11 @@ public class AgentItem implements MultiItemEntity {
         this.nextType = nextType;
     }
 
-    public int getListType() {
+    public String getListType() {
         return listType;
     }
 
-    public void setListType(int listType) {
+    public void setListType(String listType) {
         this.listType = listType;
     }
 

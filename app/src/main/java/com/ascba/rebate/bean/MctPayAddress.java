@@ -2,7 +2,8 @@ package com.ascba.rebate.bean;
 
 public class MctPayAddress extends MctBasePay {
     private String address;
-    private boolean isBuyAgency;
+    private int isBuyAgency;//是否购买过代理，1已买过，0未买过 2修改状态
+    private int selectID;
 
     @Override
     public int getItemType() {
@@ -21,16 +22,24 @@ public class MctPayAddress extends MctBasePay {
         this.address = address;
     }
 
-    public MctPayAddress(String address, boolean buyAgency) {
+    public MctPayAddress(String address, int buyAgency) {
         this.address = address;
         isBuyAgency = buyAgency;
     }
 
-    public boolean isBuyAgency() {
+    public int getIsBuyAgency() {
         return isBuyAgency;
     }
 
-    public void setBuyAgency(boolean buyAgency) {
-        isBuyAgency = buyAgency;
+    public void setIsBuyAgency(int isBuyAgency) {
+        this.isBuyAgency = isBuyAgency;
+    }
+
+    public int getSelectID() {
+        return selectID;
+    }
+
+    public void setSelectID(int selectID) {
+        this.selectID = selectID;
     }
 }

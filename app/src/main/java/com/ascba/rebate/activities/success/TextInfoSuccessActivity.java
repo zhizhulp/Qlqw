@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.agent.AgentActivity;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
@@ -55,10 +56,12 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                     startActivity(SellerInvoiceHistoryActivity.class, null);
                 else if (type == 2)
                     GiftExchangeLogActivity.jumpIntent(TextInfoSuccessActivity.this, select);
-                else if (type == 3)
+                else if (type == 3) {
                     if (select == 2) startActivity(MctApplyStartActivity.class, null);
                     else if (select == 3) MctEnterActivity.start(TextInfoSuccessActivity.this, 1);
                     else if (select == 1) startActivity(ReceiveCodeActivity.class, null);
+                } else if (type == 4)
+                    startActivity(AgentActivity.class, null);
                 finish();
             }
         });
@@ -90,6 +93,11 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                 btnComplete.setText("立即体验");
             else
                 btnComplete.setText("完善资料");
+            tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
+        } else if (type == 4) {
+            mMoneyBar.setTextTitle("加盟成功");
+            tvTitle.setText("加盟成功");
+            btnComplete.setText("完成");
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         }
     }

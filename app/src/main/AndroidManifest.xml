@@ -290,8 +290,9 @@
         <activity
             android:name=".activities.benefits.BenefitDetActivity"
             android:exported="true" />
-        <activity android:name=".activities.login.BindMobileActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".activities.login.BindMobileActivity"
+            android:exported="true" />
         <activity android:name=".activities.bill.VoucherBillActivity" />
         <activity android:name=".activities.bill.VoucherFilterActivity" />
         <activity
@@ -326,10 +327,12 @@
             android:exported="true" />
         <activity android:name=".activities.arround.ArroundListActivity" />
         <activity android:name=".activities.company_identification.CISuccessActivity" />
-        <activity android:name=".activities.agent.AgentActivity" />
+        <activity
+            android:name=".activities.agent.AgentActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activities.agent.AgentPayActivity" />
         <activity android:name=".activities.agent.CityAgentActivity" />
-        <activity android:name=".activities.mine.RecActivity"></activity>
+        <activity android:name=".activities.mine.RecActivity" />
     </application>
 
 </manifest>

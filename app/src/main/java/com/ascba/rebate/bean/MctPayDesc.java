@@ -9,6 +9,8 @@ public class MctPayDesc extends MctBasePay {
     private String title;
     @JSONField(name = "interests_desc", alternateNames = {"intro"})
     private String content;
+    private boolean isLast;
+
     @Override
     public int getItemType() {
         return ITEM_TYPE_DESC;
@@ -45,5 +47,13 @@ public class MctPayDesc extends MctBasePay {
         this.descImg = descImg;
         this.title = title;
         this.content = content;
+    }
+
+    public boolean isLast() {
+        return isLast;
+    }
+
+    public void setLast(boolean last) {
+        isLast = last;
     }
 }

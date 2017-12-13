@@ -147,21 +147,21 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         agentItems.clear();
         agentItems.add(new AgentItem(0xff408fff, "现金收益"));
         agentItems.add(new AgentItem(0xff408fff, jObj.getString("business_income_title"),
-                jObj.getString("business_income"), jObj.getString("business_income_off_title"), 1, 0));
+                jObj.getString("business_income"), jObj.getString("business_income_off_title"), 1, "17"));
         agentItems.add(new AgentItem(0xfff19234, jObj.getString("commission_title"),
-                jObj.getString("commission"), jObj.getString("commission_off_title"), 1, 0));
+                jObj.getString("commission"), jObj.getString("commission_off_title"), 1, "18"));
         agentItems.add(new AgentItem(0xff44eee7, jObj.getString("red_commission_title"),
-                jObj.getString("red_commission"), jObj.getString("red_commission_off_title"), 1, 0));
+                jObj.getString("red_commission"), jObj.getString("red_commission_off_title"), 1, "19"));
         agentItems.add(new AgentItem(0xffe15698, jObj.getString("dividend_commission_title"),
-                jObj.getString("dividend_commission"), jObj.getString("dividend_commission_off_title"), 1, 0));
+                jObj.getString("dividend_commission"), jObj.getString("dividend_commission_off_title"), 1, "20"));
         agentItems.add(new AgentItem(0xffdfe156, jObj.getString("agency_title"),
-                jObj.getString("agency"), jObj.getString("agency_off_title"), 1, 0));
+                jObj.getString("agency"), jObj.getString("agency_off_title"), 1, "21"));
         agentItems.add(new AgentItem(0xff834ffb, "积分收益"));
         agentItems.add(new AgentItem(0xff834ffb, jObj.getString("gift_points_title"),
-                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, 0));
+                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, "14"));
         agentItems.add(new AgentItem(0xffffb540, "福利券收益"));
         agentItems.add(new AgentItem(0xffffb540, jObj.getString("benefit_coupon_title"),
-                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, 0));
+                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, "3"));
         agentAdapter.notifyDataSetChanged();
     }
 
@@ -170,5 +170,11 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         if (v.getId() == R.id.tv_pay) {
             startActivity(AgentPayActivity.class, null);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        requestData();
     }
 }
