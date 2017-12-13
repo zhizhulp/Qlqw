@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.bean.MctBasePay;
+import com.ascba.rebate.bean.MctPayAddress;
 import com.ascba.rebate.bean.MctPayClass;
 import com.ascba.rebate.bean.MctPayDesc;
 import com.ascba.rebate.bean.MctPayTitle;
@@ -25,6 +26,7 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
         addItemType(MctBasePay.ITEM_TYPE_TITLE, R.layout.mct_title);
         addItemType(MctBasePay.ITEM_TYPE_CLASS, R.layout.mct_class);
         addItemType(MctBasePay.ITEM_TYPE_DESC, R.layout.mct_desc);
+        addItemType(MctBasePay.ITEM_TYPE_ADDRESS, R.layout.item_agent_pay_address);
     }
 
     @Override
@@ -33,6 +35,7 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
             case 0:
                 MctPayTitle payTitle = (MctPayTitle) item;
                 helper.setVisible(R.id.v_line, payTitle.isShowLine());
+                helper.setVisible(R.id.space_top, payTitle.isShowSpace());
                 helper.setText(R.id.tv_title, payTitle.getTitle());
                 break;
             case 1:
@@ -73,6 +76,22 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
                         into((ImageView) helper.getView(R.id.img));
                 helper.setText(R.id.tv_title, payDesc.getTitle());
                 helper.setText(R.id.tv_content, payDesc.getContent());
+                helper.setVisible(R.id.v_line, !payDesc.isLast());
+                break;
+            case 3:
+                MctPayAddress payAddress = (MctPayAddress) item;
+                if (payAddress.getIsBuyAgency() == 1) {
+                    helper.getView(R.id.tv_address_select).setVisibility(View.INVISIBLE);
+                    helper.setVisible(R.id.im_more, false);
+                    helper.setText(R.id.tv_address, payAddress.getAddress());
+                } else if (payAddress.getIsBuyAgency() == 0) {
+                    helper.getView(R.id.tv_address_select).setVisibility(View.VISIBLE);
+                    helper.setVisible(R.id.im_more, true);
+                    helper.addOnClickListener(R.id.lat_address);
+                } else if (payAddress.getIsBuyAgency() == 2) {
+                    helper.addOnClickListener(R.id.lat_address);
+                    helper.setText(R.id.tv_address_select, payAddress.getAddress());
+                }
                 break;
         }
     }

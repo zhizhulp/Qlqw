@@ -110,9 +110,11 @@ public class UrlUtils {
     public static String getSellerTaglib = baseWebsite + "seller/getSellerTaglib";
     public static String getSellerStatus = baseWebsite + "seller/getSellerStatus";
     public static String sellerPerfectAgreement = baseWebsite + "sellerPerfectAgreement";
+    public static String agentJoin = baseWebsite + "agent/join";
     public static String agencyIndex = baseWebsite + "agency/index";
     public static String partnerIndex = baseWebsite + "partner/index";
     public static String agreementRegister = baseWebsite + "agreement/register";
     public static String getMemberQrcode = baseWebsite + "user/getMemberQrcode";
+    public static String agentPayment = baseWebsite + "agent/payment";
 
 }

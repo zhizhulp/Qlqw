@@ -3,6 +3,7 @@ package com.ascba.rebate.bean;
 public class MctPayTitle extends MctBasePay {
     private String title;
     private boolean showLine;
+    private boolean showSpace = true;
 
     @Override
     public int getItemType() {
@@ -26,11 +27,25 @@ public class MctPayTitle extends MctBasePay {
         this.showLine = showLine;
     }
 
+    public MctPayTitle(String title, boolean showLine, boolean showSpace) {
+        this.title = title;
+        this.showLine = showLine;
+        this.showSpace = showSpace;
+    }
+
     public boolean isShowLine() {
         return showLine;
     }
 
     public void setShowLine(boolean showLine) {
         this.showLine = showLine;
+    }
+
+    public boolean isShowSpace() {
+        return showSpace;
+    }
+
+    public void setShowSpace(boolean showSpace) {
+        this.showSpace = showSpace;
     }
 }

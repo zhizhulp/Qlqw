@@ -150,4 +150,12 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
             drawable.setColor(Color.parseColor("#" + data.getActive_color()));
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CodeUtils.REQUEST_MCT_PAY && resultCode == RESULT_OK) {
+            requestData();
+        }
+    }
 }
