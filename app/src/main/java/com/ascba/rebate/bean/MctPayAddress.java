@@ -18,13 +18,10 @@ public class MctPayAddress extends MctBasePay {
         this.address = address;
     }
 
-    public MctPayAddress(String address) {
-        this.address = address;
-    }
-
-    public MctPayAddress(String address, int buyAgency) {
+    public MctPayAddress(String address, int buyAgency, int id) {
         this.address = address;
         isBuyAgency = buyAgency;
+        selectID = id;
     }
 
     public int getIsBuyAgency() {

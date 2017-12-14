@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <ImageView
+    <org.raphets.roundimageview.RoundImageView
         android:id="@+id/item_iv"
         android:layout_width="61dp"
         android:layout_height="61dp"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="17dp"
-        android:src="@mipmap/module_loading" />
+        android:src="@mipmap/module_loading"
+        app:leftBottom_corner_radius="3dp"
+        app:leftTop_corner_radius="3dp"
+        app:rightBottom_corner_radius="3dp"
+        app:rightTop_corner_radius="3dp"
+        app:type="round" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,7 +40,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
             android:layout_alignLeft="@id/item_title"
             android:layout_below="@id/item_title"
             android:gravity="left|center_vertical"
@@ -45,7 +51,7 @@
         <TextView
             android:id="@+id/item_taglib"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
             android:layout_below="@id/item_title"
             android:layout_marginLeft="60dp"
             android:ellipsize="end"
@@ -58,7 +64,7 @@
         <TextView
             android:id="@+id/item_time_tv"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
             android:layout_alignLeft="@id/item_title"
             android:layout_below="@id/item_taglib"
             android:layout_marginBottom="10dp"
@@ -70,7 +76,7 @@
         <TextView
             android:id="@+id/item_distance_tv"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/item_time_tv"
             android:gravity="right|center_vertical"
@@ -97,14 +103,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_time_tv"
             android:ellipsize="end"
-            android:lineSpacingExtra="6dp"
+            android:lineSpacingExtra="3dp"
             android:maxLines="2"
             android:minHeight="61dp"
             android:paddingBottom="14dp"
             android:paddingLeft="45dp"
             android:paddingRight="40dp"
-            android:paddingTop="14dp"
-            android:text="" />
+            android:paddingTop="13dp"
+            android:textSize="@dimen/text_12" />
 
         <ImageView
             android:id="@+id/item_open_iv"
