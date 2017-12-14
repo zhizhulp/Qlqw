@@ -46,8 +46,7 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     private TextView tvName;
     private TextView tvClass;
 
-    private int is_buy_agency;
-    private String balance_money, region_info, agreement_url, agreement_headname;
+    private String balance_money, agreement_url, agreement_headname;
     private MctPayAddress address;
 
     private BottomDialog dialog;
@@ -117,7 +116,6 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
             data.addAll(level);
         }
 
-        address = new MctPayAddress(region_info, is_buy_agency);
         data.add(address);
 
         List<MctPayDesc> interests = JSON.parseArray(jObj.getString("protocol_list"), MctPayDesc.class);
@@ -168,8 +166,7 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
         AbstractRequest request = buildRequest(UrlUtils.agentPayment, RequestMethod.POST, Pay.class);
         request.add("pay_type", type);
         request.add("setmeal_id", mctAdapter.getSelect().getId());
-        if (address.getIsBuyAgency() == 2)
-            request.add("region_id", address.getSelectID());
+        request.add("region_id", address.getSelectID());
         executeNetwork(what, "请稍后", request);
     }
 
@@ -180,8 +177,8 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
             String data = (String) result.getData();
             JSONObject jObj = JSONObject.parseObject(data);
             balance_money = jObj.getString("balance_money");
-            is_buy_agency = jObj.getInteger("is_buy_agency");
-            region_info = jObj.getString("region_info");
+            address = new MctPayAddress(jObj.getString("region_info"),
+                    jObj.getInteger("is_buy_agency"), jObj.getInteger("region_id"));
             agreement_url = jObj.getString("agreement_url");
             agreement_headname = jObj.getString("agreement_headname");
             setHead(jObj);
