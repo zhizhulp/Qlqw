@@ -4,27 +4,33 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.bill.BillActivity;
-import com.ascba.rebate.activities.bill.ScoreBillActivity;
+import com.ascba.rebate.adapter.AgentAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
+import com.ascba.rebate.bean.AgentItem;
 import com.ascba.rebate.bean.MctRights;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.RequestMethod;
 
 import org.raphets.roundimageview.RoundImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 李平 on 2017/12/4 18:44
@@ -33,17 +39,20 @@ import org.raphets.roundimageview.RoundImageView;
 
 public class MctRightsActivity extends BaseDefaultNetActivity implements View.OnClickListener {
 
+    private AgentAdapter agentAdapter;
+    private List<AgentItem> agentItems;
+
+    //<editor-fold desc="Head头部view">
+    private View headView;
     private RoundImageView banner;
     private TextView tvTitle;
     private TextView tvTime;
     private TextView tvStatus;
     private TextView tvLeftTime;
-    private TextView tvEmployeeMct;
-    private TextView tvEmployeeAgent;
-    private TextView tvAward;
-    private TextView tvAll;
+    private RelativeLayout latStatus;
     private TextView tvPay;
     private TextView tvBtm;
+    //</editor-fold>
 
     private MctRights data;
 
@@ -55,40 +64,79 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-
-        banner = fv(R.id.banner);
-        LinearLayout.LayoutParams bannerLayoutParams = (LinearLayout.LayoutParams) banner.getLayoutParams();
-        bannerLayoutParams.height = (getResources().getDisplayMetrics().widthPixels
-                - (int) ScreenDpiUtils.dp2px(this, 28)) * 35 / 83;
-
-        tvTitle = fv(R.id.tv_title);
-        tvTime = fv(R.id.tv_time);
-        tvStatus = fv(R.id.tv_status);
-        tvStatus.setOnClickListener(this);
-
-        tvLeftTime = fv(R.id.tv_left_time);
-        tvPay = fv(R.id.tv_pay);
-        tvPay.setOnClickListener(this);
-
-        tvEmployeeMct = fv(R.id.tv_employee_mct);
-        tvEmployeeAgent = fv(R.id.tv_employee_agent);
-        tvAward = fv(R.id.tv_award);
-        tvAll = fv(R.id.tv_all);
+        agentItems = new ArrayList<>();
+        agentAdapter = new AgentAdapter(agentItems);
+        agentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AgentItem agentItem = (AgentItem) adapter.getItem(position);
+                agentItem.goBill(MctRightsActivity.this);
+            }
+        });
+        mRecyclerView.setAdapter(agentAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         tvBtm = fv(R.id.tv_btm);
 
         fv(R.id.tv_see).setOnClickListener(this);
-        fv(R.id.lat_employee_mct).setOnClickListener(this);
-        fv(R.id.lat_employee_agent).setOnClickListener(this);
-        fv(R.id.lat_award).setOnClickListener(this);
-        fv(R.id.lat_all).setOnClickListener(this);
-
         requestData();
     }
 
     private void requestData() {
         AbstractRequest request = buildRequest(UrlUtils.interests, RequestMethod.GET, MctRights.class);
         executeNetwork(0, "请稍后", request);
+    }
+
+    private void addHead() {
+        headView = getLayoutInflater().inflate(R.layout.item_mct_head, null);
+        banner = headView.findViewById(R.id.banner);
+        LinearLayout.LayoutParams bannerLayoutParams = (LinearLayout.LayoutParams) banner.getLayoutParams();
+        bannerLayoutParams.height = (getResources().getDisplayMetrics().widthPixels
+                - (int) ScreenDpiUtils.dp2px(this, 28)) * 35 / 83;
+
+        tvTitle = headView.findViewById(R.id.tv_title);
+        tvTime = headView.findViewById(R.id.tv_time);
+        tvStatus = headView.findViewById(R.id.tv_status);
+        tvStatus.setOnClickListener(this);
+        latStatus = headView.findViewById(R.id.lat_status);
+
+        tvLeftTime = headView.findViewById(R.id.tv_left_time);
+        tvPay = headView.findViewById(R.id.tv_pay);
+        tvPay.setOnClickListener(this);
+        agentAdapter.addHeaderView(headView);
+    }
+
+    private void setHead() {
+        if (headView == null)
+            addHead();
+        Picasso.with(this).load(data.getActive_img())
+                .placeholder(R.mipmap.gift_head_loading)
+                .into(banner);
+        tvTitle.setText(data.getActive_title());
+        if (data.getActive_desc().isEmpty())
+            tvStatus.setVisibility(View.GONE);
+        else
+            tvStatus.setText(data.getActive_desc());
+        tvTime.setText(data.getActive_time());
+        tvLeftTime.setText(data.getSeller_last_time());
+        tvPay.setText(data.getSeller_status_text());
+        GradientDrawable drawable = (GradientDrawable) latStatus.getBackground();
+        drawable.setColor(Color.parseColor("#" + data.getActive_color()));
+    }
+
+    private void setList() {
+        agentItems.clear();
+        agentItems.add(new AgentItem(0xff44cee7, "现金收益"));
+        agentItems.add(new AgentItem(0xff44cee7, "入驻商家收益",
+                data.getSeller_purchase_money(), "入驻商家收益", 1, "13"));
+        agentItems.add(new AgentItem(0xff44cee7, "推荐代理收益",
+                data.getSeller_agent_money(), "推荐代理收益", 1, "14"));
+        agentItems.add(new AgentItem(0xffff4040, "礼品分收益"));
+        agentItems.add(new AgentItem(0xffff4040, "礼品分收益",
+                data.getSeller_getpay_money(), "礼品分收益", 2, "2"));
+        agentItems.add(new AgentItem(0xffff4040, "礼品分收益流水",
+                data.getSeller_referee_money(), "礼品分收益流水", 2, "5"));
+        agentAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -108,18 +156,6 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
                 if (data.getActive_status() == 1)
                     WebViewBaseActivity.start(this, data.getActive_h5_title(), data.getActive_url());
                 break;
-            case R.id.lat_employee_mct:// 入驻商家收益
-                startActivity(new Intent(this, BillActivity.class).putExtra("mine_type", 6));
-                break;
-            case R.id.lat_employee_agent:// 推荐代理收益
-                startActivity(new Intent(this, BillActivity.class).putExtra("mine_type", 7));
-                break;
-            case R.id.lat_award:// 礼品分收益
-                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 7));
-                break;
-            case R.id.lat_all:// 礼品分流水收益
-                startActivity(new Intent(this, ScoreBillActivity.class).putExtra("mine_type", 6));
-                break;
         }
     }
 
@@ -128,26 +164,9 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
         super.mHandle200(what, result);
         if (what == 0) {
             data = (MctRights) result.getData();
-            Picasso.with(this).load(data.getActive_img())
-                    .placeholder(R.mipmap.gift_head_loading)
-                    .into(banner);
-            tvTitle.setText(data.getActive_title());
-            if (data.getActive_desc().isEmpty())
-                tvStatus.setVisibility(View.GONE);
-            else
-                tvStatus.setText(data.getActive_desc());
-            tvTime.setText(data.getActive_time());
-            tvLeftTime.setText(data.getSeller_last_time());
-            tvPay.setText(data.getSeller_status_text());
-
-            tvEmployeeMct.setText(data.getSeller_purchase_money());
-            tvEmployeeAgent.setText(data.getSeller_agent_money());
-            tvAward.setText(data.getSeller_getpay_money());
-            tvAll.setText(data.getSeller_referee_money());
+            setHead();
+            setList();
             tvBtm.setText(data.getSeller_text());
-
-            GradientDrawable drawable = (GradientDrawable) fv(R.id.lat_status).getBackground();
-            drawable.setColor(Color.parseColor("#" + data.getActive_color()));
         }
     }
 

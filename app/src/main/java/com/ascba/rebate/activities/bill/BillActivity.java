@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -102,7 +101,7 @@ public class BillActivity extends BaseDefaultNetActivity {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bill bill = data.get(position);
                 String type = bill.getType();
-                if (TextUtils.equals("2",type)) {//提现
+                if (TextUtils.equals("2", type)) {//提现
                     Bundle b = new Bundle();
                     b.putInt("type", 1);
                     if (mineType == 1 || mineType == 2) {
@@ -111,11 +110,11 @@ public class BillActivity extends BaseDefaultNetActivity {
                         b.putString("till_id", String.valueOf(bill.getObject_id()));
                     }
                     startActivity(CGDealingActivity.class, b);
-                } else if (TextUtils.equals("3",type)) {
+                } else if (TextUtils.equals("3", type)) {
                     Intent intent = new Intent(BillActivity.this, TradeConfirmActivity.class);
                     intent.putExtra("order_id", bill.getObject_id() + "");
                     startActivityForResult(intent, CodeUtils.REQUEST_TRADE);
-                } else if (TextUtils.equals("9",type)) {//结算详情
+                } else if (TextUtils.equals("9", type)) {//结算详情
                     BenefitDetActivity.jumpIntent(BillActivity.this, bill.getObject_id());
                 }
             }
@@ -174,14 +173,6 @@ public class BillActivity extends BaseDefaultNetActivity {
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 1) {
                 mMoneyBar.setTextTitle("提现记录");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 6) {
-                type = "13";
-                mMoneyBar.setTextTitle("入驻商家收益");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 7) {
-                type = "14";
-                mMoneyBar.setTextTitle("推荐代理收益");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 8) {
                 type = extras.getString("type");

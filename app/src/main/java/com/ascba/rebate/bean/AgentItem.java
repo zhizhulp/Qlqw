@@ -1,7 +1,12 @@
 package com.ascba.rebate.bean;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.ColorInt;
 
+import com.ascba.rebate.activities.bill.BillActivity;
+import com.ascba.rebate.activities.bill.ScoreBillActivity;
+import com.ascba.rebate.activities.bill.VoucherBillActivity;
 import com.ascba.rebate.adapter.AgentAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
@@ -97,5 +102,21 @@ public class AgentItem implements MultiItemEntity {
     @Override
     public int getItemType() {
         return type;
+    }
+
+    public Intent getIntent(Context context, Class<?> cls) {
+        return new Intent(context, cls)
+                .putExtra("type", getListType())
+                .putExtra("title", getNextTitle())
+                .putExtra("mine_type", 8);
+    }
+
+    public void goBill(Context context) {
+        if (getNextType() == 1) // 现金
+            context.startActivity(getIntent(context, BillActivity.class));
+        else if (getNextType() == 2) // 积分
+            context.startActivity(getIntent(context, ScoreBillActivity.class));
+        else if (getNextType() == 3) // 福利券
+            context.startActivity(getIntent(context, VoucherBillActivity.class));
     }
 }
