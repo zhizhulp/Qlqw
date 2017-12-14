@@ -1,7 +1,6 @@
 package com.ascba.rebate.activities.bill;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,7 +43,7 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
     private List<Bill> data;
     private List<BillFilter> filterData;
     private int paged = 1;//当前页数
-    private String type="0";//类型
+    private String type = "0";//类型
     private String lastYear;
     private String lastMonth;
     private BillFilterDialog dialog;
@@ -128,25 +127,30 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
     }
 
     private void getParams() {
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mineType = extras.getInt("mine_type");
-            if (mineType == 2) {
-                mMoneyBar.setTextTitle("赠送记录");
-                type = "10";
-            } else if (mineType == 3) {//购卡记录
-                mMoneyBar.setTextTitle("购卡记录");
-                type = "9";
-            } else if (mineType == 4) {//商城购买积分商品
-                type = "8";
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 5) {//总记录
-                mMoneyBar.setTextTitle("佣金账单");
-            } else if (mineType == 8) {
-                type = extras.getString("type");
-                mMoneyBar.setTextTitle(extras.getString("title", "礼品分账单"));
-                mMoneyBar.setTailShow(false);
+            switch (mineType) {
+                case 2:
+                    mMoneyBar.setTextTitle("赠送记录");
+                    type = "10";
+                    break;
+                case 3://购卡记录
+                    mMoneyBar.setTextTitle("购卡记录");
+                    type = "9";
+                    break;
+                case 4://商城购买积分商品
+                    type = "8";
+                    mMoneyBar.setTailShow(false);
+                    break;
+                case 5://总记录
+                    mMoneyBar.setTextTitle("佣金账单");
+                    break;
+                case 8:
+                    type = extras.getString("type");
+                    mMoneyBar.setTextTitle(extras.getString("title", "礼品分账单"));
+                    mMoneyBar.setTailShow(false);
+                    break;
             }
         }
     }

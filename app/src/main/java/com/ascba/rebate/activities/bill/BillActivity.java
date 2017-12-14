@@ -160,24 +160,33 @@ public class BillActivity extends BaseDefaultNetActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mineType = extras.getInt("mine_type");
-            if (mineType == 3) {
-                type = "3";
-                mMoneyBar.setTextTitle("收款记录");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 2) {
-                mMoneyBar.setTextTitle("充值记录");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 5) {
-                type = "9";
-                mMoneyBar.setTextTitle("结算账单");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 1) {
-                mMoneyBar.setTextTitle("提现记录");
-                mMoneyBar.setTailShow(false);
-            } else if (mineType == 8) {
-                type = extras.getString("type");
-                mMoneyBar.setTextTitle(extras.getString("title", "现金账单"));
-                mMoneyBar.setTailShow(false);
+            switch (mineType) {
+                case 1:
+                    mMoneyBar.setTextTitle("提现记录");
+                    mMoneyBar.setTailShow(false);
+                    break;
+                case 2:
+                    mMoneyBar.setTextTitle("充值记录");
+                    mMoneyBar.setTailShow(false);
+                    break;
+                case 3:
+                    type = "3";
+                    mMoneyBar.setTextTitle("收款记录");
+                    mMoneyBar.setTailShow(false);
+                    break;
+                case 5:
+                    type = "9";
+                    mMoneyBar.setTextTitle("结算账单");
+                    mMoneyBar.setTailShow(false);
+                    break;
+                case 8:
+                    type = extras.getString("type");
+                    mMoneyBar.setTextTitle(extras.getString("title", "现金账单"));
+                    mMoneyBar.setTailShow(false);
+                    break;
+                default:
+                    mMoneyBar.setTextTitle("现金账单");
+                    break;
             }
         } else {
             mMoneyBar.setTextTitle("现金账单");
