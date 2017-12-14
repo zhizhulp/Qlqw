@@ -1,5 +1,6 @@
 package com.ascba.rebate.activities.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,7 +70,6 @@ public class RecActivity extends BaseDefaultNetActivity {
     @Override
     protected void mHandleReLogin(int what, Result result) {
         super.mHandleReLogin(what, result);
-        finish();
     }
 
     @Override
@@ -82,5 +82,11 @@ public class RecActivity extends BaseDefaultNetActivity {
     protected void mHandleNoNetwork(int what) {
         super.mHandleNoNetwork(what);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        requestData();
     }
 }

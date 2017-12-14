@@ -30,7 +30,7 @@
             <org.raphets.roundimageview.RoundImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/wx_login_icon"
+                android:src="@mipmap/wx_login"
                 app:corner_radius="3dp"
                 app:type="round" />
 
@@ -40,12 +40,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:src="@mipmap/more" />
+                android:src="@mipmap/connector" />
 
             <org.raphets.roundimageview.RoundImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/logo"
+                android:src="@mipmap/my_logo"
                 app:corner_radius="3dp"
                 app:type="round" />
         </LinearLayout>
@@ -57,31 +57,35 @@
             android:layout_marginTop="30dp"
             android:text="请绑定钱来钱往账号，便于下次快捷登陆"
             android:textColor="@color/grey_black_tv2"
-            android:textSize="@dimen/text_14" />
+            android:textSize="@dimen/text_13" />
     </LinearLayout>
     <!--phone-->
     <com.ascba.rebate.view.ClearEditText
         android:id="@+id/bind_mobile_et"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="60dp"
         android:background="@null"
         android:hint="输入手机号码"
         android:inputType="number"
         android:maxLength="11"
         android:maxLines="1"
+        android:paddingTop="10dp"
         android:paddingLeft="28dp"
         android:textColor="@color/grey_black_tv"
         android:textColorHint="@color/grey_tv"
         android:textSize="@dimen/text_13" />
 
     <View
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/grey_line" />
     <!--code-->
     <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="60dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -106,11 +110,11 @@
             android:layout_width="0.5dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="14dp"
             android:background="@color/grey_line" />
 
         <TextView
-            android:paddingRight="20dp"
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp"
             android:id="@+id/bind_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -121,11 +125,13 @@
     </LinearLayout>
 
     <View
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/grey_line" />
     <LinearLayout
-        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,7 +139,7 @@
         <CheckBox
             android:id="@+id/cb"
             android:checked="true"
-            android:button="@drawable/pay_type_cb_bg"
+            android:button="@drawable/cb_bg_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -150,6 +156,6 @@
         android:id="@+id/bind_btn"
         style="@style/ButtonNormal"
         android:layout_marginTop="50dp"
-        android:text="提交" />
+        android:text="完成绑定" />
 
 </LinearLayout>
