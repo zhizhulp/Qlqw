@@ -3,6 +3,7 @@ package com.ascba.rebate.activities.merchant;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -109,7 +110,7 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
     private void setHead() {
         if (headView == null)
             addHead();
-        Picasso.with(this).load(data.getActive_img())
+        Picasso.with(this).load(Uri.parse(data.getActive_img()))
                 .placeholder(R.mipmap.gift_head_loading)
                 .into(banner);
         tvTitle.setText(data.getActive_title());
