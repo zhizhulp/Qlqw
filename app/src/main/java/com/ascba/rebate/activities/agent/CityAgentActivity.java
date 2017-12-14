@@ -64,24 +64,7 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AgentItem agentItem = (AgentItem) adapter.getItem(position);
-                if (agentItem.getNextTitle() == null)
-                    return;
-                if (agentItem.getNextType() == 1) {// 现金
-                    startActivity(new Intent(CityAgentActivity.this, BillActivity.class)
-                            .putExtra("type", agentItem.getListType())
-                            .putExtra("title", agentItem.getNextTitle())
-                            .putExtra("mine_type", 8));
-                } else if (agentItem.getNextType() == 2) {// 积分
-                    startActivity(new Intent(CityAgentActivity.this, ScoreBillActivity.class)
-                            .putExtra("type", agentItem.getListType())
-                            .putExtra("title", agentItem.getNextTitle())
-                            .putExtra("mine_type", 8));
-                } else if (agentItem.getNextType() == 3) {// 福利券
-                    startActivity(new Intent(CityAgentActivity.this, VoucherBillActivity.class)
-                            .putExtra("type", agentItem.getListType())
-                            .putExtra("title", agentItem.getNextTitle())
-                            .putExtra("mine_type", 8));
-                }
+                agentItem.goBill(CityAgentActivity.this);
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -144,15 +127,33 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
     }
 
     private void setList(JSONObject jObj) {
-        agentItems.add(new AgentItem(0xff408fff, "现金收益"));
-        agentItems.add(new AgentItem(0xff408fff, jObj.getString("settlement_amount_title"),
-                jObj.getString("settlement_amount"), jObj.getString("settlement_amount_off_title"), 1, ""));
-        agentItems.add(new AgentItem(0xff834ffb, "积分收益"));
-        agentItems.add(new AgentItem(0xff834ffb, jObj.getString("gift_points_title"),
-                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, ""));
-        agentItems.add(new AgentItem(0xffffb540, "福利券收益"));
-        agentItems.add(new AgentItem(0xffffb540, jObj.getString("benefit_coupon_title"),
-                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, ""));
+        agentItems.add(new AgentItem(0xfff19234, "区域周结算收益"));
+        agentItems.add(new AgentItem(0xfff19234, jObj.getString("settlement_amount_title"),
+                jObj.getString("settlement_amount"), jObj.getString("settlement_amount_off_title"),
+                1, jObj.getString("settlement_amount_param")));
+        agentItems.add(new AgentItem(0xfff19234, jObj.getString("gift_points_title"),
+                jObj.getString("gift_points"), jObj.getString("gift_points_off_title"),
+                2, jObj.getString("gift_points_param")));
+        agentItems.add(new AgentItem(0xfff19234, jObj.getString("benefit_coupon_title"),
+                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"),
+                3, jObj.getString("benefit_coupon_param")));
+        agentItems.add(new AgentItem(0xff44cee7, "现金收益"));
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_business_income_title"),
+                jObj.getString("day_business_income"), jObj.getString("day_business_income_off_title"), 1, "17"));
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_commission_title"),
+                jObj.getString("day_commission"), jObj.getString("day_commission_off_title"), 1, "18"));
+        agentItems.add(new AgentItem(0xff44eee7, jObj.getString("day_red_commission_title"),
+                jObj.getString("day_red_commission"), jObj.getString("day_red_commission_off_title"), 1, "19"));
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_dividend_commission_title"),
+                jObj.getString("day_dividend_commission"), jObj.getString("day_dividend_commission_off_title"), 1, "20"));
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_agency_title"),
+                jObj.getString("day_agency"), jObj.getString("day_agency_off_title"), 1, "21"));
+        agentItems.add(new AgentItem(0xffff4040, "积分收益"));
+        agentItems.add(new AgentItem(0xffff4040, jObj.getString("day_gift_points_title"),
+                jObj.getString("day_gift_points"), jObj.getString("day_gift_points_off_title"), 2, "14"));
+        agentItems.add(new AgentItem(0xff9066f6, "福利券收益"));
+        agentItems.add(new AgentItem(0xff9066f6, jObj.getString("day_benefit_coupon_title"),
+                jObj.getString("day_benefit_coupon"), jObj.getString("day_benefit_coupon_off_title"), 3, "3"));
     }
 
     @Override
