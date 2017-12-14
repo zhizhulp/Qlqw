@@ -1,6 +1,5 @@
 package com.ascba.rebate.activities.agent;
 
-import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,9 +10,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.bill.BillActivity;
-import com.ascba.rebate.activities.bill.ScoreBillActivity;
-import com.ascba.rebate.activities.bill.VoucherBillActivity;
 import com.ascba.rebate.adapter.AgentAdapter;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;

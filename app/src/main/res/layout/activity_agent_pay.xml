@@ -43,7 +43,7 @@
     <Button
         android:id="@+id/btn_apply"
         style="@style/ButtonNormal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="14dp"
         android:enabled="true"
         android:text="立即支付" />
 </LinearLayout>
