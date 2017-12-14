@@ -20,7 +20,7 @@ public class Bill implements MultiItemEntity {
      * avatar : http://img.qlqwshop.com/public/app/images/xf.png
      */
 
-    private int type;
+    private String type;
     @JSONField(name = "money", alternateNames = {"voucher", "score"})
     private String money;
     private String remark;
@@ -58,11 +58,11 @@ public class Bill implements MultiItemEntity {
         return headIconVisible;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

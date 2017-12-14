@@ -39,7 +39,7 @@ public class ScoreFilterActivity extends BaseDefaultNetActivity implements View.
     private TextView tvIn;
     private TextView tvOut;
     private String date;
-    private int type;
+    private String type;
     private TimePickerView pvTime;
 
     @Override
@@ -95,7 +95,7 @@ public class ScoreFilterActivity extends BaseDefaultNetActivity implements View.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         date = bundle.getString("date");
-        type = bundle.getInt("type");
+        type = bundle.getString("type");
     }
 
     private void requestData() {

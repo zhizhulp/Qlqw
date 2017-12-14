@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.cash_get.CGDealingActivity;
 import com.ascba.rebate.adapter.FilterBillAdapter;
@@ -21,6 +21,7 @@ import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.datepicker.TimePickerView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -46,7 +47,7 @@ public class FilterBillActivity extends BaseDefaultNetActivity implements View.O
     private TextView tvIn;
     private TextView tvOut;
     private String date;
-    private int type;
+    private String type;
     private int mineType;
     private TimePickerView pvTime;
 
@@ -76,8 +77,8 @@ public class FilterBillActivity extends BaseDefaultNetActivity implements View.O
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bill bill = data.get(position);
-                int type = bill.getType();
-                if (type == 2) {//提现
+                String type = bill.getType();
+                if (TextUtils.equals("2",type)) {//提现
                     Bundle b = new Bundle();
                     b.putInt("type",1);
                     b.putString("till_id", String.valueOf(bill.getObject_id()));
@@ -117,7 +118,7 @@ public class FilterBillActivity extends BaseDefaultNetActivity implements View.O
         Bundle bundle = intent.getExtras();
         date = bundle.getString("date");
         Log.d(TAG, "getParams: "+date);
-        type = bundle.getInt("type");
+        type = bundle.getString("type");
         mineType = bundle.getInt("mine_type");
     }
 

@@ -45,7 +45,7 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
     private List<Bill> data;
     private List<BillFilter> filterData;
     private int paged = 1;//当前页数
-    private int type = 0;//类型
+    private String type;//类型
     private String lastYear;
     private String lastMonth;
     private BillFilterDialog dialog;
@@ -135,23 +135,23 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
             mineType = extras.getInt("mine_type");
             if (mineType == 2) {
                 mMoneyBar.setTextTitle("赠送记录");
-                type = 10;
+                type = "10";
             } else if (mineType == 3) {//购卡记录
                 mMoneyBar.setTextTitle("购卡记录");
-                type = 9;
+                type = "9";
             } else if (mineType == 4) {//商城购买积分商品
-                type = 8;
+                type = "8";
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 5) {//总记录
                 mMoneyBar.setTextTitle("佣金账单");
             } else if (mineType == 6) {//礼品分流水收益
-                type = 5;
+                type = "5";
                 mMoneyBar.setTextTitle("礼品分流水收益");
             } else if (mineType == 7) {//礼品分收益
-                type = 2;
+                type = "2";
                 mMoneyBar.setTextTitle("礼品分收益");
             } else if (mineType == 8) {
-                type = extras.getInt("type", 0);
+                type = extras.getString("type");
                 mMoneyBar.setTextTitle(extras.getString("title", "礼品分账单"));
                 mMoneyBar.setTailShow(false);
             }
@@ -283,7 +283,7 @@ public class ScoreBillActivity extends BaseDefaultNetActivity {
                     @SuppressLint("SimpleDateFormat")
                     String format = new SimpleDateFormat("yyyy-MM").format(date);
                     bundle.putString("date", format);
-                    bundle.putInt("type", type);
+                    bundle.putString("type", type);
                     startActivity(ScoreFilterActivity.class, bundle);
                 }
             })

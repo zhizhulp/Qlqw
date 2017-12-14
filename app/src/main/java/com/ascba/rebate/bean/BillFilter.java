@@ -11,7 +11,7 @@ public class BillFilter {
      * type_text : 全部
      */
     private boolean select;
-    private int type_value;
+    private String type_value;
     private String type_text;
 
     public boolean isSelect() {
@@ -22,11 +22,11 @@ public class BillFilter {
         this.select = select;
     }
 
-    public int getType_value() {
+    public String getType_value() {
         return type_value;
     }
 
-    public void setType_value(int type_value) {
+    public void setType_value(String type_value) {
         this.type_value = type_value;
     }
 

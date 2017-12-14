@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -50,7 +51,7 @@ public class BillActivity extends BaseDefaultNetActivity {
     private List<Bill> data;
     private List<BillFilter> filterData;
     private int paged = 1;//当前页数
-    private int type = 0;//账单类型
+    private String type;//账单类型
     private String lastYear;
     private String lastMonth;
     private BillFilterDialog dialog;
@@ -100,8 +101,8 @@ public class BillActivity extends BaseDefaultNetActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bill bill = data.get(position);
-                int type = bill.getType();
-                if (type == 2) {//提现
+                String type = bill.getType();
+                if (TextUtils.equals("2",type)) {//提现
                     Bundle b = new Bundle();
                     b.putInt("type", 1);
                     if (mineType == 1 || mineType == 2) {
@@ -110,11 +111,11 @@ public class BillActivity extends BaseDefaultNetActivity {
                         b.putString("till_id", String.valueOf(bill.getObject_id()));
                     }
                     startActivity(CGDealingActivity.class, b);
-                } else if (type == 3) {
+                } else if (TextUtils.equals("3",type)) {
                     Intent intent = new Intent(BillActivity.this, TradeConfirmActivity.class);
                     intent.putExtra("order_id", bill.getObject_id() + "");
                     startActivityForResult(intent, CodeUtils.REQUEST_TRADE);
-                } else if (type == 9) {//结算详情
+                } else if (TextUtils.equals("9",type)) {//结算详情
                     BenefitDetActivity.jumpIntent(BillActivity.this, bill.getObject_id());
                 }
             }
@@ -161,29 +162,29 @@ public class BillActivity extends BaseDefaultNetActivity {
         if (extras != null) {
             mineType = extras.getInt("mine_type");
             if (mineType == 3) {
-                type = 3;
+                type = "3";
                 mMoneyBar.setTextTitle("收款记录");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 2) {
                 mMoneyBar.setTextTitle("充值记录");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 5) {
-                type = 9;
+                type = "9";
                 mMoneyBar.setTextTitle("结算账单");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 1) {
                 mMoneyBar.setTextTitle("提现记录");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 6) {
-                type = 13;
+                type = "13";
                 mMoneyBar.setTextTitle("入驻商家收益");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 7) {
-                type = 14;
+                type = "14";
                 mMoneyBar.setTextTitle("推荐代理收益");
                 mMoneyBar.setTailShow(false);
             } else if (mineType == 8) {
-                type = extras.getInt("type", 0);
+                type = extras.getString("type");
                 mMoneyBar.setTextTitle(extras.getString("title", "现金账单"));
                 mMoneyBar.setTailShow(false);
             }

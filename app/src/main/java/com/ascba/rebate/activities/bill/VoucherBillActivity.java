@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -47,7 +48,7 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
     private List<Bill> data;
     private List<BillFilter> filterData;
     private int paged = 1;//当前页数
-    private int type = 0;//类型
+    private String type;//类型
     private String lastYear;
     private String lastMonth;
     private BillFilterDialog dialog;
@@ -88,8 +89,8 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bill bill = data.get(position);
-                int type = bill.getType();
-                if (type == 2) {//分红详情
+                String type = bill.getType();
+                if (TextUtils.equals("2",type)) {//分红详情
                     BenefitDetActivity.jumpIntent(VoucherBillActivity.this, bill.getObject_id());
                 }
             }
@@ -146,11 +147,11 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
         if (extras != null) {
             mineType = extras.getInt("mine_type");
             if (mineType == 1) {
-                type = 1;
+                type = "1";
             } else if (mineType == 2) {
-                type = 2;
+                type = "2";
             } else if (mineType == 8) {
-                type = extras.getInt("type", 0);
+                type = extras.getString("type");
                 mMoneyBar.setTextTitle(extras.getString("title", "福利券账单"));
                 mMoneyBar.setTailShow(false);
             }
@@ -274,7 +275,7 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
                     @SuppressLint("SimpleDateFormat")
                     String format = new SimpleDateFormat("yyyy-MM").format(date);
                     bundle.putString("date", format);
-                    bundle.putInt("type", type);
+                    bundle.putString("type", type);
                     startActivity(VoucherFilterActivity.class, bundle);
                 }
             })
