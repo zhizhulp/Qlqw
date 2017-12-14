@@ -48,7 +48,7 @@ public class VoucherBillActivity extends BaseDefaultNetActivity {
     private List<Bill> data;
     private List<BillFilter> filterData;
     private int paged = 1;//当前页数
-    private String type;//类型
+    private String type="0";//类型
     private String lastYear;
     private String lastMonth;
     private BillFilterDialog dialog;
