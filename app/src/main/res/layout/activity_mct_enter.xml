@@ -43,7 +43,8 @@
                     android:layout_centerVertical="true"
                     android:text="商家logo"
                     style="@style/TextTitle" />
-                <ImageView
+                <org.raphets.roundimageview.RoundImageView
+                    app:type="round"
                     android:src="@mipmap/module_loading"
                     android:id="@+id/mct_logo"
                     android:layout_centerVertical="true"
@@ -99,10 +100,7 @@
                     android:id="@+id/im_more_02"
                     style="@style/Mct_Image_More"/>
                 <ImageView
-                    android:src="@mipmap/gift_head_loading"
-                    android:scaleType="fitXY"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
+                    android:src="@mipmap/seller_header_loading"
                     android:id="@+id/mct_design"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="7dp"

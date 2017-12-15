@@ -133,7 +133,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
         request.add("seller_address", tvLocate.getText().toString());//
         request.add("region_name", tvPLocate.getText().toString());
         request.add("region_id", streetId);
-        Log.d(TAG, "request: region_id: "+streetId);
+        Log.d(TAG, "request: region_id: " + streetId);
         request.add("seller_localhost", tvAddress.getText().toString());//
         request.add("seller_tel", tvPhone.getText().toString());
         request.add("seller_description", etDesc.getText().toString());
@@ -186,7 +186,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                             dialog.dismiss();
                             tvPLocate.setText(String.format("%s-%s-%s-%s", province.getName(), city.getName(), county.getName(), street.getName()));
                             streetId = street.getId();
-                            Log.d(TAG, "onAddressSelected: region_id: "+streetId);
+                            Log.d(TAG, "onAddressSelected: region_id: " + streetId);
                         }
                     });
                     dialog.show();
@@ -260,7 +260,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                     } else {
                         uri = Uri.fromFile(type == 0 ? logoFile : designFile);
                     }
-                    cropImage(uri, Uri.fromFile(type == 0 ? logoFile : designFile));
+                    cropImage(uri, Uri.fromFile(type == 0 ? logoFile : designFile), type == 0 ? 1 : 50, type == 0 ? 1 : 21);
                     break;
                 case CodeUtils.REQUEST_ALBUM_ICON:
                     Uri selectedImage = data.getData();
@@ -278,7 +278,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
                         } else {
                             uri2 = Uri.parse("file://" + picturePath);
                         }
-                        cropImage(uri2, Uri.fromFile(type == 0 ? logoFile : designFile));
+                        cropImage(uri2, Uri.fromFile(type == 0 ? logoFile : designFile),type == 0 ? 1 : 50, type == 0 ? 1 : 21);
                     }
                     break;
                 case CodeUtils.REQUEST_CROP:
@@ -326,14 +326,14 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
     }
 
     //裁剪图片
-    private void cropImage(Uri inUri, Uri outUri) {
+    private void cropImage(Uri inUri, Uri outUri, int x, int y) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(inUri, "image/*");
         //是否裁剪
         intent.putExtra("crop", "true");
         //设置xy的裁剪比例
-        //intent.putExtra("aspectX", 1);
-        //intent.putExtra("aspectY", 1);
+        intent.putExtra("aspectX", x);
+        intent.putExtra("aspectY", y);
         //设置输出的宽高
         //intent.putExtra("outputX", 720);
         //intent.putExtra("outputY", 720);
@@ -389,7 +389,7 @@ public class MctEnterActivity extends BaseDefaultNetActivity implements View.OnC
             SellerDet.SellerBean seller = sellerDet.getSeller();
             mStatus = seller.getSeller_status();
             streetId = seller.getRegion_id();
-            Log.d(TAG, "setUI region_id: "+streetId);
+            Log.d(TAG, "setUI region_id: " + streetId);
             String coverLogo = seller.getSeller_cover_logo();
             if (!TextUtils.isEmpty(coverLogo)) {
                 Picasso.with(this).load(coverLogo).placeholder(R.mipmap.module_loading).into(imLogo);
