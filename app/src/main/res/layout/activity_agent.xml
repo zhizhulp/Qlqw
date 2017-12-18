@@ -7,7 +7,7 @@
 
     <com.ascba.rebate.view.MoneyBar
         style="@style/MoneyBar"
-        app:textTitle="代理加盟" />
+        app:textTitle="代理" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
