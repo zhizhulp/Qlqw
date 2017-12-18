@@ -138,7 +138,7 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
                 jObj.getString("day_business_income"), jObj.getString("day_business_income_off_title"), 1, "17"));
         agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_commission_title"),
                 jObj.getString("day_commission"), jObj.getString("day_commission_off_title"), 1, "18"));
-        agentItems.add(new AgentItem(0xff44eee7, jObj.getString("day_red_commission_title"),
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_red_commission_title"),
                 jObj.getString("day_red_commission"), jObj.getString("day_red_commission_off_title"), 1, "19"));
         agentItems.add(new AgentItem(0xff44cee7, jObj.getString("day_dividend_commission_title"),
                 jObj.getString("day_dividend_commission"), jObj.getString("day_dividend_commission_off_title"), 1, "20"));
