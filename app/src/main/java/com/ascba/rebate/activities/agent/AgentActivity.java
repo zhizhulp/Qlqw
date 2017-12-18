@@ -130,7 +130,7 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
                 jObj.getString("business_income"), jObj.getString("business_income_off_title"), 1, "17"));
         agentItems.add(new AgentItem(0xff44cee7, jObj.getString("commission_title"),
                 jObj.getString("commission"), jObj.getString("commission_off_title"), 1, "18"));
-        agentItems.add(new AgentItem(0xff44eee7, jObj.getString("red_commission_title"),
+        agentItems.add(new AgentItem(0xff44cee7, jObj.getString("red_commission_title"),
                 jObj.getString("red_commission"), jObj.getString("red_commission_off_title"), 1, "19"));
         agentItems.add(new AgentItem(0xff44cee7, jObj.getString("dividend_commission_title"),
                 jObj.getString("dividend_commission"), jObj.getString("dividend_commission_off_title"), 1, "20"));
