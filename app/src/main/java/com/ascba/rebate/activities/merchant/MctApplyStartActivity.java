@@ -40,13 +40,6 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
         super.initViews(savedInstanceState);
         findViewById(R.id.btn_apply).setOnClickListener(this);
         WebView webView = findViewById(R.id.webView);
-//        webView.setWebViewClient(new WebViewClient());
-//        WebSettings settings = webView.getSettings();
-//        settings.setJavaScriptEnabled(true);
-//        settings.setUseWideViewPort(true);// 调整到适合webview大小
-//        settings.setLoadWithOverviewMode(true);// 调整到适合webview大小
-//        settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);// 屏幕自适应网页,如果没有这个，在低分辨率的手机上显示可能会异常
-//        settings.setSupportZoom(true);
         webView.loadUrl(UrlUtils.sellerPerfectAgreement);
     }
 
@@ -82,7 +75,12 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
         } else if (companyStatus == 1) {//审核中
             showToast("公司资质审核中，请审核通过后再试。");
         } else if (companyStatus == 2) {//资料有误
-            findCompanyInfo();
+            dm.showAlertDialog2("公司资料有误，是否去查看公司资料", "取消", "确定", new DialogManager.Callback() {
+                @Override
+                public void handleRight() {
+                    findCompanyInfo();
+                }
+            });
         }
     }
 
