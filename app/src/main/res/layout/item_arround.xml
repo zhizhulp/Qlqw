@@ -71,7 +71,7 @@
             android:gravity="center_vertical"
             android:text="营业时间：09：00~22：00"
             android:textColor="@color/grey_black_tv2"
-            android:textSize="@dimen/text_13" />
+            android:textSize="@dimen/text_12" />
 
         <TextView
             android:id="@+id/item_distance_tv"
@@ -110,6 +110,7 @@
             android:paddingLeft="45dp"
             android:paddingRight="40dp"
             android:paddingTop="13dp"
+            android:textColor="@color/grey_black_tv3"
             android:textSize="@dimen/text_12" />
 
         <ImageView
@@ -138,12 +139,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_context_tv"
-            android:lineSpacingExtra="6dp"
+            android:lineSpacingExtra="3dp"
             android:paddingBottom="12dp"
             android:paddingLeft="26dp"
             android:paddingRight="40dp"
             android:paddingTop="12dp"
-            android:text="" />
+            android:textColor="@color/grey_black_tv3"
+            android:textSize="@dimen/text_12" />
     </RelativeLayout>
 
     <View
