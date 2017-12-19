@@ -149,7 +149,7 @@ public class CityAgentActivity extends BaseDefaultNetActivity implements MoneyBa
                 jObj.getString("day_gift_points"), jObj.getString("day_gift_points_off_title"), 2, "14"));
         agentItems.add(new AgentItem(0xff9066f6, "福利券收益"));
         agentItems.add(new AgentItem(0xff9066f6, jObj.getString("day_benefit_coupon_title"),
-                jObj.getString("day_benefit_coupon"), jObj.getString("day_benefit_coupon_off_title"), 3, "3"));
+                jObj.getString("day_benefit_coupon"), jObj.getString("day_benefit_coupon_off_title"), 3, "4"));
     }
 
     @Override

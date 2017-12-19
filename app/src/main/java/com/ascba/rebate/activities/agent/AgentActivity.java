@@ -141,7 +141,7 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
                 jObj.getString("gift_points"), jObj.getString("gift_points_off_title"), 2, "14"));
         agentItems.add(new AgentItem(0xff9066f6, "福利券收益"));
         agentItems.add(new AgentItem(0xff9066f6, jObj.getString("benefit_coupon_title"),
-                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, "2"));
+                jObj.getString("benefit_coupon"), jObj.getString("benefit_coupon_off_title"), 3, "3"));
         agentAdapter.notifyDataSetChanged();
     }
 
