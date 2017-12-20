@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ascba.rebate"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 31
-        versionName "3.5.1"
+        versionCode 32
+        versionName "3.6.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         flavorDimensions "code"
