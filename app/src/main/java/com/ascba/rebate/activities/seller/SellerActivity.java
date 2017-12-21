@@ -84,7 +84,7 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                         startActivity(MctRightsActivity.class, null);
                         break;
                     default:
-
+                        showToast("敬请期待");
                         break;
                 }
             }
