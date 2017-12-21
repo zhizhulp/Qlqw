@@ -89,6 +89,9 @@ public class MctPayAdapter extends BaseMultiItemQuickAdapter<MctBasePay, BaseVie
                     helper.setVisible(R.id.im_more, true);
                     helper.addOnClickListener(R.id.lat_address);
                 } else if (payAddress.getIsBuyAgency() == 2) {
+                    helper.getView(R.id.tv_address_select).setVisibility(View.VISIBLE);
+                    helper.setVisible(R.id.im_more, true);
+                    helper.setText(R.id.tv_address, "选择地区");
                     helper.addOnClickListener(R.id.lat_address);
                     helper.setText(R.id.tv_address_select, payAddress.getAddress());
                 }

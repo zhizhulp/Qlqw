@@ -23,6 +23,7 @@ import com.ascba.rebate.bean.MctPayTitle;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.jd_selector.BottomDialog;
@@ -35,6 +36,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.RequestMethod;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +92,8 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
                             }
                         });
                     }
-                    dialog.show();
+                    if (address.getIsBuyAgency() != 1)
+                        dialog.show();
                 }
             }
         });
@@ -179,6 +182,9 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
             balance_money = jObj.getString("balance_money");
             address = new MctPayAddress(jObj.getString("region_info"),
                     jObj.getInteger("is_buy_agency"), jObj.getInteger("region_id"));
+            if (address.getSelectID() == 0) {
+                address.setIsBuyAgency(0);
+            }
             agreement_url = jObj.getString("agreement_url");
             agreement_headname = jObj.getString("agreement_headname");
             setHead(jObj);
@@ -192,6 +198,13 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
         if (address.getIsBuyAgency() != 1) {
             address.setIsBuyAgency(1);
             mctAdapter.notifyDataSetChanged();
+        }
+        if (type.equals(PayUtils.BALANCE)) {
+            BigDecimal balance, money;
+            balance = new BigDecimal(balance_money);
+            money = new BigDecimal(payUtils.money);
+            balance = balance.subtract(money);
+            balance_money = balance.toString();
         }
         payUtils.clear();
         Bundle bundle = new Bundle();
