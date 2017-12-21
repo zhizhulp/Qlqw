@@ -19,6 +19,24 @@ public class Pay {
     private WXPay wxPayInfo;
     private String success_info;
     private int member_status;
+    private int company_status;
+    private String company_status_text;
+
+    public int getCompany_status() {
+        return company_status;
+    }
+
+    public void setCompany_status(int company_status) {
+        this.company_status = company_status;
+    }
+
+    public String getCompany_status_text() {
+        return company_status_text;
+    }
+
+    public void setCompany_status_text(String company_status_text) {
+        this.company_status_text = company_status_text;
+    }
 
     public String getSuccess_info() {
         return success_info;

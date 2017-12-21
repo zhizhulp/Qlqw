@@ -58,30 +58,35 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
         } else if (companyStatus == 0) {//未通过
             int anInt = AppConfig.getInstance().getInt("card_status", 0);
             if (anInt == 0) {//个人未认证
-                dm.showAlertDialog2("您没有实名认证，是否立即实名？", "取消", "确定", new DialogManager.Callback() {
+                dm.showAlertDialog2(getString("您没有实名认证，是否立即实名？"), "取消", "确定", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         startActivity(PIStartActivity.class, null);
+                        finish();
                     }
                 });
             }else {
-                dm.showAlertDialog2("公司资质未实名，是否立即实名？", "取消", "确定", new DialogManager.Callback() {
+                dm.showAlertDialog2(getString("公司资质未实名，是否立即实名？"), "取消", "确定", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         startActivity(InPutCNActivity.class, null);
+                        finish();
                     }
                 });
             }
         } else if (companyStatus == 1) {//审核中
-            showToast("公司资质审核中，请审核通过后再试。");
+            showToast(getString("公司资质审核中，请审核通过后再试。"));
         } else if (companyStatus == 2) {//资料有误
-            dm.showAlertDialog2("公司资料有误，是否去查看公司资料", "取消", "确定", new DialogManager.Callback() {
+            dm.showAlertDialog2(getString("公司资料有误，是否去查看公司资料"), "取消", "确定", new DialogManager.Callback() {
                 @Override
                 public void handleRight() {
                     findCompanyInfo();
                 }
             });
         }
+    }
+    private String getString(String defaultStr){
+        return AppConfig.getInstance().getString("company_status_text",defaultStr);
     }
 
     private void findCompanyInfo() {
@@ -98,6 +103,7 @@ public class MctApplyStartActivity extends BaseDefaultNetActivity implements Vie
             b.putParcelable("company_msg", comMsg);
             AppConfig.getInstance().putInt("company_status", comMsg.getStatus());
             startActivity(ComMsgActivity.class, b);
+            finish();
         }
     }
 }

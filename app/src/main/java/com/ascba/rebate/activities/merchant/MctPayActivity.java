@@ -3,6 +3,7 @@ package com.ascba.rebate.activities.merchant;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -143,5 +144,11 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
         bundle.putInt("select", pay.getMember_status());
         bundle.putString("info", pay.getSuccess_info());
         startActivity(TextInfoSuccessActivity.class, bundle);
+        //设置用户公司认证状态
+        String companyStatusText = pay.getCompany_status_text();
+        if(!TextUtils.isEmpty(companyStatusText)){
+            AppConfig.getInstance().putString("company_status_text",companyStatusText);
+            AppConfig.getInstance().putInt("company_status",pay.getCompany_status());
+        }
     }
 }

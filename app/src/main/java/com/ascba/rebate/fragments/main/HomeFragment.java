@@ -8,6 +8,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.merchant.MctPayActivity;
 import com.ascba.rebate.activities.seller.SellerActivity;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.manager.DialogManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
@@ -216,6 +218,11 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
             JSONObject dataObj = JSON.parseObject(data);
             int memberStatus = dataObj.getIntValue("member_status");
             final String statusText = dataObj.getString("member_status_text");
+            String companyStatusText = dataObj.getString("company_status_text");
+            if(!TextUtils.isEmpty(companyStatusText)){
+                AppConfig.getInstance().putString("company_status_text",companyStatusText);
+                AppConfig.getInstance().putInt("company_status",dataObj.getIntValue("company_status"));
+            }
             //0正常1普通用户2资料审核中3商家过期4资料不全，第一次（跳转到H5）5资料不全第N次（跳转到资料提交）
             if (memberStatus == 0) {
                 startActivity(ReceiveCodeActivity.class, null);

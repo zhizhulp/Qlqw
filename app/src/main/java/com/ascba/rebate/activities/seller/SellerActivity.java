@@ -3,6 +3,7 @@ package com.ascba.rebate.activities.seller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.ascba.rebate.activities.merchant.MctRightsActivity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
@@ -149,11 +151,21 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
             sellerEntity = (SellerEntity) result.getData();
             money.setText(sellerEntity.getMoney());
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
+            String compaynStatusText = sellerEntity.getCompayn_status_text();
+            if(!TextUtils.isEmpty(compaynStatusText)){
+                AppConfig.getInstance().putString("company_status_text",compaynStatusText);
+                AppConfig.getInstance().putInt("company_status",sellerEntity.getCompany_status());
+            }
         } else if (what == 1) {
             String data = (String) result.getData();
             JSONObject dataObj = JSON.parseObject(data);
             int memberStatus = dataObj.getIntValue("member_status");
             final String statusText = dataObj.getString("member_status_text");
+            String companyStatusText = dataObj.getString("company_status_text");
+            if(!TextUtils.isEmpty(companyStatusText)){
+                AppConfig.getInstance().putString("company_status_text",companyStatusText);
+                AppConfig.getInstance().putInt("company_status",dataObj.getIntValue("company_status"));
+            }
             //0正常1普通用户2资料审核中3商家过期4资料不全，第一次（跳转到H5）5资料不全第N次（跳转到资料提交）
             if (memberStatus == 0) {
                 startActivity(ReceiveCodeActivity.class, null);
