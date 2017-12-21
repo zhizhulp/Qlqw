@@ -71,6 +71,11 @@
     *;
 }
 
+#自定义view不混淆
+-keep class com.ascba.rebate.view.**{
+    *;
+}
+
 #fastjson
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.** { *; }
@@ -139,3 +144,4 @@
 -keep class com.ta.utdid2.device.**{*;}
 #防止inline
 -dontoptimize
+-keep class com.ascba.rebate.view.jd_selector.BottomDialog
