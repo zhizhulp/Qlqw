@@ -71,8 +71,8 @@ public class IDetection {
 		mAnimViews[mCurShowIndex].startAnimation(animationIN);
 	}
 
-	TextView detectionNameText;
-	String detectionNameStr;
+	private TextView detectionNameText;
+	private String detectionNameStr;
 
 	private void initAnim(Detector.DetectionType detectiontype, View layoutView) {
 		ImageView tmpImageView = (ImageView) layoutView.findViewById(R.id.detection_step_image);

@@ -160,6 +160,7 @@ public class LivenessActivity extends BaseDefaultNetActivity
             mFaceMask.setLayoutParams(layout_params);
             // 初始化人脸质量检测管理类
             mFaceQualityManager = new FaceQualityManager(1 - 0.5f, 0.5f);
+            mFaceQualityManager.faceMaxSizeRatioThreshold = 0.7f;
             mIDetection.mCurShowIndex = -1;
         } else {
             mDialogUtil.showDialog(getString(com.megvii.livenesslib.R.string.meglive_camera_initfailed));
@@ -270,13 +271,13 @@ public class LivenessActivity extends BaseDefaultNetActivity
 
                                     @Override
                                     public void onSucceed(int what, Response<String> response) {
-                                        Log.d(TAG, "onSucceed: "+response.get());
+                                        Log.d(TAG, "onSucceed: " + response.get());
                                         if (response.responseCode() == 200) {
                                             String str = response.get();
                                             try {
-                                                JSONObject jObj=new JSONObject(str);
+                                                JSONObject jObj = new JSONObject(str);
                                                 String token = jObj.optJSONArray("faces").optJSONObject(0).optString("token");
-                                                AppConfig.getInstance().putString("face_token",token);
+                                                AppConfig.getInstance().putString("face_token", token);
                                                 netWorkWarranty(data);
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -323,7 +324,7 @@ public class LivenessActivity extends BaseDefaultNetActivity
                         public void run() {
                             dialog.dismiss();
                             Intent intent = new Intent(LivenessActivity.this, IDCardScanActivity.class);
-                            intent.putExtra("face_img",data);
+                            intent.putExtra("face_img", data);
                             startActivity(intent);
                             finish();
                         }
@@ -334,7 +335,7 @@ public class LivenessActivity extends BaseDefaultNetActivity
                         public void run() {
                             dialog.dismiss();
                             Toast.makeText(LivenessActivity.this, "联网授权失败！", Toast.LENGTH_SHORT).show();
-                            startActivity(PIStartActivity.class,null);
+                            startActivity(PIStartActivity.class, null);
                             finish();
                         }
                     });
@@ -361,17 +362,18 @@ public class LivenessActivity extends BaseDefaultNetActivity
                 resourceID = com.megvii.livenesslib.R.string.liveness_detection_failed_timeout;
                 break;
         }
+        Log.e(TAG, "onDetectionFailed: "+getString(resourceID));
         dm.showFaceFailed(new DialogManager.Callback() {
             @Override
             public void handleLeft() {
                 initDetecteSession();
+                changeType(mIDetection.mDetectionSteps.get(0), 10);
             }
 
             @Override
             public void handleRight() {
                 initDetecteSession();
-                /*startActivity(PIStartActivity.class,null);
-                finish();*/
+                changeType(mIDetection.mDetectionSteps.get(0), 10);
             }
         });
     }
