@@ -1,6 +1,7 @@
 package com.ascba.rebate.base.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.bean.Result;
@@ -11,24 +12,32 @@ import com.ascba.rebate.net.HttpResponseListener;
 import com.ascba.rebate.net.StringRequest;
 import com.ascba.rebate.utils.EncodeUtils;
 import com.ascba.rebate.utils.PackageUtils;
+import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.error.NetworkError;
 import com.yanzhenjie.nohttp.rest.CacheMode;
+import com.yanzhenjie.nohttp.rest.OnResponseListener;
+import com.yanzhenjie.nohttp.rest.RequestQueue;
 import com.yanzhenjie.nohttp.rest.Response;
 
 /**
  * 网络基类
  */
 public abstract class BaseNetActivity extends BaseDefaultUIActivity {
-
+    private RequestQueue mQueue;
+    private Object object=new Object();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     protected <T> void executeNetwork(int what, String message, AbstractRequest<T> request) {
-        CallServer.getInstance().addRequest(what, request, new ImpHttpResponseListener<T>(this, message));
+        if(mQueue==null){
+            mQueue= NoHttp.newRequestQueue();
+        }
+        mQueue.add(what, request, new ImpHttpResponseListener<T>(this, message));
     }
 
     protected <T> void executeNetwork(int what, AbstractRequest<T> request) {
@@ -42,6 +51,7 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         } else {
             request = new EntityRequest<>(url, method, clazz);
         }
+        request.setCancelSign(object);
         if (hasCache()) {
             request.setCacheMode(CacheMode.REQUEST_NETWORK_FAILED_READ_CACHE);
         }
@@ -57,6 +67,15 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         return request;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mQueue!=null){
+            mQueue.cancelBySign(object);
+            mQueue.stop();
+        }
+    }
+
     /**
      * 设置是否有缓存
      *
@@ -66,9 +85,9 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         return false;
     }
 
-    private class ImpHttpResponseListener<T> extends HttpResponseListener<T> {
+    private static class ImpHttpResponseListener<T> extends HttpResponseListener<T> {
 
-        ImpHttpResponseListener(BaseUIActivity context, String message) {
+        ImpHttpResponseListener(BaseNetActivity context, String message) {
             super(context, message);
         }
 
@@ -80,34 +99,35 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         @Override
         public void onHttpSucceed(int what, Response<Result<T>> response) {
             Result<T> tResult = response.get();
+            BaseNetActivity context = this.context.get();
             int code = tResult.getCode();
             switch (code) {
                 case -2017://请求包体为空
-                    showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
+                    context.showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
                     break;
                 case -4515://服务端给的数据不是json数据
-                    showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
+                    context.showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
                     break;
                 case -7102://服务端有问题
-                    mHandleFailed(what);
+                    context.mHandleFailed(what);
                     break;
                 case -1545:
-                    showToast(tResult.getMsg());
+                    context.showToast(tResult.getMsg());
                     break;
                 case 10:
-                    showToast(tResult.getMsg());
+                    context.showToast(tResult.getMsg());
                     break;
                 case 11:
-                    showToast(tResult.getMsg());
+                    context.showToast(tResult.getMsg());
                     break;
                 case 20://掉线
-                    mHandleReLogin(what, tResult);
+                    context.mHandleReLogin(what, tResult);
                     break;
                 case 200:
-                    mHandle200(what, tResult);
+                    context.mHandle200(what, tResult);
                     break;
                 case 404:
-                    mHandle404(what, tResult);
+                    context.mHandle404(what, tResult);
                     break;
                 default:
                     break;
@@ -118,13 +138,13 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         public void onHttpFailed(int what, Response<Result<T>> response) {
             Exception e = response.getException();
             if (e instanceof NetworkError) {
-                mHandleNoNetwork(what);
+                context.get().mHandleNoNetwork(what);
             }
         }
 
         @Override
         public void onHttpFinish(int what) {
-            stopRefreshAndLoadMore();
+            context.get().stopRefreshAndLoadMore();
         }
     }
 

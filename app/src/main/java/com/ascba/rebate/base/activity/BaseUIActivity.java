@@ -63,13 +63,17 @@ public abstract class BaseUIActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        ActivityManager.getInstance().removeActivity(this);
+        unregisterReceiver(mHomeKeyEventReceiver);
         if(MyApplication.patchStatusCode== PatchStatus.CODE_LOAD_RELAUNCH){
             if(this instanceof MainActivity){
                 killProcess(false);
             }
+        }else {
+            if(this instanceof MainActivity){
+                System.exit(0);
+            }
         }
-        unregisterReceiver(mHomeKeyEventReceiver);
+        ActivityManager.getInstance().removeActivity(this);
         super.onDestroy();
     }
 

@@ -1,6 +1,7 @@
 package com.ascba.rebate.manager;
 
 import android.app.Activity;
+import android.util.Log;
 
 import java.util.Stack;
 
@@ -12,6 +13,7 @@ import java.util.Stack;
 public class ActivityManager {
     private static ActivityManager manager = new ActivityManager();
     private Stack<Activity> ayList = new Stack<>();
+    private String TAG="ActivityManager";
 
     private ActivityManager() {
     }
@@ -26,6 +28,7 @@ public class ActivityManager {
     public void addActivity(Activity a) {
         if (!ayList.contains(a)) {
             ayList.add(a);
+            Log.d(TAG, "addActivity: "+a);
         }
     }
 
@@ -35,6 +38,7 @@ public class ActivityManager {
     public void removeActivity(Activity a) {
         if (ayList.contains(a)) {
             ayList.remove(a);
+            Log.d(TAG, "removeActivity: "+a);
         }
     }
 

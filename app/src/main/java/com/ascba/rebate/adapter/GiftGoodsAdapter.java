@@ -32,6 +32,7 @@ public class GiftGoodsAdapter extends BaseQuickAdapter<ScoreHome.GiftGoods, Base
     @Override
     protected void convert(BaseViewHolder helper, ScoreHome.GiftGoods item) {
         Picasso.with(mContext).load(item.getImg()).placeholder(R.mipmap.gift_goods_loading)
+                .resizeDimen(R.dimen.goods_dimen,R.dimen.goods_dimen)
                 .into((ImageView) helper.getView(R.id.im_icon));
         helper.setText(R.id.tv_title, item.getTitle());
         helper.setText(R.id.tv_score, item.getPrice());

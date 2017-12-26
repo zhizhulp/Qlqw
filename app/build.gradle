@@ -138,4 +138,6 @@ dependencies {
     }
     compile 'com.amap.api:location:latest.integration'
     compile 'org.raphets:roundimageview:1.2.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

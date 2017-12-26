@@ -140,7 +140,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
         banner = fv(R.id.banner);
         ViewGroup.LayoutParams params = banner.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels;
-        banner.setImageLoader(new BannerImageLoader());
+        banner.setImageLoader(new BannerImageLoader(params.height,params.height));
         getParamsAddRequest();
         requestData();
         scrollView = fv(R.id.scrollView);
@@ -257,7 +257,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     private void requestData() {
         AbstractRequest request = buildRequest(UrlUtils.getGoodsDetail, RequestMethod.POST, null);
         request.add("goods_id", goodsId);
-        executeNetwork(0, "请稍后", request);
+        executeNetwork(0, request);
     }
 
     private void requestApply(int status) {

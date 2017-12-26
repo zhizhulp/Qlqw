@@ -1,5 +1,6 @@
 package com.ascba.rebate.activities.launch;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class LaunchActivity extends BaseDefaultNetActivity {
     protected int setUIMode() {
         return BaseUIActivity.UIMODE_FULLSCREEN;
     }
+    @SuppressLint("HandlerLeak")
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);

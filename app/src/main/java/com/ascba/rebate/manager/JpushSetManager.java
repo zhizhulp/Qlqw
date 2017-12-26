@@ -1,5 +1,6 @@
 package com.ascba.rebate.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
@@ -22,6 +23,7 @@ public class JpushSetManager {
     private static final String TAG="JpushSetManager";
     private static final int MSG_SET_ALIAS = 1001;
     private static final int MSG_SET_TAGS = 1002;
+    @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {

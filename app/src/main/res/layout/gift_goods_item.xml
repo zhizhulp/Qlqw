@@ -10,8 +10,8 @@
         android:layout_centerVertical="true"
         android:id="@+id/im_icon"
         android:src="@mipmap/head_loading"
-        android:layout_width="103.5dp"
-        android:layout_height="103.5dp" />
+        android:layout_width="@dimen/goods_dimen"
+        android:layout_height="@dimen/goods_dimen" />
     <LinearLayout
         android:layout_toRightOf="@id/im_icon"
         android:layout_centerVertical="true"

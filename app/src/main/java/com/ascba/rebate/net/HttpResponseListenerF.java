@@ -1,11 +1,10 @@
 package com.ascba.rebate.net;
 
 import android.app.ProgressDialog;
+
 import com.ascba.rebate.R;
-import com.ascba.rebate.base.activity.BaseNetActivity;
-import com.ascba.rebate.base.activity.BaseUIActivity;
+import com.ascba.rebate.base.fragment.BaseNetFragment;
 import com.ascba.rebate.bean.Result;
-import com.ascba.rebate.manager.ToastManager;
 import com.yanzhenjie.nohttp.error.NetworkError;
 import com.yanzhenjie.nohttp.error.NotFoundCacheError;
 import com.yanzhenjie.nohttp.error.ServerError;
@@ -24,15 +23,15 @@ import java.lang.ref.WeakReference;
  * 网络请求监听器
  */
 
-public abstract class HttpResponseListener<T> implements OnResponseListener<Result<T>> {
+public abstract class HttpResponseListenerF<T> implements OnResponseListener<Result<T>> {
 
     private ProgressDialog dialog;
-    protected WeakReference<BaseNetActivity> context;
+    protected WeakReference<BaseNetFragment> context;
 
-    public HttpResponseListener(BaseNetActivity context, String message) {
+    public HttpResponseListenerF(BaseNetFragment context, String message) {
         this.context =new WeakReference<>(context);
         if(message!=null){
-            this.dialog = new ProgressDialog(this.context.get(), R.style.dialog);
+            this.dialog = new ProgressDialog(this.context.get().getActivity(), R.style.dialog);
             dialog.setCanceledOnTouchOutside(false);//点击外部不可取消
             dialog.setCancelable(true);//返还键可取消
             dialog.setMessage(message);
@@ -55,26 +54,26 @@ public abstract class HttpResponseListener<T> implements OnResponseListener<Resu
 
     @Override
     public void onFailed(int what, Response<Result<T>> response) {
-
+        BaseNetFragment context = this.context.get();
         Exception e = response.getException();
         if (e instanceof NetworkError) {
             //context.showToast(e.getMessage());
         }else if(e instanceof ServerError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof StorageReadWriteError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof StorageSpaceNotEnoughError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof TimeoutError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof UnKnownHostError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof NotFoundCacheError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else if(e instanceof URLError){
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }else {
-            ToastManager.show(e.getMessage());
+            context.showToast(e.getMessage());
         }
         onHttpFailed(what,response);
 

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.ascba.rebate.utils.CodeUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -33,6 +34,11 @@ public class MyApplication extends Application {
         NoHttp.initialize(this);
         Logger.setDebug(true);
         Logger.setTag("NoHttp");
+        //内存泄漏检测
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     private void initHotFix() {

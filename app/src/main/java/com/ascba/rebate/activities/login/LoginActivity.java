@@ -52,6 +52,7 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
     private String mobile, code;
     private boolean codePressed = false;
     private int codeLength;
+    private CountDownTimer timer;
 
     @Override
     protected int setUIMode() {
@@ -227,7 +228,7 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
     }
 
     public void TimeCount() {
-        new CountDownTimer(60 * 1000, 1000) {
+        timer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long l) {
                 tvTime.setTextColor(getResources().getColor(R.color.grey_tv));
@@ -241,8 +242,8 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
                 tvTime.setText("重新发送");
                 tvTime.setEnabled(true);
             }
-        }.start();
-
+        };
+        timer.start();
     }
 
     @Override
@@ -356,6 +357,14 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
             showToast("微信登录成功");
             saveLoginInfo(JSON.parseObject(data.getStringExtra(WXUtils.INFO), LoginNextEntity.class));
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
         }
     }
 }

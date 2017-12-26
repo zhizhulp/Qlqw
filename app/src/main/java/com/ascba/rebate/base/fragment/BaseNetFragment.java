@@ -1,27 +1,40 @@
 package com.ascba.rebate.base.fragment;
 
 import com.ascba.rebate.appconfig.AppConfig;
+import com.ascba.rebate.base.activity.BaseNetActivity;
 import com.ascba.rebate.base.activity.BaseUIActivity;
 import com.ascba.rebate.bean.Result;
+import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.net.CallServer;
 import com.ascba.rebate.net.EntityRequest;
 import com.ascba.rebate.net.HttpResponseListener;
+import com.ascba.rebate.net.HttpResponseListenerF;
 import com.ascba.rebate.net.StringRequest;
 import com.ascba.rebate.utils.EncodeUtils;
 import com.ascba.rebate.utils.PackageUtils;
+import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.error.NetworkError;
 import com.yanzhenjie.nohttp.rest.CacheMode;
+import com.yanzhenjie.nohttp.rest.RequestQueue;
 import com.yanzhenjie.nohttp.rest.Response;
+
+import java.lang.ref.WeakReference;
 
 /**
  * fragment 网络基类
  */
 
 public abstract class BaseNetFragment extends BaseDefaultUIFragment {
+    private RequestQueue mQueue;
+    private Object object = new Object();
+
     protected <T> void executeNetwork(int what, String message, AbstractRequest<T> request) {
-        CallServer.getInstance().addRequest(what, request, new ImpHttpResponseListener<T>(((BaseUIActivity) getActivity()), message));
+        if (mQueue == null) {
+            mQueue = NoHttp.newRequestQueue();
+        }
+        mQueue.add(what, request, new ImpHttpResponseListener<T>(this, message));
     }
 
     protected <T> void executeNetwork(int what, AbstractRequest<T> request) {
@@ -38,6 +51,7 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
         if (hasCache()) {
             request.setCacheMode(CacheMode.REQUEST_NETWORK_FAILED_READ_CACHE);
         }
+        request.setCancelSign(object);
         request.addHeader("apiversion", PackageUtils.getPackageVersion(getActivity()));
         request.addHeader("clientfrom", "android" + PackageUtils.getAndroidVersion());
         request.addHeader("deviceuuid", PackageUtils.getDeviceId());
@@ -50,6 +64,15 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
         return request;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mQueue != null) {
+            mQueue.cancelBySign(object);
+            mQueue.stop();
+        }
+    }
+
     /**
      * 设置是否有缓存
      *
@@ -59,9 +82,8 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
         return false;
     }
 
-    private class ImpHttpResponseListener<T> extends HttpResponseListener<T> {
-
-        ImpHttpResponseListener(BaseUIActivity context, String message) {
+    private static class ImpHttpResponseListener<T> extends HttpResponseListenerF<T> {
+        ImpHttpResponseListener(BaseNetFragment context, String message) {
             super(context, message);
         }
 
@@ -75,31 +97,31 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
             int code = tResult.getCode();
             switch (code) {
                 case -2017://请求包体为空
-                    showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
+                    ToastManager.show("code:" + code + "\n" + "msg :" + tResult.getMsg());
                     break;
                 case -4515://服务端给的数据不是json数据
-                    showToast("code:" + code + "\n" + "msg :" + tResult.getMsg());
+                    ToastManager.show("code:" + code + "\n" + "msg :" + tResult.getMsg());
                     break;
                 case -7102://服务端有问题
-                    mHandleFailed(what);
+                    context.get().mHandleFailed(what);
                     break;
                 case -1545:
-                    showToast(tResult.getMsg());
+                    ToastManager.show(tResult.getMsg());
                     break;
                 case 10:
-                    showToast(tResult.getMsg());
+                    ToastManager.show(tResult.getMsg());
                     break;
                 case 11:
-                    showToast(tResult.getMsg());
+                    ToastManager.show(tResult.getMsg());
                     break;
                 case 20://掉线
-                    mHandleReLogin(what, tResult);
+                    context.get().mHandleReLogin(what, tResult);
                     break;
                 case 200:
-                    mHandle200(what, tResult);
+                    context.get().mHandle200(what, tResult);
                     break;
                 case 404:
-                    mHandle404(what, tResult);
+                    context.get().mHandle404(what, tResult);
                     break;
                 default:
                     break;
@@ -110,13 +132,13 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
         public void onHttpFailed(int what, Response<Result<T>> response) {
             Exception e = response.getException();
             if (e instanceof NetworkError) {
-                mHandleNoNetwork(what);
+                context.get().mHandleNoNetwork(what);
             }
         }
 
         @Override
         public void onHttpFinish(int what) {
-            stopRefreshAndLoadMore();
+            context.get().stopRefreshAndLoadMore();
         }
     }
 
