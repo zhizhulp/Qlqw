@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2010 ZXing authors
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.ascba.rebate.view.qr.utils.ScreenUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,10 +35,10 @@ final class CameraConfigurationManager {
 
     private Camera.Size mCameraResolution;
     private Camera.Size mPictureResolution;
-    private Activity mActivity;
+    private WeakReference<Activity> mActivity;
 
     public CameraConfigurationManager(Activity mActivity) {
-        this.mActivity = mActivity;
+        this.mActivity = new WeakReference<Activity>(mActivity);
     }
 
     private static Point getCameraResolution(Camera.Parameters parameters, Point screenResolution) {
@@ -132,12 +133,12 @@ final class CameraConfigurationManager {
     void initFromCameraParameters(Camera camera) {
 
         Camera.Parameters parameters = camera.getParameters();
-        Log.e(TAG, "screen width: " + ScreenUtils.getScreenWidth() + "-" + ScreenUtils.getScreenHeight(mActivity));
-        mCameraResolution = findCloselySize(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(mActivity),
+        Log.e(TAG, "screen width: " + ScreenUtils.getScreenWidth() + "-" + ScreenUtils.getScreenHeight(mActivity.get()));
+        mCameraResolution = findCloselySize(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(mActivity.get()),
                 parameters.getSupportedPreviewSizes(), true);
         //mCameraResolution = camera.new Size(1280,720);
         Log.e(TAG, "Setting preview size: " + mCameraResolution.width + "-" + mCameraResolution.height);
-        mPictureResolution = findCloselySize(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(mActivity),
+        mPictureResolution = findCloselySize(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(mActivity.get()),
                 parameters.getSupportedPictureSizes(), false);
         //mPictureResolution = camera.new Size(1280,720);
         Log.e(TAG, "Setting picture size: " + mPictureResolution.width + "-" + mPictureResolution.height);
