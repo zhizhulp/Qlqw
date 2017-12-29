@@ -361,7 +361,7 @@ public class SweepActivity extends BaseDefaultNetActivity implements SurfaceHold
     @Override
     protected void mHandleReLogin(int what, Result result) {
         super.mHandleReLogin(what, result);
-        restartPreview();
+        finish();
     }
 
     @Override
