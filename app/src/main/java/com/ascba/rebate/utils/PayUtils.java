@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Message;
 
 import com.alipay.sdk.app.PayTask;
-import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.application.MyApplication;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
@@ -39,7 +38,7 @@ public class PayUtils {
 
     public static PayUtils getInstance() {
         if (payUtils == null)
-            synchronized (AppConfig.class) {
+            synchronized (PayUtils.class) {
                 if (payUtils == null)
                     payUtils = new PayUtils();
             }
@@ -52,7 +51,7 @@ public class PayUtils {
 
     public PayUtils setInit(BaseDefaultPayActivity activity, Class<?> successCls, boolean result) {
         clear();
-        isResult = result;
+        payUtils.isResult = result;
         payUtils.activity = activity;
         payUtils.cls = successCls;
         return payUtils;
@@ -61,8 +60,12 @@ public class PayUtils {
     public void clear() {
         payUtils.type = null;
         payUtils.money = null;
-        paySuccess = false;
-        isResult = false;
+        payUtils.paySuccess = false;
+        payUtils.isResult = false;
+    }
+
+    public void unregister() {
+        payUtils.activity = null;
     }
 
     public void isOk() {
