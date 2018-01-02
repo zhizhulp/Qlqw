@@ -155,7 +155,7 @@ public class ScoreHome {
     }
 
 
-    public static class GiftGoods {
+    public static class GiftGoods extends ScoreBuyBase {
         /**
          * id : 8
          * title : ILISYA 柔色纤长浓密睫毛膏可温水卸妆防水不易晕染卷翘大容量15g
@@ -354,6 +354,11 @@ public class ScoreHome {
 
         public void setInventory(int inventory) {
             this.inventory = inventory;
+        }
+
+        @Override
+        public int getItemType() {
+            return 3;
         }
     }
 }

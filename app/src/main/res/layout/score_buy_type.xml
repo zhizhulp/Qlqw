@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:paddingLeft="14dp"
+            android:layout_centerVertical="true"
+            android:text="分类信息"
+            android:textColor="@color/grey_black_tv"
+            android:textSize="@dimen/text_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/more"
+            android:layout_marginRight="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/more"
+            android:textSize="@dimen/text_13"
+            android:textColor="@color/grey_black_tv2"
+            android:text="查看更多"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_alignParentBottom="true"
+            style="@style/LineHorizontal"/>
+    </RelativeLayout>
+    <GridView
+        android:scrollbars="none"
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/main_bg"/>
+    <TextView
+        android:gravity="center_vertical"
+        android:text="热销商品"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+    <View
+        style="@style/LineHorizontal"/>
+</LinearLayout>

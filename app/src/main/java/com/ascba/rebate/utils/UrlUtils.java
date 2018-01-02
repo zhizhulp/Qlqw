@@ -116,5 +116,5 @@ public class UrlUtils {
     public static String agreementRegister = baseWebsite + "agreement/register";
     public static String getMemberQrcode = baseWebsite + "user/getMemberQrcode";
     public static String agentPayment = baseWebsite + "agent/payment";
-
+    public static String purchaseIndex2 = baseWebsite + "Purchase/purchaseIndex";
 }

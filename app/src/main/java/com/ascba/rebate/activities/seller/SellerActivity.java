@@ -15,6 +15,7 @@ import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.merchant.MctPayActivity;
 import com.ascba.rebate.activities.merchant.MctRightsActivity;
+import com.ascba.rebate.activities.score_buy.ScoreBuyHome1Activity;
 import com.ascba.rebate.activities.trade.ConfirmListActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.adapter.SellerRecommendedAdapter;
@@ -139,7 +140,7 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                 startActivity(ConfirmListActivity.class, null);
                 break;
             case R.id.item_seller_iv://立即储值
-                startActivity(SellerPurchaseActivity.class, null);
+                startActivity(ScoreBuyHome1Activity.class, null);
                 break;
         }
     }

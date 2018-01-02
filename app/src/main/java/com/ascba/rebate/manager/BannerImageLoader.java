@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.bean.HomeBean;
+import com.ascba.rebate.bean.ScoreBuyBanner;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.loader.ImageLoader;
 
@@ -30,6 +31,9 @@ public class BannerImageLoader extends ImageLoader {
                     .resize(width,height).into(imageView);
         } else if (path instanceof HomeBean.VideoBean) {
             Picasso.with(context).load(((HomeBean.VideoBean) path).getThumb()).
+                    placeholder(R.mipmap.gift_head_loading).into(imageView);
+        } else if (path instanceof ScoreBuyBanner.ScoreBuyImg) {
+            Picasso.with(context).load(((ScoreBuyBanner.ScoreBuyImg) path).getBanner_img()).
                     placeholder(R.mipmap.gift_head_loading).into(imageView);
         }
     }

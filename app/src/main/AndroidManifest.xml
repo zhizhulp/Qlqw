@@ -333,6 +333,8 @@
         <activity android:name=".activities.agent.AgentPayActivity" />
         <activity android:name=".activities.agent.CityAgentActivity" />
         <activity android:name=".activities.mine.RecActivity" />
+        <activity android:name=".activities.score_buy.ScoreBuyHome1Activity"
+            android:exported="true"/>
     </application>
 
 </manifest>
