@@ -183,4 +183,11 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
         setResult(RESULT_OK, getIntent());
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        payUtils.clear();
+        payUtils.unregister();
+    }
 }
