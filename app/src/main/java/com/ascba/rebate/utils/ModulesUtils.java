@@ -14,6 +14,7 @@ import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.cash_get.CashGetActivity;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.activities.recharge.RechargeActivity;
+import com.ascba.rebate.activities.score_buy.ScoreBuyHome1Activity;
 import com.ascba.rebate.activities.score_shop.GiftShopActivity;
 import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerGiveCreateActivity;
@@ -38,7 +39,7 @@ public class ModulesUtils {
     public static boolean itemGo(final Activity activity, ModuleEntity moduleEntity) {
         switch (moduleEntity.getNav_label()) {
             case "GiftsStoredValue":// 礼品储值
-                goActivity(activity, SellerPurchaseActivity.class, null);
+                goActivity(activity, ScoreBuyHome1Activity.class, null);
                 break;
             case "PresentsGiving":// 礼品赠送
                 goActivity(activity, SellerGiveCreateActivity.class, null);

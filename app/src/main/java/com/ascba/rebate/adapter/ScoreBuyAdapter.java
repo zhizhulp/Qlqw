@@ -1,6 +1,7 @@
 package com.ascba.rebate.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.SpannableString;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ScoreBuyBanner;
 import com.ascba.rebate.bean.ScoreBuyBase;
@@ -83,7 +85,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                        mContext.startActivity(new Intent(mContext,SellerPurchaseActivity.class));
                     }
                 });
                 break;
