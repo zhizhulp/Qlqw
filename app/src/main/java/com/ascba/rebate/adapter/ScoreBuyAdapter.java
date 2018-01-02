@@ -79,13 +79,16 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
             case 1://head
                 ScoreBuyHead item1 = (ScoreBuyHead) item;
                 MyGridView gridView = helper.getView(R.id.gridView);
-                gridView.setNumColumns(item1.getGrids().size());
-                GridAdapter adapter = new GridAdapter(item1.getGrids(), mContext);
+                final List<ScoreBuyHead.ScoreBuyGrid> grids = item1.getGrids();
+                gridView.setNumColumns(grids.size());
+                GridAdapter adapter = new GridAdapter(grids, mContext);
                 gridView.setAdapter(adapter);
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        mContext.startActivity(new Intent(mContext,SellerPurchaseActivity.class));
+                        Intent intent = new Intent(mContext, SellerPurchaseActivity.class);
+                        intent.putExtra("type",grids.get(position).getId());
+                        mContext.startActivity(intent);
                     }
                 });
                 break;
