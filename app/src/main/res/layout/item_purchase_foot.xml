@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SelectBackgroundWhile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="72dp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <CheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/selector_invoice_19" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/cb_select"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="退款保障"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+
+    <ImageView
+        android:id="@+id/im_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/tv_title"
+        android:src="@mipmap/purchase_warn" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_title"
+        android:layout_below="@id/tv_title"
+        android:layout_marginBottom="12dp"
+        android:gravity="left"
+        android:minHeight="20dp"
+        android:text="20元/次，7天内可申请退款，退款额为礼品包金额的95%"
+        android:textColor="@color/grey_black_tv3"
+        android:textSize="@dimen/text_13" />
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="+20.00"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
+</RelativeLayout>

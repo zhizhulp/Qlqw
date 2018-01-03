@@ -79,15 +79,33 @@ public class PurchaseEntity {
          * cz_desc : 普卡A
          */
 
-        private int cz_money;
+        private String cz_money;
         private int cz_rate_money;
         private String cz_desc;
+        private int only_price;
 
-        public int getCz_money() {
+        public int getOnly_price() {
+            return only_price;
+        }
+
+        public void setOnly_price(int only_price) {
+            this.only_price = only_price;
+        }
+
+        public String getMoney() {
+            if (getOnly_price() == 1) {
+                return "";
+            } else if (getOnly_price() == 0) {
+                return getCz_money();
+            }
+            return "";
+        }
+
+        public String getCz_money() {
             return cz_money;
         }
 
-        public void setCz_money(int cz_money) {
+        public void setCz_money(String cz_money) {
             this.cz_money = cz_money;
         }
 
