@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference;
  */
 
 public abstract class BaseNetFragment extends BaseDefaultUIFragment {
-    private RequestQueue mQueue;
+    protected RequestQueue mQueue;
     private Object object = new Object();
 
     protected <T> void executeNetwork(int what, String message, AbstractRequest<T> request) {
@@ -70,6 +70,7 @@ public abstract class BaseNetFragment extends BaseDefaultUIFragment {
         if (mQueue != null) {
             mQueue.cancelBySign(object);
             mQueue.stop();
+            mQueue = null;
         }
     }
 

@@ -1,17 +1,24 @@
 package com.ascba.rebate.activities.score_buy;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
 import com.ascba.rebate.adapter.ScoreBuyAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
+import com.ascba.rebate.base.activity.BaseUIActivity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.bean.ScoreBuyBanner;
 import com.ascba.rebate.bean.ScoreBuyBase;
@@ -42,10 +49,17 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     private List<ScoreBuyBase> data;
     private FloatingActionButton fb;
     private ScoreBuyAdapter adapter;
+    private FrameLayout barLat;
+    private int totalY;
 
     @Override
     protected int bindLayout() {
         return R.layout.activity_score_buy_home1;
+    }
+
+    @Override
+    protected int setUIMode() {
+        return BaseUIActivity.UIMODE_TRANSPARENT_NOTALL;
     }
 
     @Override
@@ -54,7 +68,33 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         fb = fv(R.id.fb);
         setRecyclerView();
         setFloatBar();
+        setMoneyBar();
         requestData();
+    }
+
+    private void setMoneyBar() {
+        barLat = (FrameLayout)findViewById(R.id.lat_bar);
+        mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
+            @Override
+            public void clickTail() {
+                Bundle bundle = new Bundle();
+                bundle.putInt("mine_type", 3);
+                startActivity(ScoreBillActivity.class, bundle);
+            }
+        });
+        final int maxY = getResources().getDisplayMetrics().widthPixels;
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                totalY += dy;
+                if (totalY <= maxY) {
+                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 64, 143, 255));
+                } else {
+                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this,R.color.blue_btn));
+                }
+
+            }
+        });
     }
 
     private void setFloatBar() {
@@ -81,6 +121,14 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                     startActivity(GiftGoodsDetailsActivity.class, b);
                 }
             }
+
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                super.onItemChildClick(adapter, view, position);
+                if(view.getId()==R.id.tv_more_type){
+                    startActivity(GiftGoodsTypeActivity.class,null);
+                }
+            }
         });
         mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setEnableScrollContentWhenLoaded(false);
@@ -92,7 +140,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
             }
         });
         PinnedHeaderItemDecoration stickyHeader = new PinnedHeaderItemDecoration.Builder(1).create();
-        mRecyclerView.addItemDecoration(stickyHeader);
+        //mRecyclerView.addItemDecoration(stickyHeader);
         mRecyclerView.setAdapter(adapter);
     }
 

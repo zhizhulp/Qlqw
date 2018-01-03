@@ -37,4 +37,7 @@
     <string name="address_hint">谨慎填写详细地址，不少于5个字</string>
     <string name="phone_hint">店铺的电话</string>
     <string name="seller_name_unavailable">店铺名称长度不符合，请重新输入</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

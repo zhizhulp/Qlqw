@@ -4,13 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ascba.rebate.view.MoneyBar
-        style="@style/MoneyBar"
-        app:textTail="购卡记录"
-        app:textTitle="礼品采购" />
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:layout_below="@id/mb"
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,8 +14,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <FrameLayout
+        android:id="@+id/lat_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:fitsSystemWindows="true">
+
+        <com.ascba.rebate.view.MoneyBar
+            style="@style/MoneyBar"
+            app:barBg="@color/transparent"
+            app:textTail="购卡记录"
+            app:textTitle="礼品采购" />
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:id="@+id/fb"

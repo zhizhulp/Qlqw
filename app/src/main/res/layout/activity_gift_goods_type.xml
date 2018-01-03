@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ascba.rebate.activities.score_buy.GiftGoodsTypeActivity">
+    <com.ascba.rebate.view.MoneyBar
+        app:barBg="@color/purple"
+        app:textTitle="分类"
+        style="@style/MoneyBar"/>
+    <android.support.design.widget.TabLayout
+        android:background="@color/white"
+        app:tabTextColor="@color/grey_black_tv"
+        app:tabSelectedTextColor="@color/purple"
+        app:tabIndicatorColor="@color/purple"
+        app:tabIndicatorHeight="1dp"
+        app:tabGravity="center"
+        app:tabMode="scrollable"
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <View
+        style="@style/LineHorizontal"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

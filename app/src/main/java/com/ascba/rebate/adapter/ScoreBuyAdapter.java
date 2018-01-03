@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.score_buy.GiftGoodsTypeActivity;
 import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ScoreBuyBanner;
@@ -93,11 +94,20 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 });
                 break;
             case 2://type
+                helper.addOnClickListener(R.id.tv_more_type);
                 ScoreBuyType item3 = (ScoreBuyType) item;
                 GridView gridView1 = helper.getView(R.id.gridView);
-                gridView1.setNumColumns(item3.getTypes().size());
-                TypeAdapter adapter1 = new TypeAdapter(item3.getTypes(), mContext);
+                final List<ScoreBuyType.ScoreBuyTypeC> types = item3.getTypes();
+                gridView1.setNumColumns(types.size());
+                TypeAdapter adapter1 = new TypeAdapter(types, mContext);
                 gridView1.setAdapter(adapter1);
+                gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ScoreBuyType.ScoreBuyTypeC scoreBuyTypeC = types.get(position);
+                        GiftGoodsTypeActivity.start(mContext,scoreBuyTypeC.getCate_id());
+                    }
+                });
                 break;
             case 3://goods
                 ScoreHome.GiftGoods itemC = (ScoreHome.GiftGoods) item;
