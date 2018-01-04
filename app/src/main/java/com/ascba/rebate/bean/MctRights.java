@@ -24,6 +24,7 @@ public class MctRights {
      * active_h5_title : 我是活动标题
      * seller_agent_money : 0
      * seller_getpay_money : 77648
+     * seller_status_tip : 已开通商家时间
      */
 
     private int seller_id;
@@ -44,6 +45,7 @@ public class MctRights {
     private String active_h5_title;
     private String seller_agent_money;
     private String seller_getpay_money;
+    private String seller_status_tip;
 
     public String getSeller_url() {
         return seller_url;
@@ -187,5 +189,13 @@ public class MctRights {
 
     public void setSeller_getpay_money(String seller_getpay_money) {
         this.seller_getpay_money = seller_getpay_money;
+    }
+
+    public String getSeller_status_tip() {
+        return seller_status_tip;
+    }
+
+    public void setSeller_status_tip(String seller_status_tip) {
+        this.seller_status_tip = seller_status_tip;
     }
 }

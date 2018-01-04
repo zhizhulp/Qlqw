@@ -8,26 +8,45 @@
     android:layout_marginRight="14dp"
     android:layout_marginTop="14dp"
     android:background="@drawable/purple_line_corner"
-    android:paddingLeft="8dp">
+    android:paddingLeft="13dp">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:textColor="@color/mct_class_color"
-        android:textSize="@dimen/text_14" />
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_15" />
+
+    <TextView
+        android:id="@+id/tv_dct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_title"
+        android:layout_toRightOf="@id/tv_title"
+        android:gravity="center"
+        android:textColor="@color/purchase_yellow_tv"
+        android:textSize="@dimen/text_15" />
 
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="35dp"
         android:layout_below="@id/tv_title"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:textColor="@color/mct_class_color"
-        android:textSize="@dimen/text_12" />
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_21" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_content"
+        android:layout_toRightOf="@id/tv_content"
+        android:text="分"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14" />
 
     <TextView
         android:id="@+id/tv_now_price"
@@ -35,10 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/tv_title"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="14dp"
-        android:textColor="@color/mct_class_color_02"
-        android:textSize="@dimen/text_19"
-        android:textStyle="bold" />
+        android:layout_marginRight="28dp"
+        android:textColor="@color/purchase_yellow_tv"
+        android:textSize="@dimen/text_21" />
 
     <TextView
         android:id="@+id/tv_price_type"
@@ -46,8 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/tv_now_price"
         android:layout_toLeftOf="@id/tv_now_price"
-        android:textColor="@color/mct_class_color_02"
-        android:textSize="@dimen/text_12" />
+        android:textColor="@color/purchase_yellow_tv"
+        android:textSize="@dimen/text_13" />
 
     <TextView
         android:id="@+id/tv_before_price"
@@ -56,11 +74,12 @@
         android:layout_alignBaseline="@id/tv_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/tv_now_price"
-        android:layout_marginRight="14dp"
+        android:layout_marginRight="28dp"
         android:textColor="@color/grey_black_tv"
         android:textSize="@dimen/text_13" />
 
     <ImageView
+        android:id="@+id/im_dct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

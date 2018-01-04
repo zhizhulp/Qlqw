@@ -3,9 +3,16 @@ package com.ascba.rebate.activities.seller;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.adapter.PurchasePayAdapter;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
@@ -14,6 +21,7 @@ import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.PurchaseEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.NumberFormatUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -25,10 +33,24 @@ import com.yanzhenjie.nohttp.RequestMethod;
 public class SellerPurchaseActivity extends BaseDefaultPayActivity implements View.OnClickListener {
     private static final int GET = 80;
 
-    private TextView num, info;
-    private int type;
+    private int type; // 1 零售 2 批发 3 定制
     private PurchaseEntity purchaseEntity;
     private PurchasePayAdapter purchasePayAdapter;
+    // foot
+    private View footerView;
+    private CheckBox cbBack, cbInvoice;
+    private TextView tvBack, tvInvoice, tvBackContent, tvInvoiceContent;
+    private RelativeLayout latInvoice; // 选择发票布局
+    // car
+    private RelativeLayout latCar; // 购物车数字区域
+    private ImageView imCarNum; // 红点数字
+    private LinearLayout latCarShow; // 购物车展开布局
+    private TextView tvCarInfo, tvCarNum, tvCarName, tvCarMoney, tvCarBack, tvCarBackMoney, tvCarInvoice, tvCarInvoiceMoney;
+    private Button btnOk;
+    private View vLine; // 购物车灰线
+    private int num = 0; // 购物车数量
+    private String money; // 总金额
+    private Float invoiceNum; // 发票金额
 
     @Override
     protected int bindLayout() {
@@ -38,12 +60,25 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        setStatusBarColor(getResources().getColor(R.color.purple_bg));
+        setStatusBarColor(getResources().getColor(R.color.purple));
         getParams();
-        fv(R.id.seller_purchase_ok).setOnClickListener(this);
+        btnOk = fv(R.id.seller_purchase_ok);
+        btnOk.setOnClickListener(this);
         fv(R.id.seller_purchase_url).setOnClickListener(this);
-        num = fv(R.id.seller_purchase_num);
-        info = fv(R.id.seller_purchase_info);
+        tvCarNum = fv(R.id.seller_purchase_num);
+        tvCarInfo = fv(R.id.seller_purchase_info);
+        latCarShow = fv(R.id.lat_car_show);
+        latCarShow.setOnClickListener(this);
+        imCarNum = fv(R.id.purchase_car_num);
+        latCar = fv(R.id.lat_car);
+        latCar.setOnClickListener(this);
+        tvCarName = fv(R.id.purchase_car_name);
+        tvCarMoney = fv(R.id.purchase_car_money);
+        tvCarBack = fv(R.id.purchase_car_back);
+        tvCarBackMoney = fv(R.id.purchase_car_back_money);
+        tvCarInvoice = fv(R.id.purchase_car_invoice);
+        tvCarInvoiceMoney = fv(R.id.purchase_car_invoice_money);
+        vLine = fv(R.id.v_line);
         purchasePayAdapter = new PurchasePayAdapter();
         mRecyclerView.setAdapter(purchasePayAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,13 +86,9 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 purchasePayAdapter.setSelect(position);
-                num.setText("" + purchasePayAdapter.getSelectItem().getCz_money());
+                setSelectCar();
             }
         });
-        View view = getLayoutInflater().from(this).inflate(R.layout.item_purchase_foot, null);
-        purchasePayAdapter.addFooterView(view);
-        View view1 = getLayoutInflater().from(this).inflate(R.layout.item_purchase_foot, null);
-        purchasePayAdapter.addFooterView(view1);
         requestNetwork();
     }
 
@@ -81,26 +112,180 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
         }
     }
 
-    @Override
-    protected Class<?> bindPaySuccessPage() {
-        return PurchaseSuccessActivity.class;
+    private void setFooterView() {
+        if (footerView == null) {
+            footerView = getLayoutInflater().from(this).inflate(R.layout.item_purchase_foot, null);
+            cbBack = footerView.findViewById(R.id.cb_select);
+            cbInvoice = footerView.findViewById(R.id.cb_invoice_select);
+            cbBack.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    setBackSelect(isChecked);
+                }
+            });
+            cbInvoice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    setInvoiceSelect(isChecked);
+                }
+            });
+            tvBack = footerView.findViewById(R.id.tv_title);
+            tvInvoice = footerView.findViewById(R.id.tv_invoice_title);
+            tvBackContent = footerView.findViewById(R.id.tv_content);
+            tvInvoiceContent = footerView.findViewById(R.id.tv_invoice_content);
+            footerView.findViewById(R.id.im_web).setOnClickListener(this);
+            footerView.findViewById(R.id.im_invoice_web).setOnClickListener(this);
+            latInvoice = footerView.findViewById(R.id.lat_invoice);
+            purchasePayAdapter.addFooterView(footerView);
+        }
+        tvBack.setText(purchaseEntity.getBack_money_text());
+        tvInvoice.setText(purchaseEntity.getInvoice_text());
+        tvBackContent.setText(purchaseEntity.getBack_money_tips());
+        tvInvoiceContent.setText(purchaseEntity.getInvoice_tips());
+        latInvoice.setVisibility(purchaseEntity.getIs_invoice() == 1 ? View.VISIBLE : View.GONE);
+    }
+
+    private void initCarView() {
+        num = 0;
+        tvCarNum.setText("0");
+        btnOk.setEnabled(false);
+        latCar.setEnabled(false);
+        tvCarInfo.setVisibility(View.GONE);
+    }
+
+    private void resetCarView() {
+        setNum(1);
+        setSelectCar();
+        cbBack.setChecked(true);
+        cbInvoice.setChecked(true);
+        tvCarBack.setText(purchaseEntity.getBack_money_text());
+        tvCarInvoice.setText(purchaseEntity.getInvoice_text());
+        tvCarBackMoney.setText("￥" + purchaseEntity.getBack_money());
+    }
+
+    private void setSelectCar() {
+        PurchaseEntity.MoneyConfigBean item = purchasePayAdapter.getSelectItem();
+        if (item.getOnly_price() == 1)
+            tvCarName.setText(item.getCz_desc());
+        else if (item.getOnly_price() == 0)
+            tvCarName.setText(item.getCz_desc() + "（" + item.getCz_corner() + "）");
+        tvCarMoney.setText("￥" + item.getCz_money());
+        invoiceNum = Float.parseFloat(item.getCz_money()) * purchaseEntity.getInvoice() / 100;
+        tvCarInvoiceMoney.setText("￥" + NumberFormatUtils.getNewFloat(invoiceNum));
+        setMoney();
+    }
+
+    private void setMoney() {
+        float mm = Float.parseFloat(purchasePayAdapter.getSelectItem().getCz_money());
+        if (cbBack.isChecked())
+            mm += purchaseEntity.getBack_money();
+        if (cbInvoice.isChecked())
+            mm += invoiceNum;
+        money = NumberFormatUtils.getNewFloat(mm);
+        tvCarNum.setText(money);
+    }
+
+    private void setBackSelect(boolean select) {
+        if (select) {
+            tvCarBack.setVisibility(View.VISIBLE);
+            tvCarBackMoney.setVisibility(View.VISIBLE);
+            setNum(++num);
+            if (num == 2) {
+                tvCarInfo.setText("内含退款保障费用，可勾选/取消");
+            }
+        } else {
+            tvCarBack.setVisibility(View.GONE);
+            tvCarBackMoney.setVisibility(View.GONE);
+            setNum(--num);
+            if (num == 2) {
+                tvCarInfo.setText("内含发票报销费用，可勾选/取消");
+            }
+        }
+        setMoney();
+    }
+
+    private void setInvoiceSelect(boolean select) {
+        if (select) {
+            tvCarInvoice.setVisibility(View.VISIBLE);
+            tvCarInvoiceMoney.setVisibility(View.VISIBLE);
+            setNum(++num);
+            if (num == 2) {
+                tvCarInfo.setText("内含发票报销费用，可勾选/取消");
+            }
+        } else {
+            tvCarInvoice.setVisibility(View.GONE);
+            tvCarInvoiceMoney.setVisibility(View.GONE);
+            setNum(--num);
+            if (num == 2) {
+                tvCarInfo.setText("内含退款保障费用，可勾选/取消");
+            }
+        }
+        setMoney();
+    }
+
+    private void setNum(int num) {
+        this.num = num;
+        if (num == 0) {
+            imCarNum.setImageResource(0);
+            btnOk.setEnabled(false);
+            latCar.setEnabled(false);
+            return;
+        }
+        btnOk.setEnabled(true);
+        latCar.setEnabled(true);
+        switch (num) {
+            case 1:
+                imCarNum.setImageResource(R.mipmap.purchase1);
+                vLine.setVisibility(View.GONE);
+                tvCarInfo.setVisibility(View.GONE);
+                break;
+            case 2:
+                imCarNum.setImageResource(R.mipmap.purchase2);
+                vLine.setVisibility(View.VISIBLE);
+                tvCarInfo.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                imCarNum.setImageResource(R.mipmap.purchase3);
+                tvCarInfo.setText("内含退款保障和发票报销费用，可勾选/取消");
+                vLine.setVisibility(View.VISIBLE);
+                tvCarInfo.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
     public void onClick(View v) {
+        if (purchaseEntity == null) {
+            requestNetwork();
+            return;
+        }
         switch (v.getId()) {
             case R.id.seller_purchase_ok:
-                payUtils.info = purchasePayAdapter.getSelectItem().getCz_rate_money() + "";
-                showPayDialog("" + purchasePayAdapter.getSelectItem().getCz_money(), purchaseEntity.getMoney());
+                showPayDialog(money, purchaseEntity.getMoney());
                 break;
             case R.id.seller_purchase_url:
-                WebViewBaseActivity.start(this, "预存须知", purchaseEntity.getAgreement_url());
+                WebViewBaseActivity.start(this, "采购协议", purchaseEntity.getAgreement_url());
+                break;
+            case R.id.im_web:
+                WebViewBaseActivity.start(this, purchaseEntity.getBack_money_text(), purchaseEntity.getBack_money_url());
+                break;
+            case R.id.im_invoice_web:
+                WebViewBaseActivity.start(this, purchaseEntity.getInvoice_text(), purchaseEntity.getInvoice_url());
+                break;
+            case R.id.lat_car:
+                if (num == 0)
+                    return;
+                latCarShow.setVisibility(latCarShow.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+                break;
+            case R.id.lat_car_show:
+                latCarShow.setVisibility(View.GONE);
                 break;
         }
     }
 
     private void requestNetwork() {
         AbstractRequest request = buildRequest(UrlUtils.purchasePay, RequestMethod.GET, PurchaseEntity.class);
+        request.add("cate", type);
         executeNetwork(GET, "请稍后", request);
     }
 
@@ -108,7 +293,9 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
     protected void requestPayInfo(String type, String money, int what) {
         AbstractRequest request = buildRequest(UrlUtils.purchasePayment, RequestMethod.POST, Pay.class);
         request.add("pay_type", type);
-        request.add("total_fee", money);
+        request.add("level_id", purchasePayAdapter.getSelectItem().getLevel_id());
+        request.add("has_back_money", cbBack.isChecked() ? 1 : 0);
+        request.add("has_invoice", cbInvoice.isChecked() ? 1 : 0);
         executeNetwork(what, "请稍后", request);
     }
 
@@ -118,25 +305,22 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
         if (what == GET) {
             purchaseEntity = (PurchaseEntity) result.getData();
             purchasePayAdapter.setNewData(purchaseEntity.getMoney_config());
-            num.setText("" + purchasePayAdapter.getSelectItem().getCz_money());
-            info.setText(purchaseEntity.getTips());
+            if (purchaseEntity.getMoney_config().size() == 0) {
+                initCarView();
+                return;
+            }
             AppConfig.getInstance().putInt("is_level_pwd", purchaseEntity.getIs_level_pwd());
+            setFooterView();
+            resetCarView();
         }
     }
 
     @Override
-    protected boolean payIsResult() {
-        return true;
-    }
-
-    @Override
-    protected void onResult(String type, int resultCode) {
-        if (resultCode == RESULT_OK) {
-            payUtils.clear();
-        } else if (resultCode == RESULT_CANCELED) {
-            startActivity(SellerGiveCreateActivity.class, null);
-            payUtils.clear();
-            finish();
-        }
+    public void payResult(String type) {
+        payUtils.clear();
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 5);
+        bundle.putString("info", pay.getSuccess_info());
+        startActivity(TextInfoSuccessActivity.class, bundle);
     }
 }

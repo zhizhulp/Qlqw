@@ -12,6 +12,7 @@ import com.ascba.rebate.activities.agent.AgentActivity;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
+import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -62,6 +63,8 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                     else if (select == 1) startActivity(ReceiveCodeActivity.class, null);
                 } else if (type == 4)
                     startActivity(AgentActivity.class, null);
+                else if (type == 5)
+                    startActivity(SellerActivity.class, null);
                 finish();
             }
         });
@@ -97,6 +100,11 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
         } else if (type == 4) {
             mMoneyBar.setTextTitle("加盟成功");
             tvTitle.setText("加盟成功");
+            btnComplete.setText("完成");
+            tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
+        } else if (type == 5) {
+            mMoneyBar.setTextTitle("采购成功");
+            tvTitle.setText("采购成功");
             btnComplete.setText("完成");
             tvMoney.setText("\u3000\u3000" + intent.getStringExtra("info"));
         }

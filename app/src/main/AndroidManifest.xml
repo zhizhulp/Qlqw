@@ -259,7 +259,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activities.seller.SellerActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.home.ModulesSearchActivity"
             android:exported="true" />
@@ -336,7 +337,8 @@
         <activity
             android:name=".activities.score_buy.ScoreBuyHome1Activity"
             android:exported="true" />
-        <activity android:name=".activities.score_buy.GiftGoodsTypeActivity"
+        <activity
+            android:name=".activities.score_buy.GiftGoodsTypeActivity"
             android:exported="true" />
     </application>
 

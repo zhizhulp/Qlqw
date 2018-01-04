@@ -1,86 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-
-    <com.ascba.rebate.view.MoneyBar
-        style="@style/MoneyBar"
-        app:barBg="@color/purple_bg" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/white" />
-
-    <View style="@style/LineHorizontal" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="43dp"
+        android:orientation="vertical">
+
+        <com.ascba.rebate.view.MoneyBar
+            style="@style/MoneyBar"
+            android:layout_alignParentTop="true"
+            app:barBg="@color/purple" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mb"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_below="@id/recyclerView"
+            android:background="@color/bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击采购，即表示已阅读并同意"
+                android:textColor="@color/grey_black_tv2"
+                android:textSize="@dimen/text_13" />
+
+            <TextView
+                android:id="@+id/seller_purchase_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="采购协议"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_13" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击采购，即表示已阅读并同意"
+            android:id="@+id/seller_purchase_info"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#ffffe5"
+            android:gravity="center"
+            android:text="内含退款保障和发票报销费用，可勾选/取消"
             android:textColor="@color/grey_black_tv2"
-            android:textSize="@dimen/text_13" />
-
-        <TextView
-            android:id="@+id/seller_purchase_url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="采购协议"
-            android:textColor="@color/purple_bg"
-            android:textSize="@dimen/text_13" />
+            android:textSize="@dimen/text_12" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/seller_purchase_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="礼品包价值（温馨提示：充值越多赠送越多）"
-        android:textColor="@color/grey_black_tv"
-        android:textSize="@dimen/text_14" />
-
     <LinearLayout
+        android:id="@+id/lat_car_show"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:background="@color/grey_line"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="43dp"
+        android:background="@color/qr_code_finder_mask"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/purchase_car_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/grey_line"
+                android:gravity="center_vertical"
+                android:paddingLeft="14dp"
+                android:text="已选产品"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_15" />
+            <!--<editor-fold desc="礼品包">-->
+            <TextView
+                android:id="@+id/purchase_car_name"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/purchase_car_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/purchase_car_name"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:paddingRight="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                android:id="@+id/v_line"
+                style="@style/LineHorizontal"
+                android:layout_below="@id/purchase_car_name"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp" />
+            <!--</editor-fold>-->
+            <!--<editor-fold desc="退款保障">-->
+            <TextView
+                android:id="@+id/purchase_car_back"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_below="@id/purchase_car_name"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/purchase_car_back_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/purchase_car_back"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:paddingRight="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+            <!--</editor-fold>-->
+            <!--<editor-fold desc="发票报销">-->
+            <TextView
+                android:id="@+id/purchase_car_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_below="@id/purchase_car_back"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/purchase_car_invoice_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/purchase_car_invoice"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:paddingRight="14dp"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_12" />
+            <!--</editor-fold>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@id/purchase_car_invoice" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/lat_car"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="9dp"
+        android:layout_marginLeft="12dp">
+
+        <ImageView
+            android:id="@+id/purchase_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/purchase_car" />
+
+        <ImageView
+            android:id="@+id/purchase_car_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/purchase_car" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/purchase_car"
+            android:gravity="center"
             android:text="￥"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_13" />
 
         <TextView
             android:id="@+id/seller_purchase_num"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@id/purchase_car"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_19" />
+    </RelativeLayout>
 
-        <Button
-            android:id="@+id/seller_purchase_ok"
-            android:layout_width="110dp"
-            android:layout_height="43dp"
-            android:background="@drawable/btn_purple_selector"
-            android:text="采购"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_15" />
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/seller_purchase_ok"
+        android:layout_width="110dp"
+        android:layout_height="43dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_purple_selector"
+        android:enabled="false"
+        android:text="采购"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_15" />
+</RelativeLayout>

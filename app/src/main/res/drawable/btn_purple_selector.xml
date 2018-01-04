@@ -1,4 +1,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/purple_bg" android:state_enabled="true"/>
+    <item android:drawable="@color/purple" android:state_enabled="true"/>
     <item android:drawable="@color/submit_gray" android:state_enabled="false"/>
 </selector>

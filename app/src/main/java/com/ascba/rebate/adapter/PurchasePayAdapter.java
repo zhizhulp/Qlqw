@@ -19,24 +19,22 @@ public class PurchasePayAdapter extends BaseQuickAdapter<PurchaseEntity.MoneyCon
     @Override
     protected void convert(BaseViewHolder helper, PurchaseEntity.MoneyConfigBean item) {
         helper.setText(R.id.tv_title, item.getCz_desc());
-        helper.setText(R.id.tv_content, item.getCz_rate_money() + "分");
+        helper.setText(R.id.tv_content, item.getCz_rate_money());
         if (item.getOnly_price() == 1) {
             helper.setText(R.id.tv_price_type, " ¥ ");
             helper.setText(R.id.tv_now_price, item.getCz_money());
             helper.setText(R.id.tv_before_price, "");
+            helper.setText(R.id.tv_dct, "");
+            helper.setVisible(R.id.im_dct, false);
         } else if (item.getOnly_price() == 0) {
-            helper.setText(R.id.tv_price_type, "折后价 ¥ ");
+            helper.setText(R.id.tv_price_type, item.getCz_tip() + " ¥ ");
             helper.setText(R.id.tv_now_price, item.getCz_money());
-            helper.setText(R.id.tv_before_price, " ¥ " + item.getCz_money());
+            helper.setText(R.id.tv_before_price, " ¥ " + item.getCz_original_money());
             ((TextView) helper.getView(R.id.tv_before_price)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            helper.setText(R.id.tv_dct, "（" + item.getCz_corner() + "）");
+            helper.setVisible(R.id.im_dct, true);
         }
-        boolean nuSelect = helper.getAdapterPosition() != index;
-        helper.getView(R.id.tv_title).setEnabled(nuSelect);
-        helper.getView(R.id.tv_content).setEnabled(nuSelect);
-        helper.getView(R.id.tv_price_type).setEnabled(nuSelect);
-        helper.getView(R.id.tv_now_price).setEnabled(nuSelect);
-        helper.getView(R.id.tv_before_price).setEnabled(nuSelect);
-        helper.getView(R.id.lat_item).setEnabled(nuSelect);
+        helper.getView(R.id.lat_item).setEnabled(helper.getAdapterPosition() != index);
     }
 
     public PurchaseEntity.MoneyConfigBean getSelectItem() {
