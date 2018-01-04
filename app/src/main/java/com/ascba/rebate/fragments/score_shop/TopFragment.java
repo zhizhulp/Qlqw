@@ -70,6 +70,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     private View latBtm;
     private View latContent;
     private int type = 1;//1礼品分商品，2福利券商品
+    private int scene = 1;//1礼品商城 2礼品采购
     private TextView tvAddMoney;
     private float totalVo;
     private float perAddMoney;
@@ -80,10 +81,11 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     public TopFragment() {
     }
 
-    public static TopFragment getInstance(int goodsId) {
+    public static TopFragment getInstance(int goodsId,int scene) {
         TopFragment top = new TopFragment();
         Bundle b = new Bundle();
         b.putInt("goods_id", goodsId);
+        b.putInt("scene", scene);
         top.setArguments(b);
         return top;
     }
@@ -252,11 +254,13 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     private void getParamsAddRequest() {
         final Bundle bundle = getArguments();
         goodsId = bundle.getInt("goods_id");
+        scene = bundle.getInt("scene");
     }
 
     private void requestData() {
         AbstractRequest request = buildRequest(UrlUtils.getGoodsDetail, RequestMethod.POST, null);
         request.add("goods_id", goodsId);
+        request.add("scene", scene);
         executeNetwork(0, request);
     }
 
@@ -266,6 +270,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
         request.add("goods_num", numberBtn.getNum());
         request.add("address_id", addressID);
         request.add("status", status);
+        request.add("scene", scene);
         executeNetwork(1, request);
     }
 

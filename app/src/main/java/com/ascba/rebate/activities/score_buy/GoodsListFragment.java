@@ -62,11 +62,10 @@ public class GoodsListFragment extends BaseDefaultNetFragment {
         initRecyclerView();
         setLoadListener();
         getParams();
-        //requestData();
+        requestData();
     }
 
     private void initRecyclerView() {
-        mRefreshLayout.autoRefresh();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         data = new ArrayList<>();
         adapter = new GiftGoodsAdapter(R.layout.gift_goods_item, data);
@@ -75,6 +74,7 @@ public class GoodsListFragment extends BaseDefaultNetFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle b = new Bundle();
                 b.putInt("goods_id", data.get(position).getGoods_id());
+                b.putInt("scene", 2);
                 startActivityForResult(GiftGoodsDetailsActivity.class, b, CodeUtils.REQUEST_SCORE_EXCHANGE);
             }
         });

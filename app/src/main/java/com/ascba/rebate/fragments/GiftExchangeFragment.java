@@ -78,6 +78,7 @@ public class GiftExchangeFragment extends BaseDefaultNetFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle b = new Bundle();
                 b.putInt("goods_id", data.get(position).getGoods_id());
+                b.putInt("scene", 1);
                 startActivityForResult(GiftGoodsDetailsActivity.class, b, CodeUtils.REQUEST_SCORE_EXCHANGE);
             }
         });

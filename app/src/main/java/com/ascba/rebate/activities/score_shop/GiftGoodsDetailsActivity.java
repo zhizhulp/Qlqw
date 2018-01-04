@@ -58,8 +58,9 @@ public class GiftGoodsDetailsActivity extends BaseDefaultNetActivity {
         super.initViews(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         int goodsId = extras.getInt("goods_id");
+        int scene = extras.getInt("scene");
 
-        TopFragment topFragment = TopFragment.getInstance(goodsId);
+        TopFragment topFragment = TopFragment.getInstance(goodsId,scene);
         final BtmFragment btmFragment = new BtmFragment();
 
         getSupportFragmentManager().beginTransaction()

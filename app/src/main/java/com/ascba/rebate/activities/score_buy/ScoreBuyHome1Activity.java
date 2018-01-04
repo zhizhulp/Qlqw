@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -27,7 +26,6 @@ import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.net.AbstractRequest;
-import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -69,11 +67,12 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         setRecyclerView();
         setFloatBar();
         setMoneyBar();
-        requestData();
+        requestData(false);
     }
 
+
     private void setMoneyBar() {
-        barLat = (FrameLayout)findViewById(R.id.lat_bar);
+        barLat = findViewById(R.id.lat_bar);
         mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
             public void clickTail() {
@@ -88,9 +87,9 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 totalY += dy;
                 if (totalY <= maxY) {
-                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 64, 143, 255));
+                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 132, 44, 251));
                 } else {
-                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this,R.color.blue_btn));
+                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this,R.color.purple));
                 }
 
             }
@@ -118,6 +117,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 if (scoreBuyBase instanceof ScoreHome.GiftGoods) {
                     Bundle b = new Bundle();
                     b.putInt("goods_id", ((ScoreHome.GiftGoods) scoreBuyBase).getGoods_id());
+                    b.putInt("scene", 2);
                     startActivity(GiftGoodsDetailsActivity.class, b);
                 }
             }
@@ -136,7 +136,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 paged++;
-                requestData();
+                requestData(true);
             }
         });
         PinnedHeaderItemDecoration stickyHeader = new PinnedHeaderItemDecoration.Builder(1).create();
@@ -144,10 +144,14 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         mRecyclerView.setAdapter(adapter);
     }
 
-    private void requestData() {
+    private void requestData(boolean isLoadMore) {
         AbstractRequest request = buildRequest(UrlUtils.purchaseIndex2, RequestMethod.GET, null);
         request.add("paged", paged);
-        executeNetwork(0, request);
+        if(!isLoadMore){
+            executeNetwork(0, "请稍后",request);
+        }else {
+            executeNetwork(0,request);
+        }
     }
 
     @Override

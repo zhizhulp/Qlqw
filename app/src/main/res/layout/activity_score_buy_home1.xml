@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <FrameLayout
         android:id="@+id/lat_bar"
         android:layout_width="match_parent"
@@ -27,14 +28,18 @@
             app:textTail="购卡记录"
             app:textTitle="礼品采购" />
     </FrameLayout>
-
+    <com.ascba.rebate.view.MyGridView
+        android:background="@color/white"
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/fb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:src="@mipmap/code_top" />
+        android:src="@mipmap/code_top"
+        android:visibility="gone" />
 </RelativeLayout>
