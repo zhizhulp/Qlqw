@@ -125,7 +125,8 @@
                 android:gravity="center"
                 android:paddingLeft="14dp"
                 android:textColor="@color/grey_black_tv"
-                android:textSize="@dimen/text_12" />
+                android:textSize="@dimen/text_12"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/purchase_car_back_money"
@@ -136,7 +137,8 @@
                 android:gravity="center"
                 android:paddingRight="14dp"
                 android:textColor="@color/grey_black_tv"
-                android:textSize="@dimen/text_12" />
+                android:textSize="@dimen/text_12"
+                android:visibility="gone" />
             <!--</editor-fold>-->
             <!--<editor-fold desc="发票报销">-->
             <TextView
@@ -147,7 +149,8 @@
                 android:gravity="center"
                 android:paddingLeft="14dp"
                 android:textColor="@color/grey_black_tv"
-                android:textSize="@dimen/text_12" />
+                android:textSize="@dimen/text_12"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/purchase_car_invoice_money"
@@ -158,7 +161,8 @@
                 android:gravity="center"
                 android:paddingRight="14dp"
                 android:textColor="@color/grey_black_tv"
-                android:textSize="@dimen/text_12" />
+                android:textSize="@dimen/text_12"
+                android:visibility="gone" />
             <!--</editor-fold>-->
             <View
                 android:layout_width="match_parent"

@@ -22,9 +22,12 @@ import com.ascba.rebate.bean.PurchaseEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.NumberFormatUtils;
+import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yanzhenjie.nohttp.RequestMethod;
+
+import java.math.BigDecimal;
 
 /**
  * Created by Jero on 2017/10/16 0016.
@@ -148,6 +151,7 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
     private void initCarView() {
         num = 0;
         tvCarNum.setText("0");
+        imCarNum.setImageResource(0);
         btnOk.setEnabled(false);
         latCar.setEnabled(false);
         tvCarInfo.setVisibility(View.GONE);
@@ -156,8 +160,10 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
     private void resetCarView() {
         setNum(1);
         setSelectCar();
+        btnOk.setEnabled(true);
+        latCar.setEnabled(true);
         cbBack.setChecked(true);
-        cbInvoice.setChecked(true);
+        cbInvoice.setChecked(purchaseEntity.getIs_invoice() == 1);
         tvCarBack.setText(purchaseEntity.getBack_money_text());
         tvCarInvoice.setText(purchaseEntity.getInvoice_text());
         tvCarBackMoney.setText("￥" + purchaseEntity.getBack_money());
@@ -190,16 +196,10 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
             tvCarBack.setVisibility(View.VISIBLE);
             tvCarBackMoney.setVisibility(View.VISIBLE);
             setNum(++num);
-            if (num == 2) {
-                tvCarInfo.setText("内含退款保障费用，可勾选/取消");
-            }
         } else {
             tvCarBack.setVisibility(View.GONE);
             tvCarBackMoney.setVisibility(View.GONE);
             setNum(--num);
-            if (num == 2) {
-                tvCarInfo.setText("内含发票报销费用，可勾选/取消");
-            }
         }
         setMoney();
     }
@@ -209,30 +209,16 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
             tvCarInvoice.setVisibility(View.VISIBLE);
             tvCarInvoiceMoney.setVisibility(View.VISIBLE);
             setNum(++num);
-            if (num == 2) {
-                tvCarInfo.setText("内含发票报销费用，可勾选/取消");
-            }
         } else {
             tvCarInvoice.setVisibility(View.GONE);
             tvCarInvoiceMoney.setVisibility(View.GONE);
             setNum(--num);
-            if (num == 2) {
-                tvCarInfo.setText("内含退款保障费用，可勾选/取消");
-            }
         }
         setMoney();
     }
 
     private void setNum(int num) {
         this.num = num;
-        if (num == 0) {
-            imCarNum.setImageResource(0);
-            btnOk.setEnabled(false);
-            latCar.setEnabled(false);
-            return;
-        }
-        btnOk.setEnabled(true);
-        latCar.setEnabled(true);
         switch (num) {
             case 1:
                 imCarNum.setImageResource(R.mipmap.purchase1);
@@ -243,6 +229,10 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
                 imCarNum.setImageResource(R.mipmap.purchase2);
                 vLine.setVisibility(View.VISIBLE);
                 tvCarInfo.setVisibility(View.VISIBLE);
+                if (cbBack.isChecked())
+                    tvCarInfo.setText("内含退款保障费用，可勾选/取消");
+                else if (cbInvoice.isChecked())
+                    tvCarInfo.setText("内含发票报销费用，可勾选/取消");
                 break;
             case 3:
                 imCarNum.setImageResource(R.mipmap.purchase3);
@@ -317,6 +307,13 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
 
     @Override
     public void payResult(String type) {
+        if (type.equals(PayUtils.BALANCE)) {
+            BigDecimal balance, money;
+            balance = new BigDecimal(purchaseEntity.getMoney());
+            money = new BigDecimal(payUtils.money);
+            balance = balance.subtract(money);
+            purchaseEntity.setMoney(balance.toString());
+        }
         payUtils.clear();
         Bundle bundle = new Bundle();
         bundle.putInt("type", 5);
