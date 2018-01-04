@@ -50,6 +50,7 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
     private TextView tvTime;
     private TextView tvStatus;
     private TextView tvLeftTime;
+    private TextView tvLeftStr;
     private RelativeLayout latStatus;
     private TextView tvPay;
     private TextView tvBtm;
@@ -101,6 +102,7 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
         tvStatus.setOnClickListener(this);
         latStatus = headView.findViewById(R.id.lat_status);
 
+        tvLeftStr = headView.findViewById(R.id.tv_left_time_str);
         tvLeftTime = headView.findViewById(R.id.tv_left_time);
         tvPay = headView.findViewById(R.id.tv_pay);
         tvPay.setOnClickListener(this);
@@ -114,13 +116,17 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
                 .placeholder(R.mipmap.gift_head_loading)
                 .into(banner);
         tvTitle.setText(data.getActive_title());
-        if (data.getActive_desc().isEmpty())
+        if (data.getActive_desc() == null || data.getActive_desc().isEmpty())
             tvStatus.setVisibility(View.GONE);
         else
             tvStatus.setText(data.getActive_desc());
         tvTime.setText(data.getActive_time());
+        tvLeftStr.setText(data.getSeller_status_tip());
         tvLeftTime.setText(data.getSeller_last_time());
-        tvPay.setText(data.getSeller_status_text());
+        if (data.getSeller_status_text() == null || data.getSeller_status_text().isEmpty())
+            tvPay.setVisibility(View.GONE);
+        else
+            tvPay.setText(data.getSeller_status_text());
         GradientDrawable drawable = (GradientDrawable) latStatus.getBackground();
         drawable.setColor(Color.parseColor("#" + data.getActive_color()));
     }
