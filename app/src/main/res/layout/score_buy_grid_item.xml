@@ -6,7 +6,7 @@
     android:paddingTop="18dp"
     android:paddingBottom="18dp"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <org.raphets.roundimageview.RoundImageView
         android:id="@+id/head_im"
