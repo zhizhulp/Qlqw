@@ -80,7 +80,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="43dp"
                 android:background="@color/grey_line"
                 android:gravity="center_vertical"
                 android:paddingLeft="14dp"
@@ -173,12 +173,13 @@
 
     <RelativeLayout
         android:id="@+id/lat_car"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="9dp"
-        android:layout_marginLeft="12dp">
+        android:layout_marginRight="110dp"
+        android:paddingBottom="9dp"
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/purchase_car"
