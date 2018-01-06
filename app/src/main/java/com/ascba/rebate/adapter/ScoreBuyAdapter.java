@@ -33,6 +33,7 @@ import com.ascba.rebate.manager.BannerImageLoader;
 import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.view.MyGridView;
+import com.ascba.rebate.view.picasso.CropCircleTransformation;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.squareup.picasso.Picasso;
@@ -193,7 +194,9 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             ScoreBuyHead.ScoreBuyGrid scoreBuyGrid = data.get(position);
-            Picasso.with(context).load(scoreBuyGrid.getUrl()).placeholder(R.mipmap.module_loading).into(viewHolder.im);
+            Picasso.with(context).load(scoreBuyGrid.getUrl())
+                    .transform(new CropCircleTransformation())
+                    .placeholder(R.mipmap.module_loading).into(viewHolder.im);
             viewHolder.tv.setText(scoreBuyGrid.getTitle());
             return convertView;
         }

@@ -29,6 +29,7 @@ import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.manager.DialogManager;
+import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
@@ -86,8 +87,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
                 int status = buyGrid.getPurchase_status();
                 if (status == 0) {//已售完
-                    DialogManager dm = new DialogManager(ScoreBuyHome1Activity.this);
-                    dm.showAlertDialog("抱歉，该礼品包已售罄。", "确定", null);
+                    ToastManager.show("抱歉，该礼品包已售罄。");
                 } else if (status == 1) {
                     Intent intent = new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class);
                     intent.putExtra("type", buyGrid.getId());
