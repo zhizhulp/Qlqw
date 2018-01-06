@@ -3,6 +3,7 @@ package com.ascba.rebate.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
     private String title;
     private CallBack callBack;
     private TextView tailText;
+    private View bgView;
 
     public MoneyBar(Context context) {
         super(context);
@@ -43,7 +45,7 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
         LayoutInflater.from(context).inflate(R.layout.money_bar_layout, this, true);
         mTextView = (TextView) findViewById(R.id.money_bar_title);
         View backView = findViewById(R.id.money_bar_back_lat);
-        View bgView = findViewById(R.id.money_bar_parent);
+        bgView = findViewById(R.id.money_bar_parent);
         View line = findViewById(R.id.money_bar_line);
         ImageView backIm = (ImageView) findViewById(R.id.im_back);
         TextView tvBack = (TextView) findViewById(R.id.tv_back);
@@ -147,7 +149,8 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
     public void setTailShow(boolean show) {
         tailText.setVisibility(show ? VISIBLE : GONE);
     }
-    public void setBgColor(int color){
-        setBackgroundColor(color);
+
+    public void setBgColor(@ColorInt int color) {
+        bgView.setBackgroundColor(color);
     }
 }
