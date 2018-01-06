@@ -118,11 +118,11 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 if (totalY <= maxY) {
                     if (gridView.getVisibility() == View.VISIBLE)
                         gridView.setVisibility(View.GONE);
-                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 132, 44, 251));
+                    barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 64, 143, 255));
                 } else {
                     if (gridView.getVisibility() == View.GONE)
                         gridView.setVisibility(View.VISIBLE);
-                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this, R.color.purple));
+                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this, R.color.blue_btn));
                 }
 
             }

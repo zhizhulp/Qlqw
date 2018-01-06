@@ -39,7 +39,6 @@ public class GiftGoodsTypeActivity extends BaseDefaultNetActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        setStatusBarColor(ContextCompat.getColor(this, R.color.purple));
         tabLayout = fv(R.id.tab_layout);
         viewPager = fv(R.id.viewPager);
         getParams();

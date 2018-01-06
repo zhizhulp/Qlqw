@@ -63,7 +63,6 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        setStatusBarColor(getResources().getColor(R.color.purple));
         getParams();
         btnOk = fv(R.id.seller_purchase_ok);
         btnOk.setOnClickListener(this);
