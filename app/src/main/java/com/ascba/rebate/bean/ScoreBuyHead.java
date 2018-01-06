@@ -23,6 +23,7 @@ public class ScoreBuyHead extends ScoreBuyBase {
         private String title;
         @JSONField(name = "purchase_cate_id")
         private int id;
+        private int purchase_status;
 
         public ScoreBuyGrid() {
         }
@@ -30,6 +31,14 @@ public class ScoreBuyHead extends ScoreBuyBase {
         public ScoreBuyGrid(String url, String title) {
             this.url = url;
             this.title = title;
+        }
+
+        public int getPurchase_status() {
+            return purchase_status;
+        }
+
+        public void setPurchase_status(int purchase_status) {
+            this.purchase_status = purchase_status;
         }
 
         public int getId() {

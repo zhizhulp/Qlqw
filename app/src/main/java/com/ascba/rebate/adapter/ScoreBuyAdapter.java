@@ -30,6 +30,7 @@ import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.manager.BannerImageLoader;
+import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.view.MyGridView;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -87,9 +88,16 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(mContext, SellerPurchaseActivity.class);
-                        intent.putExtra("type",grids.get(position).getId());
-                        mContext.startActivity(intent);
+                        ScoreBuyHead.ScoreBuyGrid buyGrid = grids.get(position);
+                        int status = buyGrid.getPurchase_status();
+                        if(status==0){//已售完
+                            DialogManager dm=new DialogManager(mContext);
+                            dm.showAlertDialog("抱歉，该礼品包已售罄。","确定",null);
+                        }else if(status==1){
+                            Intent intent = new Intent(mContext, SellerPurchaseActivity.class);
+                            intent.putExtra("type",buyGrid.getId());
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
                 break;
