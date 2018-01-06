@@ -25,8 +25,7 @@
         <com.ascba.rebate.view.MoneyBar
             style="@style/MoneyBar"
             app:barBg="@color/transparent"
-            app:textTail="购卡记录"
-            app:textTitle="礼品采购" />
+            app:textTail="购卡记录" />
     </FrameLayout>
 
     <com.ascba.rebate.view.MyGridView
