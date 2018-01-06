@@ -74,6 +74,14 @@ android {
             ]
             buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
         }
+        aaa{
+            applicationId 'com.nettech.qlqw'
+            resValue "string", "app_name", "支付版"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+            ]
+            buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
+        }
     }
     android.applicationVariants.all { variant -> //  打包包名修改
         variant.outputs.all {
@@ -83,13 +91,13 @@ android {
                 outputFileName = "测试版_${defaultConfig.versionName}.apk"
             else if (variant.productFlavors[0].name.equals('uat'))
                 outputFileName = "共存版_${releaseTime()}.apk"
-            else if (variant.buildType.name.equals('debug'))
+            else if (variant.buildType.name.equals('aaa'))
                 outputFileName = "app_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
         }
     }
 }
 
-def releaseTime() {
+static def releaseTime() {
     return new Date().format("MMdd HH时mm分", TimeZone.getTimeZone("GMT+08:00"))
 }
 

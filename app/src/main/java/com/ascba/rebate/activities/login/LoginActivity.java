@@ -210,7 +210,7 @@ public class LoginActivity extends BaseDefaultNetActivity implements View.OnClic
 
     private void setJPushAlias(String accessToken) {
         if (!accessToken.equals(AppConfig.getInstance().getString("access_token", null))) {
-            JpushSetManager jpush = new JpushSetManager(this, 0);
+            JpushSetManager jpush = new JpushSetManager(0);
             jpush.setAlias(accessToken);
             jpush.setTag(getTag(PackageUtils.isAppDebug(this)));
         }

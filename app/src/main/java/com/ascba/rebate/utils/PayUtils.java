@@ -2,6 +2,7 @@ package com.ascba.rebate.utils;
 
 import android.content.Intent;
 import android.os.Message;
+import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
 import com.ascba.rebate.application.MyApplication;
@@ -10,6 +11,8 @@ import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.manager.PayHandler;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.Map;
 
@@ -108,9 +111,9 @@ public class PayUtils {
     }
 
     private void requestForWX(BaseDefaultNetActivity activity, Pay.WXPay wxpay) {
-        if (!MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
-            activity.showToast("您没有安装微信客户端。无法使用微信支付");
-        } else {
+//        if (!MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
+//            activity.showToast("您没有安装微信客户端。无法使用微信支付");
+//        } else {
             PayReq req = new PayReq();
             req.appId = wxpay.getAppid();
             req.nonceStr = wxpay.getNoncestr();
@@ -119,9 +122,11 @@ public class PayUtils {
             req.prepayId = wxpay.getPrepayid();
             req.timeStamp = wxpay.getTimestamp() + "";
             req.sign = wxpay.getSign();
-            MyApplication.getInstance().getWXAPI().sendReq(req);
+            IWXAPI iwxapi = WXAPIFactory.createWXAPI(activity, null);
+            iwxapi.registerApp(wxpay.getAppid());
+            iwxapi.sendReq(req);
         }
-    }
+//    }
 
     private void requestForAli(final BaseDefaultNetActivity activity, final String payInfo) {
         Runnable payRunnable = new Runnable() {

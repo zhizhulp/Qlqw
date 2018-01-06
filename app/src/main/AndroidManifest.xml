@@ -81,7 +81,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <!-- <data android:scheme="wxbc93c33327923c2c" /> -->
-                <data android:scheme="wxc0690c2be47a7d66" />
             </intent-filter>
         </activity>
         <!-- 微信登录、分享 -->

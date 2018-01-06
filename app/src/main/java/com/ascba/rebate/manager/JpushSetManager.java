@@ -1,12 +1,11 @@
 package com.ascba.rebate.manager;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ascba.rebate.appconfig.AppConfig;
+import com.ascba.rebate.application.MyApplication;
 import com.yanzhenjie.nohttp.tools.NetUtils;
 
 import java.util.Set;
@@ -30,21 +29,19 @@ public class JpushSetManager {
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_SET_ALIAS:
-                    JPushInterface.setAliasAndTags(context.getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+                    JPushInterface.setAliasAndTags(MyApplication.getInstance(), (String) msg.obj, null, mAliasCallback);
                     break;
                 case MSG_SET_TAGS:
-                    JPushInterface.setAliasAndTags(context.getApplicationContext(), null, (Set<String>) msg.obj, mTagsCallback);
+                    JPushInterface.setAliasAndTags(MyApplication.getInstance(), null, (Set<String>) msg.obj, mTagsCallback);
                     break;
                 default:
                     break;
             }
         }
     };
-    private Context context;
     private int type;//0设置成功 1清除成功
 
-    public JpushSetManager(Context context, int type) {
-        this.context=context;
+    public JpushSetManager(int type) {
         this.type=type;
     }
 

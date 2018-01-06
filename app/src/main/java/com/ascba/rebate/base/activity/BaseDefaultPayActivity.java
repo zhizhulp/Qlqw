@@ -64,10 +64,10 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
 
     @Override
     public void goPay(String type) {
-        if (type.equals(PayUtils.WX_PAY) && !MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
-            showToast("您没有安装微信客户端。无法使用微信支付");
-            return;
-        }
+//        if (type.equals(PayUtils.WX_PAY) && !MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
+//            showToast("您没有安装微信客户端。无法使用微信支付");
+//            return;
+//        }
         payUtils.type = type;
         if (AppConfig.getInstance().getInt("is_level_pwd", 0) == 0)//未设置支付密码
             onNoPWD(type);

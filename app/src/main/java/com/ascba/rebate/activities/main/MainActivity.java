@@ -47,7 +47,7 @@ public class MainActivity extends BaseDefaultNetActivity implements AppTabs.Call
     }
 
     private void setJPushAlias() {
-        JpushSetManager jpush = new JpushSetManager(this, 0);
+        JpushSetManager jpush = new JpushSetManager(0);
         if (!AppConfig.getInstance().getBoolean("jpush_set_alias_success", false)) {
             jpush.setAlias(AppConfig.getInstance().getString("access_token", null));
         }
