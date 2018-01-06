@@ -1,5 +1,6 @@
 package com.ascba.rebate.activities.score_buy;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
 import com.alibaba.fastjson.JSON;
@@ -15,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
+import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.adapter.ScoreBuyAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.BaseUIActivity;
@@ -25,8 +28,11 @@ import com.ascba.rebate.bean.ScoreBuyHead;
 import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
+import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.view.MyGridView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration;
@@ -49,6 +55,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     private ScoreBuyAdapter adapter;
     private FrameLayout barLat;
     private int totalY;
+    MyGridView gridView;
 
     @Override
     protected int bindLayout() {
@@ -72,6 +79,22 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
 
 
     private void setMoneyBar() {
+        gridView = fv(R.id.gridView);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
+                int status = buyGrid.getPurchase_status();
+                if (status == 0) {//已售完
+                    DialogManager dm = new DialogManager(ScoreBuyHome1Activity.this);
+                    dm.showAlertDialog("抱歉，该礼品包已售罄。", "确定", null);
+                } else if (status == 1) {
+                    Intent intent = new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class);
+                    intent.putExtra("type", buyGrid.getId());
+                    startActivity(intent);
+                }
+            }
+        });
         barLat = findViewById(R.id.lat_bar);
         mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
@@ -81,15 +104,25 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 startActivity(ScoreBillActivity.class, bundle);
             }
         });
-        final int maxY = getResources().getDisplayMetrics().widthPixels;
+        int statusBarHeight;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        else
+            statusBarHeight = (int) ScreenDpiUtils.dp2px(this, 24);
+        final int maxY = (int) ScreenDpiUtils.dp2px(this, 164) - statusBarHeight;
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 totalY += dy;
                 if (totalY <= maxY) {
+                    if (gridView.getVisibility() == View.VISIBLE)
+                        gridView.setVisibility(View.GONE);
                     barLat.setBackgroundColor(Color.argb(totalY * 255 / maxY, 132, 44, 251));
                 } else {
-                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this,R.color.purple));
+                    if (gridView.getVisibility() == View.GONE)
+                        gridView.setVisibility(View.VISIBLE);
+                    barLat.setBackgroundColor(ContextCompat.getColor(ScoreBuyHome1Activity.this, R.color.purple));
                 }
 
             }
@@ -125,8 +158,8 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 super.onItemChildClick(adapter, view, position);
-                if(view.getId()==R.id.tv_more_type){
-                    startActivity(GiftGoodsTypeActivity.class,null);
+                if (view.getId() == R.id.tv_more_type) {
+                    startActivity(GiftGoodsTypeActivity.class, null);
                 }
             }
         });
@@ -147,10 +180,10 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     private void requestData(boolean isLoadMore) {
         AbstractRequest request = buildRequest(UrlUtils.purchaseIndex2, RequestMethod.GET, null);
         request.add("paged", paged);
-        if(!isLoadMore){
-            executeNetwork(0, "请稍后",request);
-        }else {
-            executeNetwork(0,request);
+        if (!isLoadMore) {
+            executeNetwork(0, "请稍后", request);
+        } else {
+            executeNetwork(0, request);
         }
     }
 
@@ -179,6 +212,9 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                         ScoreBuyHead head = new ScoreBuyHead();
                         head.setGrids(grids);
                         this.data.add(head);
+                        ScoreBuyAdapter.GridAdapter adapter = new ScoreBuyAdapter.GridAdapter(grids, ScoreBuyHome1Activity.this);
+                        gridView.setNumColumns(grids.size());
+                        gridView.setAdapter(adapter);
                     }
                 }
                 //消息

@@ -28,11 +28,14 @@
             app:textTail="购卡记录"
             app:textTitle="礼品采购" />
     </FrameLayout>
+
     <com.ascba.rebate.view.MyGridView
-        android:background="@color/white"
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lat_bar"
+        android:background="@color/white" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fb"
         android:layout_width="wrap_content"
