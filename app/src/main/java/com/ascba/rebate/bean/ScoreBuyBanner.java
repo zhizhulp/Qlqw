@@ -23,8 +23,15 @@ public class ScoreBuyBanner extends ScoreBuyBase {
         private String banner_img;
         private String banner_url;
         private int banner_status;
+        private String banner_h5_title;
 
+        public String getBanner_h5_title() {
+            return banner_h5_title;
+        }
 
+        public void setBanner_h5_title(String banner_h5_title) {
+            this.banner_h5_title = banner_h5_title;
+        }
 
         public String getBanner_img() {
             return banner_img;

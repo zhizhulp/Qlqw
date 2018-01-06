@@ -101,7 +101,7 @@
             android:textSize="@dimen/text_14"
             android:textColor="@color/grey_black_tv2"
             android:background="@drawable/blue_corner_02"
-            android:text="立即充值"
+            android:text="钱往采购"
             android:id="@+id/item_seller_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/item_seller_iv"
             android:paddingTop="12dp"
-            android:text="佣金充值卡"
+            android:text="采购礼品包"
             android:textColor="@color/grey_black_tv"
             android:textSize="@dimen/text_15" />
 
@@ -128,7 +128,7 @@
             android:lineSpacingExtra="8dp"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
-            android:text="赠送超值礼包，充值越多赠送越多"
+            android:text="超低折扣价，采购越多越划算"
             android:textColor="@color/grey_black_tv2"
             android:textSize="@dimen/text_13" />
     </RelativeLayout>

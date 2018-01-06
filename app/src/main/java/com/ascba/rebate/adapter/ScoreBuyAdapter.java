@@ -31,6 +31,7 @@ import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.manager.BannerImageLoader;
 import com.ascba.rebate.manager.DialogManager;
+import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.view.MyGridView;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -71,7 +72,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                         int status = scoreBuyImg.getBanner_status();
                         Log.d(TAG, "OnBannerClick: "+status);
                         if (status == 1) {
-                            WebViewBaseActivity.start(mContext, null, scoreBuyImg.getBanner_url());
+                            WebViewBaseActivity.start(mContext, scoreBuyImg.getBanner_h5_title(), scoreBuyImg.getBanner_url());
                         } else if (status == 2) {//跳转原生界面
 
                         }
@@ -91,8 +92,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                         ScoreBuyHead.ScoreBuyGrid buyGrid = grids.get(position);
                         int status = buyGrid.getPurchase_status();
                         if(status==0){//已售完
-                            DialogManager dm=new DialogManager(mContext);
-                            dm.showAlertDialog("抱歉，该礼品包已售罄。","确定",null);
+                            ToastManager.show("抱歉，该礼品包已售罄。");
                         }else if(status==1){
                             Intent intent = new Intent(mContext, SellerPurchaseActivity.class);
                             intent.putExtra("type",buyGrid.getId());
