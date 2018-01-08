@@ -111,9 +111,9 @@ public class PayUtils {
     }
 
     private void requestForWX(BaseDefaultNetActivity activity, Pay.WXPay wxpay) {
-//        if (!MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
-//            activity.showToast("您没有安装微信客户端。无法使用微信支付");
-//        } else {
+        if (!MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
+            activity.showToast("您没有安装微信客户端。无法使用微信支付");
+        } else {
             PayReq req = new PayReq();
             req.appId = wxpay.getAppid();
             req.nonceStr = wxpay.getNoncestr();
@@ -126,7 +126,7 @@ public class PayUtils {
             iwxapi.registerApp(wxpay.getAppid());
             iwxapi.sendReq(req);
         }
-//    }
+    }
 
     private void requestForAli(final BaseDefaultNetActivity activity, final String payInfo) {
         Runnable payRunnable = new Runnable() {

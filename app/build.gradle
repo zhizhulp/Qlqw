@@ -74,14 +74,6 @@ android {
             ]
             buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
         }
-        aaa{
-            applicationId 'com.nettech.qlqw'
-            resValue "string", "app_name", "支付版"
-            manifestPlaceholders = [
-                    JPUSH_PKGNAME: applicationId,
-            ]
-            buildConfigField "String", "BASE_URL", '"http://demoapp.qlqwp2p.com/"'
-        }
     }
     android.applicationVariants.all { variant -> //  打包包名修改
         variant.outputs.all {
