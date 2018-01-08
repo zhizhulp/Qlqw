@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -28,7 +29,6 @@ import com.ascba.rebate.bean.ScoreBuyHead;
 import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
-import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.ScreenDpiUtils;
@@ -50,13 +50,16 @@ import java.util.List;
  */
 
 public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
+    private static final int PURCHASE_RESULT = 770;
+
     private int paged = 1;
     private List<ScoreBuyBase> data;
     private FloatingActionButton fb;
     private ScoreBuyAdapter adapter;
     private FrameLayout barLat;
     private int totalY;
-    MyGridView gridView;
+    private MyGridView gridView;
+    private AdapterView.OnItemClickListener gridItemListener;
 
     @Override
     protected int bindLayout() {
@@ -71,6 +74,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        getParams();
         fb = fv(R.id.fb);
         setRecyclerView();
         setFloatBar();
@@ -78,10 +82,15 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         requestData(false);
     }
 
+    private void getParams() {
+        Log.d(TAG, "getParams: " + getIntent().getBooleanExtra("seller", false));
+        if (getIntent().getBooleanExtra("seller", false)) {
+
+        }
+    }
 
     private void setMoneyBar() {
-        gridView = fv(R.id.gridView);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridItemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
@@ -89,12 +98,14 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 if (status == 0) {//已售完
                     ToastManager.show("抱歉，该礼品包已售罄。");
                 } else if (status == 1) {
-                    Intent intent = new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class);
-                    intent.putExtra("type", buyGrid.getId());
-                    startActivity(intent);
+                    startActivityForResult(
+                            new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class)
+                                    .putExtra("type", buyGrid.getId()), PURCHASE_RESULT);
                 }
             }
-        });
+        };
+        gridView = fv(R.id.gridView);
+        gridView.setOnItemClickListener(gridItemListener);
         barLat = findViewById(R.id.lat_bar);
         mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
@@ -142,7 +153,7 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     private void setRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         data = new ArrayList<>();
-        adapter = new ScoreBuyAdapter(data);
+        adapter = new ScoreBuyAdapter(data, gridItemListener);
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {

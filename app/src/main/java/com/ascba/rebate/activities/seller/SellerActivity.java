@@ -140,7 +140,7 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                 startActivity(ConfirmListActivity.class, null);
                 break;
             case R.id.item_seller_iv://立即储值
-                startActivity(ScoreBuyHome1Activity.class, null);
+                startActivity(new Intent(this, ScoreBuyHome1Activity.class).putExtra("seller", true));
                 break;
         }
     }
@@ -153,9 +153,9 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
             money.setText(sellerEntity.getMoney());
             sellerRecommendedAdapter.setNewData(sellerEntity.getServer());
             String compaynStatusText = sellerEntity.getCompayn_status_text();
-            if(!TextUtils.isEmpty(compaynStatusText)){
-                AppConfig.getInstance().putString("company_status_text",compaynStatusText);
-                AppConfig.getInstance().putInt("company_status",sellerEntity.getCompany_status());
+            if (!TextUtils.isEmpty(compaynStatusText)) {
+                AppConfig.getInstance().putString("company_status_text", compaynStatusText);
+                AppConfig.getInstance().putInt("company_status", sellerEntity.getCompany_status());
             }
         } else if (what == 1) {
             String data = (String) result.getData();
@@ -163,9 +163,9 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
             int memberStatus = dataObj.getIntValue("member_status");
             final String statusText = dataObj.getString("member_status_text");
             String companyStatusText = dataObj.getString("company_status_text");
-            if(!TextUtils.isEmpty(companyStatusText)){
-                AppConfig.getInstance().putString("company_status_text",companyStatusText);
-                AppConfig.getInstance().putInt("company_status",dataObj.getIntValue("company_status"));
+            if (!TextUtils.isEmpty(companyStatusText)) {
+                AppConfig.getInstance().putString("company_status_text", companyStatusText);
+                AppConfig.getInstance().putInt("company_status", dataObj.getIntValue("company_status"));
             }
             //0正常1普通用户2资料审核中3商家过期4资料不全，第一次（跳转到H5）5资料不全第N次（跳转到资料提交）
             if (memberStatus == 0) {
