@@ -140,7 +140,8 @@ public class SellerActivity extends BaseDefaultNetActivity implements View.OnCli
                 startActivity(ConfirmListActivity.class, null);
                 break;
             case R.id.item_seller_iv://立即储值
-                startActivity(new Intent(this, ScoreBuyHome1Activity.class).putExtra("seller", true));
+                startActivity(new Intent(this, ScoreBuyHome1Activity.class)
+                        .putExtra("page", "seller"));
                 break;
         }
     }

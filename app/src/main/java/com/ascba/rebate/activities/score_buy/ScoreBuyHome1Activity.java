@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
-import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.adapter.ScoreBuyAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.BaseUIActivity;
@@ -74,7 +73,6 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        getParams();
         fb = fv(R.id.fb);
         setRecyclerView();
         setFloatBar();
@@ -82,28 +80,18 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         requestData(false);
     }
 
-    private void getParams() {
-        Log.d(TAG, "getParams: " + getIntent().getBooleanExtra("seller", false));
-        if (getIntent().getBooleanExtra("seller", false)) {
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "getParams: " + getIntent().getStringExtra("page"));
+        if (requestCode == PURCHASE_RESULT && resultCode == RESULT_OK) {
+            if (!TextUtils.isEmpty(getIntent().getStringExtra("page"))) {
+                finish();
+            }
         }
     }
 
     private void setMoneyBar() {
-        gridItemListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
-                int status = buyGrid.getPurchase_status();
-                if (status == 0) {//已售完
-                    ToastManager.show("抱歉，该礼品包已售罄。");
-                } else if (status == 1) {
-                    startActivityForResult(
-                            new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class)
-                                    .putExtra("type", buyGrid.getId()), PURCHASE_RESULT);
-                }
-            }
-        };
         gridView = fv(R.id.gridView);
         gridView.setOnItemClickListener(gridItemListener);
         barLat = findViewById(R.id.lat_bar);
@@ -149,10 +137,24 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         });
     }
 
-
     private void setRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         data = new ArrayList<>();
+        gridItemListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
+                int status = buyGrid.getPurchase_status();
+                if (status == 0) {//已售完
+                    ToastManager.show("抱歉，该礼品包已售罄。");
+                } else if (status == 1) {
+                    startActivityForResult(new Intent(ScoreBuyHome1Activity.this,
+                                    PurchaseActivity.class)
+                                    .putExtra("type", buyGrid.getId())
+                            , PURCHASE_RESULT);
+                }
+            }
+        };
         adapter = new ScoreBuyAdapter(data, gridItemListener);
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override

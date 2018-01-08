@@ -265,7 +265,7 @@
             android:exported="true" />
         <activity android:name=".activities.trade.ConfirmListActivity" />
         <activity android:name=".activities.trade.TradeConfirmActivity" />
-        <activity android:name=".activities.seller.SellerPurchaseActivity" />
+        <activity android:name=".activities.score_buy.PurchaseActivity" />
         <activity
             android:name=".activities.seller.SellerGiveCreateActivity"
             android:launchMode="singleTask" />
