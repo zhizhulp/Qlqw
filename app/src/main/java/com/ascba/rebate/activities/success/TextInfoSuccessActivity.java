@@ -12,7 +12,6 @@ import com.ascba.rebate.activities.agent.AgentActivity;
 import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
 import com.ascba.rebate.activities.merchant.MctEnterActivity;
 import com.ascba.rebate.activities.score_shop.GiftExchangeLogActivity;
-import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerInvoiceHistoryActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -64,7 +63,7 @@ public class TextInfoSuccessActivity extends BaseDefaultNetActivity {
                 } else if (type == 4)
                     startActivity(AgentActivity.class, null);
                 else if (type == 5)
-                    startActivity(SellerActivity.class, null);
+                    setResult(RESULT_OK);
                 finish();
             }
         });

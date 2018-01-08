@@ -1,7 +1,6 @@
 package com.ascba.rebate.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.SpannableString;
@@ -21,7 +20,6 @@ import android.widget.ViewFlipper;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.score_buy.GiftGoodsTypeActivity;
-import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ScoreBuyBanner;
 import com.ascba.rebate.bean.ScoreBuyBase;
@@ -30,8 +28,6 @@ import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.manager.BannerImageLoader;
-import com.ascba.rebate.manager.DialogManager;
-import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.view.MyGridView;
 import com.ascba.rebate.view.picasso.CropCircleTransformation;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -44,14 +40,16 @@ import java.util.List;
 
 
 public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, BaseViewHolder> {
+    private AdapterView.OnItemClickListener gridItemListener;
 
-    public ScoreBuyAdapter(List<ScoreBuyBase> data) {
+    public ScoreBuyAdapter(List<ScoreBuyBase> data, AdapterView.OnItemClickListener gridListener) {
         super(data);
         addItemType(0, R.layout.score_buy_banner);
         addItemType(1, R.layout.score_buy_grid);
         addItemType(2, R.layout.score_buy_type);
         addItemType(3, R.layout.gift_goods_item);
         addItemType(4, R.layout.score_buy_msg);
+        gridItemListener = gridListener;
     }
 
     @Override
@@ -61,6 +59,8 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
             case 0://banner
                 ScoreBuyBanner itemBanner = (ScoreBuyBanner) item;
                 final Banner banner = helper.getView(R.id.banner);
+                ViewGroup.LayoutParams params = banner.getLayoutParams();
+                params.height = mContext.getResources().getDisplayMetrics().widthPixels / 18 * 11;
                 banner.setImageLoader(new BannerImageLoader());
                 final List<ScoreBuyBanner.ScoreBuyImg> imgs = itemBanner.getImgs();
                 banner.setImages(imgs).start();
@@ -71,7 +71,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
 
                         ScoreBuyBanner.ScoreBuyImg scoreBuyImg = imgs.get(position);
                         int status = scoreBuyImg.getBanner_status();
-                        Log.d(TAG, "OnBannerClick: "+status);
+                        Log.d(TAG, "OnBannerClick: " + status);
                         if (status == 1) {
                             WebViewBaseActivity.start(mContext, scoreBuyImg.getBanner_h5_title(), scoreBuyImg.getBanner_url());
                         } else if (status == 2) {//跳转原生界面
@@ -87,20 +87,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 gridView.setNumColumns(grids.size());
                 GridAdapter adapter = new GridAdapter(grids, mContext);
                 gridView.setAdapter(adapter);
-                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ScoreBuyHead.ScoreBuyGrid buyGrid = grids.get(position);
-                        int status = buyGrid.getPurchase_status();
-                        if(status==0){//已售完
-                            ToastManager.show("抱歉，该礼品包已售罄。");
-                        }else if(status==1){
-                            Intent intent = new Intent(mContext, SellerPurchaseActivity.class);
-                            intent.putExtra("type",buyGrid.getId());
-                            mContext.startActivity(intent);
-                        }
-                    }
-                });
+                gridView.setOnItemClickListener(gridItemListener);
                 break;
             case 2://type
                 helper.addOnClickListener(R.id.tv_more_type);
@@ -114,7 +101,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ScoreBuyType.ScoreBuyTypeC scoreBuyTypeC = types.get(position);
-                        GiftGoodsTypeActivity.start(mContext,scoreBuyTypeC.getCate_id());
+                        GiftGoodsTypeActivity.start(mContext, scoreBuyTypeC.getCate_id());
                     }
                 });
                 break;

@@ -1,4 +1,4 @@
-package com.ascba.rebate.activities.seller;
+package com.ascba.rebate.activities.score_buy;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +21,7 @@ import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.PurchaseEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.NumberFormatUtils;
 import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.UrlUtils;
@@ -33,7 +34,7 @@ import java.math.BigDecimal;
  * Created by Jero on 2017/10/16 0016.
  */
 
-public class SellerPurchaseActivity extends BaseDefaultPayActivity implements View.OnClickListener {
+public class PurchaseActivity extends BaseDefaultPayActivity implements View.OnClickListener {
     private static final int GET = 80;
 
     private int type; // 1 零售 2 批发 3 定制
@@ -317,6 +318,14 @@ public class SellerPurchaseActivity extends BaseDefaultPayActivity implements Vi
         Bundle bundle = new Bundle();
         bundle.putInt("type", 5);
         bundle.putString("info", pay.getSuccess_info());
-        startActivity(TextInfoSuccessActivity.class, bundle);
+        startActivityForResult(TextInfoSuccessActivity.class, bundle, CodeUtils.REQUEST_PAY);
+    }
+
+    @Override
+    protected void onResult(String type, int resultCode) {
+        if (resultCode == RESULT_OK) {
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 }

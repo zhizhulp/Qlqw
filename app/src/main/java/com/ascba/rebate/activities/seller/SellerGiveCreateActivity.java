@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
+import com.ascba.rebate.activities.score_buy.ScoreBuyHome1Activity;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.Result;
@@ -235,7 +236,8 @@ public class SellerGiveCreateActivity extends BaseDefaultNetActivity implements 
                 dm.showAlertDialog2(store_gift_status_text, null, null, new DialogManager.Callback() {
                     @Override
                     public void handleLeft() {
-                        startActivity(SellerPurchaseActivity.class, null);
+                        startActivity(new Intent(SellerGiveCreateActivity.this, ScoreBuyHome1Activity.class)
+                                .putExtra("page", "give"));
                     }
                 });
             } else if (type == 0) {

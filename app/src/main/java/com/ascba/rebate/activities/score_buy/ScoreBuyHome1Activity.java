@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -17,7 +18,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
-import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.adapter.ScoreBuyAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.BaseUIActivity;
@@ -28,7 +28,6 @@ import com.ascba.rebate.bean.ScoreBuyHead;
 import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
-import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.ScreenDpiUtils;
@@ -50,13 +49,16 @@ import java.util.List;
  */
 
 public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
+    private static final int PURCHASE_RESULT = 770;
+
     private int paged = 1;
     private List<ScoreBuyBase> data;
     private FloatingActionButton fb;
     private ScoreBuyAdapter adapter;
     private FrameLayout barLat;
     private int totalY;
-    MyGridView gridView;
+    private MyGridView gridView;
+    private AdapterView.OnItemClickListener gridItemListener;
 
     @Override
     protected int bindLayout() {
@@ -78,23 +80,20 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         requestData(false);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "getParams: " + getIntent().getStringExtra("page"));
+        if (requestCode == PURCHASE_RESULT && resultCode == RESULT_OK) {
+            if (!TextUtils.isEmpty(getIntent().getStringExtra("page"))) {
+                finish();
+            }
+        }
+    }
 
     private void setMoneyBar() {
         gridView = fv(R.id.gridView);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
-                int status = buyGrid.getPurchase_status();
-                if (status == 0) {//已售完
-                    ToastManager.show("抱歉，该礼品包已售罄。");
-                } else if (status == 1) {
-                    Intent intent = new Intent(ScoreBuyHome1Activity.this, SellerPurchaseActivity.class);
-                    intent.putExtra("type", buyGrid.getId());
-                    startActivity(intent);
-                }
-            }
-        });
+        gridView.setOnItemClickListener(gridItemListener);
         barLat = findViewById(R.id.lat_bar);
         mMoneyBar.setCallBack(mMoneyBar.new CallbackImp() {
             @Override
@@ -138,11 +137,25 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
         });
     }
 
-
     private void setRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         data = new ArrayList<>();
-        adapter = new ScoreBuyAdapter(data);
+        gridItemListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ScoreBuyHead.ScoreBuyGrid buyGrid = ((ScoreBuyHead) data.get(1)).getGrids().get(position);
+                int status = buyGrid.getPurchase_status();
+                if (status == 0) {//已售完
+                    ToastManager.show("抱歉，该礼品包已售罄。");
+                } else if (status == 1) {
+                    startActivityForResult(new Intent(ScoreBuyHome1Activity.this,
+                                    PurchaseActivity.class)
+                                    .putExtra("type", buyGrid.getId())
+                            , PURCHASE_RESULT);
+                }
+            }
+        };
+        adapter = new ScoreBuyAdapter(data, gridItemListener);
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {

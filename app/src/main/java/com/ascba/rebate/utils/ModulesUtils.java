@@ -18,7 +18,6 @@ import com.ascba.rebate.activities.score_buy.ScoreBuyHome1Activity;
 import com.ascba.rebate.activities.score_shop.GiftShopActivity;
 import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerGiveCreateActivity;
-import com.ascba.rebate.activities.seller.SellerPurchaseActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ModuleEntity;
