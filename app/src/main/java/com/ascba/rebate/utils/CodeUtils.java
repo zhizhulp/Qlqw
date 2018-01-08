@@ -30,7 +30,7 @@ public class CodeUtils {
     public static final int REQUEST_NO_ADDRESS = 2040;
     public static final int REQUEST_CROP = 2041;
     public static final String WX_APP_ID = "wxc0690c2be47a7d66";
-    public static String WX_APP_SECRET = "";//ebc8efae9ea7ca24e6b95ace1ef5f390  //3c446cc12abc8ee4b0f6d26cf30c0931
+    public static String WX_APP_SECRET = "b11bf4d1087d393ae2eb1409a2db0421";
     public static final int REQUEST_EDIT = 2042;
     public static final int REQUEST_ADD_PWD = 3001;
     public static final int CODE_CONFIRM = 3002;
