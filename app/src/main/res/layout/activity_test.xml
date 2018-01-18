@@ -6,10 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.ascba.rebate.activities.test.TestActivity">
-    <ViewFlipper
-        android:inAnimation="@anim/anim_top_in"
-        android:outAnimation="@anim/anim_bottom_out"
-        android:id="@+id/viewFlipper"
+    <Button
+        android:onClick="goPay"
+        android:text="调起支付"
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="wrap_content" />
 </FrameLayout>

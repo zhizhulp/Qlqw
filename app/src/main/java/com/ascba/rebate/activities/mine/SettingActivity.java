@@ -75,12 +75,9 @@ public class SettingActivity extends BaseDefaultNetActivity implements View.OnCl
             @Override
             public void handleLeft() {
                 AppConfig.getInstance().putBoolean("first_login",true);
-                ActivityManager.getInstance().removeAllActivity();
+                setResult(RESULT_OK);
+                finish();
                 startActivity(LoginActivity.class,null);
-                /*Intent i = getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);*/
             }
         });
     }
