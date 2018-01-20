@@ -18,6 +18,7 @@ import com.ascba.rebate.activities.score_buy.ScoreBuyHome1Activity;
 import com.ascba.rebate.activities.score_shop.GiftShopActivity;
 import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerGiveCreateActivity;
+import com.ascba.rebate.activities.shop.ShopActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ModuleEntity;
@@ -62,7 +63,7 @@ public class ModulesUtils {
                 }
                 break;
             case "Store":// 商城
-                ToastManager.show("敬请期待");
+                goActivity(activity, ShopActivity.class, null);
                 break;
             case "CashBills":// 现金账单
                 goActivity(activity, BillActivity.class, null);

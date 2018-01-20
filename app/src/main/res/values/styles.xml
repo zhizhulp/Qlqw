@@ -63,6 +63,7 @@
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:src">@mipmap/more</item>
     </style>
+
     <style name="EditTextNormal">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -162,6 +163,18 @@
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
         <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="shop_tab" parent="SelectBackgroundBorderless">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">@color/select_tab_color</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="bottom_dialog" parent="android:style/Theme.Dialog">
