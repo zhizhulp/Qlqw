@@ -72,6 +72,11 @@ public class GiftGoodsDetailsActivity extends BaseDefaultNetActivity {
             public void onDragNext() {
                 btmFragment.initView(url);
             }
+
+            @Override
+            public void onDragTop() {
+
+            }
         };
         DragLayout draglayout = (DragLayout) findViewById(R.id.dragLayout);
         draglayout.setNextPageListener(notifier);

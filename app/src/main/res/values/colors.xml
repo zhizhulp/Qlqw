@@ -35,4 +35,5 @@
     <color name="yellow_03">#FDD32D</color>
     <color name="select_bg_transparent">#14000000</color>
     <color name="purchase_yellow_tv">#e5a62c</color>
+    <color name="shop_det_red">#FFF24725</color>
 </resources>

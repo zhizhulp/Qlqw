@@ -2,6 +2,7 @@ package com.ascba.rebate.view.vertical_drag;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
@@ -15,6 +16,7 @@ public class CustScrollView extends ScrollView {
     private static final int TOUCH_IDLE = 0;
     private static final int TOUCH_INNER_CONSIME = 1; // touch事件由ScrollView内部消费
     private static final int TOUCH_DRAG_LAYOUT = 2; // touch事件由上层的DragLayout去消费
+    private String TAG="CustScrollView";
 
     boolean isAtBottom; // 按下的时候是否在底部
     private int mTouchSlop = 4; // 判定为滑动的阈值，单位是像素
@@ -73,15 +75,21 @@ public class CustScrollView extends ScrollView {
                 }
             }
         }
-        return super.onInterceptTouchEvent(ev);
+        boolean b = super.onInterceptTouchEvent(ev);
+        Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction()+","+b);
+        return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+
         if (scrollMode == TOUCH_DRAG_LAYOUT) {
+            Log.d(TAG, "onTouchEvent: "+ev.getAction()+",false");
             return false;
         }
-        return super.onTouchEvent(ev);
+        boolean b = super.onTouchEvent(ev);
+        Log.d(TAG, "onTouchEvent: "+ev.getAction()+","+b);
+        return b;
     }
 
     private boolean isAtBottom() {

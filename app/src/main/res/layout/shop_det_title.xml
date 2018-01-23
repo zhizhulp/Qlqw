@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableLeft="@mipmap/back_small"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="返回"
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tablayout"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/LineHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/im_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tablayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/tab_msg" />
+
+    <ImageView
+        android:id="@+id/im_spot"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/red_spot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089999974"
+        android:layout_marginRight="12dp" />
+
+    <android.support.design.widget.TabLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        app:tabMode="fixed"
+        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorColor="@color/shop_det_red"
+        app:tabTextAppearance="@style/shop_det_appearance"
+        app:tabTextColor="@color/grey_black_tv"
+        app:tabSelectedTextColor="@color/grey_black_tv"
+        android:id="@+id/tablayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/im_msg"
+        app:layout_constraintStart_toEndOf="@+id/tv_back"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:textColor="@color/grey_black_tv"
+        android:textSize="@dimen/text_16"
+        android:visibility="gone"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="商品详情"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/im_msg"
+        app:layout_constraintStart_toStartOf="@+id/tv_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
