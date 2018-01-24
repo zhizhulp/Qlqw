@@ -35,6 +35,7 @@ import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.NumberFormatUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.utils.WindowsUtils;
 import com.ascba.rebate.view.NumberBtn;
 import com.ascba.rebate.view.vertical_drag.CustScrollView;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -151,12 +152,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     }
 
     private void setMoneyBarAlpha(int maxHeight) {
-        int statusBarHeight;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0)
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        else
-            statusBarHeight = (int) ScreenDpiUtils.dp2px(getContext(), 24);
+        int statusBarHeight = WindowsUtils.getStatusBarHeight(getContext());
         mBarLayout = (FrameLayout) getActivity().findViewById(R.id.top_title_layout);
         mBarLayout.setBackgroundResource(R.color.transparent);
         FrameLayout bottomLay = (FrameLayout) getActivity().findViewById(R.id.bottom);
