@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fragment_lat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <View style="@style/LineHorizontal" />
+
+    <RadioGroup
+        android:id="@+id/shop_tab_lat"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:checkedButton="@+id/shop_home_tab"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/shop_home_tab"
+            style="@style/shop_tab"
+            android:drawableTop="@drawable/shop_home_tab"
+            android:text="首页" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/shop_types_tab"
+            style="@style/shop_tab"
+            android:drawableTop="@drawable/shop_types_tab"
+            android:text="分类" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/shop_me_tab"
+            style="@style/shop_tab"
+            android:drawableTop="@drawable/shop_me_tab"
+            android:text="个人中心" />
+    </RadioGroup>
+</LinearLayout>

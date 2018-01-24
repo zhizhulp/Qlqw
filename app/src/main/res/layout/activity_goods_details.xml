@@ -1,52 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btm_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context="com.ascba.rebate.activities.shop.GoodsDetailsActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_lat"
+    <include
+        android:id="@+id/include"
+        layout="@layout/shop_det_title" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="43dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1944" />
 
-    <View style="@style/LineHorizontal" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3888" />
 
-    <RadioGroup
-        android:id="@+id/shop_tab_lat"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/white"
-        android:checkedButton="@+id/shop_home_tab"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6944" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/phone"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:text="客服"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
-        <RadioButton
-            android:id="@+id/shop_home_tab"
-            style="@style/shop_tab"
-            android:drawableTop="@drawable/shop_home_tab"
-            android:text="首页" />
+    <TextView
+        android:gravity="center"
+        android:drawableTop="@mipmap/collect"
+        android:id="@+id/tv_collect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="收藏"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
-        <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="微信赠送"
+        android:textSize="@dimen/text_15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
-        <RadioButton
-            android:id="@+id/shop_types_tab"
-            style="@style/shop_tab"
-            android:drawableTop="@drawable/shop_types_tab"
-            android:text="分类" />
+    <TextView
 
-        <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+        android:gravity="center"
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="单独购买 "
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
-        <RadioButton
-            android:id="@+id/shop_me_tab"
-            style="@style/shop_tab"
-            android:drawableTop="@drawable/shop_me_tab"
-            android:text="个人中心" />
-    </RadioGroup>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
