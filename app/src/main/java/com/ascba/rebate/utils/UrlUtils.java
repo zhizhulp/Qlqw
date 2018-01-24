@@ -119,4 +119,6 @@ public class UrlUtils {
     public static String purchaseIndex2 = baseWebsite + "Purchase/purchaseIndex";
     public static String scoregoodsCate = baseWebsite + "scoregoodsCate";
     public static String scoregoodsByCate = baseWebsite + "scoregoodsByCate";
+    public static String time = baseWebsite + "time";
+
 }

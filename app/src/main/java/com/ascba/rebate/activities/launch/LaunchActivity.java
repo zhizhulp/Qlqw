@@ -3,6 +3,7 @@ package com.ascba.rebate.activities.launch;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
@@ -53,6 +54,12 @@ public class LaunchActivity extends BaseDefaultNetActivity implements Runnable {
         image = fv(R.id.start_image);
         handler = new Handler();
         requestData();
+        requestTime();
+    }
+
+    private void requestTime() {
+        AbstractRequest request = buildRequest(UrlUtils.time, RequestMethod.GET, null);
+        executeNetwork(1, request);
     }
 
     private void requestData() {
@@ -76,14 +83,21 @@ public class LaunchActivity extends BaseDefaultNetActivity implements Runnable {
                     .into(image, new Callback() {
                         @Override
                         public void onSuccess() {
-                            handler.postDelayed(LaunchActivity.this,3000);
+                            handler.postDelayed(LaunchActivity.this, 3000);
                         }
 
                         @Override
                         public void onError() {
-                            handler.postDelayed(LaunchActivity.this,3000);
+                            handler.postDelayed(LaunchActivity.this, 3000);
                         }
                     });
+        } else if (what == 1) {
+            String data = (String) result.getData();
+            JSONObject dataObj = JSON.parseObject(data);
+            Long timeserver = dataObj.getLong("time");
+            long diff = timeserver - (System.currentTimeMillis() / 1000);
+            Log.d(TAG, "mHandle200: "+diff);
+            AppConfig.getInstance().putLong("time_diff",diff);
         }
     }
 
@@ -100,13 +114,13 @@ public class LaunchActivity extends BaseDefaultNetActivity implements Runnable {
     @Override
     protected void mHandleFailed(int what) {
         //super.mHandleFailed(what);
-        handler.postDelayed(LaunchActivity.this,3000);
+        handler.postDelayed(LaunchActivity.this, 3000);
     }
 
     @Override
     protected void mHandleNoNetwork(int what) {
         //super.mHandleNoNetwork(what);
-        handler.postDelayed(LaunchActivity.this,3000);
+        handler.postDelayed(LaunchActivity.this, 3000);
     }
 
     @Override

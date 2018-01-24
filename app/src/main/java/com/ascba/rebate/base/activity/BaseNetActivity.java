@@ -60,8 +60,9 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         request.addHeader("deviceuuid", PackageUtils.getDeviceId());
         String nonceStr = EncodeUtils.makeNonceStr();
         request.addHeader("noncestr", nonceStr);
-        request.addHeader("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
-        request.addHeader("sign", EncodeUtils.makeSign(nonceStr, url));
+        String[] strs = EncodeUtils.makeSignHead(nonceStr, url);
+        request.addHeader("sign", strs[1]);
+        request.addHeader("timestamp", strs[0]);
         request.addHeader("sessionId", AppConfig.getInstance().getString("session_id", null));
         request.addHeader("accessToken", AppConfig.getInstance().getString("access_token", null));
         return request;
