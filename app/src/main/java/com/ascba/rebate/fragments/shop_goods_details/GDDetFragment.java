@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.shop.ShopActivity;
+import com.ascba.rebate.activities.shop.GoodsDetailsActivity;
 import com.ascba.rebate.fragments.score_shop.BtmFragment;
-import com.ascba.rebate.fragments.score_shop.TopFragment;
 import com.ascba.rebate.view.vertical_drag.DragLayout;
 
 /**
@@ -44,12 +43,12 @@ public class GDDetFragment extends Fragment {
             @Override
             public void onDragNext() {
                 btmFragment.initView("http://www.baidu.com");
-                ((ShopActivity) getActivity()).switchTitle(false);
+                ((GoodsDetailsActivity) getActivity()).switchTitle(false);
             }
 
             @Override
             public void onDragTop() {
-                ((ShopActivity) getActivity()).switchTitle(true);
+                ((GoodsDetailsActivity) getActivity()).switchTitle(true);
             }
         };
         DragLayout draglayout = view.findViewById(R.id.dragLayout);

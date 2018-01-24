@@ -340,6 +340,8 @@
             android:name=".activities.score_buy.GiftGoodsTypeActivity"
             android:exported="true" />
         <activity android:name=".activities.shop.ShopActivity" />
+        <activity android:name=".activities.shop.GoodsDetailsActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
