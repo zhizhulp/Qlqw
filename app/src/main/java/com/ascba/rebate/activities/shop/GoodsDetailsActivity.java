@@ -6,26 +6,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.adapter.GoodsDetPagerAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
-import com.ascba.rebate.base.activity.BaseUIActivity;
 import com.ascba.rebate.fragments.score_shop.BtmFragment;
 import com.ascba.rebate.fragments.shop_goods_details.GDComtFragment;
 import com.ascba.rebate.fragments.shop_goods_details.GDDetFragment;
 import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.utils.ScreenDpiUtils;
-import com.ascba.rebate.view.qr.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends BaseDefaultNetActivity implements View.OnClickListener, TabLayout.OnTabSelectedListener {
+public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View.OnClickListener, TabLayout.OnTabSelectedListener {
 
     private View imSpot;
     private TabLayout tabLayout;
@@ -35,7 +31,7 @@ public class ShopActivity extends BaseDefaultNetActivity implements View.OnClick
 
     @Override
     protected int bindLayout() {
-        return R.layout.activity_shop;
+        return R.layout.activity_goods_details;
     }
 
     @Override
