@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ascba.rebate.activities.shop.ShopInActivity">
+
+    <com.ascba.rebate.view.shop.MoneyBar
+        android:id="@+id/moneyBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:needLine="true"
+        app:textTitle="商城入驻" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moneyBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/tv_type_str"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="认证类型" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="63dp"
+                    android:layout_toEndOf="@+id/tv_type_str"
+                    android:layout_toRightOf="@+id/tv_type_str"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/radio_btn_bg"
+                        android:paddingLeft="6dp"
+                        android:text="个人"
+                        android:textColor="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:button="@drawable/radio_btn_bg"
+                        android:paddingLeft="6dp"
+                        android:text="企业"
+                        android:textColor="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_13" />
+                </RadioGroup>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="温馨提示:店铺认证类型激活成功不可修改"
+                android:textColor="@color/grey_black_tv2"
+                android:textSize="@dimen/text_12" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/lat_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_name_str"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="15dp"
+                    android:text="店铺名称"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/more" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    android:text="永安行"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_name_str"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    style="@style/LineHorizontal"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/lat_head"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店头形象"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/more" />
+
+                <ImageView
+                    android:id="@+id/im_head"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/shop_placeholder" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/lat_type"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="9dp"
+                android:background="@color/white"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主营类目"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/more" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    android:text="请选择"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="类目提示："
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:text="如何选择类目？"
+                    android:textColor="@color/shop_det_red"
+                    android:textSize="@dimen/text_12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/lat_phone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="联系电话"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/more" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    android:text="15517115256"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView17"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    style="@style/LineHorizontal"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:background="@color/white"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="店铺介绍"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.ascba.rebate.view.EditTextHint
+                    android:id="@+id/editTextHint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请填写商家介绍......"
+                    android:paddingTop="10dp"
+                    android:maxLines="3"
+                    android:textColor="@color/grey_black_tv"
+                    android:textColorHint="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13"
+                    app:hintSize="@dimen/text_13"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19"
+                    app:layout_constraintVertical_bias="0.0" />
+            </android.support.constraint.ConstraintLayout>
+            <Button
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/btn_shop_bg"
+                android:layout_marginTop="35dp"
+                android:textSize="@dimen/text_15"
+                android:textColor="@color/white"
+                android:text="提交"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
