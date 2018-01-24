@@ -6,6 +6,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ public class DragLayout extends ViewGroup {
 	private static final int DISTANCE_THRESHOLD = 100; // 单位是像素，当上下滑动速度不够时，通过这个阈值来判定是应该粘到顶部还是底部
 	private int downTop1; // 手指按下的时候，frameView1的getTop值
 	private ShowNextPageNotifier nextPageListener; // 手指松开是否加载下一页的notifier
+	private String TAG="DragLayout";
 
 	public DragLayout(Context context) {
 		this(context, null);
@@ -174,6 +176,9 @@ public class DragLayout extends ViewGroup {
 					|| (downTop1 == -bottomHeight && releasedChild.getTop() > DISTANCE_THRESHOLD + viewHeight - bottomHeight)) {
 				// 保持原地不动
 				finalTop = viewHeight;
+				if (null != nextPageListener) {
+					nextPageListener.onDragTop();
+				}
 			} else {
 				finalTop = viewHeight - bottomHeight;
 			}
@@ -206,7 +211,7 @@ public class DragLayout extends ViewGroup {
 			mDragHelper.processTouchEvent(ev);
 			downTop1 = frameView1.getTop();
 		}
-
+		Log.d(TAG, "onInterceptTouchEvent: "+ev.getActionMasked()+","+ (shouldIntercept && yScroll));
 		return shouldIntercept && yScroll;
 	}
 
@@ -214,6 +219,7 @@ public class DragLayout extends ViewGroup {
 	public boolean onTouchEvent(MotionEvent e) {
 		// 统一交给mDragHelper处理，由DragHelperCallback实现拖动效果
 		mDragHelper.processTouchEvent(e); // 该行代码可能会抛异常，正式发布时请将这行代码加上try catch
+		Log.d(TAG, "onTouchEvent: "+e.getActionMasked()+",true");
 		return true;
 	}
 
@@ -281,5 +287,6 @@ public class DragLayout extends ViewGroup {
 
 	public interface ShowNextPageNotifier {
 		public void onDragNext();
+		public void onDragTop();
 	}
 }

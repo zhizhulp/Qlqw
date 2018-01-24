@@ -190,4 +190,8 @@
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
+
+    <style name="shop_det_appearance">
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
 </resources>
