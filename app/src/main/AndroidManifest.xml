@@ -339,9 +339,14 @@
         <activity
             android:name=".activities.score_buy.GiftGoodsTypeActivity"
             android:exported="true" />
-        <activity android:name=".activities.shop.ShopActivity" />
-        <activity android:name=".activities.shop.GoodsDetailsActivity"
+        <activity
+            android:name=".activities.shop.GoodsDetailsActivity"
+            android:exported="true" />
+        <activity android:name=".activities.shop.ShopInActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/ShopTheme"
             android:exported="true"/>
+        <activity android:name=".activities.shop.ShopActivity" />
     </application>
 
 </manifest>
