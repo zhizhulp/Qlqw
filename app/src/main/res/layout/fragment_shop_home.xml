@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_lat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/red" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/shop_types_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/shop_type_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="173dp"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="6dp" />
+
+                    <com.rd.PageIndicatorView
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/shop_type_viewpager"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="12dp"
+                        app:piv_animationType="worm"
+                        app:piv_padding="5dp"
+                        app:piv_radius="2.5dp"
+                        app:piv_selectedColor="@color/grey_black_tv"
+                        app:piv_unselectedColor="@color/grey_ccc"
+                        app:piv_viewPager="@id/shop_type_viewpager" />
+
+                    <View
+                        android:id="@+id/shop_types_bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/shop_types_bg"
+                        android:layout_below="@id/shop_type_viewpager" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="9dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/laba" />
+
+                    <ViewFlipper
+                        android:id="@+id/viewFlipper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:inAnimation="@anim/anim_top_in"
+                        android:outAnimation="@anim/anim_bottom_out" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_collapseMode="pin" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_collapseMode="pin">
+
+                <View
+                    android:id="@+id/title_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:id="@+id/title_lat"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/transparent">
+
+                    <TextView
+                        android:id="@+id/shop_back_tv"
+                        style="@style/SelectBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/back_small_white"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="10dp"
+                        android:text="返回"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14" />
+
+                    <ImageView
+                        android:id="@+id/shop_msg_im"
+                        style="@style/SelectBackgroundBorderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="17dp"
+                        android:src="@mipmap/shop_msg" />
+
+                    <ImageView
+                        android:id="@+id/shop_msg_red_im"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="14dp"
+                        android:paddingTop="8dp"
+                        android:src="@mipmap/shop_msg_red" />
+
+                    <TextView
+                        android:id="@+id/shop_search_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_toLeftOf="@id/shop_msg_im"
+                        android:layout_toRightOf="@id/shop_back_tv"
+                        android:background="@drawable/shop_home_search_bg"
+                        android:drawableLeft="@mipmap/shop_search"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:hint="搜索"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/grey_black_tv"
+                        android:textColorHint="@color/grey_black_tv2"
+                        android:textSize="@dimen/text_14" />
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                style="@style/ShopTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginRight="39dp"
+                app:layout_scrollFlags="scroll"
+                app:tabContentStart="14dp"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="10dp"
+                app:tabPaddingStart="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/tab_types"
+                android:src="@mipmap/shop_types_line" />
+
+            <ImageView
+                android:id="@+id/tab_types"
+                style="@style/SelectBackgroundBorderless"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="4dp"
+                android:paddingRight="14dp"
+                android:src="@mipmap/shop_types" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

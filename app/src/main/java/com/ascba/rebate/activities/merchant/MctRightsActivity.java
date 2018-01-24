@@ -2,7 +2,6 @@ package com.ascba.rebate.activities.merchant;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +23,7 @@ import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.utils.DrawableChangeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.squareup.picasso.Picasso;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -127,8 +127,8 @@ public class MctRightsActivity extends BaseDefaultNetActivity implements View.On
             tvPay.setVisibility(View.GONE);
         else
             tvPay.setText(data.getSeller_status_text());
-        GradientDrawable drawable = (GradientDrawable) latStatus.getBackground();
-        drawable.setColor(Color.parseColor("#" + data.getActive_color()));
+        DrawableChangeUtils.setShapeDrawableColor(latStatus,
+                Color.parseColor("#" + data.getActive_color()));
     }
 
     private void setList() {

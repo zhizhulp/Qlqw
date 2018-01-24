@@ -2,10 +2,11 @@ package com.ascba.rebate.adapter;
 
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.ascba.rebate.R;
 import com.ascba.rebate.bean.MsgListEntity;
+import com.ascba.rebate.utils.DrawableChangeUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 
 
 public class MsgListAdapter extends BaseQuickAdapter<MsgListEntity, BaseViewHolder> {
@@ -23,12 +24,12 @@ public class MsgListAdapter extends BaseQuickAdapter<MsgListEntity, BaseViewHold
             helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.grey_black_tv));
             helper.setTextColor(R.id.tv_intro, mContext.getResources().getColor(R.color.grey_black_tv));
             helper.setTextColor(R.id.tv_see, mContext.getResources().getColor(R.color.grey_black_tv));
-            ((TextView) helper.getView(R.id.tv_see)).setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.more, 0);
+            DrawableChangeUtils.setChangeCompoundDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more);
         } else {
             helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.grey_black_tv3));
             helper.setTextColor(R.id.tv_intro, mContext.getResources().getColor(R.color.grey_tv));
             helper.setTextColor(R.id.tv_see, mContext.getResources().getColor(R.color.grey_black_tv3));
-            ((TextView) helper.getView(R.id.tv_see)).setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.more_gray, 0);
+            DrawableChangeUtils.setChangeCompoundDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more_gray);
         }
     }
 }

@@ -9,7 +9,7 @@
     tools:context="com.ascba.rebate.activities.register.RegisterNextActivity">
     <com.ascba.rebate.view.MoneyBar
         android:id="@+id/mb"
-        app:backImg="@mipmap/back_blank"
+        app:backImg="@mipmap/back_black"
         app:barBg="@color/white"
         app:backTextColor="@color/grey_black_tv"
         android:layout_marginTop="@dimen/top0_25"

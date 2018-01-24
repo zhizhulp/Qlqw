@@ -346,6 +346,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:theme="@style/ShopTheme"
             android:exported="true"/>
+        <activity android:name=".activities.shop.ShopActivity" />
     </application>
 
 </manifest>

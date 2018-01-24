@@ -70,6 +70,7 @@
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:src">@mipmap/more</item>
     </style>
+
     <style name="EditTextNormal">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -171,6 +172,18 @@
         <item name="android:visibility">invisible</item>
     </style>
 
+    <style name="shop_tab" parent="SelectBackgroundBorderless">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">@color/select_tab_color</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="bottom_dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -187,5 +200,19 @@
 
     <style name="shop_det_appearance">
         <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="ShopTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/shop_red</item>
+        <item name="tabIndicatorHeight">1dp</item>
+        <item name="tabMinWidth">45dp</item>
+        <item name="tabTextAppearance">@style/ShopTab</item>
+        <item name="tabSelectedTextColor">@color/shop_red</item>
+    </style>
+
+    <style name="ShopTab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey_black_tv</item>
+        <item name="textAllCaps">true</item>
     </style>
 </resources>

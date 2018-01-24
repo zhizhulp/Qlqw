@@ -32,6 +32,7 @@ import com.ascba.rebate.manager.ToastManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.utils.WindowsUtils;
 import com.ascba.rebate.view.MyGridView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -103,13 +104,8 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 startActivity(ScoreBillActivity.class, bundle);
             }
         });
-        int statusBarHeight;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0)
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        else
-            statusBarHeight = (int) ScreenDpiUtils.dp2px(this, 24);
-        final int maxY = (int) ScreenDpiUtils.dp2px(this, 164) - statusBarHeight;
+        final int maxY = WindowsUtils.getWindowsWidth(this) / 18 * 11
+                - WindowsUtils.getStatusBarHeight(this) - (int) ScreenDpiUtils.dp2px(this, 56);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

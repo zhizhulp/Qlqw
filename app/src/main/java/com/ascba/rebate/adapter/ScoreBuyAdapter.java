@@ -28,6 +28,7 @@ import com.ascba.rebate.bean.ScoreBuyMsgP;
 import com.ascba.rebate.bean.ScoreBuyType;
 import com.ascba.rebate.bean.ScoreHome;
 import com.ascba.rebate.manager.BannerImageLoader;
+import com.ascba.rebate.utils.WindowsUtils;
 import com.ascba.rebate.view.MyGridView;
 import com.ascba.rebate.view.picasso.CropCircleTransformation;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -60,7 +61,7 @@ public class ScoreBuyAdapter extends BaseMultiItemQuickAdapter<ScoreBuyBase, Bas
                 ScoreBuyBanner itemBanner = (ScoreBuyBanner) item;
                 final Banner banner = helper.getView(R.id.banner);
                 ViewGroup.LayoutParams params = banner.getLayoutParams();
-                params.height = mContext.getResources().getDisplayMetrics().widthPixels / 18 * 11;
+                params.height = WindowsUtils.getWindowsWidth(mContext) / 18 * 11;
                 banner.setImageLoader(new BannerImageLoader());
                 final List<ScoreBuyBanner.ScoreBuyImg> imgs = itemBanner.getImgs();
                 banner.setImages(imgs).start();

@@ -20,10 +20,10 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.activities.score_shop.GiftGoodsDetailsActivity;
 import com.ascba.rebate.activities.setting.AddressActivity;
 import com.ascba.rebate.activities.setting.AddressAddActivity;
+import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
 import com.ascba.rebate.bean.AddressEntity;
 import com.ascba.rebate.bean.Result;
@@ -35,6 +35,7 @@ import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.NumberFormatUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.utils.WindowsUtils;
 import com.ascba.rebate.view.NumberBtn;
 import com.ascba.rebate.view.vertical_drag.CustScrollView;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -81,7 +82,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     public TopFragment() {
     }
 
-    public static TopFragment getInstance(int goodsId,int scene) {
+    public static TopFragment getInstance(int goodsId, int scene) {
         TopFragment top = new TopFragment();
         Bundle b = new Bundle();
         b.putInt("goods_id", goodsId);
@@ -142,7 +143,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
         banner = fv(R.id.banner);
         ViewGroup.LayoutParams params = banner.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels;
-        banner.setImageLoader(new BannerImageLoader(params.height,params.height));
+        banner.setImageLoader(new BannerImageLoader(params.height, params.height));
         getParamsAddRequest();
         requestData();
         scrollView = fv(R.id.scrollView);
@@ -151,12 +152,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
     }
 
     private void setMoneyBarAlpha(int maxHeight) {
-        int statusBarHeight;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0)
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-        else
-            statusBarHeight = (int) ScreenDpiUtils.dp2px(getContext(), 24);
+        int statusBarHeight = WindowsUtils.getStatusBarHeight(getContext());
         mBarLayout = (FrameLayout) getActivity().findViewById(R.id.top_title_layout);
         mBarLayout.setBackgroundResource(R.color.transparent);
         FrameLayout bottomLay = (FrameLayout) getActivity().findViewById(R.id.bottom);
@@ -332,7 +328,7 @@ public class TopFragment extends BaseDefaultNetFragment implements View.OnClickL
                 viewUser.setVisibility(View.VISIBLE);
                 addressID = addObj.getInteger("address_id");
                 tvAddress.setText(addObj.getString("address_detail"));
-                tvUserName.setText("收货人：" +addObj.getString("address_realname"));
+                tvUserName.setText("收货人：" + addObj.getString("address_realname"));
                 tvMobile.setText(addObj.getString("address_mobile"));
             } else {
                 viewUser.setVisibility(View.GONE);
