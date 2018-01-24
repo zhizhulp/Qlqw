@@ -38,7 +38,7 @@ public class DrawableChangeUtils {
         drawable.setColor(color);
     }
 
-    public static void setChangeDrawable(TextView view, @DrawableType int type, @Nullable Drawable drawable) {
+    public static void setChangeCompoundDrawable(TextView view, @DrawableType int type, @Nullable Drawable drawable) {
         Drawable[] drawables = view.getCompoundDrawables();
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         //view.setCompoundDrawablesWithIntrinsicBounds (drawable, drawables[1], drawables[2], drawables[3]);
@@ -58,8 +58,8 @@ public class DrawableChangeUtils {
         }
     }
 
-    public static void setChangeDrawable(TextView view, @DrawableType int type, @DrawableRes int drawable) {
-        setChangeDrawable(view, type, drawable != 0 ? view.getContext().getResources().getDrawable(drawable) : null);
+    public static void setChangeCompoundDrawable(TextView view, @DrawableType int type, @DrawableRes int drawable) {
+        setChangeCompoundDrawable(view, type, drawable != 0 ? view.getContext().getResources().getDrawable(drawable) : null);
     }
 
 }

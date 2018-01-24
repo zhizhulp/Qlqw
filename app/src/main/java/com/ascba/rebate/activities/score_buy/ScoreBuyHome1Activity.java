@@ -104,7 +104,8 @@ public class ScoreBuyHome1Activity extends BaseDefaultNetActivity {
                 startActivity(ScoreBillActivity.class, bundle);
             }
         });
-        final int maxY = (int) ScreenDpiUtils.dp2px(this, 164) - WindowsUtils.getStatusBarHeight(this);
+        final int maxY = WindowsUtils.getWindowsWidth(this) / 18 * 11
+                - WindowsUtils.getStatusBarHeight(this) - (int) ScreenDpiUtils.dp2px(this, 56);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

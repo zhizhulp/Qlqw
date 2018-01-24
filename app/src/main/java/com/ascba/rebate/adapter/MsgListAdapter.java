@@ -24,12 +24,12 @@ public class MsgListAdapter extends BaseQuickAdapter<MsgListEntity, BaseViewHold
             helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.grey_black_tv));
             helper.setTextColor(R.id.tv_intro, mContext.getResources().getColor(R.color.grey_black_tv));
             helper.setTextColor(R.id.tv_see, mContext.getResources().getColor(R.color.grey_black_tv));
-            DrawableChangeUtils.setChangeDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more);
+            DrawableChangeUtils.setChangeCompoundDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more);
         } else {
             helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.grey_black_tv3));
             helper.setTextColor(R.id.tv_intro, mContext.getResources().getColor(R.color.grey_tv));
             helper.setTextColor(R.id.tv_see, mContext.getResources().getColor(R.color.grey_black_tv3));
-            DrawableChangeUtils.setChangeDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more_gray);
+            DrawableChangeUtils.setChangeCompoundDrawable((TextView) helper.getView(R.id.tv_see), DrawableChangeUtils.Drawable_RIGHT, R.mipmap.more_gray);
         }
     }
 }

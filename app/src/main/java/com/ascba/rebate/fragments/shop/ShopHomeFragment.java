@@ -1,7 +1,10 @@
 package com.ascba.rebate.fragments.shop;
 
+import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
+import com.ascba.rebate.utils.DrawableChangeUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.WindowsUtils;
 import com.youth.banner.Banner;
@@ -22,7 +26,7 @@ import com.youth.banner.Banner;
  * Created by Jero on 2018/1/19 0019.
  */
 
-public class ShopHomeFragment extends BaseDefaultNetFragment {
+public class ShopHomeFragment extends BaseDefaultNetFragment implements View.OnClickListener {
 
     private AppBarLayout appBarLayout;
     private Banner banner;
@@ -47,72 +51,17 @@ public class ShopHomeFragment extends BaseDefaultNetFragment {
     protected void initViews() {
         super.initViews();
         initChildHeight();
+        initViewPager();
 
-        tabLayout = fv(R.id.tab_layout);
-        viewPager = fv(R.id.viewpager);
-        tabLayout.addTab(tabLayout.newTab().setText("推荐"));
-        tabLayout.addTab(tabLayout.newTab().setText("男装"));
-        tabLayout.addTab(tabLayout.newTab().setText("电器"));
-        tabLayout.addTab(tabLayout.newTab().setText("x"));
-        tabLayout.addTab(tabLayout.newTab().setText("xzou78"));
-        tabLayout.addTab(tabLayout.newTab().setText("78"));
-        tabLayout.addTab(tabLayout.newTab().setText("ou78适度"));
-        tabLayout.addTab(tabLayout.newTab().setText("适度分红款"));
-        tabLayout.addTab(tabLayout.newTab().setText("度分红款"));
-        tabLayout.addTab(tabLayout.newTab().setText("度分红"));
-        tabLayout.addTab(tabLayout.newTab().setText("分红"));
-        tabLayout.addTab(tabLayout.newTab().setText("家居"));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                appBarLayout.setExpanded(false);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        fv(R.id.tab_types).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        fv(R.id.shop_types_bg).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: shop_types_bg");
-            }
-        });
-        fv(R.id.shop_types_bottom).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: shop_types_bottom");
-            }
-        });
-        fv(R.id.shop_back_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: shop_back_tv");
-            }
-        });
-        fv(R.id.shop_msg_im).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: shop_msg_im");
-            }
-        });
-
+        fv(R.id.tab_types).setOnClickListener(this);
+        fv(R.id.shop_types_bg).setOnClickListener(this);
+        fv(R.id.shop_types_bottom).setOnClickListener(this);
+        backTv.setOnClickListener(this);
+        searchTv.setOnClickListener(this);
+        msgIm.setOnClickListener(this);
     }
 
     private void initChildHeight() {
-
         banner = fv(R.id.banner);
         LinearLayout.LayoutParams bannerParams = (LinearLayout.LayoutParams) banner.getLayoutParams();
         bannerParams.height = WindowsUtils.getWindowsWidth(getContext()) * 5 / 9;
@@ -132,52 +81,113 @@ public class ShopHomeFragment extends BaseDefaultNetFragment {
         msgIm = fv(R.id.shop_msg_im);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             private int MIN_ALPHA = ((int) ScreenDpiUtils.dp2px(getContext(), 10));
-            private int oldType = 0;//0 原始  1 最小范围内  2渐变中  3渐变完成
+            private int oldType = 0;//0 原始  1 最小范围内  2渐变中  3渐变中黑  4渐变完成
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 int absOff = Math.abs(verticalOffset);
-                int alpha = 255;
                 if (absOff <= MIN_ALPHA) {
                     if (oldType != 1) {
                         oldType = 1;
                         titleTop.setBackgroundColor(getResources().getColor(R.color.transparent));
-                        setTitleWhite();
+                        setTitleAlpha(0);
                     }
-                } else if (absOff <= alphaHeight) {
+                } else if (absOff <= alphaHeight * 4 / 5) {
                     if (oldType != 2) {
                         oldType = 2;
                         titleTop.setBackgroundColor(getResources().getColor(R.color.grey_black_tv));
+                        setTitleWhite();
+                    }
+                    setTitleAlpha((absOff - MIN_ALPHA) * 255 / (alphaHeight - MIN_ALPHA));
+                } else if (absOff <= alphaHeight) {
+                    if (oldType != 3) {
+                        oldType = 3;
                         setBlackWhile();
                     }
-                    alpha = absOff * 255 / alphaHeight;
+                    setTitleAlpha((absOff - MIN_ALPHA) * 255 / (alphaHeight - MIN_ALPHA));
                 } else {
-
+                    if (oldType != 4) {
+                        oldType = 4;
+                        setTitleAlpha(255);
+                    }
                 }
-                Log.i(TAG, "onOffsetChanged: " + verticalOffset + "//" + absOff + "//" + alpha);
             }
         });
-
-
     }
 
     private void setTitleWhite() {
         backTv.setTextColor(getResources().getColor(R.color.white));
+        DrawableChangeUtils.setChangeCompoundDrawable(backTv, DrawableChangeUtils.Drawable_LEFT, R.mipmap.back_small_white);
         searchTv.setBackgroundResource(R.drawable.shop_home_search_bg);
-        msgIm.setBackgroundResource(R.mipmap.shop_msg);
+        msgIm.setImageResource(R.mipmap.shop_msg);
     }
 
     private void setBlackWhile() {
         backTv.setTextColor(getResources().getColor(R.color.grey_black_tv2));
+        DrawableChangeUtils.setChangeCompoundDrawable(backTv, DrawableChangeUtils.Drawable_LEFT, R.mipmap.back_small);
         searchTv.setBackgroundResource(R.drawable.shop_search_bg);
-        msgIm.setBackgroundResource(R.mipmap.shop_msg_grey);
+        msgIm.setImageResource(R.mipmap.shop_msg_grey);
     }
 
     private void setTitleAlpha(int alpha) {
-        titleLat = fv(R.id.title_lat);
-        backTv = fv(R.id.shop_back_tv);
-        searchTv = fv(R.id.shop_search_tv);
-        msgIm = fv(R.id.shop_msg_im);
+        titleLat.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
     }
 
+    private void initViewPager() {
+
+        viewPager = fv(R.id.viewpager);
+        tabLayout = fv(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+            @Override
+            public int getCount() {
+                return 10;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return "推荐";
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return new Fragment();
+            }
+        });
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                appBarLayout.setExpanded(false);
+                Log.i(TAG, "onTabSelected: " + tab);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                Log.i(TAG, "onTabUnselected: ");
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                Log.i(TAG, "onTabReselected: ");
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.shop_back_tv) {
+            getActivity().finish();
+        } else if (v.getId() == R.id.shop_search_tv) {
+
+        } else if (v.getId() == R.id.shop_msg_im) {
+
+        } else if (v.getId() == R.id.tab_types) {
+            appBarLayout.setExpanded(false);
+        }
+//        else if (v.getId() == R.id.shop_types_bg){
+//
+//        }else if (v.getId() == R.id.shop_types_bottom){
+//
+//        }
+    }
 }

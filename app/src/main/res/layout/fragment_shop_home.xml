@@ -125,14 +125,14 @@
                         style="@style/SelectBackgroundBorderless"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@mipmap/back_white"
+                        android:drawableLeft="@mipmap/back_small_white"
                         android:drawablePadding="6dp"
                         android:gravity="center_vertical"
                         android:paddingLeft="14dp"
                         android:paddingRight="10dp"
                         android:text="返回"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_17" />
+                        android:textSize="@dimen/text_14" />
 
                     <ImageView
                         android:id="@+id/shop_msg_im"

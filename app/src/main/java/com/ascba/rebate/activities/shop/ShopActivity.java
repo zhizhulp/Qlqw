@@ -31,7 +31,7 @@ public class ShopActivity extends BaseDefaultNetActivity {
 
     @Override
     protected int setUIMode() {
-        return BaseUIActivity.UIMODE_TRANSPARENT_NOTALL;
+        return BaseUIActivity.UIMODE_TRANSPARENT;
     }
 
     @Override

@@ -10,7 +10,7 @@
 
     <com.ascba.rebate.view.MoneyBar
         android:layout_marginTop="@dimen/top0_25"
-        app:backImg="@mipmap/back_blank"
+        app:backImg="@mipmap/back_black"
         app:barBg="@color/white"
         app:backTextColor="@color/grey_black_tv"
         android:id="@+id/mb"

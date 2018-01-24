@@ -89,9 +89,13 @@ public class ModulesUtils {
             case "AgentLeague":// 代理加盟
                 goActivity(activity, AgentActivity.class, null);
                 break;
+            case "MerchantPntry":// 商城入驻
+                // todo
+                goActivity(activity, ShopActivity.class, null);
+                break;
             case "More":// 更多
                 return false;
-            case "HttpAgreement":// 更多
+            case "HttpAgreement":// 跳转页面
                 goWeb(activity, moduleEntity);
                 return false;
             default:

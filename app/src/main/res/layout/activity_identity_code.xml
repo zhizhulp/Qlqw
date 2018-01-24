@@ -13,7 +13,7 @@
         app:barBg="@color/white"
         android:id="@+id/mb"
         app:needBack="true"
-        app:backImg="@mipmap/back_blank"
+        app:backImg="@mipmap/back_black"
         app:backTextColor="@color/grey_black_tv"
         android:layout_width="match_parent"
         android:layout_height="56dp" />
