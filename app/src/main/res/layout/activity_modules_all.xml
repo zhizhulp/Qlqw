@@ -26,7 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="14dp"
             android:layout_toRightOf="@id/im_back"
-            android:background="@drawable/grad_search_bg"
+            android:background="@drawable/module_search_bg"
             android:drawableLeft="@mipmap/module_search"
             android:drawablePadding="7dp"
             android:gravity="center_vertical"

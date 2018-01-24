@@ -162,7 +162,7 @@
                         android:layout_marginRight="7dp"
                         android:layout_toLeftOf="@id/shop_msg_im"
                         android:layout_toRightOf="@id/shop_back_tv"
-                        android:background="@drawable/shop_search_bg"
+                        android:background="@drawable/shop_home_search_bg"
                         android:drawableLeft="@mipmap/shop_search"
                         android:drawablePadding="8dp"
                         android:gravity="center_vertical"

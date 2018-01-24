@@ -141,9 +141,15 @@ public class ShopHomeFragment extends BaseDefaultNetFragment {
                 if (absOff <= MIN_ALPHA) {
                     if (oldType != 1) {
                         oldType = 1;
-
+                        titleTop.setBackgroundColor(getResources().getColor(R.color.transparent));
+                        setTitleWhite();
                     }
                 } else if (absOff <= alphaHeight) {
+                    if (oldType != 2) {
+                        oldType = 2;
+                        titleTop.setBackgroundColor(getResources().getColor(R.color.grey_black_tv));
+                        setBlackWhile();
+                    }
                     alpha = absOff * 255 / alphaHeight;
                 } else {
 
@@ -153,6 +159,25 @@ public class ShopHomeFragment extends BaseDefaultNetFragment {
         });
 
 
+    }
+
+    private void setTitleWhite() {
+        backTv.setTextColor(getResources().getColor(R.color.white));
+        searchTv.setBackgroundResource(R.drawable.shop_home_search_bg);
+        msgIm.setBackgroundResource(R.mipmap.shop_msg);
+    }
+
+    private void setBlackWhile() {
+        backTv.setTextColor(getResources().getColor(R.color.grey_black_tv2));
+        searchTv.setBackgroundResource(R.drawable.shop_search_bg);
+        msgIm.setBackgroundResource(R.mipmap.shop_msg_grey);
+    }
+
+    private void setTitleAlpha(int alpha) {
+        titleLat = fv(R.id.title_lat);
+        backTv = fv(R.id.shop_back_tv);
+        searchTv = fv(R.id.shop_search_tv);
+        msgIm = fv(R.id.shop_msg_im);
     }
 
 }

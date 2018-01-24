@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.bean.AgentItem;
+import com.ascba.rebate.utils.DrawableChangeUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -27,11 +28,13 @@ public class AgentAdapter extends BaseMultiItemQuickAdapter<AgentItem, BaseViewH
         switch (item.getItemType()) {
             case TITLE_TYPE:
                 helper.setText(R.id.tv_title, item.getTitle());
-                setLeftColor((TextView) helper.getView(R.id.tv_title), item.getColor());
+                DrawableChangeUtils.setShapeDrawableColor((TextView) helper.getView(R.id.tv_title),
+                        DrawableChangeUtils.Drawable_LEFT, item.getColor());
                 break;
             case NUM_TYPE:
                 helper.setText(R.id.tv_title, item.getTitle());
-                setLeftColor((TextView) helper.getView(R.id.tv_title), item.getColor());
+                DrawableChangeUtils.setShapeDrawableColor((TextView) helper.getView(R.id.tv_title),
+                        DrawableChangeUtils.Drawable_LEFT, item.getColor());
                 helper.setText(R.id.tv_num, item.getContent());
                 break;
         }
