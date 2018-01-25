@@ -42,6 +42,8 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
     private TextView tvAgentNum, tvOnlineMctNum, tvMctNum, tvUserNum;
     private TextView tvTime;
     private TextView tvPay;
+    private View latNum;
+    private TextView tvLeftTitle;
     //</editor-fold>
 
     @Override
@@ -92,6 +94,8 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         tvUserNum = headView.findViewById(R.id.tv_user_num);
         tvTime = headView.findViewById(R.id.tv_left_time);
         tvPay = headView.findViewById(R.id.tv_pay);
+        latNum = headView.findViewById(R.id.lat_agent_num);
+        tvLeftTitle = headView.findViewById(R.id.tv_left_time_str);
         tvPay.setOnClickListener(this);
         agentAdapter.addHeaderView(headView);
     }
@@ -115,6 +119,8 @@ public class AgentActivity extends BaseDefaultNetActivity implements View.OnClic
         tvName.setText(ins.getString("nickname", null));
         tvClass.setText(ins.getString("group_name", null));
         tvType.setText(jObj.getString("agent_title"));
+        latNum.setVisibility(jObj.getIntValue("agent_status") == 1 ? View.VISIBLE : View.GONE);
+        tvLeftTitle.setText(jObj.getString("seller_title"));
         tvAgentNum.setText(jObj.getString("statis_agent"));
         tvOnlineMctNum.setText(jObj.getString("statis_online_business"));
         tvMctNum.setText(jObj.getString("statis_offline_business"));
