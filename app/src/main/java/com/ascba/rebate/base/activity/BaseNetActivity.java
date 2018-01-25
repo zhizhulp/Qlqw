@@ -65,6 +65,7 @@ public abstract class BaseNetActivity extends BaseDefaultUIActivity {
         request.addHeader("timestamp", strs[0]);
         request.addHeader("sessionId", AppConfig.getInstance().getString("session_id", null));
         request.addHeader("accessToken", AppConfig.getInstance().getString("access_token", null));
+        request.addHeader("network",AppConfig.getInstance().getString("network",null));
         return request;
     }
 

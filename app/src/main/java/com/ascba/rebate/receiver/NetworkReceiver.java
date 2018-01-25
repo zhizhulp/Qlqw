@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.yanzhenjie.nohttp.tools.NetUtils;
 
@@ -41,6 +42,11 @@ public class NetworkReceiver extends BroadcastReceiver {
             } else {
                 if (tvNet != null) {
                     decorView.removeView(tvNet);
+                }
+                if(NetUtils.isMobileConnected()){
+                    AppConfig.getInstance().putString("network","own");
+                }else if(NetUtils.isWifiConnected()){
+                    AppConfig.getInstance().putString("network","wifi");
                 }
             }
         }
