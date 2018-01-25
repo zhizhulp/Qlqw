@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,20 +10,29 @@
         android:id="@+id/moneyBar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:needLine="true"
         app:textTitle="商城入驻" />
 
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/btn_apply"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/btn_shop_bg"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_15" />
+
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moneyBar">
+        android:layout_below="@+id/moneyBar"
+        android:layout_above="@id/btn_apply">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +53,12 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="认证类型" />
+                    android:text="认证类型"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
 
                 <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="28dp"
@@ -57,6 +69,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/radio_person"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/radio_btn_bg"
@@ -66,6 +79,7 @@
                         android:textSize="@dimen/text_13" />
 
                     <RadioButton
+                        android:id="@+id/radio_company"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="28dp"
@@ -123,7 +137,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
                     android:layout_marginStart="6dp"
-                    android:text="永安行"
                     android:textColor="@color/grey_black_tv2"
                     android:textSize="@dimen/text_13"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -240,7 +253,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tv_how"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -287,7 +300,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
                     android:layout_marginStart="6dp"
-                    android:text="15517115256"
                     android:textColor="@color/grey_black_tv2"
                     android:textSize="@dimen/text_13"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -302,22 +314,22 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp">
 
                 <TextView
-                    android:textColor="@color/grey_black_tv"
-                    android:textSize="@dimen/text_14"
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:text="店铺介绍"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -327,8 +339,8 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请填写商家介绍......"
-                    android:paddingTop="10dp"
                     android:maxLines="3"
+                    android:paddingTop="10dp"
                     android:textColor="@color/grey_black_tv"
                     android:textColorHint="@color/grey_black_tv2"
                     android:textSize="@dimen/text_13"
@@ -340,16 +352,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView19"
                     app:layout_constraintVertical_bias="0.0" />
             </android.support.constraint.ConstraintLayout>
-            <Button
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
-                android:background="@drawable/btn_shop_bg"
-                android:layout_marginTop="35dp"
-                android:textSize="@dimen/text_15"
-                android:textColor="@color/white"
-                android:text="提交"
-                android:layout_width="match_parent"
-                android:layout_height="43dp" />
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
