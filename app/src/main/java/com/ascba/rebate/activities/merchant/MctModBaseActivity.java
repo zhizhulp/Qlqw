@@ -49,16 +49,15 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
         btnSave = fv(R.id.btn_save);
         btnSave.setOnClickListener(this);
         etInput = fv(R.id.et_input);
+        int type = mmType.getType();
+        if (type == 1) {
+            etInput.setInputType(InputType.TYPE_CLASS_PHONE);
+        }
         etInput.addTextChangedListener(this);
         etInput.setHint(mmType.getHint());
         etInput.setText(mmType.getContent());
         mMoneyBar.setTextTitle(mmType.getTitle());
         etInput.setSelection(mmType.getContent().length());
-
-        int type = mmType.getType();
-        if (type == 1) {
-            etInput.setInputType(InputType.TYPE_CLASS_PHONE);
-        }
     }
 
     public static void start(Activity context, MctModType type) {
@@ -96,7 +95,7 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
                     return;
                 }
             } else {
-                showToast(getString(R.string.seller_name_unavailable));
+                showToast(mmType.getTitle()+"长度不符合，请重新输入");
                 return;
             }
         } else if (type == 1) {//商户电话
