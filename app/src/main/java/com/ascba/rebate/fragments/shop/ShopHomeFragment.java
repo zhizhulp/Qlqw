@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,9 +16,12 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
+import com.ascba.rebate.fragments.GiftExchangeFragment;
 import com.ascba.rebate.utils.DrawableChangeUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.WindowsUtils;
+import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.youth.banner.Banner;
 
 /**
@@ -108,6 +110,8 @@ public class ShopHomeFragment extends BaseDefaultNetFragment implements View.OnC
                 } else {
                     if (oldType != 4) {
                         oldType = 4;
+                        setBlackWhile();
+                        titleTop.setBackgroundColor(getResources().getColor(R.color.grey_black_tv));
                         setTitleAlpha(255);
                     }
                 }
@@ -134,7 +138,6 @@ public class ShopHomeFragment extends BaseDefaultNetFragment implements View.OnC
     }
 
     private void initViewPager() {
-
         viewPager = fv(R.id.viewpager);
         tabLayout = fv(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
@@ -151,26 +154,38 @@ public class ShopHomeFragment extends BaseDefaultNetFragment implements View.OnC
 
             @Override
             public Fragment getItem(int position) {
-                return new Fragment();
+                GiftExchangeFragment scoreFragment = GiftExchangeFragment.getInstance(1);
+                return scoreFragment;
             }
         });
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                appBarLayout.setExpanded(false);
-                Log.i(TAG, "onTabSelected: " + tab);
+//                appBarLayout.setExpanded(false);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Log.i(TAG, "onTabUnselected: ");
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                Log.i(TAG, "onTabReselected: ");
             }
         });
+        SlidingTabLayout slidingTabLayout = fv(R.id.tab_lay);
+        slidingTabLayout.setViewPager(viewPager);
+        slidingTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                appBarLayout.setExpanded(false);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+            }
+        });
+
     }
 
     @Override

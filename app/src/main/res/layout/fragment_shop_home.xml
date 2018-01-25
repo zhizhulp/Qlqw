@@ -212,6 +212,19 @@
                 style="@style/LineHorizontal"
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tab_lay"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:paddingLeft="4dp"
+            app:tl_indicator_color="@color/shop_red"
+            app:tl_indicator_height="1dp"
+            app:tl_tab_padding="10dp"
+            app:tl_textSelectColor="@color/shop_red"
+            app:tl_textUnselectColor="@color/grey_black_tv"
+            app:tl_textsize="14sp" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
