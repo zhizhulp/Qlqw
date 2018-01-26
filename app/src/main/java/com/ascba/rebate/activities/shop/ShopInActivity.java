@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +24,6 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
 import com.ascba.rebate.activities.merchant.MctModBaseActivity;
-import com.ascba.rebate.activities.user_data.UserDataActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.application.MyApplication;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -254,6 +252,9 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             editText.setText(shopDet.getStore_description());
         } else if (what == 1) {
             showToast(result.getMsg());
+            startActivity(new Intent(this, ShopEnterActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .putExtra("type", 2));
         } else if (what == 2) {
             ComMsg comMsg = (ComMsg) result.getData();
             Bundle b = new Bundle();

@@ -47,11 +47,13 @@ public class ShopEnter {
          * tip_status : 1
          * tip_text : 未个人认证，是否前往认证?
          * store_settled_h5 : http://www.baidu.com
+         * store_settled_h5_title : 吾乃标题
          */
 
         private int tip_status;
         private String tip_text;
         private String store_settled_h5;
+        private String store_settled_h5_title;
 
         public int getTip_status() {
             return tip_status;
@@ -76,16 +78,26 @@ public class ShopEnter {
         public void setStore_settled_h5(String store_settled_h5) {
             this.store_settled_h5 = store_settled_h5;
         }
+
+        public String getStore_settled_h5_title() {
+            return store_settled_h5_title;
+        }
+
+        public void setStore_settled_h5_title(String store_settled_h5_title) {
+            this.store_settled_h5_title = store_settled_h5_title;
+        }
     }
 
     public static class PatternBean {
         /**
          * pattern_id : 1
          * pattern_title : 普通售卖模式
+         * pattern_img : https://www.baidu.com/img/bd_logo1.png
          */
 
         private int pattern_id;
         private String pattern_title;
+        private String pattern_img;
 
         public int getPattern_id() {
             return pattern_id;
@@ -101,6 +113,14 @@ public class ShopEnter {
 
         public void setPattern_title(String pattern_title) {
             this.pattern_title = pattern_title;
+        }
+
+        public String getPattern_img() {
+            return pattern_img;
+        }
+
+        public void setPattern_img(String pattern_img) {
+            this.pattern_img = pattern_img;
         }
     }
 

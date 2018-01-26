@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/shop_warn_tv"
@@ -15,6 +16,279 @@
         android:textColor="@color/grey_black_tv2"
         android:textSize="@dimen/text_12" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shop_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:drawableLeft="@mipmap/shop_enter_success"
+                android:drawablePadding="6dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="店铺名称"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="恭喜您的店铺已成功入驻"
+                android:textColor="@color/grey_black_tv2"
+                android:textSize="@dimen/text_13" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="9dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="登陆地址"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="http://mall.qlqwgw.com"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="登陆账户"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="123456456"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="登陆密码"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="短信验证"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="店铺类型"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="个人认证"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/shop_type_tv"
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="经营类目"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_class"
+                    style="@style/SelectBackgroundWhile"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="center_vertical"
+                    android:text="服装服饰"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="店铺状态"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="未激活"
+                    android:textColor="@color/shop_det_red"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="激活金额"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/shop_success_monwy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:text="1000.00元"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="9dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/bg" />
+
+            <TextView
+                android:id="@+id/shop_store_info_tv"
+                style="@style/SelectBackgroundWhile"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableRight="@mipmap/more"
+                android:gravity="center_vertical"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="店铺信息"
+                android:textColor="@color/grey_black_tv"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                style="@style/LineHorizontal"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:text="查看可享受的商家各种服务"
+                    android:textColor="@color/grey_black_tv"
+                    android:textSize="@dimen/text_14" />
+
+                <Button
+                    android:id="@+id/shop_see_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/shop_see_bg"
+                    android:text="查看"
+                    android:textColor="@color/grey_black_tv2"
+                    android:textSize="@dimen/text_13" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
     <View style="@style/LineHorizontal" />
 
     <Button
@@ -26,4 +300,4 @@
         android:enabled="true"
         android:text="立即激活"
         app:layout_constraintBottom_toBottomOf="parent" />
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

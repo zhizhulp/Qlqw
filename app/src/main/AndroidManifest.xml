@@ -350,7 +350,6 @@
         <activity android:name=".activities.shop.ShopActivity" />
         <activity
             android:name=".activities.shop.ShopEnterActivity"
-            android:launchMode="singleTask"
             android:theme="@style/ShopTheme" />
     </application>
 

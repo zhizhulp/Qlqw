@@ -22,6 +22,11 @@ import com.yanzhenjie.nohttp.RequestMethod;
 public class ShopEnterFragment extends BaseDefaultNetFragment implements View.OnClickListener {
     private ShopEnter shopEnter;
     private int cardStatus = 0;
+    private boolean isShow = false;
+
+    public void setShowType() {
+        isShow = true;
+    }
 
     @Override
     protected int bindLayout() {
@@ -33,6 +38,11 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
         super.initViews();
         fv(R.id.btn_commit).setOnClickListener(this);
         fv(R.id.purchase_url).setOnClickListener(this);
+
+        if (isShow) {
+            fv(R.id.lat_bottom).setVisibility(View.GONE);
+            fv(R.id.btn_commit).setVisibility(View.GONE);
+        }
 
         requestNetwork();
     }
@@ -57,7 +67,7 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
                 });
             }
         } else if (v.getId() == R.id.purchase_url) {
-            WebViewBaseActivity.start(getContext(), "", shopEnter.getStore().getStore_settled_h5());
+            WebViewBaseActivity.start(getContext(), shopEnter.getStore().getStore_settled_h5_title(), shopEnter.getStore().getStore_settled_h5());
         }
     }
 

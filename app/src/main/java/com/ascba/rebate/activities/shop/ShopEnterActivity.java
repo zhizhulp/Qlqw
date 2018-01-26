@@ -3,7 +3,6 @@ package com.ascba.rebate.activities.shop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -22,7 +21,7 @@ import com.yanzhenjie.nohttp.RequestMethod;
 
 public class ShopEnterActivity extends BaseDefaultPayActivity {
     private static final int TYPE = 600;
-    private int type = 0;// 1 权益  2 
+    private int type = 0;//0 入驻（默认） 1 权益  2  成功
 
     private ShopPayFragment payFragment;
     private ShopEnterFragment enterFragment;
@@ -35,19 +34,19 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        getParams();
-        //startActivity(new Intent(this, ShopEnterActivity.class).putExtra("type", 2));
+        getParams(getIntent());
         if (type == 0)
             requestTypeNetwork();
     }
 
-    private void getParams() {
-        int param = getIntent().getIntExtra("type", 0);
+    private void getParams(Intent intent) {
+        int param = intent.getIntExtra("type", 0);
         if (param == 1) {
+            mMoneyBar.setTextTitle("查看权益");
             type = 1;
             changeEnter();
+            enterFragment.setShowType();
         } else if (param == 2) {
-            type = 2;
             changePay();
         }
     }
@@ -55,7 +54,7 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        getParams();
+        getParams(intent);
     }
 
     private void changeEnter() {
@@ -72,13 +71,16 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
     }
 
     private void changePay() {
+        type = 2;
+        mMoneyBar.setTextTitle("入驻成功");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (payFragment == null) {
             payFragment = new ShopPayFragment();
             payFragment.setBtnClick(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    changeEnter();
+                    //todo
+                    showPayDialog("", "");
                 }
             });
             fragmentTransaction.add(R.id.fragment_lat, payFragment);
@@ -99,8 +101,8 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
         if (what == TYPE) {
-            type = JSON.parseObject(result.getData().toString()).getIntValue("store_redirect");
-            if (type == 1) {
+            if (JSON.parseObject(result.getData().toString()).getIntValue("store_redirect") == 1) {
+                mMoneyBar.setTextTitle("商城入驻");
                 changeEnter();
             } else {
                 changePay();

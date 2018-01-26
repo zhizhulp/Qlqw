@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <com.ascba.rebate.view.shop.MoneyBar
+        android:id="@+id/mb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:needLine="true"
-        app:textTitle="商城入驻" />
+        app:needLine="true" />
 
     <FrameLayout
         android:id="@+id/fragment_lat"

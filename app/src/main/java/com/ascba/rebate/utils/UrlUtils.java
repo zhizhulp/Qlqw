@@ -124,6 +124,7 @@ public class UrlUtils {
     public static String storeEntrance = baseWebsite + "store/entrance";
     public static String storePerfect= baseWebsite + "store/perfect";
     public static String storePerfectPost= baseWebsite + "store/perfectPost";
+    public static String storePerfectShow= baseWebsite + "store/perfectShow";
 
 
 }
