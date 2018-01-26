@@ -19,6 +19,7 @@ import com.ascba.rebate.activities.score_shop.GiftShopActivity;
 import com.ascba.rebate.activities.seller.SellerActivity;
 import com.ascba.rebate.activities.seller.SellerGiveCreateActivity;
 import com.ascba.rebate.activities.shop.ShopActivity;
+import com.ascba.rebate.activities.shop.ShopEnterActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.bean.ModuleEntity;
@@ -90,8 +91,7 @@ public class ModulesUtils {
                 goActivity(activity, AgentActivity.class, null);
                 break;
             case "MerchantPntry":// 商城入驻
-                // todo
-                goActivity(activity, ShopActivity.class, null);
+                goActivity(activity, ShopEnterActivity.class, null);
                 break;
             case "More":// 更多
                 return false;

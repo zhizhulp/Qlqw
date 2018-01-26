@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/white" />
+
+    <View style="@style/LineHorizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@id/recyclerView"
+        android:layout_marginTop="11dp"
+        android:background="@color/bg"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开通线上商城表示您已同意"
+            android:textColor="@color/grey_black_tv3"
+            android:textSize="@dimen/text_13" />
+
+        <TextView
+            android:id="@+id/purchase_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《相关协议》"
+            android:textColor="@color/shop_det_red"
+            android:textSize="@dimen/text_13" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_commit"
+        style="@style/ButtonNormal"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/btn_shop_bg"
+        android:enabled="true"
+        android:text="立即开通" />
+</LinearLayout>

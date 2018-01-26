@@ -219,10 +219,10 @@
             android:layout_height="48dp"
             android:background="@color/white"
             android:paddingLeft="4dp"
-            app:tl_indicator_color="@color/shop_red"
+            app:tl_indicator_color="@color/shop_det_red"
             app:tl_indicator_height="1dp"
             app:tl_tab_padding="10dp"
-            app:tl_textSelectColor="@color/shop_red"
+            app:tl_textSelectColor="@color/shop_det_red"
             app:tl_textUnselectColor="@color/grey_black_tv"
             app:tl_textsize="14sp" />
     </android.support.design.widget.AppBarLayout>

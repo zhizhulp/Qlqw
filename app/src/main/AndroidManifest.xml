@@ -342,11 +342,16 @@
         <activity
             android:name=".activities.shop.GoodsDetailsActivity"
             android:exported="true" />
-        <activity android:name=".activities.shop.ShopInActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
+        <activity
+            android:name=".activities.shop.ShopInActivity"
+            android:exported="true"
             android:theme="@style/ShopTheme"
-            android:exported="true"/>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.shop.ShopActivity" />
+        <activity
+            android:name=".activities.shop.ShopEnterActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/ShopTheme" />
     </application>
 
 </manifest>

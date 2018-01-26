@@ -120,6 +120,8 @@ public class UrlUtils {
     public static String scoregoodsCate = baseWebsite + "scoregoodsCate";
     public static String scoregoodsByCate = baseWebsite + "scoregoodsByCate";
     public static String time = baseWebsite + "time";
+    public static String getStoreRedirect = baseWebsite + "store/getStoreRedirect";
+    public static String storeEntrance = baseWebsite + "store/entrance";
     public static String storePerfect= baseWebsite + "store/perfect";
     public static String storePerfectPost= baseWebsite + "store/perfectPost";
 
