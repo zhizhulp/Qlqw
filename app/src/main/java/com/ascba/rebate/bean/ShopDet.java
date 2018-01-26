@@ -15,6 +15,7 @@ public class ShopDet {
      * store_description :
      * company_status : 0
      * company_status_text : 未企业认证，请前往认证！
+     * primary_class_value : 主营类目，如果无返回null
      * type_can_change : 0
      * tip_status : 0
      */
@@ -28,6 +29,15 @@ public class ShopDet {
     private String company_status_text;
     private int type_can_change;
     private int tip_status;
+    private String primary_class_value;
+
+    public String getPrimary_class_value() {
+        return primary_class_value;
+    }
+
+    public void setPrimary_class_value(String primary_class_value) {
+        this.primary_class_value = primary_class_value;
+    }
 
     public int getStore_type() {
         return store_type;

@@ -57,6 +57,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     private RadioButton radioCompany;
     private Button btnApply;
     private File logo;
+    private ShopDet shopDet;
     private boolean isFirst;
 
     @Override
@@ -85,22 +86,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         fv(R.id.tv_how).setOnClickListener(this);
         fv(R.id.lat_phone).setOnClickListener(this);
 
-        setParams();
-    }
-
-    private void setParams() {
-        isFirst = getIntent().getBooleanExtra("is_first", true);
-        if (!isFirst) {
-            requestData();
-        } else {
-            radioPerson.setChecked(true);
-        }
-    }
-
-    private void start(Context context, boolean isFirst) {
-        Intent intent = new Intent(context, ShopInActivity.class);
-        intent.putExtra("is_first", isFirst);
-        startActivity(intent);
+        requestData();
     }
 
     private void requestData() {
@@ -115,7 +101,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         request.add("store_telphone", tvPhone.getText().toString());
         request.add("store_description", editText.getText().toString());
         request.add("store_logo", logo);
-        request.add("primary_class_key", tvType.getText().toString());
+        request.add("primary_class_key", 1);
         executeNetwork(1, "请稍后", request);
     }
 
@@ -123,9 +109,10 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         Log.d(TAG, "onCheckedChanged: " + checkedId);
         if (checkedId == R.id.radio_company) {
-            int status = AppConfig.getInstance().getInt("company_status", 0);
+            int status = shopDet.getCompany_status();
+            String statusText = shopDet.getCompany_status_text();
             if (status == 0) {
-                dm.showAlertDialog2("未审核", "取消", "确定", new DialogManager.Callback() {
+                dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         radioPerson.setChecked(true);
@@ -138,14 +125,14 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                     }
                 });
             } else if (status == 1) {
-                dm.showAlertDialog("审核中", "我知道了", new DialogManager.Callback() {
+                dm.showAlertDialog(statusText, "我知道了", new DialogManager.Callback() {
                     @Override
                     public void handleLeft() {
                         radioPerson.setChecked(true);
                     }
                 });
             } else if (status == 2) {
-                dm.showAlertDialog2("审核资料有误", "取消", "确定", new DialogManager.Callback() {
+                dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         radioPerson.setChecked(true);
@@ -240,18 +227,20 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
         if (what == 0) {
-            ShopDet shopDet = (ShopDet) result.getData();
+            shopDet = (ShopDet) result.getData();
             radioPerson.setChecked(shopDet.getStore_type() == 1);
             radioCompany.setChecked(shopDet.getStore_type() == 2);
             tvName.setText(shopDet.getStore_name());
-            Picasso.with(this).load(shopDet.getStore_logo()).
-                    placeholder(R.mipmap.shop_placeholder).into(imHead);
-            tvType.setText(shopDet.getStore_type() + "");
+            String storeLogo = shopDet.getStore_logo();
+            if (!TextUtils.isEmpty(storeLogo))
+                Picasso.with(this).load(storeLogo).
+                        placeholder(R.mipmap.shop_placeholder).into(imHead);
+            isFirst = TextUtils.isEmpty(storeLogo);
+            tvType.setText(shopDet.getPrimary_class_value());
             tvPhone.setText(shopDet.getStore_telphone());
-            editText.setEnabled(false);
             editText.setText(shopDet.getStore_description());
         } else if (what == 1) {
-            showToast(result.getMsg());
+            //showToast(result.getMsg());
             startActivity(new Intent(this, ShopEnterActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     .putExtra("type", 2));
