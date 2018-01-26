@@ -39,10 +39,30 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
         initView(context, attrs);
     }
 
+    protected int initLayout() {
+        return R.layout.money_bar_layout;
+    }
+
+    protected int initBgColor() {
+        return getResources().getColor(R.color.blue_btn);
+    }
+
+    protected int initTitleColor() {
+        return getResources().getColor(R.color.white);
+    }
+
+    protected int initBackImg() {
+        return R.mipmap.back_white;
+    }
+
+    protected int initBackColor() {
+        return getResources().getColor(R.color.white);
+    }
+
     //初始化
     private void initView(Context context, AttributeSet attrs) {
 
-        LayoutInflater.from(context).inflate(R.layout.money_bar_layout, this, true);
+        LayoutInflater.from(context).inflate(initLayout(), this, true);
         mTextView = (TextView) findViewById(R.id.money_bar_title);
         View backView = findViewById(R.id.money_bar_back_lat);
         bgView = findViewById(R.id.money_bar_parent);
@@ -52,14 +72,14 @@ public class MoneyBar extends LinearLayout implements View.OnClickListener {
         tailText = (TextView) findViewById(R.id.tail_text);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MoneyBar);
-        int bgColor = ta.getColor(R.styleable.MoneyBar_barBg, getResources().getColor(R.color.blue_btn));
+        int bgColor = ta.getColor(R.styleable.MoneyBar_barBg, initBgColor());
         title = ta.getString(R.styleable.MoneyBar_textTitle);
         String tailStr = ta.getString(R.styleable.MoneyBar_textTail);
-        int titleTextColor = ta.getColor(R.styleable.MoneyBar_titleColor, getResources().getColor(R.color.white));
+        int titleTextColor = ta.getColor(R.styleable.MoneyBar_titleColor, initTitleColor());
         boolean needBack = ta.getBoolean(R.styleable.MoneyBar_needBack, true);
         boolean needLine = ta.getBoolean(R.styleable.MoneyBar_needLine, false);
-        int backImgId = ta.getResourceId(R.styleable.MoneyBar_backImg, R.mipmap.back_white);
-        int backTextColor = ta.getColor(R.styleable.MoneyBar_backTextColor, context.getResources().getColor(R.color.white));
+        int backImgId = ta.getResourceId(R.styleable.MoneyBar_backImg, initBackImg());
+        int backTextColor = ta.getColor(R.styleable.MoneyBar_backTextColor, initBackColor());
         backIm.setBackgroundResource(backImgId);
         tvBack.setTextColor(backTextColor);
         //设置尾部文字
