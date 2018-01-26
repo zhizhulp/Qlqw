@@ -54,7 +54,16 @@ public class CustScrollView extends ScrollView {
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        //Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
+        boolean b = super.dispatchTouchEvent(ev);
+        //Log.d(TAG, "dispatchTouchEvent: "+b);
+        return b;
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+//        Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction());
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             downY = ev.getRawY();
             isAtBottom = isAtBottom();
@@ -65,30 +74,31 @@ public class CustScrollView extends ScrollView {
                 float yOffset = downY - ev.getRawY();
                 float yDistance = Math.abs(yOffset);
                 if (yDistance > mTouchSlop) {
-                    if (yOffset > 0 && isAtBottom) {
+                    if (yOffset > 0 && isAtBottom) {//在scrollview底部手指上移
+                        Log.d(TAG, "onInterceptTouchEvent: ");
                         scrollMode = TOUCH_DRAG_LAYOUT;
                         getParent().requestDisallowInterceptTouchEvent(false);
                         return true;
-                    } else {
+                    } else { //剩余垂直移动的情况
                         scrollMode = TOUCH_INNER_CONSIME;
                     }
                 }
             }
         }
         boolean b = super.onInterceptTouchEvent(ev);
-        Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction()+","+b);
+//       Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction()+","+b);
         return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-
+//        Log.d(TAG, "onTouchEvent: "+ev.getAction());
         if (scrollMode == TOUCH_DRAG_LAYOUT) {
-            Log.d(TAG, "onTouchEvent: "+ev.getAction()+",false");
+            //Log.d(TAG, "onTouchEvent: "+ev.getAction()+",false");
             return false;
         }
         boolean b = super.onTouchEvent(ev);
-        Log.d(TAG, "onTouchEvent: "+ev.getAction()+","+b);
+//        Log.d(TAG, "onTouchEvent: "+ev.getAction()+","+b);
         return b;
     }
 
