@@ -3,6 +3,8 @@ package com.ascba.rebate.manager;
 import android.app.Activity;
 import android.util.Log;
 
+import com.ascba.rebate.activities.main.MainActivity;
+
 import java.util.Stack;
 
 /**
@@ -69,5 +71,13 @@ public class ActivityManager {
      */
     public int getSize(){
         return ayList.size();
+    }
+
+    public void killMainActivity() {
+        for (Activity a : ayList) {
+            if(a instanceof MainActivity){
+                a.finish();
+            }
+        }
     }
 }

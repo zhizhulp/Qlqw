@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.login.LoginActivity;
+import com.ascba.rebate.activities.main.MainActivity;
 import com.ascba.rebate.activities.setting.AboutActivity;
 import com.ascba.rebate.activities.setting.AccountActivity;
 import com.ascba.rebate.activities.setting.AddressActivity;
@@ -75,9 +76,9 @@ public class SettingActivity extends BaseDefaultNetActivity implements View.OnCl
             @Override
             public void handleLeft() {
                 AppConfig.getInstance().putBoolean("first_login",true);
-                setResult(RESULT_OK);
-                finish();
+                ActivityManager.getInstance().killMainActivity();
                 startActivity(LoginActivity.class,null);
+                finish();
             }
         });
     }
