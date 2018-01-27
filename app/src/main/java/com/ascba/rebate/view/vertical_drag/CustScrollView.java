@@ -55,9 +55,9 @@ public class CustScrollView extends ScrollView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        //Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
+        Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
         boolean b = super.dispatchTouchEvent(ev);
-        //Log.d(TAG, "dispatchTouchEvent: "+b);
+        Log.d(TAG, "dispatchTouchEvent: "+b);
         return b;
     }
 
@@ -86,19 +86,19 @@ public class CustScrollView extends ScrollView {
             }
         }
         boolean b = super.onInterceptTouchEvent(ev);
-//       Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction()+","+b);
+       Log.d(TAG, "onInterceptTouchEvent: "+ev.getAction()+","+b);
         return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
 //        Log.d(TAG, "onTouchEvent: "+ev.getAction());
-        if (scrollMode == TOUCH_DRAG_LAYOUT) {
-            //Log.d(TAG, "onTouchEvent: "+ev.getAction()+",false");
-            return false;
-        }
+//        if (scrollMode == TOUCH_DRAG_LAYOUT) {
+//            //Log.d(TAG, "onTouchEvent: "+ev.getAction()+",false");
+//            return false;
+//        }
         boolean b = super.onTouchEvent(ev);
-//        Log.d(TAG, "onTouchEvent: "+ev.getAction()+","+b);
+        Log.d(TAG, "onTouchEvent: "+ev.getAction()+","+b);
         return b;
     }
 

@@ -32,6 +32,8 @@ public class DragLayout extends ViewGroup {
     private int downTop1; // 手指按下的时候，frameView1的getTop值
     private ShowNextPageNotifier nextPageListener; // 手指松开是否加载下一页的notifier
     private String TAG = "DragLayout";
+    private float downx;
+    private float downy;
 
     public DragLayout(Context context) {
         this(context, null);
@@ -191,36 +193,34 @@ public class DragLayout extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        //Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
+        Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
         boolean b = super.dispatchTouchEvent(ev);
-        //Log.d(TAG, "dispatchTouchEvent: "+b);
+        Log.d(TAG, "dispatchTouchEvent: "+b);
         return b;
     }
 
     /* touch事件的拦截与处理都交给mDraghelper来处理 */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "onInterceptTouchEvent: " + ev.getAction());
         if (frameView1.getBottom() > viewHeight - bottomHeight && frameView1.getTop() < 0) {
             // view粘到顶部或底部，正在动画中的时候，不处理touch事件
             return false;
         }
         boolean yScroll = gestureDetector.onTouchEvent(ev);
-        Log.d(TAG, "onInterceptTouchEvent_yScroll: " + yScroll);
+        //Log.d(TAG, "onInterceptTouchEvent_yScroll: " + yScroll);
         boolean shouldIntercept = false;
         try {
             shouldIntercept = mDragHelper.shouldInterceptTouchEvent(ev);
         } catch (Exception e) {
         }
-        Log.d(TAG, "onInterceptTouchEvent_drag: " + shouldIntercept);
+        //Log.d(TAG, "onInterceptTouchEvent_drag: " + shouldIntercept);
         int action = ev.getActionMasked();
-
         if (action == MotionEvent.ACTION_DOWN) {
             // action_down时就让mDragHelper开始工作，否则有时候导致异常 他大爷的
-            mDragHelper.processTouchEvent(ev);
+            //mDragHelper.processTouchEvent(ev);
             downTop1 = frameView1.getTop();
         }
-        //Log.d(TAG, "onInterceptTouchEvent: "+ev.getActionMasked()+","+ (shouldIntercept && yScroll));
+        Log.d(TAG, "onInterceptTouchEvent: "+ev.getActionMasked()+","+ (shouldIntercept && yScroll));
         return shouldIntercept && yScroll;
     }
 
@@ -229,7 +229,7 @@ public class DragLayout extends ViewGroup {
         //Log.d(TAG, "onTouchEvent: "+e.getAction());
         // 统一交给mDragHelper处理，由DragHelperCallback实现拖动效果
         mDragHelper.processTouchEvent(e); // 该行代码可能会抛异常，正式发布时请将这行代码加上try catch
-        //Log.d(TAG, "onTouchEvent: "+e.getActionMasked()+",true");
+        Log.d(TAG, "onTouchEvent: "+e.getActionMasked()+",true");
         return true;
     }
 

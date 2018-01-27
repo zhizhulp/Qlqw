@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -141,4 +143,18 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
         view.startAnimation(animation);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        //Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
+        boolean b = super.dispatchTouchEvent(ev);
+        //Log.d(TAG, "dispatchTouchEvent: "+b);
+        return b;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean b = super.onTouchEvent(event);
+        //Log.d(TAG, "onTouchEvent: "+event.getAction()+","+b);
+        return b;
+    }
 }

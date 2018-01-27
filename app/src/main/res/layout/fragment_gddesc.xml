@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.ascba.rebate.fragments.shop_goods_details.GDDescTopFragment">
 
-    <android.support.constraint.ConstraintLayout
+    <com.ascba.rebate.view.MineConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -471,5 +471,5 @@
             app:layout_constraintTop_toBottomOf="@id/parent_shop" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </com.ascba.rebate.view.MineConstraintLayout>
 </com.ascba.rebate.view.vertical_drag.CustScrollView>

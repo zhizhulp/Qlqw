@@ -278,11 +278,11 @@
         <activity
             android:name=".activities.launch.LaunchActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".activities.benefits.SellBenefitActivity"
@@ -341,7 +341,13 @@
             android:exported="true" />
         <activity
             android:name=".activities.shop.GoodsDetailsActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.shop.ShopInActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:theme="@style/ShopTheme"
