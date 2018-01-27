@@ -11,7 +11,6 @@ import com.ascba.rebate.appconfig.AppConfig;
 public class UrlUtils {
 
 
-
     static {
         if (BuildConfig.DEBUG)
             baseWebsite = AppConfig.getInstance().getString("debug_url", BuildConfig.BASE_URL);
@@ -122,9 +121,10 @@ public class UrlUtils {
     public static String time = baseWebsite + "time";
     public static String getStoreRedirect = baseWebsite + "store/getStoreRedirect";
     public static String storeEntrance = baseWebsite + "store/entrance";
-    public static String storePerfect= baseWebsite + "store/perfect";
-    public static String storePerfectPost= baseWebsite + "store/perfectPost";
-    public static String storePerfectShow= baseWebsite + "store/perfectShow";
+    public static String storePerfect = baseWebsite + "store/perfect";
+    public static String storePerfectPost = baseWebsite + "store/perfectPost";
+    public static String storePerfectShow = baseWebsite + "store/perfectShow";
+    public static String storePayment = baseWebsite + "store/payment";
 
 
 }

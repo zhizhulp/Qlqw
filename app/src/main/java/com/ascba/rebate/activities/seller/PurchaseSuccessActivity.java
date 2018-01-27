@@ -58,12 +58,7 @@ public class PurchaseSuccessActivity extends BaseDefaultNetActivity {
     private void getParams() {
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 0);
-        if (type == 0) {
-            mMoneyBar.setTextTitle("购买成功");
-            tvTitle.setText("购买成功");
-            btnComplete.setText("立即赠送");
-            tvMoney.setText(PayUtils.getInstance().info);
-        } else if (type == 1) {
+        if (type == 1) {
             mMoneyBar.setTextTitle("赠送成功");
             tvTitle.setText("赠送成功");
             btnComplete.setText("完成");

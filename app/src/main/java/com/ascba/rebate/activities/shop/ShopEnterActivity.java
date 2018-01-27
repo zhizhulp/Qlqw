@@ -7,7 +7,9 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.success.TextInfoSuccessActivity;
 import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
+import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.fragments.shop.ShopEnterFragment;
 import com.ascba.rebate.fragments.shop.ShopPayFragment;
@@ -76,16 +78,16 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (payFragment == null) {
             payFragment = new ShopPayFragment();
-            payFragment.setBtnClick(new View.OnClickListener() {
+            payFragment.setPayBtnClick(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo
-                    showPayDialog("", "");
+                    payStart(payFragment.shopSuccess.getActive_money(), payFragment.shopSuccess.getMoney());
                 }
             });
             fragmentTransaction.add(R.id.fragment_lat, payFragment);
         } else {
             fragmentTransaction.show(payFragment);
+            payFragment.pageSync();
         }
         if (enterFragment != null)
             fragmentTransaction.hide(enterFragment);
@@ -124,5 +126,21 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
         if (what == TYPE) {
             finish();
         }
+    }
+
+    @Override
+    protected void requestPayInfo(String type, String money, int what) {
+        AbstractRequest request = buildRequest(UrlUtils.storePayment, RequestMethod.POST, Pay.class);
+        request.add("pay_type", type);
+        executeNetwork(what, "请稍后", request);
+    }
+
+    @Override
+    public void payFinish(String type) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 6);
+        bundle.putString("info", pay.getSuccess_info());
+        startActivity(TextInfoSuccessActivity.class, bundle);
+        super.payFinish(type);
     }
 }

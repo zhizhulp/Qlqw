@@ -33,7 +33,7 @@
             android:id="@+id/purchase_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《相关协议》"
+            android:text="《商城入驻协议》"
             android:textColor="@color/shop_det_red"
             android:textSize="@dimen/text_13" />
     </LinearLayout>

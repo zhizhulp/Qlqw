@@ -1,18 +1,15 @@
 package com.ascba.rebate.base.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.setting.SetPayPwdActivity;
 import com.ascba.rebate.appconfig.AppConfig;
-import com.ascba.rebate.application.MyApplication;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
-import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.EncodeUtils;
 import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.UrlUtils;
@@ -24,7 +21,7 @@ import com.yanzhenjie.nohttp.RequestMethod;
  * Created by Jero on 2017/10/17 0017.
  */
 
-public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements PaySelectDialog.Callback {
+public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements PaySelectDialog.Callback, PayUtils.PayListener {
     private static final int CHECK_PWD = 300;
     private static final int PAY = 177;
 
@@ -37,21 +34,13 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        payUtils = PayUtils.getInstance().setInit(this, bindPaySuccessPage(), payIsResult());
-    }
-
-    protected Class<?> bindPaySuccessPage() {
-        return null;
-    }
-
-    protected boolean payIsResult() {
-        return false;
+        payUtils = PayUtils.getInstance().register(this, this);
     }
 
     /**
      * 支付的最初入口
      */
-    protected void showPayDialog(String price, String balance) {
+    protected void payStart(String price, String balance) {
         if (mPayDialog == null) {
             mPayDialog = new PaySelectDialog(this, price, balance);
             mPayDialog.setCallback(this);
@@ -62,6 +51,9 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
         mPayDialog.show();
     }
 
+    /**
+     * 第二步：验证支付密码流程（开始）
+     */
     @Override
     public void goPay(String type) {
 //        if (type.equals(PayUtils.WX_PAY) && !MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
@@ -125,7 +117,7 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
     }
 
     /**
-     * 去往获取订单详情（支付密码验证成功也走这步）
+     * 第三步子：去往获取订单详情（支付密码验证成功也走这步）
      */
     protected void requestPayInfo(String type, String money, int what) {
         Log.e(TAG, "requestPayInfo: 请重写requestPayInfo方法，执行获取订单信息的方法");
@@ -141,6 +133,9 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
         }
     }
 
+    /**
+     * 第四步：根据分类去往支付
+     */
     protected void onPay(Result result) {
         if (mPayDialog != null && mPayDialog.isShowing()) {
             mPayDialog.dismiss();
@@ -152,33 +147,11 @@ public class BaseDefaultPayActivity extends BaseDefaultNetActivity implements Pa
         payUtils.requestPay(pay);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CodeUtils.REQUEST_PAY) {
-            onResult(payUtils.type, resultCode);
-        }
-    }
-
-    protected void onResult(String type, int resultCode) {
-        Log.e(TAG, "onResult: 开启result模式 记得重写此方法处理，否则会走清理方法");
-        payResult(payUtils.type);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (payUtils.getResultOK()) {
-            payResult(payUtils.type);
-        }
-    }
-
     /**
-     * 支付完成回调
-     *
-     * @param type
+     * 第五步：支付完成回调
      */
-    public void payResult(String type) {
+    @Override
+    public void payFinish(String type) {
         payUtils.clear();
         setResult(RESULT_OK, getIntent());
         finish();

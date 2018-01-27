@@ -55,10 +55,10 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_commit) {
-            if (shopEnter.getStore().getTip_status() == 0 || cardStatus == 1)
+            if (shopEnter.getTip_status() == 0 || cardStatus == 1)
                 startActivity(ShopInActivity.class, null);
-            else if (shopEnter.getStore().getTip_status() == 1) {
-                dm.showAlertDialog2(shopEnter.getStore().getTip_text(), "取消", "确认", new DialogManager.Callback() {
+            else if (shopEnter.getTip_status() == 1) {
+                dm.showAlertDialog2(shopEnter.getTip_text(), "取消", "确认", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
                         cardStatus = -1;
@@ -67,7 +67,7 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
                 });
             }
         } else if (v.getId() == R.id.purchase_url) {
-            WebViewBaseActivity.start(getContext(), shopEnter.getStore().getStore_settled_h5_title(), shopEnter.getStore().getStore_settled_h5());
+            WebViewBaseActivity.start(getContext(), shopEnter.getStore_settled_h5_title(), shopEnter.getStore_settled_h5());
         }
     }
 
