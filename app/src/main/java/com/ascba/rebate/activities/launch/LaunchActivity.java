@@ -96,8 +96,8 @@ public class LaunchActivity extends BaseDefaultNetActivity implements Runnable {
             JSONObject dataObj = JSON.parseObject(data);
             Long timeserver = dataObj.getLong("time");
             long diff = timeserver - (System.currentTimeMillis() / 1000);
-            Log.d(TAG, "mHandle200: "+diff);
-            AppConfig.getInstance().putLong("time_diff",diff);
+            Log.d(TAG, "mHandle200: " + diff);
+            AppConfig.getInstance().putLong("time_diff", diff);
         }
     }
 
@@ -114,13 +114,11 @@ public class LaunchActivity extends BaseDefaultNetActivity implements Runnable {
     @Override
     protected void mHandleFailed(int what) {
         //super.mHandleFailed(what);
-        handler.postDelayed(LaunchActivity.this, 3000);
     }
 
     @Override
     protected void mHandleNoNetwork(int what) {
         //super.mHandleNoNetwork(what);
-        handler.postDelayed(LaunchActivity.this, 3000);
     }
 
     @Override
