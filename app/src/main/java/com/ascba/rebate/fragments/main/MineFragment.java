@@ -176,7 +176,7 @@ public class MineFragment extends BaseDefaultNetFragment implements View.OnClick
                 startActivity(ScoreBillActivity.class, b);
                 break;
             case R.id.setting_rl://设置
-                startActivityForResult(SettingActivity.class, null,CodeUtils.REQUEST_LOGIN);
+                startActivity(SettingActivity.class, null);
                 break;
             case R.id.invite_iv://邀请奖励
                 startActivity(AwardActivity.class, null);
@@ -204,8 +204,6 @@ public class MineFragment extends BaseDefaultNetFragment implements View.OnClick
         } else if (requestCode == CodeUtils.REQUEST_RECHARGE && resultCode == Activity.RESULT_OK) {
             Log.d(TAG, "onActivityResult: ");
             requestMineNetwork(0);
-        } else if(requestCode ==CodeUtils.REQUEST_LOGIN && resultCode==Activity.RESULT_OK){
-            getActivity().finish();
         }
     }
 }

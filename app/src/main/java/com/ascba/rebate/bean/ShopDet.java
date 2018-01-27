@@ -29,7 +29,34 @@ public class ShopDet {
     private String company_status_text;
     private int type_can_change;
     private int tip_status;
+    private String primary_class_key;
     private String primary_class_value;
+    private String store_class_h5;
+    private String store_class_h5_title;
+
+    public String getPrimary_class_key() {
+        return primary_class_key;
+    }
+
+    public void setPrimary_class_key(String primary_class_key) {
+        this.primary_class_key = primary_class_key;
+    }
+
+    public String getStore_class_h5() {
+        return store_class_h5;
+    }
+
+    public void setStore_class_h5(String store_class_h5) {
+        this.store_class_h5 = store_class_h5;
+    }
+
+    public String getStore_class_h5_title() {
+        return store_class_h5_title;
+    }
+
+    public void setStore_class_h5_title(String store_class_h5_title) {
+        this.store_class_h5_title = store_class_h5_title;
+    }
 
     public String getPrimary_class_value() {
         return primary_class_value;
