@@ -330,6 +330,9 @@ public class DragLayout extends ViewGroup {
         if (index == 2) {
             if (mDragHelper.smoothSlideViewTo(frameView1, 0, 0)) {
                 ViewCompat.postInvalidateOnAnimation(this);
+                if (null != nextPageListener) {
+                    nextPageListener.onDragTop();
+                }
                 index= 1;
                 return true;
             }
