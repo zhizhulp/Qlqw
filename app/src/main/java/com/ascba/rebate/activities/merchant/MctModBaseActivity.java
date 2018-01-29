@@ -89,7 +89,7 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
     public void onClick(View v) {
         int type = mmType.getType();
         if (type == 0) {//店铺名称
-            if (etInput.length() >= 1 && etInput.length() <= 11) {
+            if (etInput.length() >= 1 && etInput.length() <= 16) {
                 if (!RegexUtils.isUserName(etInput.getText().toString())) {
                     showToast(getString(R.string.input_name_unavailable));
                     return;

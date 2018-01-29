@@ -60,6 +60,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     private File logo;
     private ShopDet shopDet;
     private boolean isFirst;
+    private int typeId = -1;
 
     @Override
     protected int bindLayout() {
@@ -103,13 +104,12 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         request.add("store_description", editText.getText().toString());
         if (logo != null && logo.exists())
             request.add("store_logo", logo);
-        request.add("primary_class_key", 1);
+        request.add("primary_class_key", typeId);
         executeNetwork(1, "请稍后", request);
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        Log.d(TAG, "onCheckedChanged: " + checkedId);
         if (checkedId == R.id.radio_company) {
             int status = shopDet.getCompany_status();
             String statusText = shopDet.getCompany_status_text();
@@ -180,9 +180,11 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                 });
                 break;
             case R.id.lat_type://经营类目 写入后不可更改
+                if (shopDet.getPrimary_class_status()==0) return;
+                OnLineTypeActivity.start(this, tvType.getText().toString());
                 break;
             case R.id.tv_how://如何选择类目
-                WebViewBaseActivity.start(this,shopDet.getStore_class_h5_title(),shopDet.getStore_class_h5());
+                WebViewBaseActivity.start(this, shopDet.getStore_class_h5_title(), shopDet.getStore_class_h5());
                 break;
             case R.id.lat_phone://电话
                 MctModBaseActivity.start(this, new MctModType
@@ -211,8 +213,8 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             return false;
         }
         if (TextUtils.isEmpty(tvType.getText().toString())) {
-            //showToast("请填写主营类目");
-            //return false;
+            showToast("请填写主营类目");
+            return false;
         }
         if (TextUtils.isEmpty(tvPhone.getText().toString())) {
             showToast("请填写联系电话");
@@ -231,17 +233,18 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         super.mHandle200(what, result);
         if (what == 0) {
             shopDet = (ShopDet) result.getData();
-            int canChange = shopDet.getType_can_change();
             radioPerson.setChecked(shopDet.getStore_type() == 1);
             radioCompany.setChecked(shopDet.getStore_type() == 2);
-            radioPerson.setEnabled(canChange == 1);
-            radioCompany.setEnabled(canChange == 1);
+            int canChange = shopDet.getType_can_change();
+            radioPerson.setEnabled(canChange != 2);
+            radioCompany.setEnabled(canChange != 2);
             tvName.setText(shopDet.getStore_name());
             String storeLogo = shopDet.getStore_logo();
             if (!TextUtils.isEmpty(storeLogo))
                 Picasso.with(this).load(storeLogo).
                         placeholder(R.mipmap.shop_placeholder).into(imHead);
             String classValue = shopDet.getPrimary_class_value();
+            typeId = shopDet.getPrimary_class_key();
             isFirst = TextUtils.isEmpty(classValue);
             tvType.setText(classValue);
             tvPhone.setText(shopDet.getStore_telphone());
@@ -284,6 +287,9 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                     logo = new File(picturePath);
                     handleImage();
                 }
+            } else if (requestCode == CodeUtils.REQUEST_MCT_TYPE) {
+                typeId = data.getIntExtra("type_id", -1);
+                tvType.setText(data.getStringExtra("type"));
             }
         }
     }

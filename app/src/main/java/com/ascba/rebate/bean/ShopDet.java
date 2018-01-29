@@ -29,16 +29,25 @@ public class ShopDet {
     private String company_status_text;
     private int type_can_change;
     private int tip_status;
-    private String primary_class_key;
+    private int primary_class_key;
     private String primary_class_value;
+    private int primary_class_status;
     private String store_class_h5;
     private String store_class_h5_title;
 
-    public String getPrimary_class_key() {
+    public int getPrimary_class_status() {
+        return primary_class_status;
+    }
+
+    public void setPrimary_class_status(int primary_class_status) {
+        this.primary_class_status = primary_class_status;
+    }
+
+    public int getPrimary_class_key() {
         return primary_class_key;
     }
 
-    public void setPrimary_class_key(String primary_class_key) {
+    public void setPrimary_class_key(int primary_class_key) {
         this.primary_class_key = primary_class_key;
     }
 

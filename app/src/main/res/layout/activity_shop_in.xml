@@ -333,6 +333,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.ascba.rebate.view.EditTextHint
+                    android:maxLength="300"
                     android:id="@+id/editTextHint"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

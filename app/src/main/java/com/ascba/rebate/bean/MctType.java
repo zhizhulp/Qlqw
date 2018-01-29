@@ -8,9 +8,11 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 
 public class MctType {
+    @JSONField(name = "primary_class_key")
     private int id;
     @JSONField(name = "name")
     private String text;
+
 
     public MctType() {
     }

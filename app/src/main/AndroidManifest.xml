@@ -351,6 +351,9 @@
         <activity
             android:name=".activities.shop.ShopEnterActivity"
             android:theme="@style/ShopTheme" />
+        <activity android:name=".activities.shop.OnLineTypeActivity"
+            android:exported="true"
+            android:theme="@style/ShopTheme"/>
     </application>
 
 </manifest>

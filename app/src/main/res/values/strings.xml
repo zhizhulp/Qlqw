@@ -1,7 +1,7 @@
 <resources>
     <string name="no_network">请手动打开网络</string>
     <string name="register">手机号码注册</string>
-    <string name="modify_name_hint">可使用中英、数字和下划线，字数限制1–11个字</string>
+    <string name="modify_name_hint">可使用中英、数字和下划线，字数限制1–16个字</string>
     <string name="name_unavailable">用户昵称长度不符合，请重新输入</string>
     <string name="pay_psd_unavailable">支付密码长度不符合，请重新输入</string>
     <string name="input_not_same">两次支付密码不一致，请重新输入</string>
