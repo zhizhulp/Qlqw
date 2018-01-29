@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -28,6 +30,7 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
     private ViewPager viewPager;
     private TextView tvTitle;
     private BtmFragment btmFragment;
+    private GDDetFragment gdDetFragment;
 
     @Override
     protected int bindLayout() {
@@ -53,7 +56,8 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
 
     private List<Fragment> addFragment() {
         List<Fragment> data = new ArrayList<>();
-        data.add(new GDDetFragment());
+        gdDetFragment = new GDDetFragment();
+        data.add(gdDetFragment);
         data.add(new GDComtFragment());
         btmFragment = new BtmFragment();
         data.add(btmFragment);
@@ -141,4 +145,10 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
         view.startAnimation(animation);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(gdDetFragment.getDraglayout().btmToTop())
+            return;
+        super.onBackPressed();
+    }
 }
