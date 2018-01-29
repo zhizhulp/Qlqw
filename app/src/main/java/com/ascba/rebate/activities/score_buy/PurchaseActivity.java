@@ -1,5 +1,6 @@
 package com.ascba.rebate.activities.score_buy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -251,7 +252,7 @@ public class PurchaseActivity extends BaseDefaultPayActivity implements View.OnC
         }
         switch (v.getId()) {
             case R.id.seller_purchase_ok:
-                showPayDialog(money, purchaseEntity.getMoney());
+                payStart(money, purchaseEntity.getMoney());
                 break;
             case R.id.seller_purchase_url:
                 WebViewBaseActivity.start(this, "采购协议", purchaseEntity.getAgreement_url());
@@ -306,7 +307,7 @@ public class PurchaseActivity extends BaseDefaultPayActivity implements View.OnC
     }
 
     @Override
-    public void payResult(String type) {
+    public void payFinish(String type) {
         if (type.equals(PayUtils.BALANCE)) {
             BigDecimal balance, money;
             balance = new BigDecimal(purchaseEntity.getMoney());
@@ -322,8 +323,9 @@ public class PurchaseActivity extends BaseDefaultPayActivity implements View.OnC
     }
 
     @Override
-    protected void onResult(String type, int resultCode) {
-        if (resultCode == RESULT_OK) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CodeUtils.REQUEST_PAY && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
             finish();
         }

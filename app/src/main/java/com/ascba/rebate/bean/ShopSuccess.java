@@ -16,7 +16,6 @@ public class ShopSuccess {
      * store_money : 1000.00元
      * top_tip_show : 0
      * button_status : 2
-     * store_status : 已激活
      * top_img : http://www.baidu.com
      * store_title : 恭喜您的店铺已成功入驻
      * active_money : 1000
@@ -24,6 +23,9 @@ public class ShopSuccess {
      * money : 99902462.43
      * is_level_pwd : 1
      * top_tip :
+     * store_class_h5 : http://www.baidu.com
+     * store_status : 1
+     * store_class_h5_title : 类目入驻标准
      */
 
     private String store_name;
@@ -35,14 +37,17 @@ public class ShopSuccess {
     private String store_money;
     private int top_tip_show;
     private int button_status;
-    private String store_status;
+    private int store_status;
     private String top_img;
     private String store_title;
-    private int active_money;
+    private String active_money;
     private String button_tip;
     private String money;
     private int is_level_pwd;
     private String top_tip;
+    private String store_class_h5;
+    private String store_class_h5_title;
+
 
     public String getStore_name() {
         return store_name;
@@ -116,11 +121,11 @@ public class ShopSuccess {
         this.button_status = button_status;
     }
 
-    public String getStore_status() {
+    public int getStore_status() {
         return store_status;
     }
 
-    public void setStore_status(String store_status) {
+    public void setStore_status(int store_status) {
         this.store_status = store_status;
     }
 
@@ -140,11 +145,11 @@ public class ShopSuccess {
         this.store_title = store_title;
     }
 
-    public int getActive_money() {
+    public String getActive_money() {
         return active_money;
     }
 
-    public void setActive_money(int active_money) {
+    public void setActive_money(String active_money) {
         this.active_money = active_money;
     }
 
@@ -178,5 +183,21 @@ public class ShopSuccess {
 
     public void setTop_tip(String top_tip) {
         this.top_tip = top_tip;
+    }
+
+    public String getStore_class_h5() {
+        return store_class_h5;
+    }
+
+    public void setStore_class_h5(String store_class_h5) {
+        this.store_class_h5 = store_class_h5;
+    }
+
+    public String getStore_class_h5_title() {
+        return store_class_h5_title;
+    }
+
+    public void setStore_class_h5_title(String store_class_h5_title) {
+        this.store_class_h5_title = store_class_h5_title;
     }
 }

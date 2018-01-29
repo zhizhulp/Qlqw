@@ -1,15 +1,13 @@
 package com.ascba.rebate.utils;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Message;
-import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
 import com.ascba.rebate.application.MyApplication;
-import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
-import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.manager.PayHandler;
+import com.ascba.rebate.manager.ToastManager;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -28,11 +26,8 @@ public class PayUtils {
 
     public String type;
     public String money;
-    public String info;
-    private Class<?> cls;
-    private BaseDefaultPayActivity activity;
-    private boolean paySuccess;
-    private boolean isResult = false;
+    private Activity activity;
+    private PayListener listener;
 
     private static PayUtils payUtils;
 
@@ -48,47 +43,25 @@ public class PayUtils {
         return payUtils;
     }
 
-    public PayUtils setInit(BaseDefaultPayActivity activity, Class<?> successCls) {
-        return this.setInit(activity, successCls, false);
-    }
-
-    public PayUtils setInit(BaseDefaultPayActivity activity, Class<?> successCls, boolean result) {
+    public PayUtils register(Activity activity, PayListener payListener) {
         clear();
-        payUtils.isResult = result;
         payUtils.activity = activity;
-        payUtils.cls = successCls;
+        payUtils.listener = payListener;
         return payUtils;
     }
 
     public void clear() {
         payUtils.type = null;
         payUtils.money = null;
-        payUtils.paySuccess = false;
-        payUtils.isResult = false;
     }
 
     public void unregister() {
         payUtils.activity = null;
+        payUtils.listener = null;
     }
 
-    public void isOk() {
-        paySuccess = true;
-    }
-
-    public boolean getResultOK() {
-        return paySuccess;
-    }
-
-    public void goSuccess(Intent intent) {
-        isOk();
-        if (cls != null) {
-            intent.setClass(activity, cls);
-            if (isResult)
-                activity.startActivityForResult(intent, CodeUtils.REQUEST_PAY);
-            else
-                activity.startActivity(intent);
-        } else
-            activity.payResult(type);
+    public void goSuccess() {
+        listener.payFinish(type);
     }
 
     public void requestPay(Pay data) {
@@ -97,10 +70,7 @@ public class PayUtils {
         } else if (type.equals(WX_PAY)) {
             requestForWX(activity, data.getWxPayInfo());
         } else if (type.equals(BALANCE)) {
-            Intent intent = new Intent();
-            intent.putExtra("type", "余额支付");
-            intent.putExtra("money", PayUtils.getInstance().money);
-            goSuccess(intent);
+            goSuccess();
         }
     }
 
@@ -110,9 +80,9 @@ public class PayUtils {
         requestPay(data);
     }
 
-    private void requestForWX(BaseDefaultNetActivity activity, Pay.WXPay wxpay) {
+    private void requestForWX(Activity activity, Pay.WXPay wxpay) {
         if (!MyApplication.getInstance().getWXAPI().isWXAppInstalled()) {
-            activity.showToast("您没有安装微信客户端。无法使用微信支付");
+            ToastManager.show("您没有安装微信客户端。无法使用微信支付");
         } else {
             PayReq req = new PayReq();
             req.appId = wxpay.getAppid();
@@ -128,7 +98,7 @@ public class PayUtils {
         }
     }
 
-    private void requestForAli(final BaseDefaultNetActivity activity, final String payInfo) {
+    private void requestForAli(final Activity activity, final String payInfo) {
         Runnable payRunnable = new Runnable() {
             @Override
             public void run() {
@@ -141,5 +111,9 @@ public class PayUtils {
         };
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+    public interface PayListener {
+        void payFinish(String type);
     }
 }

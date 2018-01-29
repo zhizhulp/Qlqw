@@ -18,6 +18,7 @@ import com.ascba.rebate.base.activity.BaseDefaultPayActivity;
 import com.ascba.rebate.bean.Pay;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.PayUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.EditTextHint;
 import com.ascba.rebate.view.PaySelectDialog;
@@ -39,11 +40,6 @@ public class RechargeActivity extends BaseDefaultPayActivity implements View.OnC
     @Override
     protected int bindLayout() {
         return R.layout.activity_recharge;
-    }
-
-    @Override
-    protected Class<?> bindPaySuccessPage() {
-        return RechargeSuccessActivity.class;
     }
 
     @Override
@@ -107,7 +103,21 @@ public class RechargeActivity extends BaseDefaultPayActivity implements View.OnC
             showToast("请输入有效金额");
             return;
         }
-        showPayDialog(etInput.getText().toString(),null);
+        payStart(etInput.getText().toString(), null);
+    }
+
+    @Override
+    public void payFinish(String type) {
+        Bundle bundle = new Bundle();
+        if (type.equals(PayUtils.WX_PAY))
+            bundle.putString("type", "微信支付");
+        if (type.equals(PayUtils.ALI_PAY))
+            bundle.putString("type", "支付宝支付");
+        if (type.equals(PayUtils.BALANCE))
+            bundle.putString("type", "余额支付");
+        bundle.putString("money", PayUtils.getInstance().money + "元");
+        startActivity(RechargeSuccessActivity.class, bundle);
+        super.payFinish(type);
     }
 
     @Override

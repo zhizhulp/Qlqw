@@ -112,7 +112,7 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_apply)
-            showPayDialog(mctAdapter.getSelect().getMoney(), money);
+            payStart(mctAdapter.getSelect().getMoney(), money);
     }
 
     @Override
@@ -137,8 +137,8 @@ public class MctPayActivity extends BaseDefaultPayActivity implements View.OnCli
     }
 
     @Override
-    public void payResult(String type) {
-        super.payResult(type);
+    public void payFinish(String type) {
+        super.payFinish(type);
         Bundle bundle = new Bundle();
         bundle.putInt("type", 3);
         bundle.putInt("select", pay.getMember_status());

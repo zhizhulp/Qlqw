@@ -1,17 +1,14 @@
 package com.ascba.rebate.utils;
 
 import android.util.Log;
-import android.util.TimeUtils;
 
 import com.ascba.rebate.appconfig.AppConfig;
-import com.megvii.livenesslib.util.Screen;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
 
@@ -171,7 +168,7 @@ public class EncodeUtils {
     public static String getPayPsd(String psd) {
         String encryptPsd = encryptPsd(psd);
         Log.d(TAG, "origin: " + encryptPsd);
-        long time = getCurrentTime();
+        long time = getCurrentTime() * 1000;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         String format = simpleDateFormat.format(time);//2015年5月8号 7点16分
         Log.d(TAG, "getPayPsd: " + format);

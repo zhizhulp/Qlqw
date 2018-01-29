@@ -159,7 +159,7 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
                 showToast("请选择代理区域");
                 return;
             }
-            showPayDialog(mctAdapter.getSelect().getMoney(), balance_money);
+            payStart(mctAdapter.getSelect().getMoney(), balance_money);
         } else if (id == R.id.tv_agent_html)
             WebViewBaseActivity.start(this, agreement_headname, agreement_url);
     }
@@ -194,7 +194,7 @@ public class AgentPayActivity extends BaseDefaultPayActivity implements View.OnC
     }
 
     @Override
-    public void payResult(String type) {
+    public void payFinish(String type) {
         if (address.getIsBuyAgency() != 1) {
             address.setIsBuyAgency(1);
             mctAdapter.notifyDataSetChanged();
