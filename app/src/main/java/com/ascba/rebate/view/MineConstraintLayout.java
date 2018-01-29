@@ -42,8 +42,8 @@ public class MineConstraintLayout extends ConstraintLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         boolean b = super.onTouchEvent(ev);
-        Log.d(TAG, "onTouchEvent: " + ev.getAction() + "," + b);
-        return b;
+        Log.d(TAG, "onTouchEvent: " + ev.getAction() + "," + false);
+        return false;
     }
 
 }

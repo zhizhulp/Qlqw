@@ -11,6 +11,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 /**
  * 这是一个viewGroup容器，实现上下两个frameLayout拖动切换
@@ -25,15 +26,16 @@ public class DragLayout extends ViewGroup {
     private GestureDetectorCompat gestureDetector;
 
     /* 上下两个frameLayout，在Activity中注入fragment */
-    private View frameView1, frameView2;
+    private ViewGroup frameView1, frameView2;
     private int viewHeight, bottomHeight;
     private static final int VEL_THRESHOLD = 100; // 滑动速度的阈值，超过这个绝对值认为是上下
     private static final int DISTANCE_THRESHOLD = 100; // 单位是像素，当上下滑动速度不够时，通过这个阈值来判定是应该粘到顶部还是底部
     private int downTop1; // 手指按下的时候，frameView1的getTop值
     private ShowNextPageNotifier nextPageListener; // 手指松开是否加载下一页的notifier
     private String TAG = "DragLayout";
-    private float downx;
-    private float downy;
+    private float downY;
+    private float downX;
+    private int index=1;
 
     public DragLayout(Context context) {
         this(context, null);
@@ -56,8 +58,8 @@ public class DragLayout extends ViewGroup {
     protected void onFinishInflate() {
         // 跟findviewbyId一样，初始化上下两个view
         super.onFinishInflate();
-        frameView1 = getChildAt(0);
-        frameView2 = getChildAt(1);
+        frameView1 = (ViewGroup) getChildAt(0);
+        frameView2 = (ViewGroup) getChildAt(1);
     }
 
     class YScrollDetector extends SimpleOnGestureListener {
@@ -65,7 +67,6 @@ public class DragLayout extends ViewGroup {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float dx,
                                 float dy) {
-            Log.d(TAG, "onScroll: " + dx + "," + dy);
             // 垂直滑动时dy>dx，才被认定是上下拖动
             return Math.abs(dy) > Math.abs(dx);
         }
@@ -132,7 +133,6 @@ public class DragLayout extends ViewGroup {
 
             // finalTop代表的是理论上应该拖动到的位置。此处计算拖动的距离除以一个参数(3)，是让滑动的速度变慢。数值越大，滑动的越慢
             return finalTop;
-            //return child.getTop() + (finalTop - child.getTop()) / 3;
         }
     }
 
@@ -168,6 +168,7 @@ public class DragLayout extends ViewGroup {
                 finalTop = -bottomHeight;
 
                 // 下一页可以初始化了
+                index=2;
                 if (null != nextPageListener) {
                     nextPageListener.onDragNext();
                 }
@@ -178,6 +179,7 @@ public class DragLayout extends ViewGroup {
                     || (downTop1 == -bottomHeight && releasedChild.getTop() > DISTANCE_THRESHOLD + viewHeight - bottomHeight)) {
                 // 保持原地不动
                 finalTop = viewHeight;
+                index=1;
                 if (null != nextPageListener) {
                     nextPageListener.onDragTop();
                 }
@@ -193,9 +195,9 @@ public class DragLayout extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
+        Log.d(TAG, "dispatchTouchEvent: " + ev.getActionMasked());
         boolean b = super.dispatchTouchEvent(ev);
-        Log.d(TAG, "dispatchTouchEvent: "+b);
+        Log.d(TAG, "dispatchTouchEvent: " + b);
         return b;
     }
 
@@ -206,30 +208,63 @@ public class DragLayout extends ViewGroup {
             // view粘到顶部或底部，正在动画中的时候，不处理touch事件
             return false;
         }
+
         boolean yScroll = gestureDetector.onTouchEvent(ev);
-        //Log.d(TAG, "onInterceptTouchEvent_yScroll: " + yScroll);
         boolean shouldIntercept = false;
         try {
             shouldIntercept = mDragHelper.shouldInterceptTouchEvent(ev);
         } catch (Exception e) {
         }
-        //Log.d(TAG, "onInterceptTouchEvent_drag: " + shouldIntercept);
+
         int action = ev.getActionMasked();
         if (action == MotionEvent.ACTION_DOWN) {
             // action_down时就让mDragHelper开始工作，否则有时候导致异常 他大爷的
-            //mDragHelper.processTouchEvent(ev);
+            mDragHelper.processTouchEvent(ev);
             downTop1 = frameView1.getTop();
+            downY = ev.getY();
+            downX = ev.getX();
         }
-        Log.d(TAG, "onInterceptTouchEvent: "+ev.getActionMasked()+","+ (shouldIntercept && yScroll));
-        return shouldIntercept && yScroll;
+        boolean isAtBtm = isAtBottom();//scrollView到达底部
+        if (isAtBtm&& index==1) {
+            float moveY = ev.getY();
+            float moveX = ev.getX();
+            if (Math.abs(moveY-downY) > Math.abs(moveX-downX)) {
+                if (action == MotionEvent.ACTION_MOVE) {
+                    if (moveY >= downY) {//下拉不拦截
+                        isAtBtm = false;
+                    }
+                } else if (action == MotionEvent.ACTION_DOWN) {
+                    if(moveY >= downY){//下拉不拦截down
+                        return false;
+                    }
+                }
+            }
+
+        }
+        if(index==2){
+            getParent().requestDisallowInterceptTouchEvent(true);
+
+        }
+        if(index==1){
+            Log.d(TAG, "onInterceptTouchEvent: " + ev.getActionMasked() + "," + (shouldIntercept && yScroll && isAtBtm));
+            return shouldIntercept && yScroll && isAtBtm;
+        }else {
+            return shouldIntercept && yScroll;
+        }
+
+    }
+
+    private boolean isAtBottom() {
+        ScrollView scrollView = (ScrollView) frameView1.getChildAt(0);//scrollview
+        View child = scrollView.getChildAt(0);
+        return child.getMeasuredHeight() <= scrollView.getScrollY() + scrollView.getHeight();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        //Log.d(TAG, "onTouchEvent: "+e.getAction());
         // 统一交给mDragHelper处理，由DragHelperCallback实现拖动效果
         mDragHelper.processTouchEvent(e); // 该行代码可能会抛异常，正式发布时请将这行代码加上try catch
-        Log.d(TAG, "onTouchEvent: "+e.getActionMasked()+",true");
+        Log.d(TAG, "onTouchEvent: " + e.getActionMasked() + "," + true);
         return true;
     }
 
