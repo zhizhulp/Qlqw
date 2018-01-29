@@ -17,7 +17,7 @@ import com.ascba.rebate.view.vertical_drag.DragLayout;
  * 商品详情-商品详情
  */
 public class GDDetFragment extends Fragment {
-
+    private DragLayout draglayout;
 
     public GDDetFragment() {
     }
@@ -51,7 +51,11 @@ public class GDDetFragment extends Fragment {
                 ((GoodsDetailsActivity) getActivity()).switchTitle(true);
             }
         };
-        DragLayout draglayout = view.findViewById(R.id.dragLayout);
+        draglayout = view.findViewById(R.id.dragLayout);
         draglayout.setNextPageListener(notifier);
+    }
+
+    public DragLayout getDraglayout() {
+        return draglayout;
     }
 }

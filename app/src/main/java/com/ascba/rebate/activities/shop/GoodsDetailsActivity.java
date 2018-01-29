@@ -30,6 +30,7 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
     private ViewPager viewPager;
     private TextView tvTitle;
     private BtmFragment btmFragment;
+    private GDDetFragment gdDetFragment;
 
     @Override
     protected int bindLayout() {
@@ -55,7 +56,8 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
 
     private List<Fragment> addFragment() {
         List<Fragment> data = new ArrayList<>();
-        data.add(new GDDetFragment());
+        gdDetFragment = new GDDetFragment();
+        data.add(gdDetFragment);
         data.add(new GDComtFragment());
         btmFragment = new BtmFragment();
         data.add(btmFragment);
@@ -144,17 +146,9 @@ public class GoodsDetailsActivity extends BaseDefaultNetActivity implements View
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        //Log.d(TAG, "dispatchTouchEvent: "+ev.getAction());
-        boolean b = super.dispatchTouchEvent(ev);
-        //Log.d(TAG, "dispatchTouchEvent: "+b);
-        return b;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        boolean b = super.onTouchEvent(event);
-        //Log.d(TAG, "onTouchEvent: "+event.getAction()+","+b);
-        return b;
+    public void onBackPressed() {
+        if(gdDetFragment.getDraglayout().btmToTop())
+            return;
+        super.onBackPressed();
     }
 }

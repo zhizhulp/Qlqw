@@ -6,7 +6,6 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,7 +34,7 @@ public class DragLayout extends ViewGroup {
     private String TAG = "DragLayout";
     private float downY;
     private float downX;
-    private int index=1;
+    private int index = 1;
 
     public DragLayout(Context context) {
         this(context, null);
@@ -61,6 +60,7 @@ public class DragLayout extends ViewGroup {
         frameView1 = (ViewGroup) getChildAt(0);
         frameView2 = (ViewGroup) getChildAt(1);
     }
+
 
     class YScrollDetector extends SimpleOnGestureListener {
 
@@ -168,7 +168,7 @@ public class DragLayout extends ViewGroup {
                 finalTop = -bottomHeight;
 
                 // 下一页可以初始化了
-                index=2;
+                index = 2;
                 if (null != nextPageListener) {
                     nextPageListener.onDragNext();
                 }
@@ -179,7 +179,7 @@ public class DragLayout extends ViewGroup {
                     || (downTop1 == -bottomHeight && releasedChild.getTop() > DISTANCE_THRESHOLD + viewHeight - bottomHeight)) {
                 // 保持原地不动
                 finalTop = viewHeight;
-                index=1;
+                index = 1;
                 if (null != nextPageListener) {
                     nextPageListener.onDragTop();
                 }
@@ -191,14 +191,6 @@ public class DragLayout extends ViewGroup {
         if (mDragHelper.smoothSlideViewTo(releasedChild, 0, finalTop)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "dispatchTouchEvent: " + ev.getActionMasked());
-        boolean b = super.dispatchTouchEvent(ev);
-        Log.d(TAG, "dispatchTouchEvent: " + b);
-        return b;
     }
 
     /* touch事件的拦截与处理都交给mDraghelper来处理 */
@@ -225,30 +217,28 @@ public class DragLayout extends ViewGroup {
             downX = ev.getX();
         }
         boolean isAtBtm = isAtBottom();//scrollView到达底部
-        if (isAtBtm&& index==1) {
+        if (isAtBtm && index == 1) {
             float moveY = ev.getY();
             float moveX = ev.getX();
-            if (Math.abs(moveY-downY) > Math.abs(moveX-downX)) {
+            if (Math.abs(moveY - downY) > Math.abs(moveX - downX)) {
                 if (action == MotionEvent.ACTION_MOVE) {
                     if (moveY >= downY) {//下拉不拦截
                         isAtBtm = false;
                     }
                 } else if (action == MotionEvent.ACTION_DOWN) {
-                    if(moveY >= downY){//下拉不拦截down
+                    if (moveY >= downY) {//下拉不拦截down
                         return false;
                     }
                 }
             }
 
         }
-        if(index==2){
+        if (index == 2) {
             getParent().requestDisallowInterceptTouchEvent(true);
-
         }
-        if(index==1){
-            Log.d(TAG, "onInterceptTouchEvent: " + ev.getActionMasked() + "," + (shouldIntercept && yScroll && isAtBtm));
+        if (index == 1) {
             return shouldIntercept && yScroll && isAtBtm;
-        }else {
+        } else {
             return shouldIntercept && yScroll;
         }
 
@@ -264,7 +254,6 @@ public class DragLayout extends ViewGroup {
     public boolean onTouchEvent(MotionEvent e) {
         // 统一交给mDragHelper处理，由DragHelperCallback实现拖动效果
         mDragHelper.processTouchEvent(e); // 该行代码可能会抛异常，正式发布时请将这行代码加上try catch
-        Log.d(TAG, "onTouchEvent: " + e.getActionMasked() + "," + true);
         return true;
     }
 
@@ -326,6 +315,7 @@ public class DragLayout extends ViewGroup {
         return result | (childMeasuredState & MEASURED_STATE_MASK);
     }
 
+
     public void setNextPageListener(ShowNextPageNotifier nextPageListener) {
         this.nextPageListener = nextPageListener;
     }
@@ -335,4 +325,16 @@ public class DragLayout extends ViewGroup {
 
         public void onDragTop();
     }
+
+    public boolean btmToTop() {
+        if (index == 2) {
+            if (mDragHelper.smoothSlideViewTo(frameView1, 0, 0)) {
+                ViewCompat.postInvalidateOnAnimation(this);
+                index= 1;
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
