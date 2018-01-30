@@ -3,11 +3,11 @@ package com.ascba.rebate.fragments.shop;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.activities.shop.ShopInActivity;
@@ -22,6 +22,7 @@ import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.view.shop.EnterInfoDialog;
 import com.ascba.rebate.view.shop.EnterTopDecoration;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -38,6 +39,7 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
     private ShopEnterAdapter shopEnterAdapter;
     private LinearLayout headView;
     private ShopEnterTopAdapter shopEnterTopAdapter;
+    private EnterInfoDialog showDialog;
 
     public void setShowType() {
         isShow = true;
@@ -61,11 +63,28 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
         shopEnterAdapter = new ShopEnterAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(shopEnterAdapter);
+
+        requestNetwork();
+    }
+
+    private void requestNetwork() {
+        AbstractRequest request = buildRequest(UrlUtils.storeEntrance, RequestMethod.GET, ShopEnter.class);
+        executeNetwork(0, "请稍后", request);
+    }
+
+    private void addHeader() {
+        if (headView != null)
+            return;
         shopEnterTopAdapter = new ShopEnterTopAdapter();
         shopEnterTopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.i(TAG, "onItemChildClick: " + ((ShopEnter.PatternBean) adapter.getItem(position)).getPattern_id());
+                ShopEnter.PatternBean bean = (ShopEnter.PatternBean) adapter.getItem(position);
+                requestInfoNetwork(bean.getPattern_id());
+                if (showDialog == null) {
+                    showDialog = new EnterInfoDialog(getActivity(), R.style.dialog);
+                }
+                showDialog.setTitle(bean.getPattern_title());
             }
         });
         headView = (LinearLayout) getLayoutInflater().inflate(R.layout.item_shop_enter_top, null);
@@ -74,13 +93,12 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
         topRecyclerView.setAdapter(shopEnterTopAdapter);
         topRecyclerView.addItemDecoration(new EnterTopDecoration(getContext()));
         shopEnterAdapter.addHeaderView(headView);
-
-        requestNetwork();
     }
 
-    private void requestNetwork() {
-        AbstractRequest request = buildRequest(UrlUtils.storeEntrance, RequestMethod.GET, ShopEnter.class);
-        executeNetwork(0, "请稍后", request);
+    private void requestInfoNetwork(int id) {
+        AbstractRequest request = buildRequest(UrlUtils.storeSalePattern, RequestMethod.GET, null);
+        request.add("pattern_id", id);
+        executeNetwork(1, "请稍后", request);
     }
 
     @Override
@@ -106,16 +124,21 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
     protected <T> void mHandle200(int what, Result<T> result) {
         super.mHandle200(what, result);
         if (what == 0) {
+            addHeader();
             shopEnter = (ShopEnter) result.getData();
             shopEnterAdapter.setNewData(shopEnter.getInterests());
             shopEnterTopAdapter.setNewData(shopEnter.getPattern());
             ViewGroup.LayoutParams params = headView.getLayoutParams();
             params.height = getTopHeight(shopEnter.getPattern().size());
+        } else if (what == 1) {
+            String str = JSON.parseObject(result.getData().toString()).getString("value");
+            showDialog.setMsg(str);
+            showDialog.show();
         }
     }
 
     private int getTopHeight(int length) {
-        //            105 + line * 97 + (line - 1)*1      line = (length + 1) / 2
+        //                     105 + line * 97 + (line - 1)*1      line = (length + 1) / 2
         return (int) ScreenDpiUtils.dp2px(getContext(), 104 + ((length + 1) / 2) * 98);
     }
 
