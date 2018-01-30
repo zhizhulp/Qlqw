@@ -1,10 +1,18 @@
 package com.ascba.rebate.fragments.shop;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.personal_identification.PIStartActivity;
 import com.ascba.rebate.activities.shop.ShopInActivity;
+import com.ascba.rebate.adapter.ShopEnterAdapter;
+import com.ascba.rebate.adapter.ShopEnterTopAdapter;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
 import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
@@ -12,7 +20,10 @@ import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.bean.ShopEnter;
 import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
+import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.view.shop.EnterTopDecoration;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yanzhenjie.nohttp.RequestMethod;
 
 /**
@@ -23,6 +34,10 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
     private ShopEnter shopEnter;
     private int cardStatus = 0;
     private boolean isShow = false;
+
+    private ShopEnterAdapter shopEnterAdapter;
+    private LinearLayout headView;
+    private ShopEnterTopAdapter shopEnterTopAdapter;
 
     public void setShowType() {
         isShow = true;
@@ -43,6 +58,22 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
             fv(R.id.lat_bottom).setVisibility(View.GONE);
             fv(R.id.btn_commit).setVisibility(View.GONE);
         }
+        shopEnterAdapter = new ShopEnterAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(shopEnterAdapter);
+        shopEnterTopAdapter = new ShopEnterTopAdapter();
+        shopEnterTopAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Log.i(TAG, "onItemChildClick: " + ((ShopEnter.PatternBean) adapter.getItem(position)).getPattern_id());
+            }
+        });
+        headView = (LinearLayout) getLayoutInflater().inflate(R.layout.item_shop_enter_top, null);
+        RecyclerView topRecyclerView = headView.findViewById(R.id.item_recycler);
+        topRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        topRecyclerView.setAdapter(shopEnterTopAdapter);
+        topRecyclerView.addItemDecoration(new EnterTopDecoration(getContext()));
+        shopEnterAdapter.addHeaderView(headView);
 
         requestNetwork();
     }
@@ -76,9 +107,16 @@ public class ShopEnterFragment extends BaseDefaultNetFragment implements View.On
         super.mHandle200(what, result);
         if (what == 0) {
             shopEnter = (ShopEnter) result.getData();
-
-
+            shopEnterAdapter.setNewData(shopEnter.getInterests());
+            shopEnterTopAdapter.setNewData(shopEnter.getPattern());
+            ViewGroup.LayoutParams params = headView.getLayoutParams();
+            params.height = getTopHeight(shopEnter.getPattern().size());
         }
+    }
+
+    private int getTopHeight(int length) {
+        //            105 + line * 97 + (line - 1)*1      line = (length + 1) / 2
+        return (int) ScreenDpiUtils.dp2px(getContext(), 104 + ((length + 1) / 2) * 98);
     }
 
     @Override
