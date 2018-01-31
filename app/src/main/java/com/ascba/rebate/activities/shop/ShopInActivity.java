@@ -110,42 +110,44 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (checkedId == R.id.radio_company) {
-            int status = shopDet.getCompany_status();
-            String statusText = shopDet.getCompany_status_text();
-            if (status == 0) {
-                dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
-                    @Override
-                    public void handleRight() {
-                        radioPerson.setChecked(true);
-                        startActivity(InPutCNActivity.class, null);
-                    }
+        if (shopDet.getStore_type() == 1) {
+            if (checkedId == R.id.radio_company) {
+                int status = shopDet.getCompany_status();
+                String statusText = shopDet.getCompany_status_text();
+                if (status == 0) {
+                    dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
+                        @Override
+                        public void handleRight() {
+                            radioPerson.setChecked(true);
+                            startActivity(InPutCNActivity.class, null);
+                        }
 
-                    @Override
-                    public void handleLeft() {
-                        radioPerson.setChecked(true);
-                    }
-                });
-            } else if (status == 1) {
-                dm.showAlertDialog(statusText, "我知道了", new DialogManager.Callback() {
-                    @Override
-                    public void handleLeft() {
-                        radioPerson.setChecked(true);
-                    }
-                });
-            } else if (status == 2) {
-                dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
-                    @Override
-                    public void handleRight() {
-                        radioPerson.setChecked(true);
-                        findCompanyInfo();
-                    }
+                        @Override
+                        public void handleLeft() {
+                            radioPerson.setChecked(true);
+                        }
+                    });
+                } else if (status == 1) {
+                    dm.showAlertDialog(statusText, "我知道了", new DialogManager.Callback() {
+                        @Override
+                        public void handleLeft() {
+                            radioPerson.setChecked(true);
+                        }
+                    });
+                } else if (status == 2) {
+                    dm.showAlertDialog2(statusText, "取消", "确定", new DialogManager.Callback() {
+                        @Override
+                        public void handleRight() {
+                            radioPerson.setChecked(true);
+                            findCompanyInfo();
+                        }
 
-                    @Override
-                    public void handleLeft() {
-                        radioPerson.setChecked(true);
-                    }
-                });
+                        @Override
+                        public void handleLeft() {
+                            radioPerson.setChecked(true);
+                        }
+                    });
+                }
             }
         }
     }
@@ -180,7 +182,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                 });
                 break;
             case R.id.lat_type://经营类目 写入后不可更改
-                if (shopDet.getPrimary_class_status()==0) return;
+                if (shopDet.getPrimary_class_status() == 0) return;
                 OnLineTypeActivity.start(this, tvType.getText().toString());
                 break;
             case R.id.tv_how://如何选择类目
@@ -259,6 +261,38 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             b.putParcelable("company_msg", comMsg);
             AppConfig.getInstance().putInt("company_status", comMsg.getStatus());
             startActivity(ComMsgActivity.class, b);
+        }
+    }
+
+    @Override
+    protected void mHandle404(int what, Result result) {
+        super.mHandle404(what, result);
+        if (what == 0) {
+            finish();
+        }
+    }
+
+    @Override
+    protected void mHandleFailed(int what) {
+        super.mHandleFailed(what);
+        if (what == 0) {
+            finish();
+        }
+    }
+
+    @Override
+    protected void mHandleReLogin(int what, Result result) {
+        super.mHandleReLogin(what, result);
+        if (what == 0) {
+            finish();
+        }
+    }
+
+    @Override
+    protected void mHandleNoNetwork(int what) {
+        super.mHandleNoNetwork(what);
+        if (what == 0) {
+            finish();
         }
     }
 
