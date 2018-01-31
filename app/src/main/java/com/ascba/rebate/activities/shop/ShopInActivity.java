@@ -110,7 +110,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (shopDet.getStore_type() == 1) {
+        if (shopDet != null && shopDet.getStore_type() == 1) {
             if (checkedId == R.id.radio_company) {
                 int status = shopDet.getCompany_status();
                 String statusText = shopDet.getCompany_status_text();
