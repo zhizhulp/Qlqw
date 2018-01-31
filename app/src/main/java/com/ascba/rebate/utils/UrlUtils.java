@@ -127,4 +127,5 @@ public class UrlUtils {
     public static String storePerfectShow = baseWebsite + "store/perfectShow";
     public static String storePayment = baseWebsite + "store/payment";
     public static String getStoreTaglib = baseWebsite + "store/getStoreTaglib";
+    public static String storeSalePattern = baseWebsite + "store/salePattern";
 }

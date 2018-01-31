@@ -156,6 +156,11 @@ public class ShopEnter {
             public void setInterests_value(String interests_value) {
                 this.interests_value = interests_value;
             }
+
+            @Override
+            public String toString() {
+                return interests_value;
+            }
         }
     }
 }

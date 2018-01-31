@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="74dp">
+
+    <View style="@style/LineHorizontal" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:paddingLeft="26dp"
+        android:text="现金收益"
+        android:textColor="@color/shop_det_red"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/item_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_below="@id/item_title"
+        android:layout_marginBottom="7dp"
+        android:gravity="center"
+        android:paddingLeft="26dp"
+        android:text="立即到账"
+        android:textColor="@color/grey_black_tv2"
+        android:textSize="@dimen/text_12" />
+
+    <View
+        android:id="@+id/item_line"
+        android:layout_width="0.5dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_list"
+        android:layout_alignTop="@+id/item_list"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@id/item_title"
+        android:background="@color/bg"
+        android:minHeight="44dp" />
+
+    <LinearLayout
+        android:id="@+id/item_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/item_line"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingRight="26dp"
+        android:paddingTop="8dp" />
+</RelativeLayout>
