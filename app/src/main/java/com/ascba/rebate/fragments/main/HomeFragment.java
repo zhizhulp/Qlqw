@@ -18,33 +18,32 @@ import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
-import com.ascba.rebate.activities.merchant.MctEnterActivity;
-import com.ascba.rebate.activities.merchant.MctPayActivity;
-import com.ascba.rebate.activities.seller.SellerActivity;
-import com.ascba.rebate.appconfig.AppConfig;
-import com.ascba.rebate.manager.DialogManager;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.bill.BillActivity;
 import com.ascba.rebate.activities.bill.ScoreBillActivity;
 import com.ascba.rebate.activities.home.ModulesAllActivity;
 import com.ascba.rebate.activities.home.PlayVideoActivity;
+import com.ascba.rebate.activities.merchant.MctApplyStartActivity;
+import com.ascba.rebate.activities.merchant.MctEnterActivity;
+import com.ascba.rebate.activities.merchant.MctPayActivity;
 import com.ascba.rebate.activities.trade.ReceiveCodeActivity;
 import com.ascba.rebate.activities.trade.SweepActivity;
 import com.ascba.rebate.adapter.HomeGridAdapter;
 import com.ascba.rebate.adapter.HomeListAdapter;
+import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
 import com.ascba.rebate.bean.HomeBean;
 import com.ascba.rebate.bean.ModuleEntity;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.manager.BannerImageLoader;
+import com.ascba.rebate.manager.DialogManager;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
 import com.ascba.rebate.utils.ModulesUtils;
 import com.ascba.rebate.utils.ScreenDpiUtils;
 import com.ascba.rebate.utils.UrlUtils;
 import com.ascba.rebate.view.NestGridView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -199,6 +198,7 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
         AbstractRequest request = buildRequest(UrlUtils.indexHome, RequestMethod.GET, HomeBean.class);
         executeNetwork(0, request);
     }
+
     private void requestSellerStatus() {
         AbstractRequest request = buildRequest(UrlUtils.getSellerStatus, RequestMethod.GET, null);
         executeNetwork(2, "请稍后", request);
@@ -213,15 +213,15 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
             addNavData(homeBean.getNavList());
             addVideoData(homeBean.getVideoList());
             ModulesUtils.navActivity = homeBean.getNav_activity();
-        } else if(what==2){
+        } else if (what == 2) {
             String data = (String) result.getData();
             JSONObject dataObj = JSON.parseObject(data);
             int memberStatus = dataObj.getIntValue("member_status");
             final String statusText = dataObj.getString("member_status_text");
             String companyStatusText = dataObj.getString("company_status_text");
-            if(!TextUtils.isEmpty(companyStatusText)){
-                AppConfig.getInstance().putString("company_status_text",companyStatusText);
-                AppConfig.getInstance().putInt("company_status",dataObj.getIntValue("company_status"));
+            if (!TextUtils.isEmpty(companyStatusText)) {
+                AppConfig.getInstance().putString("company_status_text", companyStatusText);
+                AppConfig.getInstance().putInt("company_status", dataObj.getIntValue("company_status"));
             }
             //0正常1普通用户2资料审核中3商家过期4资料不全，第一次（跳转到H5）5资料不全第N次（跳转到资料提交）
             if (memberStatus == 0) {
@@ -253,7 +253,7 @@ public class HomeFragment extends BaseDefaultNetFragment implements View.OnClick
                 dm.showAlertDialog2(statusText, "取消", "确认", new DialogManager.Callback() {
                     @Override
                     public void handleRight() {
-                        MctEnterActivity.start(getActivity(),1);
+                        MctEnterActivity.start(getActivity(), 1);
                     }
                 });
             }

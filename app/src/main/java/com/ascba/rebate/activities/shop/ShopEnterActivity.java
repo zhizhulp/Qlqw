@@ -43,12 +43,7 @@ public class ShopEnterActivity extends BaseDefaultPayActivity {
 
     private void getParams(Intent intent) {
         int param = intent.getIntExtra("type", 0);
-        if (param == 1) {
-            mMoneyBar.setTextTitle("查看权益");
-            type = 1;
-            changeEnter();
-            enterFragment.setShowType();
-        } else if (param == 2) {
+        if (param == 2) {
             changePay();
         }
     }

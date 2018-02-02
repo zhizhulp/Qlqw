@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
-import com.ascba.rebate.activities.shop.ShopEnterActivity;
+import com.ascba.rebate.activities.shop.ShopEnterShowActivity;
 import com.ascba.rebate.activities.shop.ShopInActivity;
 import com.ascba.rebate.appconfig.AppConfig;
 import com.ascba.rebate.base.activity.WebViewBaseActivity;
@@ -116,7 +116,7 @@ public class ShopPayFragment extends BaseDefaultNetFragment implements View.OnCl
         if (v.getId() == R.id.shop_store_info_tv) {
             startActivity(new Intent(getContext(), ShopInActivity.class).putExtra("is_first", false));
         } else if (v.getId() == R.id.shop_see_btn) {
-            startActivity(new Intent(getContext(), ShopEnterActivity.class).putExtra("type", 1));
+            startActivity(ShopEnterShowActivity.class, null);
         } else if (v.getId() == R.id.shop_success_class) {
             WebViewBaseActivity.start(getContext(), shopSuccess.getStore_class_h5_title(), shopSuccess.getStore_class_h5());
         }

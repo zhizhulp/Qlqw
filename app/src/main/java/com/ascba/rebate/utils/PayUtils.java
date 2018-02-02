@@ -61,7 +61,8 @@ public class PayUtils {
     }
 
     public void goSuccess() {
-        listener.payFinish(type);
+        if (listener != null)
+            listener.payFinish(type);
     }
 
     public void requestPay(Pay data) {
