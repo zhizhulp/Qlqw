@@ -12,6 +12,7 @@ import com.ascba.rebate.R;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.base.activity.BaseUIActivity;
 import com.ascba.rebate.fragments.shop.ShopHomeFragment;
+import com.ascba.rebate.fragments.shop.TypeSearchFragment;
 
 /**
  * Created by Jero on 2018/1/19 0019.
@@ -82,7 +83,7 @@ public class ShopActivity extends BaseDefaultNetActivity {
                 fragment = new ShopHomeFragment();
                 break;
             case tagTypes:
-                fragment = new Fragment();
+                fragment = new TypeSearchFragment();
                 break;
             case tagMine:
                 fragment = new Fragment();

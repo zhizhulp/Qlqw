@@ -1,18 +1,21 @@
 package com.ascba.rebate.activities.merchant;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
 import com.ascba.rebate.bean.MctModType;
+import com.ascba.rebate.utils.KeyBoardUtils;
 import com.ascba.rebate.utils.RegexUtils;
 import com.ascba.rebate.view.EditTextHint;
 
@@ -57,6 +60,13 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
         etInput.setHint(mmType.getHint());
         etInput.setText(mmType.getContent());
         mMoneyBar.setTextTitle(mmType.getTitle());
+        mMoneyBar.setCallBack(mMoneyBar.new CallbackImp(){
+            @Override
+            public void clickBack(View back) {
+                KeyBoardUtils.showKeyboard(MctModBaseActivity.this,etInput,false);
+                super.clickBack(back);
+            }
+        });
         etInput.setSelection(mmType.getContent().length());
     }
 
@@ -106,9 +116,15 @@ public class MctModBaseActivity extends BaseDefaultNetActivity implements TextWa
                 return;
             }
         }
+        KeyBoardUtils.showKeyboard(this,etInput,false);
         Intent intent = getIntent();
         intent.putExtra("value", etInput.getText().toString());
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

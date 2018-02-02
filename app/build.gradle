@@ -52,8 +52,8 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //release 固定
-            resValue "string", "app_name", "钱来钱往"
-            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
+            //resValue "string", "app_name", "钱来钱往"
+            //buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
         }
         debug {
             minifyEnabled false  //不启用Proguard

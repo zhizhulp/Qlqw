@@ -308,7 +308,8 @@
         <activity
             android:name=".activities.merchant.MctEnterActivity"
             android:exported="true" />
-        <activity android:name=".activities.merchant.MctModBaseActivity" />
+        <activity
+            android:name=".activities.merchant.MctModBaseActivity" />
         <activity
             android:name=".activities.merchant.MctModTimeActivity"
             android:exported="true"
@@ -351,9 +352,10 @@
         <activity
             android:name=".activities.shop.ShopEnterActivity"
             android:theme="@style/ShopTheme" />
-        <activity android:name=".activities.shop.OnLineTypeActivity"
+        <activity
+            android:name=".activities.shop.OnLineTypeActivity"
             android:exported="true"
-            android:theme="@style/ShopTheme"/>
+            android:theme="@style/ShopTheme" />
     </application>
 
 </manifest>
