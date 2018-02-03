@@ -61,6 +61,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     private ShopDet shopDet;
     private boolean isFirst;
     private int typeId = -1;
+    private View imTypeGo;
 
     @Override
     protected int bindLayout() {
@@ -80,6 +81,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         tvPhone = fv(R.id.tv_phone);
         editText = fv(R.id.editTextHint);
         btnApply = fv(R.id.btn_apply);
+        imTypeGo = fv(R.id.imageView6);
 
         btnApply.setOnClickListener(this);
         fv(R.id.lat_name).setOnClickListener(this);
@@ -251,6 +253,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             tvType.setText(classValue);
             tvPhone.setText(shopDet.getStore_telphone());
             editText.setText(shopDet.getStore_description());
+            imTypeGo.setVisibility(shopDet.getPrimary_class_status() == 0 ? View.GONE : View.VISIBLE);
         } else if (what == 1) {
             startActivity(new Intent(this, ShopEnterActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
