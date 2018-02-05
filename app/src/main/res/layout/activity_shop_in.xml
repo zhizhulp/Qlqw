@@ -325,7 +325,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="请填写商家介绍......"
+                    android:hint="为了方便消费者了解您的店铺，请填写店铺的特色介绍吧......"
                     android:maxLines="3"
                     android:paddingTop="10dp"
                     android:textColor="@color/grey_black_tv"

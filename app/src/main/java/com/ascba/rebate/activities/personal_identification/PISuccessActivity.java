@@ -1,6 +1,7 @@
 package com.ascba.rebate.activities.personal_identification;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ascba.rebate.R;
@@ -54,5 +55,9 @@ public class PISuccessActivity extends BaseDefaultNetActivity {
             tvLocation.setText(pi.getLocation());
             AppConfig.getInstance().putString("realname",pi.getRealname());
         }
+    }
+
+    public void close(View view) {
+        finish();
     }
 }

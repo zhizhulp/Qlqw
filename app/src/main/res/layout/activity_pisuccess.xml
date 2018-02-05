@@ -161,4 +161,10 @@
             android:layout_height="0.5dp"
             android:background="@color/grey_line"/>
     </RelativeLayout>
+    <Button
+        android:onClick="close"
+        android:layout_marginTop="25dp"
+        android:text="完成"
+        style="@style/ButtonNormal"
+        android:enabled="true"/>
 </LinearLayout>
