@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ascba.rebate.R;
+import com.ascba.rebate.activities.merchant.MctModBaseActivity;
 import com.ascba.rebate.activities.merchant.MctTypeActivity;
 import com.ascba.rebate.adapter.MctTypeAdapter;
 import com.ascba.rebate.base.activity.BaseDefaultNetActivity;
@@ -20,7 +21,9 @@ import com.ascba.rebate.bean.MctType;
 import com.ascba.rebate.bean.Result;
 import com.ascba.rebate.net.AbstractRequest;
 import com.ascba.rebate.utils.CodeUtils;
+import com.ascba.rebate.utils.KeyBoardUtils;
 import com.ascba.rebate.utils.UrlUtils;
+import com.ascba.rebate.view.shop.MoneyBar;
 import com.yanzhenjie.nohttp.RequestMethod;
 
 import java.util.ArrayList;
@@ -31,11 +34,12 @@ import java.util.List;
  * Describe: 线上商品分类
  */
 
-public class OnLineTypeActivity extends BaseDefaultNetActivity implements TextWatcher,AdapterView.OnItemClickListener {
+public class OnLineTypeActivity extends BaseDefaultNetActivity implements TextWatcher, AdapterView.OnItemClickListener {
     private EditText autoEt;
     private List<MctType> dataAll = new ArrayList<>();
     private List<MctType> filterData = new ArrayList<>();
     private MctTypeAdapter mctAdapter;
+
     @Override
     protected int bindLayout() {
         return R.layout.activity_on_line_type;
@@ -46,6 +50,14 @@ public class OnLineTypeActivity extends BaseDefaultNetActivity implements TextWa
         super.initViews(savedInstanceState);
         autoEt = fv(R.id.actv);
         autoEt.addTextChangedListener(this);
+        MoneyBar mbShop = fv(R.id.shop_mb);
+        mbShop.setCallBack(mbShop.new CallbackImp() {
+            @Override
+            public void clickBack(View back) {
+                KeyBoardUtils.showKeyboard(OnLineTypeActivity.this, autoEt, false);
+                super.clickBack(back);
+            }
+        });
         ListView listView = fv(R.id.listView);
         mctAdapter = new MctTypeAdapter(filterData);
         listView.setAdapter(mctAdapter);
@@ -74,6 +86,7 @@ public class OnLineTypeActivity extends BaseDefaultNetActivity implements TextWa
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MctType item = (MctType) mctAdapter.getItem(position);
+        KeyBoardUtils.showKeyboard(OnLineTypeActivity.this, autoEt, false);
         Intent intent = getIntent();
         intent.putExtra("type", item.getText());
         intent.putExtra("type_id", item.getId());

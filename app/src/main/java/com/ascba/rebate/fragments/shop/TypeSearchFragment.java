@@ -48,13 +48,11 @@ public class TypeSearchFragment extends BaseDefaultNetFragment {
         stTabAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.d(TAG, "onItemClick: " + position);
                 int newPos = getNew(position);
                 View headView = stDetAdapter.getViewByPosition(detRec, newPos, android.R.id.text1);
-                Log.d(TAG, "onItemClick: " + headView);
-//                detRec.smoothScrollToPosition(newPos);
-//                detRec.smoothScrollBy(0, headView.getTop());
-                ((LinearLayoutManager)detRec.getLayoutManager()).scrollToPositionWithOffset(newPos,0);
+                if (headView != null) detRec.smoothScrollBy(0, headView.getTop());
+                detRec.smoothScrollToPosition(newPos);
+                //((LinearLayoutManager) detRec.getLayoutManager()).scrollToPositionWithOffset(newPos, 0);
             }
         });
         tabRec.setAdapter(stTabAdapter);

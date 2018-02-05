@@ -1,6 +1,8 @@
 package com.ascba.rebate.adapter;
 
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ascba.rebate.R;
@@ -32,6 +34,7 @@ public class STDetAdapter extends BaseMultiItemQuickAdapter<STBase,BaseViewHolde
 
     @Override
     protected void convert(BaseViewHolder helper, STBase item) {
+        Log.d(TAG, "convert: "+helper.getAdapterPosition());
         switch (item.getItemType()){
             case 0:
                 ShopTypeHead item1 = (ShopTypeHead) item;
@@ -46,5 +49,12 @@ public class STDetAdapter extends BaseMultiItemQuickAdapter<STBase,BaseViewHolde
                 Picasso.with(mContext).load(item2.getImage()).into((ImageView) helper.getView(R.id.imageView5));
                 break;
         }
+    }
+
+    @Override
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        BaseViewHolder baseViewHolder = super.onCreateViewHolder(parent, viewType);
+        Log.d(TAG, "onCreateViewHolder: ");
+        return baseViewHolder;
     }
 }

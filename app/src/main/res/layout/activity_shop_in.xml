@@ -151,7 +151,7 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="店头形象"
+                    android:text="店铺形象"
                     android:textColor="@color/grey_black_tv"
                     android:textSize="@dimen/text_14"
                     app:layout_constraintBottom_toBottomOf="parent"

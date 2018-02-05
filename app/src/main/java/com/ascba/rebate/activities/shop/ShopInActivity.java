@@ -5,11 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.ascba.rebate.BuildConfig;
 import com.ascba.rebate.R;
 import com.ascba.rebate.activities.company_identification.ComMsgActivity;
 import com.ascba.rebate.activities.company_identification.InPutCNActivity;
@@ -213,7 +217,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             return false;
         }
         if (logo == null || !logo.exists()) {
-            showToast("请上传店头形象");
+            showToast("请上传店铺形象");
             return false;
         }
         if (TextUtils.isEmpty(tvType.getText().toString())) {
@@ -308,9 +312,13 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             } else if (requestCode == CodeUtils.REQUEST_SHOP_PHONE) {
                 tvPhone.setText(data.getStringExtra("value"));
             } else if (requestCode == CodeUtils.REQUEST_CAMERA_ICON) {
-                if (logo != null && logo.exists()) {
-                    handleImage();
+                Uri uri;
+                if (Build.VERSION.SDK_INT > 23) {
+                    uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", logo);
+                } else {
+                    uri = Uri.fromFile(logo);
                 }
+                cropImage(uri, Uri.fromFile(logo));
             } else if (requestCode == CodeUtils.REQUEST_ALBUM_ICON) {
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -321,18 +329,23 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     String picturePath = cursor.getString(columnIndex);
                     cursor.close();
-                    logo = new File(picturePath);
-                    handleImage();
+                    Uri uri;
+                    if (Build.VERSION.SDK_INT > 23) {
+                        uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(picturePath));
+                    } else {
+                        uri = Uri.parse("file://" + picturePath);
+                    }
+                    cropImage(uri, Uri.fromFile(logo));
                 }
             } else if (requestCode == CodeUtils.REQUEST_MCT_TYPE) {
                 typeId = data.getIntExtra("type_id", -1);
                 tvType.setText(data.getStringExtra("type"));
+            } else if (requestCode == CodeUtils.REQUEST_CROP) {
+                Luban.with(this).load(logo)
+                        .ignoreBy(350)
+                        .setCompressListener(this).launch();
             }
         }
-    }
-
-    private void handleImage() {
-        Luban.with(this).load(logo).setCompressListener(this).launch();
     }
 
     @Override
@@ -349,5 +362,32 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     @Override
     public void onError(Throwable e) {
 
+    }
+
+    //裁剪图片
+    private void cropImage(Uri inUri, Uri outUri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(inUri, "image/*");
+        //是否裁剪
+        intent.putExtra("crop", "true");
+        //设置xy的裁剪比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        //设置输出的宽高
+        intent.putExtra("outputX", 720);
+        intent.putExtra("outputY", 720);
+        intent.putExtra("scale", true);//去除黑边
+        intent.putExtra("scaleUpIfNeeded", true);//去除黑边
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        //输入图片的Uri，指定以后，可以在这个uri获得图片
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outUri);
+        //是否返回图片数据，可以不用，直接用uri就可以了
+        intent.putExtra("return-data", false);
+        //设置输入图片格式
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        //是否关闭面部识别
+        intent.putExtra("noFaceDetection", true); // no face detection
+        //启动
+        startActivityForResult(intent, CodeUtils.REQUEST_CROP);
     }
 }

@@ -8,6 +8,7 @@
     tools:context="com.ascba.rebate.activities.shop.OnLineTypeActivity">
 
     <com.ascba.rebate.view.shop.MoneyBar
+        android:id="@+id/shop_mb"
         android:layout_height="48dp"
         android:layout_width="match_parent"
         app:needLine="true"
