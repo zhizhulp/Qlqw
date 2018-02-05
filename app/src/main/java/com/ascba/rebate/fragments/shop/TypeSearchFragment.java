@@ -14,10 +14,13 @@ import com.ascba.rebate.base.fragment.BaseDefaultNetFragment;
 import com.ascba.rebate.bean.STBase;
 import com.ascba.rebate.bean.ShopTypeDet;
 import com.ascba.rebate.bean.ShopTypeHead;
+import com.ascba.rebate.view.MyGridLayoutManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
  * Created by 李平 on 2018/1/31 16:18
@@ -49,16 +52,13 @@ public class TypeSearchFragment extends BaseDefaultNetFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 int newPos = getNew(position);
-                View headView = stDetAdapter.getViewByPosition(detRec, newPos, android.R.id.text1);
-                if (headView != null) detRec.smoothScrollBy(0, headView.getTop());
                 detRec.smoothScrollToPosition(newPos);
-                //((LinearLayoutManager) detRec.getLayoutManager()).scrollToPositionWithOffset(newPos, 0);
             }
         });
         tabRec.setAdapter(stTabAdapter);
         //
         detRec = fv(R.id.det_recyclerView);
-        detRec.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        detRec.setLayoutManager(new MyGridLayoutManager(getContext(), 3));
         stDetAdapter = new STDetAdapter(getTypeData());
         stDetAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
             @Override
@@ -88,7 +88,7 @@ public class TypeSearchFragment extends BaseDefaultNetFragment {
 
     private List<String> getTabData() {
         tabData = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 5; i++) {
             tabData.add("服饰" + i);
         }
         return tabData;
@@ -98,7 +98,7 @@ public class TypeSearchFragment extends BaseDefaultNetFragment {
         typeData = new ArrayList<>();
         for (int i = 0; i < tabData.size(); i++) {
             typeData.add(new ShopTypeHead(tabData.get(i), i));
-            for (int j = 0; j < Math.random() * 10.0; j++) {
+            for (int j = 0; j < Math.random() * 5.0; j++) {
                 typeData.add(new ShopTypeDet(tabData.get(i) + j,
                         "http://img.ivsky.com/img/tupian/pre/201710/08/qima-001.jpg"));
             }
