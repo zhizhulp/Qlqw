@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.ascba.rebate.activities.user_data.UserDataActivity">
+
     <com.ascba.rebate.view.MoneyBar
         android:id="@+id/mb"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_56"
         app:textTitle="个人资料" />
+
     <RelativeLayout
         android:id="@+id/lat_user_head"
         android:layout_width="match_parent"
@@ -18,6 +20,7 @@
         android:background="@color/white"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
             style="@style/ImageViewMore"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
+
         <ImageView
             android:id="@+id/im_user_icon"
             android:layout_width="48dp"
@@ -151,6 +155,7 @@
         android:paddingRight="15dp">
 
         <TextView
+            android:id="@+id/left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -164,7 +169,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
             android:layout_marginRight="6dp"
+            android:layout_toRightOf="@id/left"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/grey_black_tv2"
             android:textSize="@dimen/text_14" />
     </RelativeLayout>
