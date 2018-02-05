@@ -125,7 +125,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                         @Override
                         public void handleRight() {
                             radioPerson.setChecked(true);
-                            startActivity(InPutCNActivity.class, null);
+                            startActivityForResult(InPutCNActivity.class, null, CodeUtils.CIChecking);
                         }
 
                         @Override
@@ -344,6 +344,8 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                 Luban.with(this).load(logo)
                         .ignoreBy(350)
                         .setCompressListener(this).launch();
+            } else if (requestCode == CodeUtils.CIChecking) {
+                requestData();
             }
         }
     }

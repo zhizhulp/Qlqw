@@ -1,6 +1,8 @@
 package com.ascba.rebate.utils;
 
 
+import android.os.Bundle;
+
 /**
  * Created by 李平 on 2017/8/19.
  * 存储一些 REQUEST_CODE等
@@ -46,4 +48,5 @@ public class CodeUtils {
     public static final int REQUEST_MCT_PAY = 3011;
     public static final int REQUEST_LOGIN = 3012;
 
+    public static  final int  CIChecking =3013 ;
 }
