@@ -182,6 +182,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
                             if (logo == null) {
                                 logo = new File(FileUtils.getAppFile(MyApplication.getInstance(),
                                         Environment.DIRECTORY_PICTURES), "qlqw201801251423shop.png");
+                                if(logo.exists()) logo.delete();
                             }
                             SelectIconDialog dialog = new SelectIconDialog(ShopInActivity.this, logo, R.style.dialog);
                             dialog.show();
@@ -219,7 +220,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             return false;
         }
         if (logo == null || !logo.exists()) {
-            showToast("请上传店铺形象");
+            showToast("请上传店铺头像");
             return false;
         }
         if (TextUtils.isEmpty(tvType.getText().toString())) {
