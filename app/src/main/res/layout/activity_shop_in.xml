@@ -12,14 +12,27 @@
         android:layout_height="48dp"
         app:needLine="true"
         app:textTitle="商城入驻" />
-
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/btn_apply"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/btn_shop_bg"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_15" />
     <ScrollView
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/moneyBar">
+        android:layout_below="@+id/moneyBar"
+        android:layout_above="@id/btn_apply">
 
         <LinearLayout
             android:focusable="true"
@@ -47,6 +60,7 @@
                     android:textSize="@dimen/text_14" />
 
                 <RadioGroup
+                    android:visibility="gone"
                     android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -78,6 +92,14 @@
                         android:textColor="@color/grey_black_tv2"
                         android:textSize="@dimen/text_13" />
                 </RadioGroup>
+                <TextView
+                    android:id="@+id/tv_auth_type"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/text_14"
+                    android:textColor="@color/grey_black_tv2"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </RelativeLayout>
 
             <TextView
@@ -339,19 +361,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView19"
                     app:layout_constraintVertical_bias="0.0" />
             </android.support.constraint.ConstraintLayout>
-            <Button
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
-                android:id="@+id/btn_apply"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="56dp"
-                android:background="@drawable/btn_shop_bg"
-                android:text="提交"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_15" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -66,6 +66,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
     private boolean isFirst;
     private int typeId = -1;
     private View imTypeGo;
+    private TextView tvAuthType;
 
     @Override
     protected int bindLayout() {
@@ -86,6 +87,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
         editText = fv(R.id.editTextHint);
         btnApply = fv(R.id.btn_apply);
         imTypeGo = fv(R.id.imageView6);
+        tvAuthType = fv(R.id.tv_auth_type);
 
         btnApply.setOnClickListener(this);
         fv(R.id.lat_name).setOnClickListener(this);
@@ -258,6 +260,7 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             tvPhone.setText(shopDet.getStore_telphone());
             editText.setText(shopDet.getStore_description());
             imTypeGo.setVisibility(shopDet.getPrimary_class_status() == 0 ? View.GONE : View.VISIBLE);
+            setAuth();
         } else if (what == 1) {
             startActivity(new Intent(this, ShopEnterActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -269,6 +272,13 @@ public class ShopInActivity extends BaseDefaultNetActivity implements RadioGroup
             AppConfig.getInstance().putInt("company_status", comMsg.getStatus());
             startActivity(ComMsgActivity.class, b);
         }
+    }
+
+    private void setAuth() {
+        int canChange = shopDet.getType_can_change();
+        tvAuthType.setVisibility(canChange == 2 ? View.VISIBLE : View.GONE);
+        tvAuthType.setText(shopDet.getStore_type() == 1 ? "个人认证" : "企业认证");
+        radioGroup.setVisibility(tvAuthType.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
     }
 
     @Override
