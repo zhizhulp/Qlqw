@@ -94,7 +94,7 @@ public class UserMsgActivity extends BaseDefaultNetActivity implements View.OnCl
                 if (cardStatus == 0) {
                     startActivity(PIStartActivity.class, null);
                 } else {
-                    startActivity(PISuccessActivity.class, null);
+                    PISuccessActivity.start(this,false);
                 }
                 break;
             case R.id.lat_company_authon:

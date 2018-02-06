@@ -168,6 +168,8 @@
             android:background="@color/grey_line"/>
     </RelativeLayout>
     <Button
+        android:visibility="gone"
+        android:id="@+id/btn_complete"
         android:onClick="close"
         android:layout_marginTop="25dp"
         android:text="完成"

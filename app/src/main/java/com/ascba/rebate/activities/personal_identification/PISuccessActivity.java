@@ -1,5 +1,7 @@
 package com.ascba.rebate.activities.personal_identification;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ public class PISuccessActivity extends BaseDefaultNetActivity {
     private TextView tvSex;
     private TextView tvCardNum;
     private TextView tvLocation;
+    private View btnComplete;
 
     @Override
     protected int bindLayout() {
@@ -38,9 +41,21 @@ public class PISuccessActivity extends BaseDefaultNetActivity {
         tvSex = fv(R.id.tv_sex);
         tvCardNum = fv(R.id.tv_card_num);
         tvLocation = fv(R.id.tv_location);
-
+        btnComplete = fv(R.id.btn_complete);
+        getParams();
         AbstractRequest request = buildRequest(UrlUtils.nameSeek, RequestMethod.POST, PIUserInfo.class);
         executeNetwork(0, "请稍后", request);
+    }
+
+    private void getParams() {
+        btnComplete.setVisibility(getIntent().getBooleanExtra("show_btn", true) ?
+                View.VISIBLE: View.GONE);
+    }
+
+    public static void start(Context context, boolean showBtn) {
+        Intent intent = new Intent(context, PISuccessActivity.class);
+        intent.putExtra("show_btn", showBtn);
+        context.startActivity(intent);
     }
 
     @Override
@@ -53,7 +68,7 @@ public class PISuccessActivity extends BaseDefaultNetActivity {
             tvSex.setText(pi.getSex());
             tvCardNum.setText(pi.getCardid());
             tvLocation.setText(pi.getLocation());
-            AppConfig.getInstance().putString("realname",pi.getRealname());
+            AppConfig.getInstance().putString("realname", pi.getRealname());
         }
     }
 
