@@ -63,9 +63,9 @@ public class EncodeUtils {
         for (Object o : map.keySet()) {
             sb.append(map.get(o));
         }
-        Log.d(TAG, "makeSign: " + sb.toString());
+        //Log.d(TAG, "makeSign: " + sb.toString());
         String secret = EncryptHelper.md5Encode(sb.toString());
-        Log.d(TAG, "makeSign: " + secret.toUpperCase());
+        //Log.d(TAG, "makeSign: " + secret.toUpperCase());
         ss[0] = time + "";
         ss[1] = secret.toUpperCase();
         return ss;
@@ -209,8 +209,8 @@ public class EncodeUtils {
     }
 
     public static long getCurrentTime() {
-        long theTime = System.currentTimeMillis() / 1000 + AppConfig.getInstance().getLong("time_diff", 0);
-        Log.d(TAG, "getCurrentTime: " + theTime);
+        long theTime = System.currentTimeMillis() / 1000;
+        //Log.d(TAG, "getCurrentTime: " + theTime);
         return theTime;
     }
 }

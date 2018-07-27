@@ -58,13 +58,13 @@ android {
         debug {
             minifyEnabled false  //不启用Proguard
             zipAlignEnabled false //是否启用zipAlign压缩
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
     productFlavors {
         normal {//  上线版
             resValue "string", "app_name", "测试版"
-            buildConfigField "String", "BASE_URL", '"http://apidebug.qlqwp2p.com/"'
+            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
         }
         uat {//  共存版
             applicationId 'com.ascba.rebate.demo'
