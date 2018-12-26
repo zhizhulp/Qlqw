@@ -22,7 +22,12 @@ android {
                 JPUSH_APPKEY : "38b7d12e3ef40facf5b431d6",
                 JPUSH_CHANNEL: "developer-default"
         ]
+        packagingOptions {
+            doNotStrip '*/mips/*.so'
+            doNotStrip '*/mips64/*.so'
+        }
     }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -63,8 +68,9 @@ android {
     }
     productFlavors {
         normal {//  上线版
-            resValue "string", "app_name", "测试版"
-            buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
+            resValue "string", "app_name", "钱来钱往"
+            //buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
+            buildConfigField "String", "BASE_URL", '"http://114.115.255.53/"'
         }
         uat {//  共存版
             applicationId 'com.ascba.rebate.demo'
