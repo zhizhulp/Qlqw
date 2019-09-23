@@ -36,10 +36,10 @@ android {
         debug {
             v1SigningEnabled true
             v2SigningEnabled false
-            storeFile file('/debug.keystore')
-            keyAlias 'androiddebugkey'
-            storePassword 'android'
-            keyPassword 'android'
+            storeFile file('/asc.jks')
+            keyAlias 'lovelycat'
+            storePassword 'qlqw1234'
+            keyPassword 'qlqw1234'
         }
         release {
             v1SigningEnabled true
@@ -55,7 +55,7 @@ android {
             minifyEnabled true //启用Proguard
             zipAlignEnabled true //是否启用zipAlign压缩
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //release 固定
             //resValue "string", "app_name", "钱来钱往"
             //buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
@@ -70,7 +70,7 @@ android {
         normal {//  上线版
             resValue "string", "app_name", "钱来钱往"
             //buildConfigField "String", "BASE_URL", '"http://app.qlqwgw.com/"'
-            buildConfigField "String", "BASE_URL", '"http://114.115.255.53/"'
+            buildConfigField "String", "BASE_URL", '"http://129.204.4.105/"'
         }
         uat {//  共存版
             applicationId 'com.ascba.rebate.demo'

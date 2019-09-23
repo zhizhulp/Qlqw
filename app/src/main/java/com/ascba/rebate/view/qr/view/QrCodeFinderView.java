@@ -127,8 +127,8 @@ public final class QrCodeFinderView extends RelativeLayout {
         drawFocusRect(canvas, frame);
         drawAngle(canvas, frame);
         drawText(canvas, frame);
-        drawGridBitmap(canvas);
-        moveGridBitmap(frame);
+        //drawGridBitmap(canvas);
+        //moveGridBitmap(frame);
     }
 
     /**
